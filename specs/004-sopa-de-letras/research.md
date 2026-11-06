@@ -12,7 +12,7 @@ decidir cómo resolver siete cosas propias del juego.
 
   | Referencia | Palabras buscadas |
   |------------|-------------------|
-  | NUBE | LLUVIA, CIELO, TRUENO |
+  | NUBE | LLUVIA, CIELO, RAYO |
   | MAR | OLAS, ARENA, BARCO |
   | COCINA | SARTEN, PLATO, HORNO |
   | HUERTO | TOMATE, PATATA, AZADA |
@@ -33,6 +33,12 @@ decidir cómo resolver siete cosas propias del juego.
   vertical (arriba abajo). Lo que no se puede automatizar es que no aparezca *otra* palabra
   relacionada con la de referencia (RF-013, porque no hay diccionario): lo revisa una persona al
   escribir cada cuadrícula, y queda anotado en la lista de tareas.
+- **Revisión hecha al escribir las cuadrículas (T005)**: se leyeron a mano las filas y las
+  columnas de las cinco sopas y no aparece ninguna otra palabra relacionada con la referencia,
+  salvo las que ya están dentro de otra: "ARCO" dentro de "BARCO" (sopa MAR), que no tiene
+  relación con el mar. En NUBE se usó "RAYO" en lugar de "TRUENO": con dos palabras de 6 letras
+  en horizontal, una vertical de 5 no podía cruzarlas de forma consistente. Esta revisión la
+  tiene que confirmar una persona en T027.
 
 ## 2. Cómo se sortea la sopa
 
