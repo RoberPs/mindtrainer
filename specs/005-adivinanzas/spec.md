@@ -29,7 +29,7 @@ Una persona mayor abre la actividad y ve una adivinanza escrita en letra grande 
 
 ### Historia 2 - Terminar la partida y ver cuántas he acertado (Prioridad: P1)
 
-Una partida son 5 adivinanzas. Al responder la quinta, el botón en lugar de "Siguiente" lleva al resultado: la persona ve cuántas ha acertado ("X de 5") y los botones "Jugar otra vez" y "Volver al inicio".
+Una partida son 5 adivinanzas. Al responder la quinta, el botón, que en lugar de "Siguiente" dice "Ver resultado", lleva al resultado: la persona ve cuántas ha acertado ("X de 5") y los botones "Jugar otra vez" y "Volver al inicio".
 
 **Por qué esta prioridad**: da sentido de principio y fin a la actividad y permite comprobar la puntuación.
 
@@ -37,7 +37,7 @@ Una partida son 5 adivinanzas. Al responder la quinta, el botón en lugar de "Si
 
 **Escenarios de aceptación**:
 
-1. **Dado** que he respondido la quinta adivinanza, **cuando** pulso el botón para continuar, **entonces** veo el resultado "X de 5" con el número de aciertos y los botones "Jugar otra vez" y "Volver al inicio".
+1. **Dado** que he respondido la quinta adivinanza, **cuando** pulso "Ver resultado", **entonces** veo el resultado "X de 5" con el número de aciertos y los botones "Jugar otra vez" y "Volver al inicio".
 2. **Dado** que he acertado las 5, **cuando** veo el resultado, **entonces** dice "5 de 5".
 3. **Dado** que he fallado las 5, **cuando** veo el resultado, **entonces** dice "0 de 5" con un mensaje amable y de ánimo.
 4. **Dado** que estoy en el resultado, **cuando** pulso "Jugar otra vez", **entonces** empieza una partida nueva con 5 adivinanzas, con el recuento de aciertos a cero.
@@ -63,7 +63,7 @@ Una partida son 5 adivinanzas. Al responder la quinta, el botón en lugar de "Si
 - **RF-003**: Si la respuesta es correcta, la actividad MUST mostrar un mensaje positivo y el botón "Siguiente", y MUST sumar un acierto.
 - **RF-004**: Si la respuesta es incorrecta, la actividad MUST mostrar un mensaje amable que indique la respuesta correcta, y el botón "Siguiente". No MUST sumar acierto y MUST NOT haber penalización de ningún tipo.
 - **RF-005**: Tras responder, la adivinanza y las tres respuestas MUST seguir visibles, con la respuesta correcta señalada de una forma que no dependa solo del color.
-- **RF-006**: Cada partida MUST constar de 5 adivinanzas distintas. Al responder la última, en lugar de "Siguiente" la persona MUST llegar al resultado.
+- **RF-006**: Cada partida MUST constar de 5 adivinanzas distintas. Al responder la última, el botón MUST decir "Ver resultado" en lugar de "Siguiente" y llevar al resultado.
 - **RF-007**: El resultado MUST mostrar el número de aciertos con el formato "X de 5", un mensaje acorde a la puntuación y los botones "Jugar otra vez" y "Volver al inicio".
 - **RF-008**: "Jugar otra vez" MUST empezar una partida nueva de 5 adivinanzas, con los aciertos a cero y sin mensajes de la partida anterior.
 - **RF-009**: Cada vez que se muestra una adivinanza, el orden de sus tres respuestas MUST sortearse, de modo que no sea siempre el mismo entre partidas.
@@ -73,7 +73,7 @@ Una partida son 5 adivinanzas. Al responder la quinta, el botón en lugar de "Si
 - **RF-013**: La actividad MUST NOT tener límite de tiempo, cuenta atrás ni penalización por tardar.
 - **RF-014**: La actividad MUST cumplir las reglas de accesibilidad del proyecto: letra de al menos 22 puntos, botones de al menos 64 puntos de alto y contraste de al menos 7 a 1. El acierto y el fallo MUST distinguirse sin depender solo del color.
 - **RF-015**: Cada botón de acción ("Siguiente", "Jugar otra vez" y "Volver al inicio" de la pantalla final) y cada mensaje importante (acierto, fallo, resultado final) MUST llevar un icono grande e intuitivo junto al texto, nunca en lugar de él, incluido dentro de la app.
-- **RF-016**: Todos los textos de la actividad, incluidas las adivinanzas, MUST estar en español de España, con tildes y signos de apertura, y guardarse junto al resto de textos fijos de la app.
+- **RF-016**: Todos los textos de la actividad, incluidas las adivinanzas, MUST estar en español de España, con tildes y signos de apertura. Los textos de la interfaz se guardan junto al resto de textos fijos de la app; las adivinanzas y sus respuestas se guardan con los datos de la propia actividad, como las palabras y las sopas de las otras actividades.
 - **RF-017**: La actividad MUST integrarse en la pantalla de inicio como una actividad más, con su identificador, icono, nombre y descripción, y MUST avisar de cuándo empieza y termina una partida según el contrato de actividades de la app.
 - **RF-018**: La actividad MUST funcionar completa sin internet, sin cuentas y sin guardar ningún dato de la persona.
 - **RF-019**: La actividad MUST tener pruebas básicas y funcionales de: respuesta correcta, respuesta incorrecta con la correcta mostrada, un solo intento por adivinanza, puntuación "X de 5", adivinanzas sin repetir dentro de la partida, orden de respuestas sorteado y final de partida.
