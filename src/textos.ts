@@ -31,3 +31,21 @@ export const textosParejas = {
     tijeras: 'Tijeras',
   },
 };
+
+// Textos de la actividad "Forma la palabra".
+export const textosFormaPalabra = {
+  nombre: 'Forma la palabra',
+  descripcion: 'Ordena las letras para formar la palabra',
+  comprobar: 'Comprobar',
+  borrarUltima: 'Borrar última letra',
+  empezarDeNuevo: 'Empezar de nuevo',
+  verRespuesta: 'Ver la respuesta',
+  siguiente: 'Siguiente',
+  verResultado: 'Ver resultado',
+  jugarOtraVez: 'Jugar otra vez',
+  acierto: '¡Muy bien! Has formado la palabra',
+  fallo: 'Todavía no es esa. Inténtalo otra vez',
+  incompleta: 'Completa la palabra antes de comprobar',
+  laPalabraEs: (palabra: string) => `La palabra es: ${palabra}`,
+  aciertos: (n: number) => `Has acertado ${n} de 5`,
+};

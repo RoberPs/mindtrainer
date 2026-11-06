@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import App from '../App';
 import { crearPartida } from '../src/actividades/parejas/juego';
-import { textos, textosParejas } from '../src/textos';
+import { textos, textosFormaPalabra, textosParejas } from '../src/textos';
 import { tema } from '../src/tema';
 import { crearActividades } from './ayudas';
 
@@ -92,5 +92,36 @@ describe('Textos de "Parejas" (FR-009, FR-014)', () => {
     await fireEvent.press(screen.getByTestId(`carta-${ids.findIndex((id) => id !== ids[0])}`));
     expect(screen.getByTestId('icono-seguir', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosParejas.seguir)).toBeTruthy();
+  });
+});
+
+describe('Textos de "Forma la palabra" (RF-014)', () => {
+  it('los textos fijos son los acordados, con tildes y signos de apertura', () => {
+    expect(textosFormaPalabra.nombre).toBe('Forma la palabra');
+    expect(textosFormaPalabra.descripcion).toBe('Ordena las letras para formar la palabra');
+    expect(textosFormaPalabra.borrarUltima).toBe('Borrar última letra');
+    expect(textosFormaPalabra.acierto).toBe('¡Muy bien! Has formado la palabra');
+    expect(textosFormaPalabra.laPalabraEs('casa')).toBe('La palabra es: casa');
+    expect(textosFormaPalabra.aciertos(1)).toBe('Has acertado 1 de 5');
+    expect(textosFormaPalabra.aciertos(5)).toBe('Has acertado 5 de 5');
+  });
+
+  it('cada botón de acción lleva icono y texto', async () => {
+    jest.spyOn(Math, 'random').mockReturnValue(0);
+    await render(<App />);
+    await fireEvent.press(screen.getByText('Forma la palabra'));
+    for (const [id, t] of [
+      ['icono-comprobar', textosFormaPalabra.comprobar],
+      ['icono-borrar-ultima', textosFormaPalabra.borrarUltima],
+      ['icono-empezar-de-nuevo', textosFormaPalabra.empezarDeNuevo],
+      ['icono-ver-respuesta', textosFormaPalabra.verRespuesta],
+    ]) {
+      expect(screen.getByTestId(id, { includeHiddenElements: true })).toBeTruthy();
+      expect(screen.getByText(t)).toBeTruthy();
+    }
+    await fireEvent.press(screen.getByText(textosFormaPalabra.verRespuesta));
+    expect(screen.getByTestId('icono-siguiente', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByText(textosFormaPalabra.siguiente)).toBeTruthy();
+    jest.restoreAllMocks();
   });
 });

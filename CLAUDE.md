@@ -40,7 +40,8 @@ npm run typecheck  # comprobar tipos
 App.tsx                      # Decide si se ve el inicio o una actividad
 src/
 ├── actividades/             # tipos.ts (contrato), registro.ts (lista real), ejemplos.ts (solo pruebas a mano)
-│   └── parejas/             # Actividad "Parejas": juego.ts (reglas puras), dibujos.ts y sus pantallas
+│   ├── parejas/             # Actividad "Parejas": juego.ts (reglas puras), dibujos.ts y sus pantallas
+│   └── forma-palabra/       # Actividad "Forma la palabra": palabras.ts, juego.ts (reglas puras) y sus pantallas
 ├── pantallas/               # Inicio.tsx, MarcoActividad.tsx
 ├── componentes/             # BotonGrande.tsx, Icono.tsx
 ├── tema.ts                  # Tamaños y colores accesibles
@@ -75,7 +76,7 @@ Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla
 
 ## Cosas a tener en cuenta
 
-- La única actividad real por ahora es "Parejas". No se inventan actividades de relleno.
+- Las actividades reales por ahora son "Parejas" y "Forma la palabra". No se inventan actividades de relleno.
 - Las pruebas usan `getByTestId(..., { includeHiddenElements: true })` para los iconos, porque
   son decorativos y están ocultos a la accesibilidad a propósito.
 - En PowerShell 5.1, `Set-Content -Encoding utf8` añade BOM y rompe los JSON; usa Node para
