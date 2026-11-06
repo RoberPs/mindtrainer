@@ -44,6 +44,7 @@ siete cosas propias de esta actividad.
   de diferencia son rectángulos `{ x, y, ancho, alto }` en la misma escala. Al tocar el dibujo de
   abajo se toma la posición del toque dentro del recuadro (`locationX` y `locationY`), se divide
   entre el ancho y el alto medidos con `onLayout` y se pasa a la regla `tocar(partida, x, y)`.
+- **Detalle importante**: en un dispositivo real, `locationX` y `locationY` son relativos al elemento que recibe el toque; por eso los iconos y los círculos dentro del recuadro llevan `pointerEvents="none"`, y así el toque lo recibe siempre el recuadro.
 - **Razón**: Con coordenadas relativas las zonas valen para cualquier móvil y no hay que
   recalcular nada si cambia el tamaño. La regla es una función pura de dos números, fácil de probar
   sin pintar nada, y los rectángulos son más simples que los círculos (no dependen de la

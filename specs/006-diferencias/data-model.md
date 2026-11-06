@@ -28,7 +28,7 @@ en **exactamente 3** elementos: uno solo está en la lista de arriba (falta), un
 
 **Reglas**: hay exactamente 3. Cada zona está dentro del dibujo (de 0 a 1) y contiene el centro del
 elemento que difiere. Ninguna zona se solapa con otra. Cada zona mide lo bastante para un dedo
-(al menos unos 56 puntos en el dibujo más pequeño) y es algo mayor que el icono que cambia. La
+(al menos 0,18 del ancho y 0,27 del alto del dibujo, unos 44 puntos en el dibujo más pequeño) y es algo mayor que el icono que cambia. La
 zona sirve también como tamaño y posición del círculo de marca.
 
 ## Partida (estado mientras se juega)

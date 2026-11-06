@@ -39,7 +39,7 @@ actividad cumple el contrato de la funcionalidad 001 y se añade a `registro.ts`
 puntos de alto, contraste de al menos 7 a 1, sin límites de tiempo (RF-011, RF-013). Textos en
 español de España en `src/textos.ts`. Los dos dibujos deben caber a la vez en un móvil pequeño
 (unos 360 × 640 puntos) sin desplazarse (RF-013): el tamaño de cada dibujo se calcula a partir del
-alto disponible. Zonas de toque de al menos unos 56 puntos en el dibujo más pequeño.
+alto disponible. Zonas de toque de al menos unos 44 puntos (ancho y alto) en el dibujo más pequeño.
 
 **Escala/Alcance**: 2 pantallas dentro de la actividad (los dos dibujos y la felicitación), 1
 escena fija, 3 diferencias.
