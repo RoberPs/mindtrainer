@@ -6,7 +6,7 @@ cómo resolver seis cosas propias del juego.
 
 ## 1. De dónde sale la lista de palabras
 
-- **Decisión**: Un archivo `palabras.ts` con una lista fija de unas 100 palabras, en minúsculas,
+- **Decisión**: Un archivo `palabras.ts` con una lista fija de al menos 100 palabras, en minúsculas,
   de 4 a 7 letras, sin tildes (la "ñ" se permite). Sustantivos y objetos cotidianos.
 - **Razón**: Es lo más simple (principio I), funciona sin internet (V) y no guarda nada (VI).
   Con 100 palabras y 5 por partida, las partidas no se hacen monótonas enseguida.
