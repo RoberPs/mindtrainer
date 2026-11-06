@@ -50,8 +50,9 @@ La lista debe soportar desde 1 hasta unas decenas de actividades.
 | VI. Datos con respeto | Sí | No se pide ni se guarda ningún dato; no hay claves. |
 | VII. Pensada para mayores | Sí | Tamaños y contraste definidos en un solo sitio y reutilizados; sin temporizadores. |
 | VIII. Pruebas básicas | Sí | Pruebas funcionales de la lista, la navegación y la confirmación de salida. |
+| IX. Imágenes e iconos intuitivos | Sí | Iconos grandes incluidos en `assets/`, siempre junto al texto (FR-013 a FR-016). |
 
-**Resultado**: Sin infracciones. No hace falta la tabla de complejidad. Se mantiene tras el
+**Resultado** (constitución v1.1.0, 9 principios): Sin infracciones. No hace falta la tabla de complejidad. Se mantiene tras el
 diseño.
 
 ## Estructura del proyecto

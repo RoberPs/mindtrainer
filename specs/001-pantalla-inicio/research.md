@@ -53,8 +53,9 @@ no fijaba. Todas se pueden cambiar antes de `/speckit-tasks`.
 
 ## D7. Iconos e imágenes
 
-- **Decisión**: Los iconos e imágenes son archivos incluidos dentro de la app (carpeta `assets/`),
-  con licencia que permita usarlos. Un componente `Icono` los muestra siempre grandes y junto a
+- **Decisión**: Los iconos e imágenes van incluidos dentro de la app: los iconos de uso común
+  (casa, aceptar, cancelar) con los que trae Expo (licencia libre) y las imágenes propias de
+  cada actividad como archivos en `assets/`, con licencia que permita usarlos. Un componente `Icono` los muestra siempre grandes y junto a
   su texto.
 - **Motivo**: FR-013 a FR-016 y principio V: se ven sin internet y no se descarga nada.
 - **Alternativas descartadas**: Descargarlos de internet (contra el principio V); iconos solo de
