@@ -1,10 +1,12 @@
 <!--
 Informe de impacto de la sincronización
-- Cambio de versión: (plantilla sin rellenar) → 1.0.0
-- Principios: creados los 8 (no existían; el archivo anterior era la plantilla vacía)
-- Secciones añadidas: Principios fundamentales, Límites del producto, Forma de trabajar, Gobierno
+- Cambio de versión: 1.0.0 → 1.1.0 (MENOR: se añade un principio)
+- Principios modificados: ninguno
+- Principios añadidos: IX. Imágenes e iconos intuitivos
+- Secciones añadidas: ninguna
 - Secciones eliminadas: ninguna
 - Pendientes (TODO): ninguno
+- Historial: 1.0.0 (2026-11-06) creó los 8 principios iniciales
 -->
 # Constitución de MindTrainer
 
@@ -46,6 +48,12 @@ respuesta correcta e incorrecta, puntuación y final de la partida. Solo lo bás
 hacen pruebas exhaustivas, de rendimiento ni de aspecto visual. Una funcionalidad no está
 terminada hasta que sus pruebas pasan.
 
+### IX. Imágenes e iconos intuitivos
+Toda la app se construye con una gran variedad de iconos e imágenes intuitivos para personas
+mayores. Los iconos e imágenes acompañan al texto, nunca lo sustituyen. Son grandes, de alto
+contraste, están incluidos dentro de la app (sin descargar de internet) y tienen una licencia
+que permite usarlos. Se entienden sin leer: sirven de apoyo a quien tiene poca soltura.
+
 ## Límites del producto
 
 - No hay servidor, base de datos externa, publicidad ni análisis de uso.
@@ -68,4 +76,4 @@ este criterio: MAYOR si se elimina o cambia el sentido de un principio; MENOR si
 principio o se amplía mucho uno existente; PARCHE si solo se aclara la redacción. Cada
 especificación, plan y revisión comprueba que cumple estos principios.
 
-**Versión**: 1.0.0 | **Ratificada**: 2026-11-06 | **Última modificación**: 2026-11-06
+**Versión**: 1.1.0 | **Ratificada**: 2026-11-06 | **Última modificación**: 2026-11-06

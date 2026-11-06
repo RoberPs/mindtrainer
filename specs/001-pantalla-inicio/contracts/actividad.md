@@ -8,6 +8,7 @@ cumplir este contrato. Es la única interfaz entre la pantalla de inicio y las a
 | Campo | Obligatorio | Descripción |
 |-------|-------------|-------------|
 | Identificador | Sí | Único entre todas las actividades |
+| Icono | Sí | Icono o imagen propio, incluido en la app, distinto del de las demás |
 | Nombre | Sí | Texto para la lista, en español de España |
 | Descripción | Sí | Una línea, en español de España |
 | Contenido | Sí | La pantalla de la actividad |
@@ -32,15 +33,15 @@ cumplir este contrato. Es la única interfaz entre la pantalla de inicio y las a
 
 **Pantalla de inicio**
 - Una lista que se puede desplazar.
-- Cada elemento muestra el nombre y, debajo, la descripción de una línea.
+- Cada elemento muestra su icono grande, el nombre y, debajo, la descripción de una línea.
 - Tocar un elemento abre esa actividad.
 - Con una sola actividad el aspecto es el mismo que con varias.
 
 **Marco de actividad**
-- Zona fija con el botón "Volver al inicio", siempre a la vista.
+- Zona fija con el botón "Volver al inicio" (icono de casa y texto), siempre a la vista.
 - Debajo, el contenido de la actividad.
 
 **Aviso de salida** (solo con partida en curso)
 - Texto: "¿Seguro que quieres salir? Perderás la partida".
-- Dos botones grandes: "Sí, salir" y "No, seguir jugando".
+- Dos botones grandes, cada uno con icono y texto: "Sí, salir" y "No, seguir jugando".
 - Sin límite de tiempo para responder.

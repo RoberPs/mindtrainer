@@ -12,7 +12,7 @@
 
 ### Historia de usuario 1 - Ver las actividades y empezar una (Prioridad: P1)
 
-Una persona mayor abre la app y ve de inmediato la lista de actividades disponibles. Cada actividad muestra su nombre y una descripción de una línea. Toca una y empieza. No hay registro, permisos ni tutorial previos.
+Una persona mayor abre la app y ve de inmediato la lista de actividades disponibles. Cada actividad muestra un icono o imagen intuitivo, su nombre y una descripción de una línea. Toca una y empieza. No hay registro, permisos ni tutorial previos.
 
 **Por qué esta prioridad**: Es la puerta de entrada a todo el producto. Sin ella, la persona no sabe qué hacer al abrir la app.
 
@@ -20,7 +20,7 @@ Una persona mayor abre la app y ve de inmediato la lista de actividades disponib
 
 **Escenarios de aceptación**:
 
-1. **Dado** que la persona abre la app por primera vez, **cuando** termina de cargar, **entonces** ve la lista de actividades, cada una con su nombre y una descripción de una línea.
+1. **Dado** que la persona abre la app por primera vez, **cuando** termina de cargar, **entonces** ve la lista de actividades, cada una con su icono o imagen, su nombre y una descripción de una línea.
 2. **Dado** que ve la lista de actividades, **cuando** toca una de ellas, **entonces** se abre esa actividad.
 3. **Dado** que la persona abre la app por primera vez, **cuando** aparece la pantalla de inicio, **entonces** no se le pide registro ni permisos y no se le muestra ningún tutorial antes de la lista.
 
@@ -63,10 +63,14 @@ Una persona que está dentro de una actividad puede volver a la pantalla de inic
 - **FR-010**: La pantalla de inicio y el botón MUST cumplir las pautas para personas mayores de la constitución: letra grande, contraste alto, botones grandes y sin límite de tiempo.
 - **FR-011**: Al tocar "Volver al inicio" con una partida en curso, la app MUST pedir confirmación antes de salir, con los botones grandes "Sí, salir" y "No, seguir jugando". Sin límite de tiempo para responder.
 - **FR-012**: Si la persona elige "No, seguir jugando", la partida MUST continuar exactamente donde estaba.
+- **FR-013**: Cada actividad de la lista MUST mostrar un icono o imagen propio, distinto del de las demás actividades y fácil de entender sin leer, junto a su nombre y descripción.
+- **FR-014**: Los iconos e imágenes MUST acompañar al texto, nunca sustituirlo: toda acción y toda actividad sigue teniendo su texto escrito.
+- **FR-015**: El botón "Volver al inicio" MUST llevar un icono reconocible (por ejemplo, una casa) junto a su texto, igual en todas las actividades. Los botones "Sí, salir" y "No, seguir jugando" MUST llevar también un icono claro junto al texto.
+- **FR-016**: Los iconos e imágenes MUST verse grandes y con buen contraste, y estar incluidos dentro de la app para verse sin internet.
 
 ### Entidades clave
 
-- **Actividad**: Cada una de las cosas que la persona puede hacer en la app (un juego o un tipo de pregunta). Tiene un nombre y una descripción de una línea.
+- **Actividad**: Cada una de las cosas que la persona puede hacer en la app (un juego o un tipo de pregunta). Tiene un icono o imagen, un nombre y una descripción de una línea.
 
 ## Criterios de éxito *(obligatorio)*
 
@@ -78,6 +82,8 @@ Una persona que está dentro de una actividad puede volver a la pantalla de inic
 - **SC-004**: Una persona mayor que ha entrado en una actividad vuelve a la pantalla de inicio con un solo toque, sin ayuda, en menos de 10 segundos.
 - **SC-005**: Con 1 actividad y con 10 actividades, todas se pueden ver y abrir desde la pantalla de inicio.
 - **SC-006**: Una persona no técnica puede comprobar cada criterio anterior usando solo la app, sin leer código.
+- **SC-007**: Con varias actividades en la lista, una persona mayor distingue una actividad de otra solo por su icono o imagen, sin leer el texto, en al menos 8 de cada 10 intentos.
+- **SC-008**: Una persona mayor identifica el botón "Volver al inicio" por su icono sin leer el texto, y todos los iconos e imágenes se ven con la app sin conexión a internet.
 
 ## Fuera de alcance
 
@@ -90,3 +96,5 @@ Cuentas, perfil, ajustes, estadísticas, favoritos, recordatorios y buscador.
 - El orden de las actividades en la lista lo decide la spec de cada actividad; esta funcionalidad solo las muestra.
 - Las actividades concretas (nombre, descripción, reglas) se especifican por separado; esta funcionalidad no las define.
 - No se guarda ningún dato de la persona para mostrar la pantalla de inicio.
+- Cada actividad futura aporta su propio icono o imagen en su spec. Esta funcionalidad define cómo se muestran, no cuáles son. La variedad de iconos e imágenes dentro de cada juego o pregunta se especifica en la spec de esa actividad.
+- Los iconos e imágenes tienen licencia que permite usarlos en la app y no se descargan de internet.

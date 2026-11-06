@@ -51,7 +51,16 @@ no fijaba. Todas se pueden cambiar antes de `/speckit-tasks`.
 - **Motivo**: Principio VII en un solo sitio, fácil de ajustar.
 - **Alternativas descartadas**: Estilos sueltos por pantalla.
 
-## D7. Pruebas
+## D7. Iconos e imágenes
+
+- **Decisión**: Los iconos e imágenes son archivos incluidos dentro de la app (carpeta `assets/`),
+  con licencia que permita usarlos. Un componente `Icono` los muestra siempre grandes y junto a
+  su texto.
+- **Motivo**: FR-013 a FR-016 y principio V: se ven sin internet y no se descarga nada.
+- **Alternativas descartadas**: Descargarlos de internet (contra el principio V); iconos solo de
+  texto o emojis (se ven distinto según el móvil y no garantizan contraste ni tamaño).
+
+## D8. Pruebas
 
 - **Decisión**: Jest y React Native Testing Library, con pruebas funcionales de comportamiento.
   Sin pruebas de aspecto visual ni de rendimiento.

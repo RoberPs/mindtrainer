@@ -10,6 +10,7 @@ Cada una de las cosas que la persona puede hacer en la app (un juego o un tipo d
 | Campo | Qué es | Reglas |
 |-------|--------|--------|
 | Identificador | Nombre interno único | Obligatorio y sin repetir entre actividades |
+| Icono | Icono o imagen que ve la persona | Obligatorio, incluido en la app, distinto del de las demás actividades |
 | Nombre | Texto que ve la persona | Obligatorio, en español de España, breve |
 | Descripción | Una línea que explica la actividad | Obligatoria, una sola línea, en español de España |
 | Contenido | La pantalla de la actividad | Obligatorio; sigue el [contrato](contracts/actividad.md) |

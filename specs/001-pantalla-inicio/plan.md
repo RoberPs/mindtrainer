@@ -6,8 +6,8 @@
 
 ## Resumen
 
-Se construye la base de la app: una pantalla de inicio con la lista de actividades (nombre y
-descripción de una línea) y un marco común para las actividades que muestra siempre el botón
+Se construye la base de la app: una pantalla de inicio con la lista de actividades (icono,
+nombre y descripción de una línea) y un marco común para las actividades que muestra siempre el botón
 "Volver al inicio". Si hay una partida en curso, el botón pide confirmación antes de salir. Es
 la primera funcionalidad del proyecto, así que también crea el esqueleto de la app. Todo corre
 dentro del móvil, sin servidor ni internet (ver [research.md](research.md)).
@@ -73,6 +73,7 @@ specs/001-pantalla-inicio/
 
 ```text
 App.tsx                      # Punto de entrada: decide si se ve el inicio o una actividad
+assets/                      # Iconos e imágenes incluidos en la app (sin descargas)
 src/
 ├── actividades/
 │   └── registro.ts          # Lista de actividades disponibles (vacía por ahora)
@@ -80,7 +81,8 @@ src/
 │   ├── Inicio.tsx           # Lista de actividades
 │   └── MarcoActividad.tsx   # Marco con el botón "Volver al inicio" y la confirmación
 ├── componentes/
-│   └── BotonGrande.tsx      # Botón con tamaño y contraste accesibles
+│   ├── BotonGrande.tsx      # Botón con tamaño y contraste accesibles, con icono y texto
+│   └── Icono.tsx            # Muestra un icono o imagen grande, siempre junto a texto
 ├── tema.ts                  # Tamaños de letra y colores de alto contraste
 └── textos.ts                # Todos los textos en español de España
 
