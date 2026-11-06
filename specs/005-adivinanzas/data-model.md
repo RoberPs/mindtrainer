@@ -1,11 +1,11 @@
 # Modelo de datos: Actividad "Adivinanzas"
 
 Nada se guarda: todo vive en memoria mientras la actividad está abierta y se pierde al salir.
-Los tipos van en `src/actividades/adivinanzas/juego.ts` y los datos en `adivinanzas.ts`.
+Los tipos van en `src/actividades/adivinanzas/juego.ts` y los datos en `banco.ts`.
 
 ## Adivinanza
 
-Una adivinanza preparada de antemano en `adivinanzas.ts`.
+Una adivinanza preparada de antemano en `banco.ts`.
 
 | Campo | Qué es |
 |-------|--------|

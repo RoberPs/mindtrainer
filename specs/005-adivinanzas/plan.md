@@ -85,7 +85,7 @@ src/
 ├── actividades/
 │   ├── registro.ts                 # Se añade "Adivinanzas" tras "Sopa de letras"
 │   └── adivinanzas/
-│       ├── adivinanzas.ts          # Banco de al menos 10: id, texto, correcta y 2 incorrectas
+│       ├── banco.ts                # Banco de al menos 10: id, texto, correcta y 2 incorrectas
 │       ├── juego.ts                # Reglas: crearPartida, responder, siguiente, esUltima
 │       │                           #   (funciones puras)
 │       ├── Adivinanzas.tsx         # Contenido de la actividad: elige entre adivinanza y resultado

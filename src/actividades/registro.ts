@@ -2,7 +2,8 @@ import type { Actividad } from './tipos';
 import { Parejas } from './parejas/Parejas';
 import { FormaPalabra } from './forma-palabra/FormaPalabra';
 import { SopaDeLetras } from './sopa-de-letras/SopaDeLetras';
-import { textosFormaPalabra, textosParejas, textosSopa } from '../textos';
+import { Adivinanzas } from './adivinanzas/Adivinanzas';
+import { textosAdivinanzas, textosFormaPalabra, textosParejas, textosSopa } from '../textos';
 
 // Actividades disponibles en la app.
 export const actividades: Actividad[] = [
@@ -26,5 +27,12 @@ export const actividades: Actividad[] = [
     nombre: textosSopa.nombre,
     descripcion: textosSopa.descripcion,
     Contenido: SopaDeLetras,
+  },
+  {
+    id: 'adivinanzas',
+    icono: { nombre: 'help-circle' },
+    nombre: textosAdivinanzas.nombre,
+    descripcion: textosAdivinanzas.descripcion,
+    Contenido: Adivinanzas,
   },
 ];

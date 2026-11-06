@@ -7,7 +7,7 @@ cosas propias de esta actividad.
 
 ## 1. De dónde salen las adivinanzas
 
-- **Decisión**: Un archivo `adivinanzas.ts` con una lista fija de al menos 10. Cada una tiene un
+- **Decisión**: Un archivo `banco.ts` con una lista fija de al menos 10. Cada una tiene un
   `id`, el `texto`, la `correcta` y las dos `incorrectas`, todo escrito a mano. Propuesta inicial,
   a confirmar al escribir los textos (T-escritura) y a revisar por una persona:
 
