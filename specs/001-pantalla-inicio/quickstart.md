@@ -7,7 +7,8 @@ persona no técnica y mayor, usando solo la app, y otra automática.
 
 **Antes de empezar**: la app instalada en el móvil, sin haberla abierto nunca. Para esta
 comprobación hacen falta al menos dos actividades de ejemplo en la app. Mientras no exista
-ninguna actividad real, se añaden temporalmente solo para la prueba y se quitan después.
+ninguna actividad real, se usan las de `src/actividades/ejemplos.ts`, que se activan solo para
+la prueba y se quitan después.
 
 | # | Qué hacer | Qué debe verse | Criterio |
 |---|-----------|----------------|----------|

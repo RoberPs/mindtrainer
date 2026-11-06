@@ -21,7 +21,7 @@
 **⚠️ CRÍTICO**: Ninguna historia puede empezar hasta terminar esta fase.
 
 - [ ] T004 [P] Crear los textos en español de España ("Volver al inicio", "¿Seguro que quieres salir? Perderás la partida", "Sí, salir", "No, seguir jugando") en `src/textos.ts`
-- [ ] T005 [P] Crear el tema accesible (letra grande, colores de alto contraste, tamaño mínimo de botón) en `src/tema.ts`
+- [ ] T005 [P] Crear el tema accesible (letra de al menos 22 puntos, botones de al menos 64 puntos de alto, contraste de al menos 7 a 1, según FR-010) en `src/tema.ts`
 - [ ] T006 [P] Definir el tipo `Actividad` (identificador, icono, nombre, descripción, contenido) y el aviso de partida en curso según [contracts/actividad.md](contracts/actividad.md) en `src/actividades/tipos.ts`
 - [ ] T007 Crear el registro de actividades, vacío por ahora, en `src/actividades/registro.ts` (depende de T006)
 - [ ] T008 [P] Crear el componente `Icono` que muestra un icono grande, incluido en la app y sin descargas, en `src/componentes/Icono.tsx`. Usa los iconos que trae Expo dentro de la app y acepta también una imagen propia en `assets/`
@@ -85,7 +85,8 @@
 
 - [ ] T024 [P] Prueba de textos: los textos fijos de la app están en español de España y los botones llevan icono y texto, en `tests/textos.test.tsx` (FR-009, FR-014)
 - [ ] T025 Ejecutar `npm test` y comprobar que todas las pruebas pasan (principio VIII)
-- [ ] T026 Hacer la comprobación manual de los 13 pasos de [quickstart.md](quickstart.md) en un móvil con una persona no técnica, con dos actividades de ejemplo temporales que se quitan al terminar, incluido el modo avión (principio IV, SC-001 a SC-008)
+- [ ] T026 [P] Crear `src/actividades/ejemplos.ts` con dos actividades de ejemplo (icono, nombre, descripción y una partida simple) SOLO para la comprobación manual. No se registran en `registro.ts`; se activan cambiando una sola línea en `App.tsx` y se retiran al terminar, con una nota en el archivo que lo explique (principio III)
+- [ ] T027 Hacer la comprobación manual de los 13 pasos de [quickstart.md](quickstart.md) en un móvil con una persona no técnica y las actividades de T026, incluido el modo avión. Cronometrar los pasos 2 y 4 (SC-001, SC-004) y repetir 10 veces la prueba de distinguir iconos (SC-007). Al terminar, retirar las actividades de ejemplo (principio IV, SC-001 a SC-008). **Requiere a una persona y un móvil: no la puede hacer el agente.**
 
 ---
 

@@ -60,13 +60,13 @@ Una persona que está dentro de una actividad puede volver a la pantalla de inic
 - **FR-007**: Cada pantalla de cada actividad MUST mostrar un botón "Volver al inicio" siempre visible, sin necesidad de desplazarse ni de abrir menús.
 - **FR-008**: Al tocar "Volver al inicio", la app MUST mostrar la pantalla de inicio.
 - **FR-009**: Todos los textos de la pantalla de inicio y del botón MUST estar en español de España.
-- **FR-010**: La pantalla de inicio y el botón MUST cumplir las pautas para personas mayores de la constitución: letra grande, contraste alto, botones grandes y sin límite de tiempo.
+- **FR-010**: La pantalla de inicio y el botón MUST cumplir las pautas para personas mayores de la constitución, con estos mínimos: letra de al menos 22 puntos, botones de al menos 64 puntos de alto, contraste entre texto y fondo de al menos 7 a 1 y sin límite de tiempo.
 - **FR-011**: Al tocar "Volver al inicio" con una partida en curso, la app MUST pedir confirmación antes de salir, con los botones grandes "Sí, salir" y "No, seguir jugando". Sin límite de tiempo para responder.
 - **FR-012**: Si la persona elige "No, seguir jugando", la partida MUST continuar exactamente donde estaba.
 - **FR-013**: Cada actividad de la lista MUST mostrar un icono o imagen propio, distinto del de las demás actividades y fácil de entender sin leer, junto a su nombre y descripción.
 - **FR-014**: Los iconos e imágenes MUST acompañar al texto, nunca sustituirlo: toda acción y toda actividad sigue teniendo su texto escrito.
 - **FR-015**: El botón "Volver al inicio" MUST llevar un icono reconocible (por ejemplo, una casa) junto a su texto, igual en todas las actividades. Los botones "Sí, salir" y "No, seguir jugando" MUST llevar también un icono claro junto al texto.
-- **FR-016**: Los iconos e imágenes MUST verse grandes y con buen contraste, y estar incluidos dentro de la app para verse sin internet.
+- **FR-016**: Los iconos e imágenes MUST cumplir los mismos mínimos de tamaño y contraste de FR-010 y estar incluidos dentro de la app para verse sin internet.
 
 ### Entidades clave
 
@@ -98,3 +98,4 @@ Cuentas, perfil, ajustes, estadísticas, favoritos, recordatorios y buscador.
 - No se guarda ningún dato de la persona para mostrar la pantalla de inicio.
 - Cada actividad futura aporta su propio icono o imagen en su spec. Esta funcionalidad define cómo se muestran, no cuáles son. La variedad de iconos e imágenes dentro de cada juego o pregunta se especifica en la spec de esa actividad.
 - Los iconos e imágenes tienen licencia que permite usarlos en la app y no se descargan de internet.
+- Mientras no exista ninguna actividad real, la lista de la pantalla de inicio queda vacía. Qué se ve en ese caso queda sin definir hasta la spec de la primera actividad, y esta funcionalidad no construye nada para ello. La comprobación con la app usa actividades de ejemplo temporales que no forman parte del producto.

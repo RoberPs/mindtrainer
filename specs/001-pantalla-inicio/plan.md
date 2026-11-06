@@ -30,8 +30,9 @@ pantallas basta un estado simple (principio I).
 **Objetivos de rendimiento**: Sin objetivos propios. La pantalla de inicio se ve al abrir la
 app y la respuesta al toque es inmediata a ojos de la persona.
 
-**Restricciones**: Funciona sin internet. Sin cuentas, permisos ni tutorial. Letra grande,
-contraste alto, botones grandes, sin límites de tiempo. Textos en español de España.
+**Restricciones**: Funciona sin internet. Sin cuentas, permisos ni tutorial. Letra de al
+menos 22 puntos, botones de al menos 64 puntos de alto, contraste de al menos 7 a 1, sin
+límites de tiempo (FR-010). Textos en español de España.
 
 **Escala/Alcance**: 2 pantallas (inicio y marco de actividad) más el aviso de confirmación.
 La lista debe soportar desde 1 hasta unas decenas de actividades.
@@ -77,7 +78,9 @@ App.tsx                      # Punto de entrada: decide si se ve el inicio o una
 assets/                      # Iconos e imágenes incluidos en la app (sin descargas)
 src/
 ├── actividades/
-│   └── registro.ts          # Lista de actividades disponibles (vacía por ahora)
+│   ├── tipos.ts             # Tipo Actividad y aviso de partida en curso (contrato)
+│   ├── registro.ts          # Lista de actividades disponibles (vacía por ahora)
+│   └── ejemplos.ts          # Actividades de ejemplo SOLO para comprobar a mano; no forman parte del producto
 ├── pantallas/
 │   ├── Inicio.tsx           # Lista de actividades
 │   └── MarcoActividad.tsx   # Marco con el botón "Volver al inicio" y la confirmación
@@ -88,6 +91,7 @@ src/
 └── textos.ts                # Todos los textos en español de España
 
 tests/
+├── textos.test.tsx          # Textos fijos en español de España, botones con icono y texto
 ├── inicio.test.tsx          # Lista, una sola actividad, varias, abrir actividad
 └── marco-actividad.test.tsx # Botón visible, volver, confirmación con partida en curso
 ```
