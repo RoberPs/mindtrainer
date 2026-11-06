@@ -1,0 +1,27 @@
+import { StyleSheet, Text, View } from 'react-native';
+import { BotonGrande } from '../../componentes/BotonGrande';
+import { Icono } from '../../componentes/Icono';
+import { textosSopa as t } from '../../textos';
+import { tema } from '../../tema';
+
+type Props = {
+  intentos: number;
+  alJugarOtraVez: () => void;
+};
+
+// Mensaje final. "Volver al inicio" no se pinta aquí: lo pone siempre el marco.
+export function Felicitacion({ intentos, alJugarOtraVez }: Props) {
+  return (
+    <View style={estilos.pantalla}>
+      <Icono icono={{ nombre: 'party-popper' }} tamano={96} testID="icono-felicitacion" />
+      <Text style={estilos.mensaje}>{t.felicitacion}</Text>
+      <Text style={estilos.mensaje}>{t.intentosNecesitados(intentos)}</Text>
+      <BotonGrande texto={t.jugarOtraVez} icono={{ nombre: 'refresh' }} idIcono="icono-jugar-otra-vez" alTocar={alJugarOtraVez} />
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { gap: tema.espacio, alignItems: 'center' },
+  mensaje: { fontSize: tema.letra.titulo, fontWeight: '700', color: tema.colores.texto, textAlign: 'center' },
+});

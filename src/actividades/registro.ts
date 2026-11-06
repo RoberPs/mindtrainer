@@ -1,7 +1,8 @@
 import type { Actividad } from './tipos';
 import { Parejas } from './parejas/Parejas';
 import { FormaPalabra } from './forma-palabra/FormaPalabra';
-import { textosFormaPalabra, textosParejas } from '../textos';
+import { SopaDeLetras } from './sopa-de-letras/SopaDeLetras';
+import { textosFormaPalabra, textosParejas, textosSopa } from '../textos';
 
 // Actividades disponibles en la app.
 export const actividades: Actividad[] = [
@@ -18,5 +19,12 @@ export const actividades: Actividad[] = [
     nombre: textosFormaPalabra.nombre,
     descripcion: textosFormaPalabra.descripcion,
     Contenido: FormaPalabra,
+  },
+  {
+    id: 'sopa-de-letras',
+    icono: { nombre: 'grid' },
+    nombre: textosSopa.nombre,
+    descripcion: textosSopa.descripcion,
+    Contenido: SopaDeLetras,
   },
 ];
