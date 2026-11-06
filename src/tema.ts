@@ -7,6 +7,7 @@ export const tema = {
     textoSobrePrimario: '#FFFFFF',
     tarjeta: '#F2F5FA',
     borde: '#0B3D91',
+    acierto: '#1B5E20', // verde oscuro para las parejas encontradas
     velo: 'rgba(0, 0, 0, 0.6)',
   },
   letra: {

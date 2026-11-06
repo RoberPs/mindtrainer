@@ -12,7 +12,7 @@
 
 ## Fase 1: Preparación
 
-- [ ] T001 Comprobar que `npm test` y `npm run typecheck` pasan en la rama `002-parejas-memoria` antes de tocar nada, para saber que cualquier fallo posterior es de esta funcionalidad
+- [X] T001 Comprobar que `npm test` y `npm run typecheck` pasan en la rama `002-parejas-memoria` antes de tocar nada, para saber que cualquier fallo posterior es de esta funcionalidad
 
 ---
 
@@ -20,9 +20,9 @@
 
 **⚠️ CRÍTICO**: Ninguna historia puede empezar hasta terminar esta fase.
 
-- [ ] T002 [P] Añadir a `src/textos.ts` todos los textos de la actividad en español de España, con tildes y signos de apertura: nombre "Parejas", descripción "Encuentra las cartas iguales", invitación a elegir tamaño, "Pequeña", "Mediana", "Grande" con "6 cartas", "8 cartas" y "12 cartas", "Intentos", "Seguir", "Carta", mensaje de felicitación, "Has necesitado N intentos" (con singular para 1) y "Jugar otra vez"; y los nombres de los 8 dibujos (llave, taza, reloj, gafas, cama, silla, lámpara, tijeras)
-- [ ] T003 [P] Crear los 8 dibujos (identificador, nombre tomado de `src/textos.ts` e icono de `MaterialCommunityIcons`: `key`, `coffee`, `clock-outline`, `glasses`, `bed`, `seat`, `lamp`, `content-cut`) en `src/actividades/parejas/dibujos.ts` según [data-model.md](data-model.md)
-- [ ] T004 Crear en `src/actividades/parejas/juego.ts` los tipos `Carta` y `Partida` y la función `crearPartida(tamano, azar = Math.random)`: elige N/2 dibujos distintos de los 8, los duplica y mezcla las cartas con Fisher-Yates; todas empiezan `tapada` y los intentos en 0, según [contracts/parejas.md](contracts/parejas.md) (depende de T003)
+- [X] T002 Añadir a `src/textos.ts` todos los textos de la actividad en español de España, con tildes y signos de apertura: nombre "Parejas", descripción "Encuentra las cartas iguales", invitación a elegir tamaño, "Pequeña", "Mediana", "Grande" con "6 cartas", "8 cartas" y "12 cartas", "Intentos", "Seguir", "Carta", mensaje de felicitación, "Has necesitado N intentos" (con singular para 1) y "Jugar otra vez"; y los nombres de los 8 dibujos (llave, taza, reloj, gafas, cama, silla, lámpara, tijeras)
+- [X] T003 Crear los 8 dibujos (identificador, nombre tomado de `src/textos.ts` e icono de `MaterialCommunityIcons`: `key`, `coffee`, `clock-outline`, `glasses`, `bed`, `seat`, `lamp`, `content-cut`) en `src/actividades/parejas/dibujos.ts` según [data-model.md](data-model.md) (depende de T002)
+- [X] T004 Crear en `src/actividades/parejas/juego.ts` los tipos `Carta` y `Partida` y la función `crearPartida(tamano, azar = Math.random)`: elige N/2 dibujos distintos de los 8, los duplica y mezcla las cartas con Fisher-Yates; todas empiezan `tapada` y los intentos en 0, según [contracts/parejas.md](contracts/parejas.md) (depende de T003)
 
 **Punto de control**: Base lista; las historias pueden empezar.
 
@@ -36,17 +36,17 @@
 
 ### Pruebas de la historia 1
 
-- [ ] T005 [P] [US1] Escribir en `tests/parejas-juego.test.tsx` las pruebas de las reglas con un mazo conocido: dos cartas iguales quedan `descubierta`; dos distintas quedan `girada`; `seguir` las vuelve a tapar; tocar una carta descubierta o ya girada no cambia nada; con dos distintas a la vista, tocar otra carta no cambia nada; el intento sube en 1 al girar la segunda carta (acierte o falle) y no al girar la primera
-- [ ] T006 [P] [US1] Escribir en `tests/parejas-pantalla.test.tsx` las pruebas de la pantalla con `Math.random` fijado: "Parejas" aparece en la lista de inicio con su icono, nombre y descripción; al abrirla hay 6 cartas tapadas con "Intentos: 0"; dos distintas muestran dibujo y nombre y aparece "Seguir"; tras avanzar el reloj 1 minuto con temporizadores simulados siguen a la vista; tocar una tercera no hace nada; "Seguir" las tapa y desaparece; dos iguales se quedan descubiertas sin "Seguir". Los iconos se buscan con `getByTestId(..., { includeHiddenElements: true })`
+- [X] T005 [P] [US1] Escribir en `tests/parejas-juego.test.tsx` las pruebas de las reglas con un mazo conocido: dos cartas iguales quedan `descubierta`; dos distintas quedan `girada`; `seguir` las vuelve a tapar; tocar una carta descubierta o ya girada no cambia nada; con dos distintas a la vista, tocar otra carta no cambia nada; el intento sube en 1 al girar la segunda carta (acierte o falle) y no al girar la primera
+- [X] T006 [P] [US1] Escribir en `tests/parejas-pantalla.test.tsx` las pruebas de la pantalla con `Math.random` fijado: "Parejas" aparece en la lista de inicio con su icono, nombre y descripción; al abrirla hay 6 cartas tapadas con "Intentos: 0"; dos distintas muestran dibujo y nombre y aparece "Seguir"; tras avanzar el reloj 1 minuto con temporizadores simulados siguen a la vista; tocar una tercera no hace nada; "Seguir" las tapa y desaparece; dos iguales se quedan descubiertas sin "Seguir". Los iconos se buscan con `getByTestId(..., { includeHiddenElements: true })`
 
 ### Implementación de la historia 1
 
-- [ ] T007 [US1] Añadir `tocarCarta(partida, posicion)` y `seguir(partida)` a `src/actividades/parejas/juego.ts` como funciones puras que devuelven una partida nueva (o la misma si el toque no tiene efecto), según las garantías de [contracts/parejas.md](contracts/parejas.md) (depende de T004)
-- [ ] T008 [P] [US1] Crear la carta en `src/actividades/parejas/Carta.tsx`: tapada muestra icono de interrogante y el texto "Carta"; girada o descubierta muestra el dibujo grande con su nombre; las descubiertas se distinguen además por un icono de visto, no solo por el color. Usa `Icono` y `tema` (letra de al menos 22 puntos)
-- [ ] T009 [US1] Crear el tablero en `src/actividades/parejas/Tablero.tsx`: zona fija arriba con "Intentos: N" y, solo si hay dos cartas distintas a la vista, el botón "Seguir" (`BotonGrande`, icono `arrow-right-circle`); debajo un `ScrollView` con la cuadrícula de cartas, de 2 columnas (6 y 8 cartas) o 3 (12 cartas) (depende de T007, T008)
-- [ ] T010 [US1] Crear el contenido de la actividad en `src/actividades/parejas/Parejas.tsx`: guarda la partida en `useState`, empieza una partida de 6 cartas al abrirse, llama a `avisarPartida(true)` al empezar y conecta el tablero con `tocarCarta` y `seguir`. Es un arranque provisional que T020 sustituye (depende de T009)
-- [ ] T011 [US1] Añadir la actividad a `src/actividades/registro.ts` con identificador `parejas`, icono `{ nombre: 'cards' }`, nombre y descripción de `src/textos.ts` y `Contenido: Parejas` (depende de T010)
-- [ ] T012 [US1] Ejecutar `npm test` y `npm run typecheck`: T005 y T006 deben pasar
+- [X] T007 [US1] Añadir `tocarCarta(partida, posicion)` y `seguir(partida)` a `src/actividades/parejas/juego.ts` como funciones puras que devuelven una partida nueva (o la misma si el toque no tiene efecto), según las garantías de [contracts/parejas.md](contracts/parejas.md) (depende de T004)
+- [X] T008 [P] [US1] Crear la carta en `src/actividades/parejas/Carta.tsx`: tapada muestra icono de interrogante y el texto "Carta"; girada o descubierta muestra el dibujo grande con su nombre; las descubiertas se distinguen además por un icono de visto, no solo por el color. Usa `Icono` y `tema` (letra de al menos 22 puntos)
+- [X] T009 [US1] Crear el tablero en `src/actividades/parejas/Tablero.tsx`: zona fija arriba con "Intentos: N" y, solo si hay dos cartas distintas a la vista, el botón "Seguir" (`BotonGrande`, icono `arrow-right-circle`); debajo un `ScrollView` con la cuadrícula de cartas, de 2 columnas (6 y 8 cartas) o 3 (12 cartas) (depende de T007, T008)
+- [X] T010 [US1] Crear el contenido de la actividad en `src/actividades/parejas/Parejas.tsx`: guarda la partida en `useState`, empieza una partida de 6 cartas al abrirse, llama a `avisarPartida(true)` al empezar y conecta el tablero con `tocarCarta` y `seguir`. Es un arranque provisional que T020 sustituye (depende de T009)
+- [X] T011 [US1] Añadir la actividad a `src/actividades/registro.ts` con identificador `parejas`, icono `{ nombre: 'cards' }`, nombre y descripción de `src/textos.ts` y `Contenido: Parejas` (depende de T010)
+- [X] T012 [US1] Ejecutar `npm test` y `npm run typecheck`: T005 y T006 deben pasar
 
 **Punto de control**: Se puede jugar una partida pequeña de principio a fin, aún sin felicitación.
 
@@ -60,14 +60,14 @@
 
 ### Pruebas de la historia 2
 
-- [ ] T013 [US2] Ampliar `tests/parejas-juego.test.tsx` y `tests/parejas-pantalla.test.tsx`: la partida no está terminada hasta descubrir la última pareja y sí lo está al descubrirla; al terminar aparece la felicitación con el número de intentos que marcaba (con singular si es 1) y los botones "Jugar otra vez" y "Volver al inicio"; `avisarPartida` se llama con `true` al empezar y con `false` al terminar; dentro de `MarcoActividad`, "Volver al inicio" en la felicitación vuelve a la lista sin pedir confirmación; "Jugar otra vez" empieza una partida nueva con intentos a 0, cartas tapadas y orden distinto (depende de T012)
+- [X] T013 [US2] Ampliar `tests/parejas-juego.test.tsx` y `tests/parejas-pantalla.test.tsx`: la partida no está terminada hasta descubrir la última pareja y sí lo está al descubrirla; al terminar aparece la felicitación con el número de intentos que marcaba (con singular si es 1) y los botones "Jugar otra vez" y "Volver al inicio"; `avisarPartida` se llama con `true` al empezar y con `false` al terminar; dentro de `MarcoActividad`, "Volver al inicio" en la felicitación vuelve a la lista sin pedir confirmación; "Jugar otra vez" empieza una partida nueva con intentos a 0 y cartas tapadas. Para comprobar que el orden es distinto, el azar no puede ir fijo como en T006: se simula con valores distintos en cada partida (por ejemplo `mockReturnValueOnce` con secuencias diferentes para la primera y la segunda partida) y se comprueba que el orden de los dibujos cambia (depende de T012)
 
 ### Implementación de la historia 2
 
-- [ ] T014 [US2] Añadir el campo `terminada` a la partida en `src/actividades/parejas/juego.ts`: pasa a ser verdadero solo cuando todas las cartas están `descubierta` (depende de T013)
-- [ ] T015 [P] [US2] Crear la pantalla final en `src/actividades/parejas/Felicitacion.tsx`: icono `party-popper`, mensaje de felicitación, "Has necesitado N intentos" y un `BotonGrande` "Jugar otra vez" (icono `refresh`). El botón "Volver al inicio" no se pinta aquí: lo pone el marco
-- [ ] T016 [US2] Cambiar `src/actividades/parejas/Parejas.tsx` para mostrar la felicitación cuando la partida está terminada, llamar a `avisarPartida(false)` en ese momento y hacer que "Jugar otra vez" empiece una partida nueva de 6 cartas (provisional hasta T020) (depende de T014, T015)
-- [ ] T017 [US2] Ejecutar `npm test` y `npm run typecheck`: las pruebas de T013 deben pasar
+- [X] T014 [US2] Añadir el campo `terminada` a la partida en `src/actividades/parejas/juego.ts`: pasa a ser verdadero solo cuando todas las cartas están `descubierta` (depende de T013)
+- [X] T015 [P] [US2] Crear la pantalla final en `src/actividades/parejas/Felicitacion.tsx`: icono `party-popper`, mensaje de felicitación, "Has necesitado N intentos" y un `BotonGrande` "Jugar otra vez" (icono `refresh`). El botón "Volver al inicio" no se pinta aquí: lo pone el marco
+- [X] T016 [US2] Cambiar `src/actividades/parejas/Parejas.tsx` para mostrar la felicitación cuando la partida está terminada, llamar a `avisarPartida(false)` en ese momento y hacer que "Jugar otra vez" empiece una partida nueva de 6 cartas (provisional hasta T020) (depende de T014, T015)
+- [X] T017 [US2] Ejecutar `npm test` y `npm run typecheck`: las pruebas de T013 deben pasar
 
 **Punto de control**: Las historias 1 y 2 funcionan juntas; el juego tiene principio y final.
 
@@ -81,13 +81,13 @@
 
 ### Pruebas de la historia 3
 
-- [ ] T018 [US3] Ampliar `tests/parejas-juego.test.tsx` y `tests/parejas-pantalla.test.tsx`: `crearPartida` da exactamente 6, 8 y 12 cartas y cada dibujo sale exactamente 2 veces en los tres tamaños; con otro valor de azar el orden cambia; al abrir la actividad se ven los tres botones con "6 cartas", "8 cartas" y "12 cartas"; elegir cada uno muestra exactamente ese número de cartas tapadas; se puede jugar y terminar una partida de cada tamaño; "Jugar otra vez" lleva a la elección de tamaño; `avisarPartida(true)` se llama al elegir el tamaño y no antes (depende de T017)
+- [X] T018 [US3] Ampliar `tests/parejas-juego.test.tsx` y `tests/parejas-pantalla.test.tsx`: `crearPartida` da exactamente 6, 8 y 12 cartas y cada dibujo sale exactamente 2 veces en los tres tamaños; con dos azares distintos el orden de las cartas cambia; al abrir la actividad se ven los tres botones con "6 cartas", "8 cartas" y "12 cartas"; elegir cada uno muestra exactamente ese número de cartas tapadas; se puede jugar y terminar una partida de cada tamaño; "Jugar otra vez" lleva a la elección de tamaño; `avisarPartida(true)` se llama al elegir el tamaño y no antes (depende de T017)
 
 ### Implementación de la historia 3
 
-- [ ] T019 [P] [US3] Crear la pantalla de elegir tamaño en `src/actividades/parejas/ElegirTamano.tsx`: una invitación a elegir y tres `BotonGrande` con icono (`size-s`, `size-m`, `size-l`) y texto "Pequeña", "Mediana" y "Grande" con su número de cartas visible
-- [ ] T020 [US3] Cambiar `src/actividades/parejas/Parejas.tsx` para que empiece en la elección de tamaño, cree la partida con el tamaño elegido llamando a `avisarPartida(true)`, y haga que "Jugar otra vez" vuelva a la elección de tamaño. Quitar el arranque provisional de T010 y T016 (depende de T018, T019)
-- [ ] T021 [US3] Ejecutar `npm test` y `npm run typecheck`: las pruebas de T018 deben pasar
+- [X] T019 [P] [US3] Crear la pantalla de elegir tamaño en `src/actividades/parejas/ElegirTamano.tsx`: una invitación a elegir y tres `BotonGrande` con icono (`size-s`, `size-m`, `size-l`) y texto "Pequeña", "Mediana" y "Grande" con su número de cartas visible
+- [X] T020 [US3] Cambiar `src/actividades/parejas/Parejas.tsx` para que empiece en la elección de tamaño, cree la partida con el tamaño elegido llamando a `avisarPartida(true)`, y haga que "Jugar otra vez" vuelva a la elección de tamaño. Quitar el arranque provisional de T010 y T016 (depende de T018, T019)
+- [X] T021 [US3] Ejecutar `npm test` y `npm run typecheck`: las pruebas de T018 deben pasar
 
 **Punto de control**: Las tres historias funcionan; la actividad está completa.
 
@@ -95,9 +95,9 @@
 
 ## Fase 6: Remate
 
-- [ ] T022 [P] Ampliar `tests/textos.test.tsx`, siguiendo su estilo, para comprobar los textos fijos de "Parejas" (con tildes y signos de apertura) y que cada botón de la actividad lleva icono y texto
-- [ ] T023 [P] Actualizar `CLAUDE.md`: quitar la nota que dice que la lista de actividades está vacía y añadir `src/actividades/parejas/` a la estructura
-- [ ] T024 Ejecutar `npm test` y `npm run typecheck` completos: todo debe pasar, también las pruebas de la funcionalidad 001 (depende de T022)
+- [X] T022 [P] Ampliar `tests/textos.test.tsx`, siguiendo su estilo, para comprobar los textos fijos de "Parejas" (con tildes y signos de apertura) y que cada botón de la actividad lleva icono y texto
+- [X] T023 [P] Actualizar `CLAUDE.md`: quitar la nota que dice que la lista de actividades está vacía y añadir `src/actividades/parejas/` a la estructura
+- [X] T024 Ejecutar `npm test` y `npm run typecheck` completos: todo debe pasar, también las pruebas de la funcionalidad 001 (depende de T022)
 - [ ] T025 Hacer la comprobación manual de los 18 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos esperar un minuto con dos cartas distintas a la vista (paso 6), el modo avión (paso 17) y el reconocimiento de los dibujos con 10 personas (paso 18, CE-005). Comprobar sobre todo que en la partida grande los nombres caben en letra de 22 puntos (paso 14). **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
 
 ---
@@ -120,7 +120,7 @@
 
 ### Oportunidades de paralelismo
 
-- Fase 2: T002 y T003 a la vez.
+- Fase 2: ninguna; T002, T003 y T004 van en orden.
 - Historia 1: T005 y T006 a la vez; T008 a la vez que T007.
 - Historia 2: T015 a la vez que T014.
 - Historia 3: T019 a la vez que T018.

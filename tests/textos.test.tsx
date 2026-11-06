@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import App from '../App';
-import { textos } from '../src/textos';
+import { crearPartida } from '../src/actividades/parejas/juego';
+import { textos, textosParejas } from '../src/textos';
 import { tema } from '../src/tema';
 import { crearActividades } from './ayudas';
 
@@ -50,5 +51,46 @@ describe('Tema accesible (FR-010)', () => {
     expect(contraste(tema.colores.textoSobrePrimario, tema.colores.primario)).toBeGreaterThanOrEqual(
       tema.contrasteMinimo,
     );
+  });
+});
+
+describe('Textos de "Parejas" (FR-009, FR-014)', () => {
+  it('los textos fijos son los acordados, con tildes y signos de apertura', () => {
+    expect(textosParejas.nombre).toBe('Parejas');
+    expect(textosParejas.descripcion).toBe('Encuentra las cartas iguales');
+    expect(textosParejas.elegirTamano).toBe('Elige el tamaño de la partida');
+    expect(textosParejas.pequena).toBe('Pequeña: 6 cartas');
+    expect(textosParejas.mediana).toBe('Mediana: 8 cartas');
+    expect(textosParejas.grande).toBe('Grande: 12 cartas');
+    expect(textosParejas.felicitacion).toBe('¡Enhorabuena! Has encontrado todas las parejas');
+    expect(textosParejas.intentosNecesitados(1)).toBe('Has necesitado 1 intento');
+    expect(textosParejas.intentosNecesitados(5)).toBe('Has necesitado 5 intentos');
+    expect(Object.values(textosParejas.dibujos)).toEqual([
+      'Llave', 'Taza', 'Reloj', 'Gafas', 'Cama', 'Silla', 'Lámpara', 'Tijeras',
+    ]);
+  });
+
+  it('cada botón de la actividad lleva icono y texto', async () => {
+    jest.spyOn(Math, 'random').mockReturnValue(0);
+    await render(<App />);
+    await fireEvent.press(screen.getByText('Parejas'));
+    for (const [id, t] of [
+      ['icono-pequena', textosParejas.pequena],
+      ['icono-mediana', textosParejas.mediana],
+      ['icono-grande', textosParejas.grande],
+    ]) {
+      expect(screen.getByTestId(id, { includeHiddenElements: true })).toBeTruthy();
+      expect(screen.getByText(t)).toBeTruthy();
+    }
+    await fireEvent.press(screen.getByText(textosParejas.pequena));
+    // Una carta tapada: icono y texto 'Carta'
+    expect(screen.getByTestId('icono-carta-0', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getAllByText(textosParejas.carta)).toHaveLength(6);
+    // Dos cartas distintas a la vista: aparece 'Seguir' con icono y texto
+    const ids = crearPartida('pequena', () => 0).cartas.map((c) => c.dibujo);
+    await fireEvent.press(screen.getByTestId('carta-0'));
+    await fireEvent.press(screen.getByTestId(`carta-${ids.findIndex((id) => id !== ids[0])}`));
+    expect(screen.getByTestId('icono-seguir', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByText(textosParejas.seguir)).toBeTruthy();
   });
 });
