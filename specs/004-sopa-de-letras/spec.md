@@ -8,6 +8,15 @@
 
 **Entrada**: Actividad "Sopa de letras": una cuadrícula pequeña de 5 filas por 6 columnas donde hay que encontrar 3 palabras relacionadas con una palabra dada (por ejemplo, con "NUBE", encontrar "LLUVIA"). Pensada para personas mayores, para ejercitar la memoria y la atención con un ejercicio visual claro. Las palabras están solo en horizontal (de izquierda a derecha) o en vertical (de arriba abajo), nunca en diagonal ni al revés.
 
+## Aclaraciones
+
+### Sesión 2026-11-06
+
+- Q: Al pulsar "Jugar otra vez", ¿qué sopa ve la persona? → A: Hay al menos 5 sopas preparadas y se sortea una distinta de la que se acaba de jugar.
+- Q: Si la persona marca una palabra al revés, ¿cómo se trata? → A: Cuenta como un intento fallido normal, con el mensaje amable de siempre.
+- Q: En la lista, ¿las palabras sin encontrar indican cuántas letras tienen? → A: No. Todas se muestran igual (por ejemplo, "???"), sin pista de longitud.
+- Q: Al terminar, ¿se sigue viendo la cuadrícula junto al mensaje final? → A: Sí, con las 3 palabras resaltadas, aunque ya no acepta marcas.
+
 ## Escenarios de usuario y pruebas *(obligatorio)*
 
 ### Historia 1 - Encontrar una palabra marcando su primera y su última letra (Prioridad: P1)
@@ -38,7 +47,7 @@ Cuando la persona encuentra las 3 palabras, ve un mensaje de felicitación que l
 
 **Escenarios de aceptación**:
 
-1. **Dado** que he encontrado dos palabras, **cuando** encuentro la tercera, **entonces** aparece un mensaje de felicitación con el número de intentos que he necesitado y los botones "Jugar otra vez" y "Volver al inicio".
+1. **Dado** que he encontrado dos palabras, **cuando** encuentro la tercera, **entonces** aparece un mensaje de felicitación con el número de intentos que he necesitado y los botones "Jugar otra vez" y "Volver al inicio", y la cuadrícula sigue visible con las 3 palabras resaltadas.
 2. **Dado** que he encontrado las 3 palabras sin ningún fallo, **cuando** veo el mensaje final, **entonces** el número de intentos es 3.
 3. **Dado** que he fallado dos veces y he encontrado las 3 palabras, **cuando** veo el mensaje final, **entonces** el número de intentos es 5.
 4. **Dado** que estoy en el mensaje final, **cuando** pulso "Jugar otra vez", **entonces** empieza una partida nueva con otra sopa, sin palabras encontradas y con los intentos a cero.
@@ -86,8 +95,8 @@ Durante la partida, la persona ve en pantalla cuántas palabras le faltan por en
 - **RF-006**: Si las dos letras tocadas no están en la misma fila ni en la misma columna, la actividad MUST ignorar la pulsación, mostrar un mensaje amable que pida marcar una línea recta y quitar la marca.
 - **RF-007**: Tocar una palabra ya encontrada MUST NOT hacer nada: ni cambia el resaltado, ni la lista, ni los intentos, ni muestra un error. Volver a tocar la primera letra marcada MUST quitar la marca sin error.
 - **RF-008**: Un intento MUST contarse cada vez que la persona completa una marca con dos letras en la misma fila o columna (acierto o fallo), salvo que sea una palabra ya encontrada. Las pulsaciones ignoradas por no formar línea recta y las marcas quitadas al volver a tocar la primera letra MUST NOT contar como intento.
-- **RF-009**: La actividad MUST mostrar en todo momento cuántas palabras faltan por encontrar, con el singular y el plural bien escritos, sin mostrar cuáles son. En la lista, las palabras sin encontrar MUST aparecer ocultas, y las encontradas MUST aparecer escritas y tachadas.
-- **RF-010**: Al encontrar las 3 palabras, la actividad MUST mostrar un mensaje de felicitación con el número de intentos necesitados y los botones "Jugar otra vez" y "Volver al inicio".
+- **RF-009**: La actividad MUST mostrar en todo momento cuántas palabras faltan por encontrar, con el singular y el plural bien escritos, sin mostrar cuáles son. En la lista, las palabras sin encontrar MUST aparecer ocultas, todas con el mismo aspecto (por ejemplo, "???") y sin indicar cuántas letras tienen, y las encontradas MUST aparecer escritas y tachadas.
+- **RF-010**: Al encontrar las 3 palabras, la actividad MUST mostrar un mensaje de felicitación con el número de intentos necesitados y los botones "Jugar otra vez" y "Volver al inicio". La cuadrícula MUST seguir visible con las 3 palabras resaltadas, aunque ya no acepte marcas.
 - **RF-011**: "Jugar otra vez" MUST empezar una partida nueva con una sopa distinta de la que se acaba de jugar, sin palabras encontradas y con los intentos a cero.
 - **RF-012**: Cada partida MUST constar de una única cuadrícula. Las sopas MUST estar preparadas de antemano e incluidas en la app: la actividad MUST NOT generar sopas nuevas.
 - **RF-013**: Debe haber al menos 5 sopas preparadas, cada una con su palabra de referencia, sus 3 palabras relacionadas y su cuadrícula. En ninguna cuadrícula puede aparecer, además de las 3 buscadas, otra palabra relacionada con la de referencia en horizontal o vertical que la persona pudiera marcar y no se reconociera.
@@ -127,11 +136,11 @@ Más de una cuadrícula por partida, niveles de dificultad, generar sopas nuevas
 
 - La actividad se añade a la lista real de actividades junto a "Parejas" y "Forma la palabra", y sigue el contrato de actividades de la funcionalidad 001.
 - "5x6" se entiende como 5 filas por 6 columnas, que permite colocar una palabra de 6 letras (como "LLUVIA") en horizontal. En vertical caben palabras de hasta 5 letras.
-- Como no se generan sopas nuevas, las sopas están preparadas de antemano y "Jugar otra vez" sortea otra distinta de la actual. Si se prefiriera una única sopa fija, bastaría con reducir la lista a una; hacerlo es una decisión de la persona responsable del producto.
+- Como no se generan sopas nuevas, las sopas están preparadas de antemano y "Jugar otra vez" sortea otra distinta de la actual (aclarado el 2026-11-06).
 - Las palabras buscadas son palabras cotidianas conocidas por personas mayores, sin tecnicismos, y su relación con la palabra de referencia es clara (por ejemplo, "NUBE": "LLUVIA", "CIELO", "VIENTO").
 - Un intento es cada marca completa de dos letras en una línea recta, sea acierto o fallo. Por eso el mínimo de intentos es 3.
 - Una línea recta marcada al revés (de derecha a izquierda o de abajo arriba) se trata como un fallo normal, ya que las palabras nunca están al revés.
-- Las palabras ocultas de la lista se muestran como casillas vacías o puntos, sin indicar cuántas letras tienen.
+- Las palabras ocultas de la lista se muestran todas igual (por ejemplo, "???"), sin indicar cuántas letras tienen (aclarado el 2026-11-06).
 - El botón "Volver al inicio" durante la partida lo pone el marco común de la app, como en el resto de actividades. La pantalla final añade además su propio "Volver al inicio", como pide la descripción.
 - No se guarda nada entre partidas: ni puntuaciones, ni sopas vistas, ni progreso.
 - Basta con un mensaje positivo, un mensaje amable de error, un mensaje de línea no recta y un mensaje de invitación a tocar la última letra; no hace falta variarlos.
