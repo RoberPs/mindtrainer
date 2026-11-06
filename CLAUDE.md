@@ -68,6 +68,9 @@ Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla
 `/speckit-implement`. Para cambiar las reglas del proyecto: `/speckit-constitution`.
 
 - Una rama por funcionalidad (`001-pantalla-inicio`, …), creada por `/speckit-specify`.
+- **Al cerrar cada spec** (tareas hechas, pruebas y comprobación manual pasadas), pregunta
+  siempre al usuario si se fusiona la rama en `main`. No fusiones sin su respuesta. La
+  siguiente spec debe crearse desde `main` ya actualizado.
 - Los hooks de `.specify/extensions.yml` hacen un commit automático al terminar cada comando de
   Spec Kit. No hace falta commitear a mano esos pasos.
 - Marca cada tarea de `tasks.md` como hecha al terminarla.
