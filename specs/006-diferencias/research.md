@@ -19,7 +19,7 @@ siete cosas propias de esta actividad.
   | Sillón | sillón | sillón | igual |
   | Planta | planta | planta | igual |
   | Reloj | reloj de pared | _(no está)_ | falta |
-  | Taza | taza de café | taza de té (otro icono) | cambia |
+  | Bebida | taza de café | botella de vino (otro icono) | cambia |
   | Gato | _(no está)_ | gato | sobra |
 
 - **Razón**: Es lo más simple (principio I): sin descargar nada (V), sin licencias que revisar

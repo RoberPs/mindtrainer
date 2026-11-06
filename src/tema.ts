@@ -9,6 +9,7 @@ export const tema = {
     borde: '#0B3D91',
     acierto: '#1B5E20', // verde oscuro para las parejas encontradas
     velo: 'rgba(0, 0, 0, 0.6)',
+    marca: '#A0001C', // rojo oscuro de los círculos de las diferencias encontradas
   },
   letra: {
     normal: 22, // mínimo 22 puntos
@@ -19,6 +20,9 @@ export const tema = {
   },
   icono: {
     tamano: 48,
+  },
+  grosor: {
+    circulo: 6, // borde grueso: se ve aunque no se distingan los colores
   },
   contrasteMinimo: 7, // al menos 7 a 1 entre texto y fondo
   espacio: 16,

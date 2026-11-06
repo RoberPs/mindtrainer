@@ -2,11 +2,13 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 import App from '../App';
 import { crearPartida } from '../src/actividades/parejas/juego';
 import { crearPartida as crearPartidaSopa } from '../src/actividades/sopa-de-letras/juego';
-import { textos, textosAdivinanzas, textosFormaPalabra, textosParejas, textosSopa } from '../src/textos';
+import { textos, textosAdivinanzas, textosDiferencias, textosFormaPalabra, textosParejas, textosSopa } from '../src/textos';
 import { crearPartida as crearPartidaAdivinanzas } from '../src/actividades/adivinanzas/juego';
 import { tema } from '../src/tema';
 import { crearActividades } from './ayudas';
 import { casillasDe } from './ayudas-sopa';
+import { diferencias } from '../src/actividades/diferencias/escena';
+import { centroDe, puntoVacio, tocarAbajo } from './ayudas-diferencias';
 
 // Contraste entre dos colores hexadecimales (#RRGGBB), según la fórmula habitual de accesibilidad.
 function luminancia(hex: string): number {
@@ -204,5 +206,46 @@ describe('Textos de "Adivinanzas" (RF-015, RF-016)', () => {
     expect(screen.getByTestId('icono-jugar-otra-vez', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosAdivinanzas.jugarOtraVez)).toBeTruthy();
     jest.restoreAllMocks();
+  });
+});
+
+describe('Textos de "Diferencias" (RF-014, RF-015)', () => {
+  it('los textos fijos son los acordados, con tildes y signos de apertura', () => {
+    expect(textosDiferencias.nombre).toBe('Diferencias');
+    expect(textosDiferencias.descripcion).toBe('Encuentra las 3 diferencias entre dos dibujos');
+    expect(textosDiferencias.instruccion).toBe('Toca en el dibujo de abajo lo que sea distinto');
+    expect(textosDiferencias.fallo).toBe('Ahí no hay ninguna diferencia. ¡Sigue buscando!');
+    expect(textosDiferencias.felicitacion).toBe('¡Enhorabuena! Has encontrado las 3 diferencias');
+    expect(textosDiferencias.jugarOtraVez).toBe('Jugar otra vez');
+  });
+
+  it('el aviso de las que faltan usa singular para 1 y plural para 2 y 3', () => {
+    expect(textosDiferencias.faltan(3)).toBe('Te faltan 3 diferencias');
+    expect(textosDiferencias.faltan(2)).toBe('Te faltan 2 diferencias');
+    expect(textosDiferencias.faltan(1)).toBe('Te falta 1 diferencia');
+  });
+
+  it('los toques incluyen el número', () => {
+    expect(textosDiferencias.toques(3)).toBe('Has necesitado 3 toques');
+    expect(textosDiferencias.toques(7)).toBe('Has necesitado 7 toques');
+  });
+
+  it('el color de los círculos tiene contraste suficiente sobre el fondo y las tarjetas', () => {
+    expect(contraste(tema.colores.marca, tema.colores.fondo)).toBeGreaterThanOrEqual(tema.contrasteMinimo);
+    expect(contraste(tema.colores.marca, tema.colores.tarjeta)).toBeGreaterThanOrEqual(tema.contrasteMinimo);
+  });
+
+  it('el botón y los mensajes importantes llevan icono y texto', async () => {
+    await render(<App />);
+    await fireEvent.press(screen.getByText('Diferencias'));
+    expect(screen.getByTestId('icono-faltan', { includeHiddenElements: true })).toBeTruthy();
+    await tocarAbajo(puntoVacio().x, puntoVacio().y);
+    expect(screen.getByTestId('icono-fallo', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByText(textosDiferencias.fallo)).toBeTruthy();
+    for (const d of diferencias) await tocarAbajo(centroDe(d.id).x, centroDe(d.id).y);
+    expect(screen.getByTestId('icono-felicitacion', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByText(textosDiferencias.felicitacion)).toBeTruthy();
+    expect(screen.getByTestId('icono-jugar-otra-vez', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByText(textosDiferencias.jugarOtraVez)).toBeTruthy();
   });
 });

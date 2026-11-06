@@ -88,3 +88,16 @@ export const textosAdivinanzas = {
     return '¡Ánimo! Con la práctica saldrán más';
   },
 };
+
+export const textosDiferencias = {
+  nombre: 'Diferencias',
+  descripcion: 'Encuentra las 3 diferencias entre dos dibujos',
+  instruccion: 'Toca en el dibujo de abajo lo que sea distinto',
+  rotuloArriba: 'Dibujo de arriba',
+  rotuloAbajo: 'Dibujo de abajo',
+  faltan: (n: number) => (n === 1 ? 'Te falta 1 diferencia' : `Te faltan ${n} diferencias`),
+  fallo: 'Ahí no hay ninguna diferencia. ¡Sigue buscando!',
+  felicitacion: '¡Enhorabuena! Has encontrado las 3 diferencias',
+  toques: (n: number) => `Has necesitado ${n} toques`,
+  jugarOtraVez: 'Jugar otra vez',
+};
