@@ -75,6 +75,9 @@ Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla
 - Los hooks de `.specify/extensions.yml` hacen un commit automático al terminar cada comando de
   Spec Kit. No hace falta commitear a mano esos pasos.
 - Marca cada tarea de `tasks.md` como hecha al terminarla.
+- Las mejoras que se observen al probar los juegos a mano se anotan en
+  [specs/ideas-pendientes.md](specs/ideas-pendientes.md). No se construyen: se recogen en la
+  última spec del proyecto. Antes de cerrar cada spec, pregunta si hay observaciones nuevas.
 - Las tareas que necesitan a una persona y un móvil (como T027) no las puede hacer el agente:
   déjalas pendientes y avísalo.
 
