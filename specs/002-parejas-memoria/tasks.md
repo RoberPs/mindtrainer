@@ -98,7 +98,7 @@
 - [X] T022 [P] Ampliar `tests/textos.test.tsx`, siguiendo su estilo, para comprobar los textos fijos de "Parejas" (con tildes y signos de apertura) y que cada botón de la actividad lleva icono y texto
 - [X] T023 [P] Actualizar `CLAUDE.md`: quitar la nota que dice que la lista de actividades está vacía y añadir `src/actividades/parejas/` a la estructura
 - [X] T024 Ejecutar `npm test` y `npm run typecheck` completos: todo debe pasar, también las pruebas de la funcionalidad 001 (depende de T022)
-- [ ] T025 Hacer la comprobación manual de los 18 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos esperar un minuto con dos cartas distintas a la vista (paso 6), el modo avión (paso 17) y el reconocimiento de los dibujos con 10 personas (paso 18, CE-005). Comprobar sobre todo que en la partida grande los nombres caben en letra de 22 puntos (paso 14). **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
+- [X] T025 Hacer la comprobación manual de los 18 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos esperar un minuto con dos cartas distintas a la vista (paso 6), el modo avión (paso 17) y el reconocimiento de los dibujos con 10 personas (paso 18, CE-005). Comprobar sobre todo que en la partida grande los nombres caben en letra de 22 puntos (paso 14). **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
 
 ---
 
