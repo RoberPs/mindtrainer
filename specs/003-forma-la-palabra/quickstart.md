@@ -26,7 +26,7 @@ de inicio junto a "Parejas".
 | 14 | Tocar "Ver resultado" | "Has acertado X de 5", donde X es el número de palabras que formaste tú (sin contar las de "Ver la respuesta"), y el botón "Jugar otra vez". El "Volver al inicio" también está a la vista. | RF-012, CE-002 |
 | 15 | Tocar "Jugar otra vez" | Empieza una partida nueva con palabras distintas a las de antes. | RF-013, CE-003 |
 | 16 | Jugar 10 partidas seguidas | Dentro de cada partida no se repite ninguna palabra, y las partidas no son iguales entre sí. | RF-009, CE-003 |
-| 17 | Buscar una palabra con letras repetidas (como "casa") | Se puede formar tocando cualquiera de las letras repetidas. | RF-001, RF-002 |
+| 17 | Si en alguna partida sale una palabra con letras repetidas (como "casa" o "pelota") | Se puede formar tocando cualquiera de las letras repetidas. Si no sale ninguna, este paso lo cubre la prueba automática. | RF-001, RF-002 |
 | 18 | En una partida a medias, tocar "Volver al inicio" | Sale el aviso de salida del marco; al aceptar vuelve a la lista. Al entrar otra vez empieza una partida nueva. | RF-018, RF-019 |
 | 19 | Tras resolver la palabra 5, tocar "Volver al inicio" sin pulsar "Ver resultado" | Sale a la lista sin preguntar nada. | RF-018 |
 | 20 | Mirar todas las pantallas | Todo en español de España, con letra grande, buen contraste y cada botón con icono y texto. No hay cuentas atrás ni prisas. | RF-014, RF-015, RF-016, RF-017 |
@@ -46,7 +46,8 @@ Las pruebas de esta funcionalidad (`tests/forma-palabra-*.test.tsx`) comprueban:
 - La lista: 100 palabras o más, de 4 a 7 letras, sin tildes, sin repetidas y sin dos con las
   mismas letras.
 - La partida: 5 palabras distintas y letras que no salen en el orden correcto.
-- Colocar, borrar la última y empezar de nuevo, también con letras repetidas.
+- Colocar, borrar la última y empezar de nuevo.
+- Las letras repetidas: cualquiera de ellas sirve, en cualquier orden.
 - Palabra correcta, incorrecta e incompleta con "Comprobar".
 - Ver la respuesta: muestra la palabra y no suma.
 - Fallar y luego acertar sí suma.

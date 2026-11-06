@@ -24,14 +24,16 @@ cómo resolver seis cosas propias del juego.
 - **Decisión**: Mezcla de Fisher-Yates con una función de azar que se puede cambiar, igual que en
   "Parejas". Se mezcla la lista y se toman las 5 primeras (así no se repiten en una partida).
   Las letras de cada palabra se mezclan igual. Si el resultado coincide con la palabra, se
-  vuelve a mezclar.
+  vuelve a mezclar hasta 10 veces; si aun así coincide (por ejemplo, con un azar fijo en las
+  pruebas), se intercambian las dos primeras letras distintas.
 - **Razón**: Es el algoritmo estándar, corto y sin sesgo, y pasar el azar como parámetro permite
   pruebas repetibles sin librerías. Evitar que las letras salgan ya en orden correcto impide que
   la persona "acierte" sin hacer nada.
 - **Alternativas descartadas**: `sort(() => Math.random() - 0.5)` (reparte mal); una librería de
   azar con semilla (dependencia innecesaria).
 - **Nota**: Como las letras de una palabra tienen al menos dos distintas, siempre existe una
-  mezcla diferente de la original y el bucle de remezcla termina.
+  mezcla diferente de la original. Con el tope de 10 intentos y el intercambio final, la función
+  siempre termina, también con un azar constante.
 
 ## 3. Cómo se tratan las letras repetidas
 

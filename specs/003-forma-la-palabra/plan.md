@@ -10,7 +10,7 @@ Se añade la segunda actividad real de la app: una partida de 5 palabras cotidia
 salen desordenadas y la persona va colocando en casillas hasta formarlas. Hay comprobar, borrar
 la última letra, empezar de nuevo, ver la respuesta y un resultado final "X de 5". Igual que en
 "Parejas", las reglas viven en funciones puras y pequeñas (fáciles de probar) y la pantalla solo
-las pinta. La lista de unas 100 palabras es un archivo de código dentro de la app, y una prueba
+las pinta. La lista de al menos 100 palabras es un archivo de código dentro de la app, y una prueba
 automática comprueba que todas cumplen la spec (longitud, sin tildes, sin anagramas entre
 ellas). No se añade ninguna librería (ver [research.md](research.md)). La actividad cumple el
 contrato de la funcionalidad 001 y se añade a `registro.ts`.
@@ -38,7 +38,7 @@ RF-015). Textos en español de España en `src/textos.ts`. Palabras de 4 a 7 let
 casillas y las letras deben caber sin letra pequeña, pasando a una segunda fila si hace falta.
 
 **Escala/Alcance**: 2 pantallas dentro de la actividad (la palabra y el resultado final), 5
-palabras por partida y una lista de unas 100 palabras.
+palabras por partida y una lista de al menos 100 palabras.
 
 ## Comprobación de la constitución
 
@@ -83,7 +83,7 @@ src/
 ├── actividades/
 │   ├── registro.ts            # Se añade "Forma la palabra" junto a "Parejas"
 │   └── forma-palabra/
-│       ├── palabras.ts        # Lista de unas 100 palabras cotidianas
+│       ├── palabras.ts        # Lista de al menos 100 palabras cotidianas
 │       ├── juego.ts           # Reglas: crearPartida, colocarLetra, borrarUltima, empezarDeNuevo,
 │       │                      #   comprobar, verRespuesta, siguiente (funciones puras)
 │       ├── FormaPalabra.tsx   # Contenido de la actividad: elige entre palabra y resultado
@@ -92,7 +92,8 @@ src/
 └── textos.ts                  # Se añaden los textos de la actividad
 
 tests/
-├── forma-palabra-juego.test.tsx    # Reglas, puntuación, final y comprobación de la lista
+├── forma-palabra-palabras.test.tsx # Comprobación de la lista de palabras
+├── forma-palabra-juego.test.tsx    # Reglas, puntuación y final de partida
 └── forma-palabra-pantalla.test.tsx # Partida completa usando la pantalla
 ```
 

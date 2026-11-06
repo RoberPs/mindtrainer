@@ -37,7 +37,7 @@ Es la única interfaz interna que se prueba directamente.
 
 Garantías:
 1. `crearPartida` produce exactamente 5 palabras de la lista, sin repetir ninguna.
-2. Las letras desordenadas de una palabra nunca están ya en el orden correcto.
+2. Las letras desordenadas de una palabra nunca están ya en el orden correcto, aunque el azar sea constante.
 3. `colocarLetra`, `borrarUltima`, `empezarDeNuevo` y `comprobar` no hacen nada si la palabra no
    está en `jugando`.
 4. Un acierto se suma una sola vez por palabra y nunca tras `verRespuesta`.

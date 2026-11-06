@@ -21,9 +21,9 @@
 **⚠️ CRÍTICO**: Ninguna historia puede empezar hasta terminar esta fase.
 
 - [ ] T002 Añadir a `src/textos.ts` un bloque `textosFormaPalabra` con todos los textos de la actividad en español de España, con tildes y signos de apertura: nombre "Forma la palabra", descripción "Ordena las letras para formar la palabra", botones "Comprobar", "Borrar última letra", "Empezar de nuevo", "Ver la respuesta", "Siguiente", "Ver resultado" y "Jugar otra vez", mensaje positivo de acierto, mensaje amable de fallo, mensaje que pide completar la palabra, mensaje "La palabra es: X" al ver la respuesta, y el resultado "Has acertado X de 5" (con singular "1 de 5" correcto)
-- [ ] T003 Escribir en `tests/forma-palabra-juego.test.tsx` las pruebas de la lista y de `crearPartida`: la lista tiene 100 palabras o más; cada palabra tiene entre 4 y 7 letras, solo minúsculas de la "a" a la "z" y "ñ" (sin tildes); no hay palabras repetidas; no hay dos palabras con las mismas letras (se ordenan las letras de cada una y no se repite ninguna combinación); `crearPartida` da exactamente 5 palabras distintas de la lista; con dos azares distintos las palabras cambian; las letras desordenadas de cada palabra nunca coinciden con la palabra en orden y contienen exactamente sus letras (también con letras repetidas); la partida empieza con la primera palabra en estado `jugando`, aciertos a 0 y nada colocado
-- [ ] T004 Crear `src/actividades/forma-palabra/palabras.ts` con una lista exportada de 100 palabras cotidianas en minúsculas (objetos y cosas conocidas por personas mayores, sin nombres propios ni extranjerismos), de 4 a 7 letras, sin tildes (la "ñ" vale), sin repetidas y sin dos con las mismas letras. Ejecutar las pruebas de lista de T003 hasta que pasen
-- [ ] T005 Crear en `src/actividades/forma-palabra/juego.ts` los tipos `Letra` (`id`, `letra`) y `Partida` (`palabras`, `indice`, `aciertos`, `disponibles`, `colocadas`, `estado`, `aviso`, `terminada`) y la función `crearPartida(azar = Math.random)`: mezcla la lista con Fisher-Yates, toma 5 palabras distintas, desordena las letras de la primera volviendo a mezclar si queda en orden correcto, según [data-model.md](data-model.md) y [contracts/forma-palabra.md](contracts/forma-palabra.md) (depende de T004)
+- [ ] T003 Escribir las pruebas de la lista en `tests/forma-palabra-palabras.test.tsx` y las de `crearPartida` en `tests/forma-palabra-juego.test.tsx` (archivos separados para poder probar la lista antes de que exista `juego.ts`). Lista: tiene 100 palabras o más; cada palabra tiene entre 4 y 7 letras, solo minúsculas de la "a" a la "z" y "ñ" (sin tildes); no hay palabras repetidas; no hay dos palabras con las mismas letras (se ordenan las letras de cada una y no se repite ninguna combinación). `crearPartida`: da exactamente 5 palabras distintas de la lista; con dos azares distintos las palabras cambian; las letras desordenadas de cada palabra nunca coinciden con la palabra en orden y contienen exactamente sus letras (también con letras repetidas); con un azar constante (por ejemplo, `() => 0`) las letras tampoco salen en el orden correcto y la función termina; la partida empieza con la primera palabra en estado `jugando`, aciertos a 0 y nada colocado
+- [ ] T004 Crear `src/actividades/forma-palabra/palabras.ts` con una lista exportada de 100 palabras cotidianas en minúsculas (objetos y cosas conocidas por personas mayores, sin nombres propios ni extranjerismos), de 4 a 7 letras, sin tildes (la "ñ" vale), sin repetidas y sin dos con las mismas letras. Revisar a mano cada palabra: descartar las que con sus letras formen otra palabra común del español (por ejemplo, cosa/caos/saco, ropa/paro, mano/mona) y sustituirlas, porque la prueba automática solo detecta los anagramas que están dentro de la lista. Ejecutar `tests/forma-palabra-palabras.test.tsx` hasta que pase
+- [ ] T005 Crear en `src/actividades/forma-palabra/juego.ts` los tipos `Letra` (`id`, `letra`) y `Partida` (`palabras`, `indice`, `aciertos`, `disponibles`, `colocadas`, `estado`, `aviso`, `terminada`) y la función `crearPartida(azar = Math.random)`: mezcla la lista con Fisher-Yates, toma 5 palabras distintas, desordena las letras de la primera volviendo a mezclar (hasta 10 veces y, si no basta, intercambiando las dos primeras letras distintas) si queda en orden correcto, según [data-model.md](data-model.md) y [contracts/forma-palabra.md](contracts/forma-palabra.md) (depende de T004)
 
 **Punto de control**: Base lista; las historias pueden empezar.
 
@@ -42,7 +42,7 @@
 
 ### Implementación de la historia 1
 
-- [ ] T008 [US1] Añadir `colocarLetra(partida, id)`, `comprobar(partida)` y `siguiente(partida)` a `src/actividades/forma-palabra/juego.ts` como funciones puras que devuelven una partida nueva (o la misma si no tienen efecto), según las garantías de [contracts/forma-palabra.md](contracts/forma-palabra.md). `siguiente` desordena las letras de la palabra siguiente (misma regla de T005) y por ahora solo cubre las palabras 1 a 4 (depende de T005)
+- [ ] T008 [US1] Añadir `colocarLetra(partida, id)`, `comprobar(partida)` y `siguiente(partida)` a `src/actividades/forma-palabra/juego.ts` como funciones puras que devuelven una partida nueva (o la misma si no tienen efecto), según las garantías de [contracts/forma-palabra.md](contracts/forma-palabra.md). `siguiente` desordena las letras de la palabra siguiente (misma regla de T005, con el tope de 10 remezclas y el intercambio final) y por ahora solo cubre las palabras 1 a 4 (depende de T005)
 - [ ] T009 [P] [US1] Crear la pantalla de una palabra en `src/actividades/forma-palabra/Palabra.tsx`: fila de casillas (una por letra, letra de al menos 22 puntos, que pasa a otra fila si no cabe); mensaje con icono grande (`emoticon-happy` en acierto, `emoticon-neutral` en fallo, `information` si está incompleta); letras desordenadas en botones de al menos 64 de alto (`tema.boton.altoMinimo`); botón "Comprobar" con `BotonGrande` (icono `check-circle`); con la palabra cerrada se esconden las letras y "Comprobar" y aparece "Siguiente" (icono `arrow-right-circle`). Todo dentro de un `ScrollView`, con colores y tamaños de `src/tema.ts`
 - [ ] T010 [US1] Crear el contenido en `src/actividades/forma-palabra/FormaPalabra.tsx`: guarda la partida en `useState`, la crea al abrirse, llama a `avisarPartida(true)` al abrirse y conecta `Palabra` con `colocarLetra`, `comprobar` y `siguiente` (depende de T008, T009)
 - [ ] T011 [US1] Añadir la actividad a `src/actividades/registro.ts` tras "Parejas", con identificador `forma-palabra`, icono `{ nombre: 'alphabetical-variant' }`, nombre y descripción de `src/textos.ts` y `Contenido: FormaPalabra` (depende de T010)
@@ -101,7 +101,7 @@
 
 ### Pruebas de la historia 4
 
-- [ ] T022 [US4] Ampliar `tests/forma-palabra-juego.test.tsx` y `tests/forma-palabra-pantalla.test.tsx`: `verRespuesta` deja la palabra `rendida` y no suma aciertos; con la palabra ya cerrada no hace nada; tras `verRespuesta`, `colocarLetra`, `comprobar` y `borrarUltima` no hacen nada; fallar y acertar después sí suma; en la pantalla, "Ver la respuesta" está siempre visible mientras la palabra no esté cerrada, muestra "La palabra es: X" con icono y el botón "Siguiente"; en la quinta palabra muestra "Ver resultado"; en una partida completa donde se ve la respuesta en una palabra, el resultado "X de 5" no la cuenta (depende de T021)
+- [ ] T022 [US4] Ampliar `tests/forma-palabra-juego.test.tsx` y `tests/forma-palabra-pantalla.test.tsx`: `verRespuesta` deja la palabra `rendida` y no suma aciertos; con la palabra ya cerrada no hace nada; tras `verRespuesta`, `colocarLetra`, `comprobar` y `borrarUltima` no hacen nada; fallar y acertar después sí suma; en la pantalla, "Ver la respuesta" está siempre visible mientras la palabra no esté cerrada, muestra "La palabra es: X" con icono y el botón "Siguiente"; en la quinta palabra muestra "Ver resultado"; en una partida completa donde se ve la respuesta en una palabra, el resultado "X de 5" no la cuenta; si la quinta palabra se cierra con "Ver la respuesta", se llama a `avisarPartida(false)` en ese momento (depende de T021)
 
 ### Implementación de la historia 4
 
@@ -115,7 +115,7 @@
 
 ## Fase 7: Remate
 
-- [ ] T026 [P] Ampliar `tests/textos.test.tsx`, siguiendo su estilo, para comprobar los textos fijos de "Forma la palabra" (con tildes y signos de apertura) y que cada botón de la actividad lleva icono y texto
+- [ ] T026 [P] Ampliar `tests/textos.test.tsx`, siguiendo su estilo, para comprobar los textos fijos de "Forma la palabra" (con tildes y signos de apertura) y que cada botón de acción (todos menos los de letra) lleva icono y texto
 - [ ] T027 [P] Actualizar `CLAUDE.md`: cambiar la nota "La única actividad real por ahora es Parejas" por las dos actividades reales y añadir `src/actividades/forma-palabra/` a la estructura
 - [ ] T028 Ejecutar `npm test` y `npm run typecheck` completos: todo debe pasar, también las pruebas de las funcionalidades 001 y 002 (depende de T026)
 - [ ] T029 Hacer la comprobación manual de los 21 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos esperar un minuto sin tocar nada (paso 8), jugar 10 partidas seguidas (paso 16), salir sin aviso tras la quinta palabra (paso 19) y el modo avión (paso 21). Comprobar sobre todo que una palabra de 7 letras cabe en las casillas y los botones con letra de 22 puntos en un móvil pequeño. **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
@@ -141,7 +141,7 @@
 
 ### Oportunidades de paralelismo
 
-- Fase 2: T003 y T004 son archivos distintos, pero las pruebas de la lista (T003) se escriben antes y se ejecutan al terminar T004.
+- Fase 2: las pruebas de la lista (T003) se escriben antes y se ejecutan al terminar T004; las de `crearPartida` se ejecutan al terminar T005.
 - Historia 1: T006 y T007 a la vez; T009 a la vez que T008.
 - Historia 3: T019 a la vez que T018.
 - Remate: T026 y T027 a la vez.
@@ -183,4 +183,4 @@ T009 src/actividades/forma-palabra/Palabra.tsx
 - Marca cada tarea como hecha al terminarla.
 - Todos los textos van en `src/textos.ts`; todos los tamaños y colores salen de `src/tema.ts`.
 - Nada fuera de la spec: sin pistas, niveles, ranking, guardado, contador de intentos ni "Palabra N de 5".
-- Cada botón y cada mensaje importante va con icono y texto; las letras son texto y no llevan icono.
+- Cada botón de acción y cada mensaje importante va con icono y texto; los botones de letra son solo texto.

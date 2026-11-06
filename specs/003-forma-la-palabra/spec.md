@@ -30,7 +30,7 @@ Una persona mayor abre la actividad y ve las letras de una palabra cotidiana des
 1. **Dado** que veo las letras desordenadas de una palabra, **cuando** toco una letra, **entonces** esa letra pasa a la primera casilla libre de la palabra y deja de estar entre las desordenadas.
 2. **Dado** que he colocado todas las letras formando la palabra correcta, **cuando** pulso "Comprobar", **entonces** aparece un mensaje positivo y el botón "Siguiente" (o "Ver resultado" si es la quinta palabra).
 3. **Dado** que he colocado todas las letras formando una palabra incorrecta, **cuando** pulso "Comprobar", **entonces** aparece un mensaje amable, las letras siguen colocadas y puedo volver a intentarlo.
-4. **Dado** que he colocado solo una parte de las letras, **cuando** pulso "Comprobar", **entonces** aparece un mensaje que me pide completar la palabra y no se cuenta como intento fallido.
+4. **Dado** que he colocado solo una parte de las letras, **cuando** pulso "Comprobar", **entonces** aparece un mensaje que me pide completar la palabra y no cambia nada más.
 
 ---
 
@@ -86,7 +86,7 @@ Si la persona no consigue la palabra, puede pulsar "Ver la respuesta". Se le mue
 
 ### Casos límite
 
-- "Comprobar" con la palabra incompleta: se muestra un mensaje que pide completarla; no cuenta como fallo.
+- "Comprobar" con la palabra incompleta: se muestra un mensaje que pide completarla; no cambia las letras colocadas ni la puntuación.
 - No hay límite de intentos por palabra ni límite de tiempo en ninguna pantalla.
 - Palabra acertada tras uno o más fallos: cuenta como acierto.
 - Palabra cuya respuesta se ha visto: no cuenta como acierto.
@@ -102,18 +102,18 @@ Si la persona no consigue la palabra, puede pulsar "Ver la respuesta". Se le mue
 - **RF-002**: Al tocar una letra desordenada, la actividad MUST colocarla en la primera casilla libre y quitarla de las desordenadas.
 - **RF-003**: La actividad MUST ofrecer el botón "Comprobar". Con la palabra completa y correcta MUST mostrar un mensaje positivo y el botón "Siguiente"; en la quinta palabra, ese botón MUST llamarse "Ver resultado".
 - **RF-004**: Con la palabra completa e incorrecta, la actividad MUST mostrar un mensaje amable, mantener las letras colocadas y permitir seguir intentándolo sin límite de intentos.
-- **RF-005**: Con la palabra incompleta, "Comprobar" MUST mostrar un mensaje que pide completarla y no MUST contar como intento fallido.
+- **RF-005**: Con la palabra incompleta, "Comprobar" MUST mostrar un mensaje que pide completarla y MUST NOT cambiar las letras colocadas ni la puntuación.
 - **RF-006**: La actividad MUST ofrecer "Borrar última letra", que devuelve la última letra colocada a las desordenadas, y "Empezar de nuevo", que devuelve todas.
-- **RF-007**: La actividad MUST ofrecer "Ver la respuesta", siempre visible mientras la palabra no esté resuelta. Al pulsarlo MUST mostrar la palabra correcta, MUST ofrecer "Siguiente" (o "Ver resultado" en la quinta palabra) y MUST dejar esa palabra sin contar como acierto.
+- **RF-007**: La actividad MUST ofrecer "Ver la respuesta", siempre visible mientras la palabra no esté cerrada. Al pulsarlo MUST mostrar la palabra correcta, MUST ofrecer "Siguiente" (o "Ver resultado" en la quinta palabra) y MUST dejar esa palabra sin contar como acierto.
 - **RF-008**: Una partida MUST constar de exactamente 5 palabras, distintas entre sí dentro de la misma partida.
-- **RF-009**: Las palabras de cada partida MUST sortearse de una lista de unas 100 palabras cotidianas incluidas en la app, para que las partidas no resulten repetitivas.
-- **RF-010**: Cada palabra de la lista MUST tener entre 4 y 7 letras, estar escrita sin tildes (la "ñ" se permite como una letra más) y tener una única solución posible: las letras desordenadas de una palabra no deben poder formar otra palabra de la lista.
+- **RF-009**: Las palabras de cada partida MUST sortearse de una lista de al menos 100 palabras cotidianas incluidas en la app, para que las partidas no resulten repetitivas.
+- **RF-010**: Cada palabra de la lista MUST tener entre 4 y 7 letras, estar escrita sin tildes (la "ñ" se permite como una letra más) y tener una única solución posible: las letras desordenadas de una palabra no deben poder formar otra palabra de la lista. Se evitan además las palabras que tengan como anagrama otra palabra común del español (por ejemplo, "cosa", que también forma "caos" y "saco"), aunque esa otra no esté en la lista.
 - **RF-011**: Una palabra MUST contar como acierto si la persona la forma correctamente en cualquier intento, y MUST NOT contar si ha visto la respuesta.
 - **RF-012**: Al terminar la quinta palabra, la actividad MUST mostrar el resultado "X de 5" con los botones "Jugar otra vez" y "Volver al inicio".
 - **RF-013**: "Jugar otra vez" MUST empezar una partida nueva con la puntuación a cero y 5 palabras sorteadas de nuevo.
 - **RF-014**: La actividad MUST NOT tener límite de tiempo, cuenta atrás ni penalización por tardar.
 - **RF-015**: La actividad MUST cumplir las reglas de accesibilidad del proyecto: letra de al menos 22 puntos, botones de al menos 64 puntos de alto y contraste de al menos 7 a 1.
-- **RF-016**: Cada botón, mensaje y estado importante (acierto, fallo, respuesta mostrada, resultado final) MUST llevar un icono grande e intuitivo junto al texto, nunca en lugar de él, incluido dentro de la app.
+- **RF-016**: Cada botón de acción ("Comprobar", "Borrar última letra", "Empezar de nuevo", "Ver la respuesta", "Siguiente", "Ver resultado" y "Jugar otra vez"), cada mensaje y cada estado importante (acierto, fallo, palabra incompleta, respuesta mostrada, resultado final) MUST llevar un icono grande e intuitivo junto al texto, nunca en lugar de él, incluido dentro de la app. Los botones de letra son solo texto, porque la letra ya es lo que se lee.
 - **RF-017**: Todos los textos de la actividad MUST estar en español de España, con tildes y signos de apertura, y guardarse junto al resto de textos fijos de la app.
 - **RF-018**: La actividad MUST integrarse en la pantalla de inicio como una actividad más, con su identificador, icono, nombre y descripción, y MUST avisar de cuándo empieza y termina una partida según el contrato de actividades de la app.
 - **RF-019**: La actividad MUST funcionar completa sin internet, sin cuentas y sin guardar ningún dato de la persona.
@@ -127,7 +127,7 @@ Pistas, niveles de dificultad, ranking o clasificación, y guardar partidas. No 
 
 - **Palabra**: una palabra cotidiana de la lista, de 4 a 7 letras, sin tildes, con una única solución posible.
 - **Partida**: una serie de 5 palabras distintas sorteadas de la lista, con el número de aciertos conseguido hasta el momento.
-- **Intento**: las letras que la persona ha colocado en las casillas en un momento dado para la palabra actual.
+- **Letras colocadas**: las letras que la persona ha colocado en las casillas en un momento dado para la palabra actual.
 
 ## Criterios de éxito *(obligatorio)*
 
