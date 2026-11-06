@@ -86,7 +86,7 @@
 - [X] T024 [P] Prueba de textos: los textos fijos de la app están en español de España y los botones llevan icono y texto, en `tests/textos.test.tsx` (FR-009, FR-014)
 - [X] T025 Ejecutar `npm test` y comprobar que todas las pruebas pasan (principio VIII)
 - [X] T026 [P] Crear `src/actividades/ejemplos.ts` con dos actividades de ejemplo (icono, nombre, descripción y una partida simple) SOLO para la comprobación manual. No se registran en `registro.ts`; se activan cambiando una sola línea en `App.tsx` y se retiran al terminar, con una nota en el archivo que lo explique (principio III)
-- [ ] T027 Hacer la comprobación manual de los 13 pasos de [quickstart.md](quickstart.md) en un móvil con una persona no técnica y las actividades de T026, incluido el modo avión. Cronometrar los pasos 2 y 4 (SC-001, SC-004) y repetir 10 veces la prueba de distinguir iconos (SC-007). Al terminar, retirar las actividades de ejemplo (principio IV, SC-001 a SC-008). **Requiere a una persona y un móvil: no la puede hacer el agente.**
+- [X] T027 Hacer la comprobación manual de los 13 pasos de [quickstart.md](quickstart.md) en un móvil con una persona no técnica y las actividades de T026, incluido el modo avión. Cronometrar los pasos 2 y 4 (SC-001, SC-004) y repetir 10 veces la prueba de distinguir iconos (SC-007). Al terminar, retirar las actividades de ejemplo (principio IV, SC-001 a SC-008). **Requiere a una persona y un móvil: no la puede hacer el agente.**
 
 ---
 
