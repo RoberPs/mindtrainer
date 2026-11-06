@@ -2,7 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 import App from '../App';
 import { crearPartida } from '../src/actividades/parejas/juego';
 import { crearPartida as crearPartidaSopa } from '../src/actividades/sopa-de-letras/juego';
-import { textos, textosFormaPalabra, textosParejas, textosSopa } from '../src/textos';
+import { textos, textosAdivinanzas, textosFormaPalabra, textosParejas, textosSopa } from '../src/textos';
+import { crearPartida as crearPartidaAdivinanzas } from '../src/actividades/adivinanzas/juego';
 import { tema } from '../src/tema';
 import { crearActividades } from './ayudas';
 import { casillasDe } from './ayudas-sopa';
@@ -162,6 +163,46 @@ describe('Textos de "Sopa de letras" (RF-017, RF-018)', () => {
     }
     expect(screen.getByTestId('icono-jugar-otra-vez', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosSopa.jugarOtraVez)).toBeTruthy();
+    jest.restoreAllMocks();
+  });
+});
+
+describe('Textos de "Adivinanzas" (RF-015, RF-016)', () => {
+  it('los textos fijos son los acordados, con tildes y signos de apertura', () => {
+    expect(textosAdivinanzas.nombre).toBe('Adivinanzas');
+    expect(textosAdivinanzas.descripcion).toBe('Descubre la respuesta de cada adivinanza');
+    expect(textosAdivinanzas.numero(2)).toBe('Adivinanza 2 de 5');
+    expect(textosAdivinanzas.acierto).toBe('¡Muy bien! Esa es la respuesta correcta');
+    expect(textosAdivinanzas.fallo('llave')).toBe('No pasa nada. La respuesta correcta es: llave');
+    expect(textosAdivinanzas.aciertos(1)).toBe('Has acertado 1 de 5');
+    expect(textosAdivinanzas.aciertos(5)).toBe('Has acertado 5 de 5');
+  });
+
+  it('el mensaje final depende de los aciertos', () => {
+    expect(textosAdivinanzas.mensajeFinal(5)).toBe('¡Perfecto! Las has acertado todas');
+    expect(textosAdivinanzas.mensajeFinal(4)).toBe('¡Muy bien! Tienes buena memoria');
+    expect(textosAdivinanzas.mensajeFinal(3)).toBe('¡Muy bien! Tienes buena memoria');
+    expect(textosAdivinanzas.mensajeFinal(2)).toBe('¡Ánimo! Con la práctica saldrán más');
+    expect(textosAdivinanzas.mensajeFinal(0)).toBe('¡Ánimo! Con la práctica saldrán más');
+  });
+
+  it('cada botón de acción lleva icono y texto', async () => {
+    jest.spyOn(Math, 'random').mockReturnValue(0);
+    const partida = crearPartidaAdivinanzas(() => 0);
+    await render(<App />);
+    await fireEvent.press(screen.getByText('Adivinanzas'));
+    const turno = partida.turnos[0];
+    await fireEvent.press(screen.getByText(turno.adivinanza.correcta));
+    expect(screen.getByTestId('icono-siguiente', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByText(textosAdivinanzas.siguiente)).toBeTruthy();
+    // La quinta adivinanza ofrece "Ver resultado" y el resultado ofrece "Jugar otra vez".
+    const p = partida;
+    for (let i = 0; i < 5; i++) {
+      if (i > 0) await fireEvent.press(screen.getByText(p.turnos[i].adivinanza.correcta));
+      await fireEvent.press(screen.getByText(i < 4 ? textosAdivinanzas.siguiente : textosAdivinanzas.verResultado));
+    }
+    expect(screen.getByTestId('icono-jugar-otra-vez', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByText(textosAdivinanzas.jugarOtraVez)).toBeTruthy();
     jest.restoreAllMocks();
   });
 });

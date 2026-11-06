@@ -70,3 +70,21 @@ export const textosSopa = {
   jugarOtraVez: 'Jugar otra vez',
   celda: (letra: string, fila: number, columna: number) => `Letra ${letra}, fila ${fila}, columna ${columna}`,
 };
+
+// Textos de la actividad "Adivinanzas".
+export const textosAdivinanzas = {
+  nombre: 'Adivinanzas',
+  descripcion: 'Descubre la respuesta de cada adivinanza',
+  numero: (n: number) => `Adivinanza ${n} de 5`,
+  acierto: '¡Muy bien! Esa es la respuesta correcta',
+  fallo: (correcta: string) => `No pasa nada. La respuesta correcta es: ${correcta}`,
+  siguiente: 'Siguiente',
+  verResultado: 'Ver resultado',
+  jugarOtraVez: 'Jugar otra vez',
+  aciertos: (n: number) => `Has acertado ${n} de 5`,
+  mensajeFinal: (n: number) => {
+    if (n === 5) return '¡Perfecto! Las has acertado todas';
+    if (n >= 3) return '¡Muy bien! Tienes buena memoria';
+    return '¡Ánimo! Con la práctica saldrán más';
+  },
+};

@@ -38,3 +38,21 @@ _Sin observaciones todavía._
 ## Forma la palabra (spec 003)
 
 _Sin observaciones todavía._
+
+## Adivinanzas (spec 005)
+
+Observada el 2026-11-06 al hacer la comprobación manual de la spec 005. Esa comprobación salió
+bien; esta es una mejora, no un fallo.
+
+1. **Catálogo de adivinanzas mucho más extenso.** Cada partida enseña 5, pero el banco actual
+   (`src/actividades/adivinanzas/banco.ts`) tiene solo 10, así que las partidas se parecen
+   mucho entre sí. Se pide que haya **al menos 50** adivinanzas. A tener en cuenta:
+   - Hoy la spec 005 exige "al menos 10" (RF-010) y la prueba `tests/adivinanzas-banco.test.tsx`
+     comprueba ese mínimo. Habría que subirlo a 50 en la spec y en la prueba.
+   - Es solo un cambio de contenido, sin tocar reglas ni pantallas: `crearPartida` ya elige 5
+     distintas de todo el banco.
+   - Cada adivinanza debe ser tradicional y conocida, de respuesta una sola palabra, con dos
+     incorrectas que no valgan también como respuesta (RF-011), y revisada una a una por una
+     persona, igual que las 10 actuales.
+   - Las pruebas actuales ya comprueban tres respuestas distintas, una palabra y que el texto no
+     contenga la respuesta; valen para las 50.
