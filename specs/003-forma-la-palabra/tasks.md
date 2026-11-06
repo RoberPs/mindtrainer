@@ -118,7 +118,7 @@
 - [X] T026 [P] Ampliar `tests/textos.test.tsx`, siguiendo su estilo, para comprobar los textos fijos de "Forma la palabra" (con tildes y signos de apertura) y que cada botón de acción (todos menos los de letra) lleva icono y texto
 - [X] T027 [P] Actualizar `CLAUDE.md`: cambiar la nota "La única actividad real por ahora es Parejas" por las dos actividades reales y añadir `src/actividades/forma-palabra/` a la estructura
 - [X] T028 Ejecutar `npm test` y `npm run typecheck` completos: todo debe pasar, también las pruebas de las funcionalidades 001 y 002 (depende de T026)
-- [ ] T029 Hacer la comprobación manual de los 21 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos esperar un minuto sin tocar nada (paso 8), jugar 10 partidas seguidas (paso 16), salir sin aviso tras la quinta palabra (paso 19) y el modo avión (paso 21). Comprobar sobre todo que una palabra de 7 letras cabe en las casillas y los botones con letra de 22 puntos en un móvil pequeño. **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
+- [X] T029 Hacer la comprobación manual de los 21 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos esperar un minuto sin tocar nada (paso 8), jugar 10 partidas seguidas (paso 16), salir sin aviso tras la quinta palabra (paso 19) y el modo avión (paso 21). Comprobar sobre todo que una palabra de 7 letras cabe en las casillas y los botones con letra de 22 puntos en un móvil pequeño. **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
 
 ---
 
