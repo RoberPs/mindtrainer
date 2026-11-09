@@ -11,6 +11,7 @@ cumplir este contrato. Es la única interfaz entre la pantalla de inicio y las a
 | Icono | Sí | Icono o imagen propio, incluido en la app, distinto del de las demás |
 | Nombre | Sí | Texto para la lista, en español de España |
 | Descripción | Sí | Una línea, en español de España |
+| Color | No | Color de fondo de su tarjeta en la lista de inicio (spec 007). Oscuro, con contraste de al menos 7 a 1 con el texto blanco y distinto del de las demás. Sin color, la tarjeta es azul. |
 | Contenido | Sí | La pantalla de la actividad |
 
 ## Qué recibe el contenido de la actividad
@@ -33,7 +34,8 @@ cumplir este contrato. Es la única interfaz entre la pantalla de inicio y las a
 
 **Pantalla de inicio**
 - Una lista que se puede desplazar.
-- Cada elemento muestra su icono grande, el nombre y, debajo, la descripción de una línea.
+- Cada elemento muestra su icono grande, el nombre y, debajo, la descripción de una línea,
+  en blanco sobre el color de la actividad.
 - Tocar un elemento abre esa actividad.
 - Con una sola actividad el aspecto es el mismo que con varias.
 

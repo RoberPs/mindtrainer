@@ -37,7 +37,7 @@ React Native, y los componentes `Icono` y `BotonGrande` que ya existen.
 **Tipo de proyecto**: Aplicación móvil
 
 **Objetivos de rendimiento**: Fundido de 400 ms (entre 300 y 600 según RF-008), con el motor
-nativo para opacidad, sin trabajo extra en el hilo de la interfaz.
+de JavaScript de Animated (un solo icono; el motor nativo no actualiza el valor en las pruebas).
 
 **Restricciones**: Funciona sin internet. Letra de al menos 22 puntos, botones de al menos 64
 puntos de alto, contraste de al menos 7 a 1 entre el texto blanco y cada color de actividad

@@ -54,7 +54,7 @@ El contexto técnico no tenía incógnitas abiertas. Solo hay que decidir seis c
 ## 4. Qué animación y con qué herramienta
 
 - **Decisión**: Fundido de la opacidad del icono de 0 a 1 en **400 ms**, una vez, con `Animated`
-  de React Native y el motor nativo (`useNativeDriver: true`). Sin desplazamiento ni cambio de
+  de React Native con el motor de JavaScript (`useNativeDriver: false`: es un solo icono durante 400 ms y así se puede probar, porque en Jest el motor nativo no actualiza el valor). Sin desplazamiento ni cambio de
   tamaño (decisión de la aclaración del 2026-11-09).
 - **Razón**: `Animated` ya viene con React Native, así que no hay librerías (RF-013). La opacidad
   es la animación menos mareante. 400 ms está dentro de 300–600 (RF-008) y por debajo de 1

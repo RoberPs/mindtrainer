@@ -14,7 +14,7 @@
 
 ## Fase 1: Preparación
 
-- [ ] T001 Comprobar que `npm test` y `npm run typecheck` pasan en la rama `007-color-animacion-victoria` antes de tocar nada, para saber que cualquier fallo posterior es de esta funcionalidad
+- [X] T001 Comprobar que `npm test` y `npm run typecheck` pasan en la rama `007-color-animacion-victoria` antes de tocar nada, para saber que cualquier fallo posterior es de esta funcionalidad
 
 ---
 
@@ -26,16 +26,16 @@
 
 ### Pruebas de la historia 1
 
-- [ ] T002 [US1] Escribir en `tests/inicio-colores.test.tsx` las pruebas de los colores: las 5 actividades de `src/actividades/registro.ts` tienen `color` y son 5 valores distintos entre sí; cada color tiene un contraste de al menos 7 a 1 con `tema.colores.textoSobrePrimario` (calculado en la prueba) y ninguno es igual a `tema.colores.marca`; una actividad de `crearActividades` de `tests/ayudas.tsx` (sin color) se pinta con fondo `tema.colores.primario`; una actividad con `color` se pinta con ese color de fondo; el nombre y la descripción siguen visibles y la etiqueta de accesibilidad de la tarjeta no cambia. Deben fallar al principio (depende de T001)
+- [X] T002 [US1] Escribir en `tests/inicio-colores.test.tsx` las pruebas de los colores: las 5 actividades de `src/actividades/registro.ts` tienen `color` y son 5 valores distintos entre sí; cada color tiene un contraste de al menos 7 a 1 con `tema.colores.textoSobrePrimario` (calculado en la prueba) y ninguno es igual a `tema.colores.marca`; una actividad de `crearActividades` de `tests/ayudas.tsx` (sin color) se pinta con fondo `tema.colores.primario`; una actividad con `color` se pinta con ese color de fondo; el nombre y la descripción siguen visibles y la etiqueta de accesibilidad de la tarjeta no cambia. Deben fallar al principio (depende de T001)
 
 ### Implementación de la historia 1
 
-- [ ] T003 [US1] Añadir a `src/tema.ts` el bloque `colores.actividades` con los cinco colores de [research.md](research.md): `azul` `#0B3D91`, `verde` `#1B5E20`, `morado` `#5B2A86`, `marron` `#7A3E00` y `verdeAzulado` `#006064`. Volver a comprobar con un cálculo que cada uno supera 7 a 1 con blanco (depende de T002)
-- [ ] T004 [P] [US1] Añadir a `Actividad` en `src/actividades/tipos.ts` el campo opcional `color?: string`, con un comentario breve: color de fondo de la tarjeta en el inicio; si falta, azul (depende de T002)
-- [ ] T005 [US1] Cambiar `src/pantallas/Inicio.tsx` para que cada tarjeta use como fondo y borde `actividad.color ?? tema.colores.primario`, con el nombre, la descripción y el icono en `tema.colores.textoSobrePrimario`. El icono se pinta con la prop `color` de `Icono`. Los tamaños, el orden, el `testID` y la etiqueta de accesibilidad no cambian (depende de T003, T004)
-- [ ] T006 [US1] Indicar el `color` de cada actividad en `src/actividades/registro.ts` usando `tema.colores.actividades`: Parejas `azul`, Forma la palabra `verde`, Sopa de letras `morado`, Adivinanzas `marron` y Diferencias `verdeAzulado` (depende de T003, T004)
-- [ ] T007 [P] [US1] Actualizar `specs/001-pantalla-inicio/contracts/actividad.md` según [contracts/color-y-animacion.md](contracts/color-y-animacion.md): añadir el campo opcional "Color" a la tabla "Qué entrega la actividad" y, en "Pantalla de inicio", que cada elemento se muestra sobre el color de la actividad
-- [ ] T008 [US1] Ejecutar `npm test` y `npm run typecheck`: T002 debe pasar, sin romper las pruebas de las funcionalidades 001 a 006 (depende de T005, T006)
+- [X] T003 [US1] Añadir a `src/tema.ts` el bloque `colores.actividades` con los cinco colores de [research.md](research.md): `azul` `#0B3D91`, `verde` `#1B5E20`, `morado` `#5B2A86`, `marron` `#7A3E00` y `verdeAzulado` `#006064`. Volver a comprobar con un cálculo que cada uno supera 7 a 1 con blanco (depende de T002)
+- [X] T004 [P] [US1] Añadir a `Actividad` en `src/actividades/tipos.ts` el campo opcional `color?: string`, con un comentario breve: color de fondo de la tarjeta en el inicio; si falta, azul (depende de T002)
+- [X] T005 [US1] Cambiar `src/pantallas/Inicio.tsx` para que cada tarjeta use como fondo y borde `actividad.color ?? tema.colores.primario`, con el nombre, la descripción y el icono en `tema.colores.textoSobrePrimario`. El icono se pinta con la prop `color` de `Icono`. Los tamaños, el orden, el `testID` y la etiqueta de accesibilidad no cambian (depende de T003, T004)
+- [X] T006 [US1] Indicar el `color` de cada actividad en `src/actividades/registro.ts` usando `tema.colores.actividades`: Parejas `azul`, Forma la palabra `verde`, Sopa de letras `morado`, Adivinanzas `marron` y Diferencias `verdeAzulado` (depende de T003, T004)
+- [X] T007 [P] [US1] Actualizar `specs/001-pantalla-inicio/contracts/actividad.md` según [contracts/color-y-animacion.md](contracts/color-y-animacion.md): añadir el campo opcional "Color" a la tabla "Qué entrega la actividad" y, en "Pantalla de inicio", que cada elemento se muestra sobre el color de la actividad
+- [X] T008 [US1] Ejecutar `npm test` y `npm run typecheck`: T002 debe pasar, sin romper las pruebas de las funcionalidades 001 a 006 (depende de T005, T006)
 
 **Punto de control**: La lista de inicio tiene cinco colores distintos; las pantallas finales aún no se animan.
 
@@ -49,18 +49,18 @@
 
 ### Pruebas de la historia 2
 
-- [ ] T009 [US2] Escribir en `tests/icono-victoria.test.tsx` las pruebas del icono de victoria, con temporizadores simulados de Jest y poniendo `animacion.activa = true` (y restaurándolo al terminar cada prueba): con la animación activa y sin "reducir movimiento" (simulado con `jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled')` devolviendo falso) el icono empieza con opacidad 0, llega a opacidad 1 al avanzar 400 ms y se queda en 1 al avanzar más tiempo; con "reducir movimiento" devolviendo verdadero el icono tiene opacidad 1 sin avanzar el reloj; con `animacion.activa` en falso el icono tiene opacidad 1 desde el primer momento; con la animación activa, la `Felicitacion` de `src/actividades/diferencias/Felicitacion.tsx` muestra el mensaje y el botón "Jugar otra vez" a la vista desde el primer instante y el botón responde al primer toque (llama a `alJugarOtraVez`) sin avanzar el reloj. Deben fallar al principio (depende de T008)
+- [X] T009 [US2] Escribir en `tests/icono-victoria.test.tsx` las pruebas del icono de victoria, con temporizadores simulados de Jest y poniendo `animacion.activa = true` (y restaurándolo al terminar cada prueba): con la animación activa y sin "reducir movimiento" (simulado con `jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled')` devolviendo falso) el icono empieza con opacidad 0, llega a opacidad 1 al avanzar 400 ms y se queda en 1 al avanzar más tiempo; con "reducir movimiento" devolviendo verdadero el icono tiene opacidad 1 sin avanzar el reloj; con `animacion.activa` en falso el icono tiene opacidad 1 desde el primer momento; con la animación activa, la `Felicitacion` de `src/actividades/diferencias/Felicitacion.tsx` muestra el mensaje y el botón "Jugar otra vez" a la vista desde el primer instante y el botón responde al primer toque (llama a `alJugarOtraVez`) sin avanzar el reloj; al desmontar y volver a montar el icono, el fundido empieza de nuevo desde opacidad 0 (caso de "Jugar otra vez" y ganar otra vez). Las otras cuatro pantallas finales quedan cubiertas por sus pruebas actuales (con la animación apagada) y por los pasos 5 a 7 del quickstart. Deben fallar al principio (depende de T008)
 
 ### Implementación de la historia 2
 
-- [ ] T010 [P] [US2] Crear `src/animacion.ts` con el objeto exportado `animacion = { activa: process.env.NODE_ENV !== 'test', duracion: 400 }`, según [data-model.md](data-model.md) (depende de T009)
-- [ ] T011 [US2] Crear `src/componentes/IconoVictoria.tsx`: icono `party-popper` (props `testID` y `tamano`, por defecto 96) dentro de un `Animated.View`. Con `animacion.activa` en falso, o con "reducir movimiento" activado (consulta única a `AccessibilityInfo.isReduceMotionEnabled()` al montarse), la opacidad es 1 y no se anima. En los demás casos la opacidad va de 0 a 1 en `animacion.duracion` ms con `Animated.timing` y `useNativeDriver: true`, una sola vez, sin desplazamiento ni cambio de tamaño; si se desmonta durante el fundido se para la animación. Envuelve solo el icono, nunca texto ni botones. El icono sigue siendo decorativo (usa `Icono`) (depende de T010)
-- [ ] T012 [P] [US2] Cambiar `src/actividades/parejas/Felicitacion.tsx` para usar `IconoVictoria` con `testID="icono-felicitacion"` en lugar de `Icono` (depende de T011)
-- [ ] T013 [P] [US2] Cambiar `src/actividades/sopa-de-letras/Felicitacion.tsx` para usar `IconoVictoria` con `testID="icono-felicitacion"` en lugar de `Icono` (depende de T011)
-- [ ] T014 [P] [US2] Cambiar `src/actividades/diferencias/Felicitacion.tsx` para usar `IconoVictoria` con `testID="icono-felicitacion"` en lugar de `Icono` (depende de T011)
-- [ ] T015 [P] [US2] Cambiar `src/actividades/forma-palabra/Resultado.tsx` para usar `IconoVictoria` con `testID="icono-resultado"` en lugar de `Icono` (depende de T011)
-- [ ] T016 [P] [US2] Cambiar `src/actividades/adivinanzas/Resultado.tsx` para usar `IconoVictoria` con `testID="icono-resultado"` en lugar de `Icono` (depende de T011)
-- [ ] T017 [US2] Ejecutar `npm test` y `npm run typecheck`: T009 debe pasar, sin romper las pruebas de las funcionalidades 001 a 006 (en especial las de las cinco pantallas finales) (depende de T012 a T016)
+- [X] T010 [P] [US2] Crear `src/animacion.ts` con el objeto exportado `animacion = { activa: process.env.NODE_ENV !== 'test', duracion: 400 }`, según [data-model.md](data-model.md) (depende de T009)
+- [X] T011 [US2] Crear `src/componentes/IconoVictoria.tsx`: icono `party-popper` (props `testID` y `tamano`, por defecto 96) dentro de un `Animated.View`. Con `animacion.activa` en falso, o con "reducir movimiento" activado (consulta única a `AccessibilityInfo.isReduceMotionEnabled()` al montarse), la opacidad es 1 y no se anima. En los demás casos la opacidad va de 0 a 1 en `animacion.duracion` ms con `Animated.timing`, una sola vez, sin desplazamiento ni cambio de tamaño; si se desmonta durante el fundido se para la animación, y si la consulta de "reducir movimiento" termina cuando ya está desmontado se ignora su resultado. Envuelve solo el icono, nunca texto ni botones. El icono sigue siendo decorativo (usa `Icono`) (depende de T010)
+- [X] T012 [P] [US2] Cambiar `src/actividades/parejas/Felicitacion.tsx` para usar `IconoVictoria` con `testID="icono-felicitacion"` en lugar de `Icono` (depende de T011)
+- [X] T013 [P] [US2] Cambiar `src/actividades/sopa-de-letras/Felicitacion.tsx` para usar `IconoVictoria` con `testID="icono-felicitacion"` en lugar de `Icono` (depende de T011)
+- [X] T014 [P] [US2] Cambiar `src/actividades/diferencias/Felicitacion.tsx` para usar `IconoVictoria` con `testID="icono-felicitacion"` en lugar de `Icono` (depende de T011)
+- [X] T015 [P] [US2] Cambiar `src/actividades/forma-palabra/Resultado.tsx` para usar `IconoVictoria` con `testID="icono-resultado"` en lugar de `Icono` (depende de T011)
+- [X] T016 [P] [US2] Cambiar `src/actividades/adivinanzas/Resultado.tsx` para usar `IconoVictoria` con `testID="icono-resultado"` en lugar de `Icono` (depende de T011)
+- [X] T017 [US2] Ejecutar `npm test` y `npm run typecheck`: T009 debe pasar, sin romper las pruebas de las funcionalidades 001 a 006 (en especial las de las cinco pantallas finales) (depende de T012 a T016)
 
 **Punto de control**: Las dos historias funcionan; la funcionalidad está completa.
 
@@ -68,8 +68,8 @@
 
 ## Fase 4: Remate
 
-- [ ] T018 [P] Actualizar `CLAUDE.md`: en la sección "Estructura" añadir `animacion.ts` junto a `tema.ts` y `IconoVictoria.tsx` a `componentes/`, y en "Cómo añadir una actividad" mencionar el `color` opcional en el contrato
-- [ ] T019 Ejecutar `npm test` y `npm run typecheck` completos: todo debe pasar, también las pruebas de las funcionalidades 001 a 006 (depende de T017, T018)
+- [X] T018 [P] Actualizar `CLAUDE.md`: en la sección "Estructura" añadir `animacion.ts` junto a `tema.ts` y `IconoVictoria.tsx` a `componentes/`, y en "Cómo añadir una actividad" mencionar el `color` opcional en el contrato
+- [X] T019 Ejecutar `npm test` y `npm run typecheck` completos: todo debe pasar, también las pruebas de las funcionalidades 001 a 006 (depende de T017, T018)
 - [ ] T020 Hacer la comprobación manual de los 12 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos los colores de la lista (pasos 1 a 3), activar y desactivar "reducir movimiento" en el móvil (pasos 8 y 9), esperar un par de minutos en la pantalla final (paso 11) y el modo avión (paso 12). Antes de cerrar la spec, preguntar al usuario si hay observaciones nuevas y anotarlas en [specs/ideas-pendientes.md](../ideas-pendientes.md) (no se construyen), y preguntarle si se fusiona la rama en `main`. **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
 
 ---
@@ -92,7 +92,7 @@
 
 - Historia 1: T003 y T004 a la vez (archivos distintos); T005 y T006 a la vez tras ellos; T007 en cualquier momento.
 - Historia 2: T012 a T016 a la vez (cinco archivos distintos) en cuanto exista T011.
-- Remate: T018 a la vez que T019 solo si T019 espera a T018; por seguridad se hace T018 primero.
+- Remate: T018 se hace antes de T019 (la verificación final va la última).
 
 ### Ejemplo de paralelismo: Historia 2
 

@@ -29,7 +29,7 @@ Una persona mayor abre la app y ve la lista de actividades. Cada actividad tiene
 1. **Dado** que estoy en la pantalla de inicio, **cuando** miro la lista, **entonces** cada una de las 5 actividades ("Parejas", "Forma la palabra", "Sopa de letras", "Adivinanzas" y "Diferencias") tiene un color de fondo distinto del de las demás.
 2. **Dado** que miro la lista, **cuando** leo cualquiera de los botones, **entonces** el texto sigue siendo perfectamente legible sobre su color (contraste de al menos 7 a 1) y el icono y el nombre siguen junto a la descripción.
 3. **Dado** que toco una actividad, **cuando** se abre, **entonces** su pantalla y sus botones ("Volver al inicio", "Jugar otra vez", etc.) mantienen el aspecto que tenían: el color por actividad solo afecta a la lista de inicio.
-4. **Dado** que se añade en el futuro una actividad nueva, **cuando** no indica ningún color, **entonces** aparece en la lista con el color azul de siempre y la app no falla.
+4. **Dado** que se añade en el futuro una actividad nueva, **cuando** no indica ningún color, **entonces** aparece en la lista con el azul de la app como fondo y la app no falla.
 
 ---
 
@@ -69,7 +69,7 @@ Al terminar una partida, la pantalla final (felicitación o resultado) aparece c
 - **RF-004**: El color MUST ser solo un refuerzo: cada elemento de la lista MUST seguir mostrando su icono grande, su nombre y su descripción, y la actividad MUST poder identificarse sin ver el color.
 - **RF-005**: El color por actividad MUST aplicarse solo a la lista de la pantalla de inicio. El resto de botones y pantallas de la app MUST mantener el aspecto actual.
 - **RF-006**: Cada actividad MUST indicar su color como parte de lo que entrega a la pantalla de inicio (el contrato de actividad se amplía con este campo), y los colores MUST guardarse junto al resto de colores de la app.
-- **RF-007**: Si una actividad no indica color, la lista MUST mostrarla con el color azul actual, sin fallar.
+- **RF-007**: Si una actividad no indica color, la lista MUST mostrarla con el azul de la app como color de fondo y el texto en blanco, igual que las que sí tienen color, sin fallar.
 - **RF-008**: La pantalla final de cada actividad que termina con felicitación o resultado ("Parejas", "Forma la palabra", "Sopa de letras", "Adivinanzas" y "Diferencias") MUST animar la entrada del icono de celebración con un fundido suave (aparece poco a poco, sin desplazarse ni cambiar de tamaño) de entre 300 y 600 milisegundos.
 - **RF-009**: La animación MUST ocurrir una sola vez cada vez que aparece la pantalla final, y MUST NOT repetirse, girar, temblar ni parpadear. No hay confeti ni efectos que cubran la pantalla.
 - **RF-010**: La animación MUST NOT retrasar, ocultar ni bloquear nada: el texto y todos los botones MUST estar visibles y activos desde que aparece la pantalla.
@@ -104,7 +104,7 @@ Sonidos, vibración, confeti, animaciones durante el juego o en el menú, cambio
 ## Suposiciones
 
 - Los 5 colores concretos se eligen al planificar, respetando los requisitos de contraste y daltonismo; esta especificación no fija cuáles son.
-- El color por actividad sustituye al azul solo en el fondo del botón de la lista de inicio; el borde, el texto blanco, el icono y la descripción mantienen su forma actual.
+- Hoy las tarjetas de la lista de inicio tienen fondo claro con borde azul. Con esta funcionalidad todas pasan a tener el color de su actividad como fondo (o el azul de la app si no tienen), con el nombre, la descripción y el icono en blanco. El tamaño, el orden, los textos y los iconos no cambian.
 - "Pantalla final" incluye la felicitación de "Parejas", "Sopa de letras" y "Diferencias" y el resultado de "Forma la palabra" y "Adivinanzas": todas tienen el mismo icono de celebración.
 - La animación es un fundido (decidido en la sesión de aclaraciones). Se aplica la misma a las 5 pantallas.
 - El ajuste de reducir movimiento es el que ofrece el propio móvil en su configuración de accesibilidad; la app no tiene un ajuste propio.

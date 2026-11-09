@@ -4,6 +4,7 @@ import { FormaPalabra } from './forma-palabra/FormaPalabra';
 import { SopaDeLetras } from './sopa-de-letras/SopaDeLetras';
 import { Adivinanzas } from './adivinanzas/Adivinanzas';
 import { Diferencias } from './diferencias/Diferencias';
+import { tema } from '../tema';
 import { textosAdivinanzas, textosDiferencias, textosFormaPalabra, textosParejas, textosSopa } from '../textos';
 
 // Actividades disponibles en la app.
@@ -13,6 +14,7 @@ export const actividades: Actividad[] = [
     icono: { nombre: 'cards' },
     nombre: textosParejas.nombre,
     descripcion: textosParejas.descripcion,
+    color: tema.colores.actividades.azul,
     Contenido: Parejas,
   },
   {
@@ -20,6 +22,7 @@ export const actividades: Actividad[] = [
     icono: { nombre: 'alphabetical-variant' },
     nombre: textosFormaPalabra.nombre,
     descripcion: textosFormaPalabra.descripcion,
+    color: tema.colores.actividades.verde,
     Contenido: FormaPalabra,
   },
   {
@@ -27,6 +30,7 @@ export const actividades: Actividad[] = [
     icono: { nombre: 'grid' },
     nombre: textosSopa.nombre,
     descripcion: textosSopa.descripcion,
+    color: tema.colores.actividades.morado,
     Contenido: SopaDeLetras,
   },
   {
@@ -34,6 +38,7 @@ export const actividades: Actividad[] = [
     icono: { nombre: 'help-circle' },
     nombre: textosAdivinanzas.nombre,
     descripcion: textosAdivinanzas.descripcion,
+    color: tema.colores.actividades.marron,
     Contenido: Adivinanzas,
   },
   {
@@ -41,6 +46,7 @@ export const actividades: Actividad[] = [
     icono: { nombre: 'compare' },
     nombre: textosDiferencias.nombre,
     descripcion: textosDiferencias.descripcion,
+    color: tema.colores.actividades.verdeAzulado,
     Contenido: Diferencias,
   },
 ];
