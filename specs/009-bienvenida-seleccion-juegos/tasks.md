@@ -108,7 +108,7 @@
 - [X] T028 Ejecutar `npm test` y `npm run typecheck` y comprobar que pasan completos, incluidas las pruebas de las funcionalidades 001 a 008
 - [X] T029 [P] Añadir al final de `specs/001-pantalla-inicio/contracts/actividad.md` una línea que remita a `specs/009-bienvenida-seleccion-juegos/contracts/actividad-color.md`. Actualizar `CLAUDE.md`: estructura (`Bienvenida.tsx`, `ColorJuego.tsx`, logo), regla "un color por juego en todos sus botones" y la nota de contraste; y la sección "Estado" de `specs/ideas-pendientes.md` con lo hecho en la spec 009
 - [X] T030 Pasar [quickstart.md](quickstart.md) pasos 1 a 5 y anotar el resultado
-- [ ] T031 Tarea para una persona con móvil (no la puede hacer el agente): revisar a ojo en un móvil de unos 360 puntos de ancho el logo, los colores de cada juego, que los iconos de Diferencias se siguen reconociendo y el icono de la app
+- [X] T031 Tarea para una persona con móvil (no la puede hacer el agente): revisar a ojo en un móvil de unos 360 puntos de ancho el logo, los colores de cada juego, que los iconos de Diferencias se siguen reconociendo y el icono de la app
 
 ---
 
