@@ -121,13 +121,13 @@
 
 ### Pruebas de la historia 4
 
-- [ ] T029 [US4] Actualizar `tests/diferencias-pantalla.test.tsx` y `tests/textos.test.tsx`. En `tests/textos.test.tsx` (líneas 215-223 aprox.): `textosDiferencias.descripcion` pasa a esperar 'Encuentra las diferencias entre dos dibujos', `textosDiferencias.felicitacion` deja de compararse con una cadena y se comprueba como función (`felicitacion(3)`, `felicitacion(5)` y `felicitacion(7)` dicen "Has encontrado las n diferencias"), y se comprueban los textos nuevos `elegirNumero`, `tres`, `cinco` y `siete`. En `tests/diferencias-pantalla.test.tsx`, todas las pruebas que juegan primero eligen "3 diferencias" (o el número que toque). Debe cubrirse además: al abrir "Diferencias" se ve la pantalla de elegir con los botones "3 diferencias", "5 diferencias" y "7 diferencias" y sus iconos; para cada número se juega una partida completa (se tocan las `n` zonas), el aviso baja de `n` a 0, la felicitación dice "Has encontrado las n diferencias" y no hay círculos de más; al pulsar "Jugar otra vez" vuelve la pantalla de elegir; la descripción de la actividad ya no contiene "3". Deben fallar al principio (depende de T028)
+- [X] T029 [US4] Actualizar `tests/diferencias-pantalla.test.tsx` y `tests/textos.test.tsx`. En `tests/textos.test.tsx` (líneas 215-223 aprox.): `textosDiferencias.descripcion` pasa a esperar 'Encuentra las diferencias entre dos dibujos', `textosDiferencias.felicitacion` deja de compararse con una cadena y se comprueba como función (`felicitacion(3)`, `felicitacion(5)` y `felicitacion(7)` dicen "Has encontrado las n diferencias"), y se comprueban los textos nuevos `elegirNumero`, `tres`, `cinco` y `siete`. En `tests/diferencias-pantalla.test.tsx`, todas las pruebas que juegan primero eligen "3 diferencias" (o el número que toque). Debe cubrirse además: al abrir "Diferencias" se ve la pantalla de elegir con los botones "3 diferencias", "5 diferencias" y "7 diferencias" y sus iconos; para cada número se juega una partida completa (se tocan las `n` zonas), el aviso baja de `n` a 0, la felicitación dice "Has encontrado las n diferencias" y no hay círculos de más; al pulsar "Jugar otra vez" vuelve la pantalla de elegir; la descripción de la actividad ya no contiene "3". Deben fallar al principio (depende de T028)
 
 ### Implementación de la historia 4
 
-- [ ] T030 [US4] Cambiar `src/textos.ts`, en `textosDiferencias`: `descripcion` pasa a "Encuentra las diferencias entre dos dibujos"; `felicitacion` pasa a ser `(n: number) => \`¡Enhorabuena! Has encontrado las ${n} diferencias\``; añadir `elegirNumero` ("Elige cuántas diferencias quieres buscar") y los textos `tres`, `cinco` y `siete` (depende de T029)
-- [ ] T031 [US4] Cambiar `src/actividades/diferencias/Diferencias.tsx` y `src/actividades/diferencias/Felicitacion.tsx`: sin partida se muestra `ElegirOpcion` con las opciones 3, 5 y 7 (iconos `numeric-3-circle`, `numeric-5-circle`, `numeric-7-circle`, ids `icono-tres`, `icono-cinco` e `icono-siete`); al elegir se llama a `crearPartida(n, idEscenaAnterior)` y a `avisarPartida(true)`; "Jugar otra vez" vuelve a la pantalla de elegir (guardando el `id` de la escena anterior); `Felicitacion` recibe `total` y usa `t.felicitacion(total)` (depende de T003, T030)
-- [ ] T032 [US4] Ejecutar `npm test` y `npm run typecheck`: T029 debe pasar sin romper el resto (depende de T031)
+- [X] T030 [US4] Cambiar `src/textos.ts`, en `textosDiferencias`: `descripcion` pasa a "Encuentra las diferencias entre dos dibujos"; `felicitacion` pasa a ser `(n: number) => \`¡Enhorabuena! Has encontrado las ${n} diferencias\``; añadir `elegirNumero` ("Elige cuántas diferencias quieres buscar") y los textos `tres`, `cinco` y `siete` (depende de T029)
+- [X] T031 [US4] Cambiar `src/actividades/diferencias/Diferencias.tsx` y `src/actividades/diferencias/Felicitacion.tsx`: sin partida se muestra `ElegirOpcion` con las opciones 3, 5 y 7 (iconos `numeric-3-circle`, `numeric-5-circle`, `numeric-7-circle`, ids `icono-tres`, `icono-cinco` e `icono-siete`); al elegir se llama a `crearPartida(n, idEscenaAnterior)` y a `avisarPartida(true)`; "Jugar otra vez" vuelve a la pantalla de elegir (guardando el `id` de la escena anterior); `Felicitacion` recibe `total` y usa `t.felicitacion(total)` (depende de T003, T030)
+- [X] T032 [US4] Ejecutar `npm test` y `npm run typecheck`: T029 debe pasar sin romper el resto (depende de T031)
 
 **Punto de control**: se puede jugar con 3, 5 y 7 diferencias.
 
@@ -160,9 +160,9 @@
 
 **Prueba independiente**: Pasos de "Historia 6" del [quickstart.md](quickstart.md).
 
-- [ ] T038 [US6] Actualizar `tests/icono-victoria.test.tsx`: con la animación activa, el icono sigue en opacidad 0 al principio y llega a 1 al avanzar `animacion.duracion` ms; añadir una prueba de que `animacion.duracion` está entre 800 y 1000; el resto de pruebas (reducir movimiento, animación apagada, botones sin bloqueo) se queda igual. Debe fallar al principio por la duración (depende de T001)
-- [ ] T039 [US6] Cambiar `src/animacion.ts` (`duracion: 900` y el comentario "entre 800 y 1000") y el comentario de `src/componentes/IconoVictoria.tsx` que dice "400 ms" (depende de T038)
-- [ ] T040 [US6] Ejecutar `npm test` y `npm run typecheck`: T038 debe pasar sin romper el resto (depende de T039)
+- [X] T038 [US6] Actualizar `tests/icono-victoria.test.tsx`: con la animación activa, el icono sigue en opacidad 0 al principio y llega a 1 al avanzar `animacion.duracion` ms; añadir una prueba de que `animacion.duracion` está entre 800 y 1000; el resto de pruebas (reducir movimiento, animación apagada, botones sin bloqueo) se queda igual. Debe fallar al principio por la duración (depende de T001)
+- [X] T039 [US6] Cambiar `src/animacion.ts` (`duracion: 900` y el comentario "entre 800 y 1000") y el comentario de `src/componentes/IconoVictoria.tsx` que dice "400 ms" (depende de T038)
+- [X] T040 [US6] Ejecutar `npm test` y `npm run typecheck`: T038 debe pasar sin romper el resto (depende de T039)
 
 **Punto de control**: el fundido es más largo y todo lo demás de la animación sigue igual.
 

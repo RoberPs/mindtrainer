@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { ElegirOpcion } from '../../componentes/ElegirOpcion';
 import { Icono } from '../../componentes/Icono';
 import { textosDiferencias as t } from '../../textos';
 import { tema } from '../../tema';
 import type { PropsContenido } from '../tipos';
 import { Dibujo } from './Dibujo';
 import { Felicitacion } from './Felicitacion';
-import { dibujosDe, proporcionDibujo } from './escena';
+import { dibujosDe, proporcionDibujo, type Total } from './escena';
 import { crearPartida, faltan, tocar, type Partida } from './juego';
 
 // Alto que ocupan el marco, la instrucción, el aviso de las que faltan, los rótulos, el hueco
@@ -15,15 +16,27 @@ const altoReservado = 410;
 // Con 7 diferencias las zonas son más pequeñas: con este ancho miden al menos 44 puntos.
 const anchoMinimo = 240;
 
-// Contenido de la actividad: los dos dibujos y la felicitación. Nada se guarda.
+const opciones = [
+  { valor: 3 as Total, texto: t.tres, icono: { nombre: 'numeric-3-circle' }, idIcono: 'icono-tres' },
+  { valor: 5 as Total, texto: t.cinco, icono: { nombre: 'numeric-5-circle' }, idIcono: 'icono-cinco' },
+  { valor: 7 as Total, texto: t.siete, icono: { nombre: 'numeric-7-circle' }, idIcono: 'icono-siete' },
+];
+
+// Contenido de la actividad: elegir cuántas diferencias, los dos dibujos y la felicitación. Nada se guarda.
 export function Diferencias({ avisarPartida }: PropsContenido) {
-  const [partida, setPartida] = useState<Partida>(() => crearPartida());
+  const [partida, setPartida] = useState<Partida | null>(null);
+  // Escena de la partida anterior: la siguiente es siempre otra distinta.
+  const [escenaAnterior, setEscenaAnterior] = useState<string | undefined>(undefined);
   const { width, height } = useWindowDimensions();
 
-  // La partida empieza al abrir la actividad.
-  useEffect(() => {
+  const elegir = (total: Total) => {
+    const nueva = crearPartida(total, escenaAnterior);
+    setPartida(nueva);
+    setEscenaAnterior(nueva.escena.id);
     avisarPartida(true);
-  }, []);
+  };
+
+  if (!partida) return <ElegirOpcion invitacion={t.elegirNumero} opciones={opciones} alElegir={elegir} />;
 
   const alTocar = (x: number, y: number) => {
     const nueva = tocar(partida, x, y);
@@ -34,11 +47,9 @@ export function Diferencias({ avisarPartida }: PropsContenido) {
   if (partida.terminada) {
     return (
       <Felicitacion
+        total={partida.total}
         toques={partida.toques}
-        alJugarOtraVez={() => {
-          setPartida(crearPartida(3, partida.escena.id));
-          avisarPartida(true);
-        }}
+        alJugarOtraVez={() => setPartida(null)}
       />
     );
   }

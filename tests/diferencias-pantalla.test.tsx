@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import App from '../App';
 import { Diferencias } from '../src/actividades/diferencias/Diferencias';
+import type { Total } from '../src/actividades/diferencias/escena';
 import { MarcoActividad } from '../src/pantallas/MarcoActividad';
 import { textosDiferencias as t } from '../src/textos';
 import { centroDe, diferenciasDe, escenaDePrueba, puntoVacio, segundaEscena, tocarAbajo, tocarArriba } from './ayudas-diferencias';
@@ -15,15 +16,72 @@ afterEach(() => {
 
 const ids = diferenciasDe(escenaDePrueba).map((d) => d.id);
 
-async function abrir() {
+const textoDe: Record<Total, string> = { 3: t.tres, 5: t.cinco, 7: t.siete };
+const elegir = (total: Total) => fireEvent.press(screen.getByText(textoDe[total]));
+
+// Abre la actividad y elige cuántas diferencias buscar (3 si no se dice otra cosa).
+async function abrir(total: Total = 3) {
   await render(<App />);
   await fireEvent.press(screen.getByText('Diferencias'));
+  await elegir(total);
 }
 const acertar = (id: string) => tocarAbajo(centroDe(id).x, centroDe(id).y);
 const fallar = () => tocarAbajo(puntoVacio().x, puntoVacio().y);
 const icono = (id: string) => screen.getByTestId(id, { includeHiddenElements: true });
 const hayCirculo = (lado: 'arriba' | 'abajo', id: string) =>
   screen.queryByTestId(`circulo-${lado}-${id}`, { includeHiddenElements: true }) !== null;
+
+describe('Diferencias: elegir cuántas diferencias buscar (RF-016)', () => {
+  it('al abrirla se ve la invitación y los botones de 3, 5 y 7 con su icono, y todavía no hay dibujos', async () => {
+    await render(<App />);
+    await fireEvent.press(screen.getByText('Diferencias'));
+    expect(screen.getByText(t.elegirNumero)).toBeTruthy();
+    for (const [texto, idIcono] of [
+      [t.tres, 'icono-tres'],
+      [t.cinco, 'icono-cinco'],
+      [t.siete, 'icono-siete'],
+    ]) {
+      expect(screen.getByRole('button', { name: texto })).toBeTruthy();
+      expect(icono(idIcono)).toBeTruthy();
+    }
+    expect(screen.queryByTestId('dibujo-abajo')).toBeNull();
+  });
+
+  it('elegir un número empieza la partida con ese número por encontrar', async () => {
+    await abrir(7);
+    expect(screen.getByText(t.faltan(7))).toBeTruthy();
+    expect(screen.getByTestId('dibujo-abajo')).toBeTruthy();
+    expect(screen.queryByText(t.elegirNumero)).toBeNull();
+  });
+
+  it.each([3, 5, 7] as Total[])('una partida completa con %i diferencias: baja el aviso, hay círculos y se felicita', async (total) => {
+    const activas = diferenciasDe(escenaDePrueba, total).map((d) => d.id);
+    await abrir(total);
+    expect(screen.getByText(t.faltan(total))).toBeTruthy();
+    let hechas = 0;
+    for (const id of activas) {
+      await acertar(id);
+      hechas++;
+      if (hechas < total) {
+        expect(screen.getByText(t.faltan(total - hechas))).toBeTruthy();
+        expect(hayCirculo('abajo', id)).toBe(true);
+        expect(hayCirculo('arriba', id)).toBe(true);
+      }
+    }
+    expect(screen.getByText(t.felicitacion(total))).toBeTruthy();
+    expect(screen.getByText(t.toques(total))).toBeTruthy();
+    expect(screen.queryByTestId('dibujo-abajo')).toBeNull();
+  });
+
+  it('con 3 diferencias, tocar la zona de un cambio no activo no marca nada', async () => {
+    await abrir(3);
+    const noActivo = diferenciasDe(escenaDePrueba, 7)[3].id;
+    await acertar(noActivo);
+    expect(hayCirculo('abajo', noActivo)).toBe(false);
+    expect(screen.getByText(t.fallo)).toBeTruthy();
+    expect(screen.getByText(t.faltan(3))).toBeTruthy();
+  });
+});
 
 describe('Diferencias: pantalla de los dibujos', () => {
   it('aparece en la lista de inicio con icono, nombre y descripción', async () => {
@@ -110,7 +168,7 @@ describe('Diferencias: felicitación y jugar otra vez', () => {
     await abrir();
     for (const id of ids) await acertar(id);
     expect(icono('icono-felicitacion')).toBeTruthy();
-    expect(screen.getByText(t.felicitacion)).toBeTruthy();
+    expect(screen.getByText(t.felicitacion(3))).toBeTruthy();
     expect(screen.getByText('Has necesitado 3 toques')).toBeTruthy();
     expect(screen.getByText(t.jugarOtraVez)).toBeTruthy();
     expect(icono('icono-jugar-otra-vez')).toBeTruthy();
@@ -135,6 +193,8 @@ describe('Diferencias: felicitación y jugar otra vez', () => {
     await fallar();
     for (const id of ids) await acertar(id);
     await fireEvent.press(screen.getByText(t.jugarOtraVez));
+    expect(screen.getByText(t.elegirNumero)).toBeTruthy(); // vuelve a pedir el número
+    await elegir(3);
     expect(screen.getByText(t.faltan(3))).toBeTruthy();
     expect(screen.queryByText(t.fallo)).toBeNull();
     [...ids, ...idsNuevos].forEach((id) => expect(hayCirculo('abajo', id)).toBe(false));
@@ -146,9 +206,11 @@ describe('Diferencias: felicitación y jugar otra vez', () => {
 });
 
 describe('Diferencias: avisos de partida y salida', () => {
-  it('avisa con true al abrir, con false al marcar la tercera y con true al jugar otra vez', async () => {
+  it('avisa con true al elegir el número, con false al marcar la última y con true al jugar otra vez', async () => {
     const avisar = jest.fn();
     await render(<Diferencias avisarPartida={avisar} />);
+    expect(avisar).not.toHaveBeenCalled(); // todavía se está eligiendo
+    await elegir(3);
     expect(avisar).toHaveBeenLastCalledWith(true);
     await acertar(ids[0]);
     await acertar(ids[1]);
@@ -156,6 +218,7 @@ describe('Diferencias: avisos de partida y salida', () => {
     await acertar(ids[2]);
     expect(avisar).toHaveBeenLastCalledWith(false);
     await fireEvent.press(screen.getByText(t.jugarOtraVez));
+    await elegir(3);
     expect(avisar).toHaveBeenLastCalledWith(true);
   });
 
@@ -169,6 +232,7 @@ describe('Diferencias: avisos de partida y salida', () => {
       Contenido: Diferencias,
     };
     await render(<MarcoActividad actividad={actividad} alVolver={alVolver} />);
+    await elegir(3);
     for (const id of ids) await acertar(id);
     await fireEvent.press(screen.getByText('Volver al inicio'));
     expect(alVolver).toHaveBeenCalledTimes(1);
@@ -184,6 +248,7 @@ describe('Diferencias: avisos de partida y salida', () => {
       Contenido: Diferencias,
     };
     await render(<MarcoActividad actividad={actividad} alVolver={alVolver} />);
+    await elegir(3);
     await acertar(ids[0]);
     await fireEvent.press(screen.getByText('Volver al inicio'));
     expect(alVolver).not.toHaveBeenCalled();
