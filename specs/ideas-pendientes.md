@@ -113,3 +113,23 @@ bien; esta es una mejora, no un fallo.
    - Debe seguir respetando "reducir movimiento", sin bloquear botones y sin librerías nuevas.
    - Cambiaría: RF-008 y RF-009 de la spec 007, `IconoVictoria.tsx`, `src/animacion.ts` y
      `tests/icono-victoria.test.tsx`.
+
+## Pantalla de bienvenida y selección de juegos más intuitiva (spec 008)
+
+Observada el 2026-11-09 al cerrar la spec 008.
+
+1. **Pantalla de bienvenida básica.** Una pantalla inicial con el logo de la app (el usuario lo
+   facilitará más adelante), el mensaje "Empieza a entrenar tu mente" y un botón grande que lleve
+   a la pantalla de juegos. A tener en cuenta:
+   - Hasta que llegue el logo, hace falta un hueco o un icono provisional. El logo debe ir
+     incluido en la app (sin internet) y junto al texto, nunca en lugar de él.
+   - Cambiaría: `App.tsx` (nueva pantalla previa a `Inicio`), `src/textos.ts`, `src/tema.ts` si
+     hace falta y pruebas nuevas de navegación.
+2. **Pantalla de juegos con el mensaje "Elige uno de los juegos".** Encabezado claro que indique
+   qué hacer en la pantalla actual (`src/pantallas/Inicio.tsx`).
+3. **Selección de juego más intuitiva que una lista de botones.** Que cada juego se reconozca de
+   un vistazo, no solo por un botón con su nombre. A tener en cuenta:
+   - Opciones a decidir en la spec: tarjetas grandes con icono grande y color propio, cuadrícula
+     de dos columnas, o una ilustración por juego. Siempre con texto junto al icono.
+   - Debe seguir cumpliendo letra de 22 puntos o más, botones de 64 puntos o más de alto y
+     contraste de 7 a 1, con 5 juegos y los que se añadan después.
