@@ -65,7 +65,7 @@ Al menos uno de `arriba` o `abajo` existe. En *cambia*, ambos tienen el mismo `i
 |---|---|---|
 | `id` | texto | Único. |
 | `nombre` | texto | Interno (para revisar). |
-| `comunes` | lista de `Elemento` | Iguales en los dos dibujos, 3 en este plan. |
+| `comunes` | lista de `Elemento` | Iguales en los dos dibujos, de 2 a 5 según la escena. |
 | `cambios` | lista de 7 `Cambio` | Siempre 7. |
 
 Reglas de contenido: los `id` de los elementos no se repiten dentro de un dibujo; ningún elemento (común o de cambio) queda a menos de su tamaño de otro; todo icono existe en MaterialCommunityIcons y tiene contraste ≥ 7:1 con el fondo; no se repiten iconos entre escenas.

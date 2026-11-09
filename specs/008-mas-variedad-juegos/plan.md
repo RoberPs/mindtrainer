@@ -10,7 +10,7 @@
 
 1. **Adivinanzas** (P1): el banco pasa de 10 a 50 adivinanzas y `crearPartida` excluye las 5 de la partida anterior.
 2. **Sopa, direcciones** (P1): se reescriben las cuadrículas de 3 de las 5 sopas pequeñas para que tengan 2 palabras verticales y 1 horizontal.
-3. **Diferencias, escenas** (P2): la escena única pasa a ser una lista de 4 escenas fijas con 7 cambios posibles cada una (unos 50 iconos en total); cada partida usa una escena distinta de la anterior.
+3. **Diferencias, escenas** (P2): la escena única pasa a ser una lista de 4 escenas fijas con 7 cambios posibles cada una (54 iconos en total); cada partida usa una escena distinta de la anterior.
 4. **Diferencias, 3/5/7** (P3): pantalla previa para elegir cuántas diferencias; la partida activa solo los primeros N cambios de la escena.
 5. **Sopa, tamaño** (P3): pantalla previa para elegir pequeña (5×6, 3 palabras) o mediana (6×6, 5 palabras, 3 sopas nuevas hechas a mano).
 6. **Animación** (P4): la duración del fundido pasa de 400 a 900 ms.

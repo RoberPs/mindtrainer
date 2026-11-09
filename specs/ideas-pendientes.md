@@ -20,6 +20,12 @@ Alcance acordado con la persona responsable para la última spec, "Más variedad
 - **No entran**: palabras al revés o en diagonal, tres tamaños de sopa y colocación aleatoria
   de iconos.
 
+**Estado tras implementar la spec 008 (2026-11-09)**: hechas la idea 1 y la idea 3 de la sopa
+(con sopa mediana de 6 × 6, porque con 7 columnas las casillas medirían unos 42 puntos), la idea 1
+de las adivinanzas (50), las ideas 1, 2 y 3 de Diferencias (4 escenas fijas, 54 iconos y 3, 5 o 7
+diferencias) y la animación (900 ms). **No se construyeron** las palabras al revés o en diagonal ni
+la colocación aleatoria. Pendiente de una persona: revisar el contenido nuevo y probarlo en un móvil.
+
 ## Sopa de letras (spec 004)
 
 Observadas el 2026-11-06 al hacer la comprobación manual de la spec 004. Esa comprobación salió
