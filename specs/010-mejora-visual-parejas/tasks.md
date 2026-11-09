@@ -30,7 +30,7 @@
 **Propósito**: textos y colores que usan los dibujos nuevos.
 
 - [ ] T002 [P] Añadir en `src/textos.ts`, dentro de `textosParejas.dibujos`, los nombres `paraguas: 'Paraguas'`, `telefono: 'Teléfono'`, `libro: 'Libro'` y `sombrero: 'Sombrero'`
-- [ ] T003 [P] Añadir en `src/tema.ts` el objeto `tema.colores.dibujos` con un color oscuro distinto para cada uno de los 12 ids de dibujo, cada uno con contraste de al menos 7 a 1 sobre `tema.colores.tarjeta` (`#F7EEE0`); comprobar los valores con la fórmula de `tests/tema-contraste.test.tsx` antes de fijarlos
+- [ ] T003 [P] Añadir en `src/tema.ts` el objeto `tema.colores.dibujos` con un color oscuro distinto para cada uno de los 12 ids de dibujo, cada uno con contraste de al menos 7 a 1 sobre `tema.colores.tarjeta` (`#F7EEE0`); elegir tonos bien separados entre sí (por ejemplo azul, verde, granate, marrón, morado, verde azulado, ocre oscuro…) para que no se parezcan, y comprobar los valores con la fórmula de `tests/tema-contraste.test.tsx` antes de fijarlos
 - [ ] T004 Añadir en `tests/tema-contraste.test.tsx` una prueba que recorra `tema.colores.dibujos` y compruebe que hay 12 colores distintos y que cada uno tiene al menos 7 a 1 sobre `tema.colores.tarjeta` (depende de T003)
 
 **Punto de control**: textos y colores listos y con su prueba pasando.
@@ -51,7 +51,7 @@
 ### Implementación de la historia 1
 
 - [ ] T007 [US1] En `src/actividades/parejas/dibujos.ts` ampliar la lista a los 12 dibujos indicados en las notas (depende de T002)
-- [ ] T008 [US1] En `src/actividades/parejas/Carta.tsx` pintar la cara con el dibujo en su color (`tema.colores.dibujos[dibujo.id]`), el nombre debajo con `tema.colores.texto`, borde grueso del color del juego (`useColorJuego()`) para la carta girada y borde verde con el visto para la acertada; añadir una propiedad `tamanoIcono` y usarla para el dibujo (depende de T003 y T007)
+- [ ] T008 [US1] En `src/actividades/parejas/Carta.tsx` pintar la cara con el dibujo en su color (`tema.colores.dibujos[dibujo.id]`), el nombre debajo con `tema.colores.texto`, borde del color del juego (`useColorJuego()`), con el mismo ancho de 4 puntos de hoy, para la carta girada y borde verde con el visto para la acertada; añadir una propiedad `tamanoIcono` y usarla para el dibujo (depende de T003 y T007)
 - [ ] T009 [US1] En `src/actividades/parejas/Tablero.tsx` pasar a cada `Carta` `tamanoIcono` 88 en partidas de 6 y 8 cartas y 64 en la de 12 (depende de T008)
 
 **Punto de control**: las pruebas de US1 pasan y los dibujos se ven bien en los tres tamaños.
@@ -66,7 +66,7 @@
 
 ### Pruebas de la historia 2
 
-- [ ] T010 [P] [US2] En `tests/parejas-pantalla.test.tsx` añadir una prueba de que, al empezar una partida de cada tamaño, todas las cartas muestran el texto "Carta" y el icono `icono-carta-N`, y de que al girar una carta deja de mostrar "Carta" y muestra su nombre
+- [ ] T010 [P] [US2] En `tests/parejas-pantalla.test.tsx` añadir solo lo que falta (la prueba de la línea 75 ya comprueba que salen tantos "Carta" como cartas): que en cada tamaño todas las cartas tapadas tienen el icono `icono-carta-N`, y que al girar una carta deja de mostrar "Carta" y muestra su nombre
 
 ### Implementación de la historia 2
 
@@ -103,9 +103,9 @@
 ## Fase 7: Cierre
 
 - [ ] T014 Ejecutar `npm test` y `npm run typecheck`: todo en verde, incluidas las pruebas que ya existían de "Parejas" y de las demás actividades
-- [ ] T015 [P] Actualizar `CLAUDE.md` (línea de `parejas/` en la estructura: 12 dibujos con color propio y dorso común) y añadir en `specs/ideas-pendientes.md` el estado tras la spec 010, indicando que no se usó Openclipart ni Kenney y por qué
+- [ ] T015 [P] Actualizar `CLAUDE.md` (línea de `parejas/` en la estructura: 12 dibujos con color propio y dorso común) y añadir en `specs/ideas-pendientes.md` el estado tras la spec 010, indicando que no se usó Openclipart ni Kenney y por qué, y la salvedad de licencia de los iconos (research.md, punto 1: la licencia pide conservar su aviso al redistribuir el código); dejar anotado que la persona responsable debe aceptarla de forma expresa al cerrar la spec (FR-008, SC-006)
 - [ ] T016 Comprobación manual con un móvil siguiendo [quickstart.md](quickstart.md). **La hace una persona**: dejar pendiente y avisarlo
-- [ ] T017 Antes de cerrar la spec, preguntar al usuario si hay observaciones nuevas para `specs/ideas-pendientes.md` y si se fusiona la rama en `main`. No fusionar sin su respuesta
+- [ ] T017 Antes de cerrar la spec, preguntar al usuario si acepta la salvedad de licencia de los iconos (FR-008, SC-006), si hay observaciones nuevas para `specs/ideas-pendientes.md` y si se fusiona la rama en `main`. No fusionar sin su respuesta
 
 ---
 
