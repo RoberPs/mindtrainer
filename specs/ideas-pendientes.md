@@ -56,3 +56,28 @@ bien; esta es una mejora, no un fallo.
      persona, igual que las 10 actuales.
    - Las pruebas actuales ya comprueban tres respuestas distintas, una palabra y que el texto no
      contenga la respuesta; valen para las 50.
+
+## Diferencias (spec 006)
+
+Observadas el 2026-11-09 al hacer la comprobación manual de la spec 006. Esa comprobación salió
+bien; estas son mejoras, no fallos.
+
+1. **Elegir el número de diferencias: 3, 5 o 7.** Hoy son siempre 3. Hay precedente en
+   "Parejas" y en la idea de elegir tamaño de "Sopa de letras". A tener en cuenta:
+   - Cada nivel necesita más elementos en la escena y zonas que no se solapen ni sean menores
+     de unos 44 puntos (hoy exigido por `tests/diferencias-escena.test.tsx`).
+   - Cambiaría: "las 3 diferencias" en la descripción y la felicitación, `faltan`, la regla de
+     terminar (`3 - encontradas.length`) y las pruebas que dan por hecho 3.
+2. **Variar la colocación y la cantidad de iconos.** Ahora la escena es una sola y fija, así que
+   se memoriza a la segunda partida. Que cada partida cambie dónde van los iconos y cuántos hay.
+   A tener en cuenta:
+   - Hoy las zonas son datos fijos revisados a mano (RF-012). Si la colocación fuera aleatoria,
+     habría que generar las zonas y comprobar por código que no se solapan ni se salen del
+     dibujo, o bien tener varias escenas fijas revisadas a mano (más simple).
+   - Con más iconos hay que vigilar que todo siga cabiendo y se reconozca en un móvil pequeño.
+3. **Catálogo de iconos más amplio, unos 50,** para que sea algo más desafiante. Hoy hay 4
+   iguales más los 3 que difieren. A tener en cuenta:
+   - Cada icono de MaterialCommunityIcons debe existir, reconocerse a simple vista y tener
+     colores de alto contraste; revisado uno a uno por una persona.
+   - Las ideas 1, 2 y 3 se apoyan entre sí: con más iconos y más diferencias, la colocación
+     variable tiene sentido. Conviene decidirlas juntas.
