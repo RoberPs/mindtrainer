@@ -96,7 +96,7 @@
 - [x] T021 [P] Actualizar `CLAUDE.md`: añadir en Comandos/Estructura una línea con `eas.json`, `docs/` y el aviso de subir `versionCode` en cada APK, y en "Cosas a tener en cuenta" que la clave de firma está fuera del repositorio
 - [x] T022 Ejecutar `npm test` y `npm run typecheck` por última vez y repasar `quickstart.md` marcando qué pasos quedan pendientes de una persona
 - [ ] T023 Preguntar al usuario si hay observaciones nuevas para `specs/ideas-pendientes.md` antes de cerrar la spec
-- [ ] T024 Preguntar al usuario si se fusiona la rama `012-despliegue-android-apk` en `main`; no fusionar sin su respuesta
+- [x] T024 Preguntar al usuario si se fusiona la rama `012-despliegue-android-apk` en `main`; no fusionar sin su respuesta
 
 ---
 
