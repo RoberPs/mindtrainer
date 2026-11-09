@@ -62,7 +62,7 @@
 - [ ] T012 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de la naturaleza, el cuerpo y el tiempo, con las mismas reglas que T009; así el banco llega a 50 (depende de T011)
 - [ ] T013 [US1] Ejecutar `npm test` y `npm run typecheck`: T004, T005 y T006 deben pasar sin romper el resto (depende de T008, T012)
 
-**Punto de control**: "Adivinanzas" tiene 50 o más adivinanzas y no repite las de la partida anterior. Falta solo la revisión humana del contenido (T037).
+**Punto de control**: "Adivinanzas" tiene 50 o más adivinanzas y no repite las de la partida anterior. Falta solo la revisión humana del contenido (T045).
 
 ---
 
@@ -83,7 +83,7 @@
 - [ ] T017 [US2] Reescribir en `src/actividades/sopa-de-letras/sopas.ts` la cuadrícula de `cocina`: SARTEN en horizontal y PLATO y HORNO en vertical, con las mismas reglas que T015. `huerto` y `costura` no cambian (depende de T016)
 - [ ] T018 [US2] Ejecutar `npm test` y `npm run typecheck`: T014 debe pasar y las pruebas de la sopa (`tests/sopa-*.test.tsx`) no deben romperse; si alguna dependía de las celdas de las sopas antiguas, actualizar solo esas coordenadas (depende de T017)
 
-**Punto de control**: tres sopas pequeñas tienen 2 verticales y 1 horizontal. Falta la revisión humana (T038).
+**Punto de control**: tres sopas pequeñas tienen 2 verticales y 1 horizontal. Falta la revisión humana (T045).
 
 ---
 
@@ -95,13 +95,13 @@
 
 ### Pruebas de la historia 3
 
-- [ ] T019 [US3] Reescribir `tests/diferencias-escena.test.tsx` para recorrer todas las escenas de `escenas` con `describe.each`/`it.each`, según [contracts/contenido.md](contracts/contenido.md): hay 4 escenas o más con `id` distintos; cada una tiene 7 cambios con `id` distintos y 3 `comunes`; cada cambio tiene `arriba`, `abajo` o los dos, y si tiene los dos con el mismo `id` e iconos distintos; las zonas están dentro del dibujo, no se solapan, miden al menos 0,20 de ancho y 0,30 de alto y contienen el centro del elemento; ningún icono se solapa con otro (distancia entre centros mayor que el tamaño); los `id` no se repiten dentro de un dibujo; todos los iconos existen en `MaterialCommunityIcons.glyphMap`; los colores tienen contraste de al menos 7 a 1 con `tema.colores.tarjeta`; ningún icono se repite entre escenas y el total ronda los 50; y para `n` = 3, 5 y 7, `dibujosDe(escena, n)` da `n` diferencias y los dos dibujos difieren exactamente en esos `n` elementos. Debe fallar al principio (depende de T001)
+- [ ] T019 [US3] Reescribir `tests/diferencias-escena.test.tsx` para recorrer todas las escenas de `escenas` con `describe.each`/`it.each`, según [contracts/contenido.md](contracts/contenido.md): hay 4 escenas o más con `id` distintos; cada una tiene 7 cambios con `id` distintos y 3 `comunes`; cada cambio tiene `arriba`, `abajo` o los dos, y si tiene los dos con el mismo `id` e iconos distintos; las zonas están dentro del dibujo, no se solapan, miden al menos 0,20 de ancho y 0,30 de alto y contienen el centro del elemento; ningún icono se solapa con otro (distancia entre centros mayor que el tamaño); los `id` no se repiten dentro de un dibujo; todos los iconos existen en `MaterialCommunityIcons.glyphMap`; los colores tienen contraste de al menos 7 a 1 con `tema.colores.tarjeta`; ningún icono se repite entre escenas y el total de iconos distintos está entre 45 y 60; el tamaño mínimo de las zonas equivale a al menos 44 puntos con el ancho mínimo del dibujo (0,20 × 240 ≥ 44 y 0,30 × (240 / `proporcionDibujo`) ≥ 44); y para `n` = 3, 5 y 7, `dibujosDe(escena, n)` da `n` diferencias y los dos dibujos difieren exactamente en esos `n` elementos. Debe fallar al principio (depende de T001)
 - [ ] T020 [P] [US3] Reescribir `tests/diferencias-juego.test.tsx` para usar partidas de `crearPartida(total, idEscenaAnterior, azar)`: la partida guarda su `escena` y su `total`; tocar dentro de una zona activa marca la diferencia; tocar fuera, o en la zona de un cambio no activo, cuenta el toque y da fallo sin marcar nada; tocar una ya marcada no cambia nada; `faltan` es `total − encontradas.length`; la partida termina al marcar las `total`; la escena nueva es siempre distinta de la anterior para varios valores de `azar`. Por ahora el total es 3 por defecto. Deben fallar al principio (depende de T001)
 - [ ] T021 [P] [US3] Actualizar `tests/diferencias-pantalla.test.tsx`: la pantalla pinta las diferencias de la escena de la partida (los toques se calculan con las zonas de esa escena), se completa una partida con 3 diferencias, y al pulsar "Jugar otra vez" la escena nueva es distinta de la anterior. Debe fallar al principio (depende de T001)
 
 ### Implementación de la historia 3
 
-- [ ] T022 [US3] Reescribir `src/actividades/diferencias/escena.ts` según [data-model.md](data-model.md): conservar los tipos `Elemento` y `Zona` y `proporcionDibujo`; añadir `Cambio`, `Escena` y `Diferencia`; la función `dibujosDe(escena, total)` y la lista `escenas`. Dejar de exportar `dibujoArriba`, `dibujoAbajo` y `diferencias`. Crear en esta tarea la escena `salon` (3 comunes y 7 cambios con mezcla de *falta*, *sobra* y *cambia*, en una rejilla de 4 × 2 huecos con zonas de 0,22 × 0,40, colores de alto contraste, unos 13 iconos de MaterialCommunityIcons) (depende de T019)
+- [ ] T022 [US3] Reescribir `src/actividades/diferencias/escena.ts` según [data-model.md](data-model.md): conservar los tipos `Elemento` y `Zona` y `proporcionDibujo`; añadir `Cambio`, `Escena` y `Diferencia`; la función `dibujosDe(escena, total)` y la lista `escenas`. Dejar de exportar `dibujoArriba`, `dibujoAbajo` y `diferencias`, y actualizar el comentario de cabecera (que habla de "las 3 zonas"). Crear en esta tarea la escena `salon` (3 comunes y 7 cambios con mezcla de *falta*, *sobra* y *cambia*, en una rejilla de 4 × 2 huecos con zonas de 0,22 × 0,40, colores de alto contraste, unos 13 iconos de MaterialCommunityIcons) (depende de T019)
 - [ ] T023 [US3] Añadir a `src/actividades/diferencias/escena.ts` la escena `cocina`, con las mismas reglas que `salon` y 13 iconos distintos de los de las otras escenas (depende de T022)
 - [ ] T024 [US3] Añadir a `src/actividades/diferencias/escena.ts` la escena `jardin`, con las mismas reglas (depende de T023)
 - [ ] T025 [US3] Añadir a `src/actividades/diferencias/escena.ts` la escena `mercado`, con las mismas reglas; así hay unos 52 iconos en total (depende de T024)
@@ -109,7 +109,7 @@
 - [ ] T027 [US3] Cambiar `src/actividades/diferencias/Dibujo.tsx` y `src/actividades/diferencias/Diferencias.tsx`: `Dibujo` recibe las `diferencias` activas por props en vez de importarlas; `Diferencias` calcula `dibujosDe(partida.escena, partida.total)`, pasa `arriba`/`abajo` y las diferencias a cada `Dibujo`, guarda en un estado el `id` de la escena de la partida anterior y lo pasa a `crearPartida` al pulsar "Jugar otra vez". Subir `anchoMinimo` de 160 a 240 (ver [research.md](research.md), apartado 4) (depende de T021, T026)
 - [ ] T028 [US3] Ejecutar `npm test` y `npm run typecheck`: T019, T020 y T021 deben pasar sin romper el resto (depende de T025, T027)
 
-**Punto de control**: "Diferencias" tiene 4 escenas y cambia de escena en cada partida, con 3 diferencias. Falta la revisión humana (T039).
+**Punto de control**: "Diferencias" tiene 4 escenas y cambia de escena en cada partida, con 3 diferencias. Falta la revisión humana (T045).
 
 ---
 
@@ -121,7 +121,7 @@
 
 ### Pruebas de la historia 4
 
-- [ ] T029 [US4] Actualizar `tests/diferencias-pantalla.test.tsx` y `tests/textos.test.tsx` y `tests/inicio.test.tsx` si hace falta: al abrir "Diferencias" se ve la pantalla de elegir con los botones "3 diferencias", "5 diferencias" y "7 diferencias" y sus iconos; para cada número se juega una partida completa (se tocan las `n` zonas), el aviso baja de `n` a 0, la felicitación dice "Has encontrado las n diferencias" y no hay círculos de más; al pulsar "Jugar otra vez" vuelve la pantalla de elegir; la descripción de la actividad ya no contiene "3". Deben fallar al principio (depende de T028)
+- [ ] T029 [US4] Actualizar `tests/diferencias-pantalla.test.tsx` y `tests/textos.test.tsx`. En `tests/textos.test.tsx` (líneas 215-223 aprox.): `textosDiferencias.descripcion` pasa a esperar 'Encuentra las diferencias entre dos dibujos', `textosDiferencias.felicitacion` deja de compararse con una cadena y se comprueba como función (`felicitacion(3)`, `felicitacion(5)` y `felicitacion(7)` dicen "Has encontrado las n diferencias"), y se comprueban los textos nuevos `elegirNumero`, `tres`, `cinco` y `siete`. En `tests/diferencias-pantalla.test.tsx`, todas las pruebas que juegan primero eligen "3 diferencias" (o el número que toque). Debe cubrirse además: al abrir "Diferencias" se ve la pantalla de elegir con los botones "3 diferencias", "5 diferencias" y "7 diferencias" y sus iconos; para cada número se juega una partida completa (se tocan las `n` zonas), el aviso baja de `n` a 0, la felicitación dice "Has encontrado las n diferencias" y no hay círculos de más; al pulsar "Jugar otra vez" vuelve la pantalla de elegir; la descripción de la actividad ya no contiene "3". Deben fallar al principio (depende de T028)
 
 ### Implementación de la historia 4
 
@@ -141,16 +141,16 @@
 
 ### Pruebas de la historia 5
 
-- [ ] T033 [US5] Actualizar `tests/sopa-sopas.test.tsx`: cada sopa tiene `tamano`; las pequeñas tienen 5 filas de 6 letras y 3 palabras; las medianas 6 filas de 6 y 5 palabras; hay al menos 5 pequeñas y 3 medianas; en las medianas cada palabra aparece una sola vez y nunca al revés. Actualizar `tests/sopa-juego.test.tsx`: `crearPartida(tamano, idAnterior, azar)` da una sopa de ese tamaño, distinta de la anterior; `haTerminado` y `faltan` usan `sopa.palabras.length` (3 y 5). Actualizar `tests/sopa-pantalla.test.tsx` y `tests/textos.test.tsx`: la pantalla de elegir muestra "Pequeña: 3 palabras" y "Mediana: 5 palabras" con sus iconos; se completa una partida pequeña y una mediana (tocando las casillas de cada palabra), el aviso baja a 0 y la felicitación dice el número correcto; "Jugar otra vez" vuelve a la pantalla de elegir. Deben fallar al principio (depende de T018, T028)
+- [ ] T033 [US5] Actualizar `tests/sopa-sopas.test.tsx` (incluida la prueba de la línea 29, "3 palabras distintas", que pasa a comprobar 3 o 5 según el tamaño): cada sopa tiene `tamano`; las pequeñas tienen 5 filas de 6 letras y 3 palabras; las medianas 6 filas de 6 y 5 palabras; hay al menos 5 pequeñas y 3 medianas; en las medianas cada palabra aparece una sola vez y nunca al revés. Actualizar `tests/sopa-juego.test.tsx`: `crearPartida(tamano, idAnterior, azar)` da una sopa de ese tamaño, distinta de la anterior; `haTerminado` y `faltan` usan `sopa.palabras.length` (3 y 5). Actualizar `tests/sopa-pantalla.test.tsx` (todas las pruebas que juegan primero eligen "Pequeña: 3 palabras" o "Mediana: 5 palabras"; la etiqueta, el aviso y la felicitación se comprueban con el número correcto) y `tests/textos.test.tsx` (líneas 138-144 aprox.: `etiqueta` y `felicitacion` pasan a comprobarse como funciones con 3 y 5, y se comprueban `elegirTamano`, `pequena` y `mediana`): la pantalla de elegir muestra "Pequeña: 3 palabras" y "Mediana: 5 palabras" con sus iconos; se completa una partida pequeña y una mediana (tocando las casillas de cada palabra), el aviso baja a 0 y la felicitación dice el número correcto; "Jugar otra vez" vuelve a la pantalla de elegir. Deben fallar al principio (depende de T018, T028)
 
 ### Implementación de la historia 5
 
 - [ ] T034 [US5] Cambiar `src/actividades/sopa-de-letras/sopas.ts`: añadir al tipo `Sopa` el campo `tamano: 'pequena' | 'mediana'` (y exportar el tipo `Tamano`), indicar `'pequena'` en las 5 sopas actuales y añadir 3 sopas medianas hechas a mano (`id` únicos, cuadrícula de 6 filas × 6 letras en mayúsculas sin tildes, 5 palabras de hasta 6 letras con mezcla de horizontales y verticales, cada palabra una sola vez y nunca al revés, relleno que no forme otras palabras). Actualizar el comentario de cabecera (depende de T033)
 - [ ] T035 [US5] Cambiar `src/textos.ts`, en `textosSopa`: `etiqueta` pasa a ser `(n: number) => \`Busca ${n} palabras relacionadas con:\``; `felicitacion` pasa a ser `(n: number) => \`¡Enhorabuena! Has encontrado las ${n} palabras\``; añadir `elegirTamano` ("Elige el tamaño de la sopa"), `pequena` ("Pequeña: 3 palabras") y `mediana` ("Mediana: 5 palabras") (depende de T033)
-- [ ] T036 [US5] Cambiar `src/actividades/sopa-de-letras/juego.ts`, `SopaDeLetras.tsx`, `Felicitacion.tsx` y `ListaPalabras.tsx`: `crearPartida(tamano, idAnterior?, azar)` sortea entre las sopas de ese tamaño con otro `id`; se elimina `palabrasPorSopa` y `haTerminado`/`faltan` usan `partida.sopa.palabras.length`; la actividad muestra `ElegirOpcion` (iconos `size-s` y `size-m`, ids `icono-pequena` e `icono-mediana`) antes de la partida, guarda el tamaño y la sopa anterior y vuelve a elegir al pulsar "Jugar otra vez"; `Felicitacion` recibe el número de palabras y la etiqueta usa `t.etiqueta(n)`; la cuadrícula ya se pinta con las filas y columnas de cada sopa (depende de T003, T034, T035)
+- [ ] T036 [US5] Cambiar `src/actividades/sopa-de-letras/juego.ts`, `SopaDeLetras.tsx`, `Felicitacion.tsx` y `ListaPalabras.tsx`: `crearPartida(tamano, idAnterior?, azar)` sortea entre las sopas de ese tamaño con otro `id`; se elimina `palabrasPorSopa` y `haTerminado`/`faltan` usan `partida.sopa.palabras.length` (actualizando los comentarios que dicen "3 palabras", también en `ListaPalabras.tsx`); la actividad muestra `ElegirOpcion` (iconos `size-s` y `size-m`, ids `icono-pequena` e `icono-mediana`) antes de la partida, guarda el tamaño y la sopa anterior y vuelve a elegir al pulsar "Jugar otra vez"; `Felicitacion` recibe el número de palabras y la etiqueta usa `t.etiqueta(n)`; la cuadrícula ya se pinta con las filas y columnas de cada sopa (depende de T003, T034, T035)
 - [ ] T037 [US5] Ejecutar `npm test` y `npm run typecheck`: T033 debe pasar sin romper el resto (depende de T036)
 
-**Punto de control**: se puede jugar la sopa pequeña y la mediana. Falta la revisión humana (T038) y la prueba táctil en un móvil de 360 puntos (T044).
+**Punto de control**: se puede jugar la sopa pequeña y la mediana. Falta la revisión humana (T045) y la prueba táctil en un móvil de 360 puntos (T044).
 
 ---
 

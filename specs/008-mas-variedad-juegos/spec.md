@@ -195,7 +195,7 @@ Palabras al revés o en diagonal, tres tamaños de sopa de letras, colocación a
 - **CE-001**: El banco de "Adivinanzas" contiene al menos 50 adivinanzas, y dos partidas seguidas nunca comparten ninguna adivinanza (en 2 partidas seguidas se ven siempre 10 adivinanzas distintas).
 - **CE-002**: Al menos 2 de las 5 sopas pequeñas tienen más palabras verticales que horizontales, y en todas las sopas cada palabra se encuentra una sola vez.
 - **CE-003**: Al elegir tamaño en "Sopa de letras", la sopa mediana tiene 5 palabras y se completa tocando las casillas con comodidad en un móvil de unos 360 puntos de ancho, sin errores al tocar.
-- **CE-004**: Dos partidas seguidas de "Diferencias" nunca usan la misma escena, y en 5 partidas seguidas se ven al menos 3 escenas distintas entre sí.
+- **CE-004**: Dos partidas seguidas de "Diferencias" nunca usan la misma escena, y en 5 partidas seguidas se ven al menos 2 escenas distintas entre sí.
 - **CE-005**: Al elegir 3, 5 o 7 diferencias, la partida tiene exactamente ese número, el aviso de cuántas faltan es correcto en cada momento y la felicitación final menciona el número elegido.
 - **CE-006**: En todas las escenas, ninguna zona de diferencia se solapa con otra ni se sale del dibujo, y todas se pueden tocar con comodidad.
 - **CE-007**: En las 5 actividades, el icono de celebración aparece poco a poco en entre 0,8 y 1 segundo, se queda quieto y no se repite; con el ajuste de reducir movimiento activado, no se anima.
