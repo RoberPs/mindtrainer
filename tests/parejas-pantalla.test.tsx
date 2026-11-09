@@ -220,3 +220,45 @@ describe('Parejas: final de la partida', () => {
     expect(screen.getByText('¿Seguro que quieres salir? Perderás la partida')).toBeTruthy();
   });
 });
+
+describe('Parejas: aspecto de las cartas (spec 010)', () => {
+  it.each(Object.keys(botones) as Tamano[])(
+    '%s: todas las cartas tapadas tienen el mismo dorso y al girar una se ve su nombre',
+    async (tamano) => {
+      const ids = mazo(tamano);
+      await abrirPartida(tamano);
+      for (let i = 0; i < cuantas[tamano]; i++) {
+        expect(screen.getByTestId(`icono-carta-${i}`, { includeHiddenElements: true })).toBeTruthy();
+      }
+      await tocar(0);
+      expect(screen.getAllByText('Carta')).toHaveLength(cuantas[tamano] - 1);
+      expect(screen.getByText(nombre(ids[0]))).toBeTruthy();
+    },
+  );
+
+  it.each(Object.keys(botones) as Tamano[])(
+    '%s: al descubrir una pareja se ve su nombre y su icono en las dos cartas',
+    async (tamano) => {
+      const ids = mazo(tamano);
+      const [a, b] = parejas(ids)[0];
+      await abrirPartida(tamano);
+      await tocar(a);
+      await tocar(b);
+      expect(screen.getAllByText(nombre(ids[a]))).toHaveLength(2);
+      expect(screen.getByTestId(`icono-carta-${a}`, { includeHiddenElements: true })).toBeTruthy();
+      expect(screen.getByTestId(`icono-carta-${b}`, { includeHiddenElements: true })).toBeTruthy();
+    },
+  );
+
+  it('"Volver al inicio" y "Seguir" muestran icono y texto a la vez', async () => {
+    const ids = mazo('pequena');
+    const b = distintaDe(ids, 0);
+    await abrirPartida('pequena');
+    expect(screen.getByText('Volver al inicio')).toBeTruthy();
+    expect(screen.getByTestId('icono-volver', { includeHiddenElements: true })).toBeTruthy();
+    await tocar(0);
+    await tocar(b);
+    expect(screen.getByText('Seguir')).toBeTruthy();
+    expect(screen.getByTestId('icono-seguir', { includeHiddenElements: true })).toBeTruthy();
+  });
+});

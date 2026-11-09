@@ -28,6 +28,8 @@ la colocación aleatoria. Pendiente de una persona: revisar el contenido nuevo y
 
 **Estado tras implementar la spec 009 (2026-11-09)**: hechas la bienvenida, el encabezado "Elige uno de los juegos", las tarjetas grandes y la paleta del logo con un color por juego en todos sus botones. Comprobado a mano en un móvil por la persona responsable.
 
+**Estado tras implementar la spec 010 (2026-11-09)**: "Parejas" pasa a 12 dibujos con color propio, dorso común (cerebro y "Carta") y caras más claras; "Seguir", "Jugar otra vez" y "Volver al inicio" ya llevaban icono (solo se añadió su prueba). **No se usó Openclipart ni Kenney**: Board Game Icons no trae objetos cotidianos confirmados y Openclipart mezcla estilos y exige revisar la licencia de cada dibujo; se mantuvieron los iconos de la app. **Salvedad de licencia**: la licencia de esos iconos (tipo Apache 2.0) pide conservar su aviso al redistribuir el código; la persona responsable debe aceptarla de forma expresa al cerrar la spec (FR-008, SC-006). Pendiente de una persona: comprobar a mano en un móvil que los dibujos se reconocen sin dudar.
+
 ## Sopa de letras (spec 004)
 
 Observadas el 2026-11-06 al hacer la comprobación manual de la spec 004. Esa comprobación salió

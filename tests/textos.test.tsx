@@ -70,6 +70,7 @@ describe('Textos de "Parejas" (FR-009, FR-014)', () => {
     expect(textosParejas.intentosNecesitados(5)).toBe('Has necesitado 5 intentos');
     expect(Object.values(textosParejas.dibujos)).toEqual([
       'Llave', 'Taza', 'Reloj', 'Gafas', 'Cama', 'Silla', 'Lámpara', 'Tijeras',
+      'Paraguas', 'Teléfono', 'Libro', 'Sombrero',
     ]);
   });
 

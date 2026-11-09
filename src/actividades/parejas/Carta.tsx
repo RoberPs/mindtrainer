@@ -10,10 +10,12 @@ type Props = {
   carta: DatosCarta;
   posicion: number;
   alTocar: () => void;
+  // Tamaño del icono: más grande cuando hay pocas cartas y caben mejor.
+  tamanoIcono?: number;
 };
 
-// Una carta: tapada (interrogante + "Carta") o con su dibujo grande y su nombre escrito.
-export function Carta({ carta, posicion, alTocar }: Props) {
+// Una carta: tapada (dorso común con cerebro y "Carta") o con su dibujo en color y su nombre escrito.
+export function Carta({ carta, posicion, alTocar, tamanoIcono = 64 }: Props) {
   const color = useColorJuego();
   if (carta.estado === 'tapada') {
     return (
@@ -24,13 +26,15 @@ export function Carta({ carta, posicion, alTocar }: Props) {
         onPress={alTocar}
         style={[estilos.carta, { backgroundColor: color.fondo, borderColor: color.fondo }]}
       >
-        <Icono
-          icono={{ nombre: 'help-circle-outline' }}
-          tamano={64}
-          color={color.texto}
-          testID={`icono-carta-${posicion}`}
-        />
-        <Text style={[estilos.nombre, { color: color.texto }]}>{textosParejas.carta}</Text>
+        <View style={[estilos.marcoDorso, { borderColor: color.texto }]}>
+          <Icono
+            icono={{ nombre: 'brain' }}
+            tamano={tamanoIcono}
+            color={color.texto}
+            testID={`icono-carta-${posicion}`}
+          />
+          <Text style={[estilos.nombre, { color: color.texto }]}>{textosParejas.carta}</Text>
+        </View>
       </Pressable>
     );
   }
@@ -43,12 +47,16 @@ export function Carta({ carta, posicion, alTocar }: Props) {
       accessibilityRole="button"
       accessibilityLabel={dibujo.nombre}
       onPress={alTocar}
-      style={[estilos.carta, estilos.visible, descubierta && estilos.acertada]}
+      style={[
+        estilos.carta,
+        estilos.visible,
+        { borderColor: descubierta ? tema.colores.acierto : color.fondo },
+      ]}
     >
       <Icono
         icono={{ nombre: dibujo.icono }}
-        tamano={64}
-        color={tema.colores.texto}
+        tamano={tamanoIcono}
+        color={tema.colores.dibujos[dibujo.id]}
         testID={`icono-carta-${posicion}`}
       />
       <View style={estilos.fila}>
@@ -77,8 +85,16 @@ const estilos = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 4,
   },
-  visible: { backgroundColor: tema.colores.tarjeta, borderColor: tema.colores.borde },
-  acertada: { borderColor: tema.colores.acierto },
+  visible: { backgroundColor: tema.colores.tarjeta },
+  marcoDorso: {
+    alignSelf: 'stretch',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+    borderWidth: 3,
+    borderRadius: 8,
+  },
   fila: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   nombre: { fontSize: tema.letra.normal, fontWeight: '700', color: tema.colores.texto },
 });

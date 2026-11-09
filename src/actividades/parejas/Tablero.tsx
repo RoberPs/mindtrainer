@@ -13,7 +13,9 @@ type Props = {
 
 // Zona fija arriba (intentos y "Seguir") y debajo la cuadrícula desplazable de cartas.
 export function Tablero({ partida, alTocarCarta, alSeguir }: Props) {
-  const ancho = partida.cartas.length === 12 ? '31%' : '48%';
+  const grande = partida.cartas.length === 12;
+  const ancho = grande ? '31%' : '48%';
+  const tamanoIcono = grande ? 64 : 88;
   return (
     <View style={estilos.tablero}>
       <View style={estilos.superior}>
@@ -30,7 +32,7 @@ export function Tablero({ partida, alTocarCarta, alSeguir }: Props) {
       <ScrollView testID="cuadricula" contentContainerStyle={estilos.cuadricula}>
         {partida.cartas.map((carta, i) => (
           <View key={i} style={{ width: ancho, flexDirection: 'row' }}>
-            <Carta carta={carta} posicion={i} alTocar={() => alTocarCarta(i)} />
+            <Carta carta={carta} posicion={i} alTocar={() => alTocarCarta(i)} tamanoIcono={tamanoIcono} />
           </View>
         ))}
       </ScrollView>

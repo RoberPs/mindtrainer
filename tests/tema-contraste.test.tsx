@@ -47,6 +47,15 @@ describe('Contraste de la paleta (RF-009 a RF-012)', () => {
     expect(contraste(primero, segundo)).toBeGreaterThanOrEqual(tema.contrasteMinimo);
   });
 
+  it('los 12 colores de dibujo de Parejas son distintos y tienen al menos 7 a 1 sobre la ficha', () => {
+    const colores = Object.values(c.dibujos);
+    expect(colores).toHaveLength(12);
+    expect(new Set(colores).size).toBe(12);
+    for (const color of colores) {
+      expect(contraste(color, c.tarjeta)).toBeGreaterThanOrEqual(tema.contrasteMinimo);
+    }
+  });
+
   it('el fondo es el crema del logo y no hay blanco puro como fondo ni ficha', () => {
     expect(c.fondo).toBe('#FFF9F0');
     expect(c.tarjeta.toUpperCase()).not.toBe('#FFFFFF');

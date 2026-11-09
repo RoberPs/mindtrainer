@@ -29,6 +29,10 @@ export const textosParejas = {
     silla: 'Silla',
     lampara: 'Lámpara',
     tijeras: 'Tijeras',
+    paraguas: 'Paraguas',
+    telefono: 'Teléfono',
+    libro: 'Libro',
+    sombrero: 'Sombrero',
   },
 };
 
