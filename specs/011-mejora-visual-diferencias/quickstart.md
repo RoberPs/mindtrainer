@@ -13,7 +13,7 @@ Hace falta una persona con un móvil para los puntos 1 a 6 (el agente no puede d
 
 ## Comprobaciones con la app
 
-1. **Dos dibujos completos (SC-001)**: abrir "Diferencias". La partida empieza sin pedir cuántas diferencias. Se ven los dos dibujos enteros, del mismo tamaño y alineados, sin acercar ni hacer desplazar para ver ninguno de los dos.
+1. **Dos dibujos completos (SC-001)**: abrir "Diferencias". La partida empieza sin pedir cuántas diferencias. Se ven los dos dibujos enteros, del mismo tamaño y alineados, sin acercar. En un móvil muy pequeño puede hacer falta desplazar la pantalla para ver el aviso de fallo, pero nunca para ver un dibujo cortado.
 2. **Dibujos nítidos y vivos (historia 1)**: cada objeto se reconoce a primera vista, con contorno oscuro y colores vivos, y todos tienen el mismo estilo.
 3. **Exactamente 3 diferencias (SC-002, SC-003)**: en cada escena hay un objeto de otro color, uno que falta arriba y uno añadido abajo. La pantalla dice "Te faltan 3 diferencias". Tocar cada una la marca con un círculo en los dos dibujos y baja la cuenta. Al marcar la tercera aparece la felicitación con "las 3 diferencias". No se encuentra ninguna otra.
 4. **Fallo (casos límite)**: tocar un sitio sin diferencia muestra el aviso amable de siempre y suma un toque. Tocar una diferencia ya marcada no cambia nada.

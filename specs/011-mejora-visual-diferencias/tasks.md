@@ -35,12 +35,12 @@
 - [ ] T003 [P] En `src/textos.ts`, dentro de `textosDiferencias`, quitar `elegirNumero`, `tres`, `cinco` y `siete`, y cambiar `felicitacion` de función a texto fijo `'¡Enhorabuena! Has encontrado las 3 diferencias'`
 - [ ] T004 [P] Crear `src/actividades/diferencias/objetos.tsx` con el estilo común: constantes del contorno (`#1F1F1F`, grosor), la paleta de colores vivos para los dibujos y la ayuda `Contorno`/props comunes que usarán todos los objetos; cada objeto es una función `(color: string) => JSX.Element` pensada para un lienzo de 300 × 200 (nada de iconos)
 - [ ] T005 Reescribir `src/actividades/diferencias/escena.ts` según [data-model.md](data-model.md): tipos `Objeto`, `Colocado`, `Cambio` (con `tipo: 'color' | 'falta' | 'sobra'`), `Zona`, `Diferencia` y `Escena` (con `fondo`, `comunes` y `cambios`), `proporcionDibujo = 1.5`, la ayuda `zonaEn(x, y, ancho, alto)` y `dibujosDe(escena)` que devuelve `{ arriba, abajo, diferencias }`; quitar `Total` y la rejilla de iconos. No debe importar de `escenas/` (depende de T004)
-- [ ] T006 Adaptar `src/actividades/diferencias/juego.ts`: `crearPartida(idEscenaAnterior?, azar = Math.random)` sin `total`; `terminada` cuando `encontradas.length === 3`; `faltan` usa 3; importar `escenas` de `./escenas`. Las reglas de `tocar` (acierto, repetida, fallo, toques) no cambian (depende de T005)
+- [ ] T006 Crear `src/actividades/diferencias/escenas/index.ts` con `export const escenas: Escena[] = []` (vacía por ahora; se rellena en T012 y T022) y adaptar `src/actividades/diferencias/juego.ts`: `crearPartida(idEscenaAnterior?, azar = Math.random)` sin `total`; `terminada` cuando `encontradas.length === 3`; `faltan` usa 3; importar `escenas` de `./escenas`. Las reglas de `tocar` (acierto, repetida, fallo, toques) no cambian (depende de T005)
 - [ ] T007 [P] Adaptar `src/actividades/diferencias/Felicitacion.tsx`: quitar la propiedad `total` y usar `t.felicitacion` como texto (depende de T003)
-- [ ] T008 Adaptar `src/actividades/diferencias/Diferencias.tsx`: quitar `ElegirOpcion`, `opciones` y `Total`; la partida empieza al abrir (`useState(() => crearPartida())` y `avisarPartida(true)` una sola vez al montar); "Jugar otra vez" crea otra partida con `escenaAnterior` y vuelve a avisar `avisarPartida(true)`; pasar a `Dibujo` los objetos de `dibujosDe(partida.escena)`; ajustar `altoReservado` y quitar `anchoMinimo` basado en 7 diferencias (usar el mínimo que da zonas de 44 puntos con zona ≥ 0,2 de ancho, es decir 220) (depende de T006 y T007)
+- [ ] T008 Adaptar `src/actividades/diferencias/Diferencias.tsx`: quitar `ElegirOpcion`, `opciones` y `Total`; la partida empieza al abrir (`useState(() => crearPartida())` y `avisarPartida(true)` una sola vez al montar); "Jugar otra vez" crea otra partida con `escenaAnterior` y vuelve a avisar `avisarPartida(true)`; pasar a `Dibujo` el `fondo` de `partida.escena` y los objetos de `dibujosDe(partida.escena)`; ajustar `altoReservado` y quitar `anchoMinimo` basado en 7 diferencias (usar el mínimo que da zonas de 44 puntos con zona ≥ 0,2 de ancho, es decir 220) (depende de T006 y T007)
 - [ ] T009 Adaptar `tests/ayudas-diferencias.ts` a las nuevas formas: `escenaDePrueba = escenas[0]`, `segundaEscena = escenas[1]`, sin parámetro `total`, importando `escenas` de `../src/actividades/diferencias/escenas` (depende de T005 y T006)
 
-**Punto de control**: `npm run typecheck` pasa (puede faltar la lista de escenas, que llega en la Fase 3).
+**Punto de control**: `npm run typecheck` pasa (la lista de escenas existe pero está vacía hasta la Fase 3).
 
 ---
 
@@ -52,13 +52,13 @@
 
 ### Pruebas de la historia 1
 
-- [ ] T010 [P] [US1] En `tests/diferencias-pantalla.test.tsx` (se rehace entera en T017; aquí solo el bloque nuevo) añadir una prueba de que, al abrir "Diferencias", `dibujo-arriba` y `dibujo-abajo` existen y tienen exactamente el mismo `width` y `height` en su estilo
+- [ ] T010 [P] [US1] En `tests/diferencias-pantalla.test.tsx` (se rehace entera en T016; aquí solo el bloque nuevo) añadir una prueba de que, al abrir "Diferencias", `dibujo-arriba` y `dibujo-abajo` existen y tienen exactamente el mismo `width` y `height` en su estilo
 
 ### Implementación de la historia 1
 
 - [ ] T011 [P] [US1] Crear `src/actividades/diferencias/escenas/salon.tsx`: fondo del salón (pared, suelo, zócalo), objetos comunes (ventana con cortinas, planta, mesita con lámpara, alfombra), el sofá (cambio `color`: rojo en el dibujo de arriba y azul en el de abajo), el reloj de pared (cambio `falta`, solo arriba) y el gato (cambio `sobra`, solo abajo); exportar la `Escena` `salon` con `nombre: 'Salón'` y las zonas con `zonaEn` (depende de T004 y T005)
-- [ ] T012 [US1] Crear `src/actividades/diferencias/escenas/index.ts` que exporte `escenas: Escena[] = [salon]` (se ampliará en la Fase 5) (depende de T011)
-- [ ] T013 [US1] Reescribir `src/actividades/diferencias/Dibujo.tsx`: dibujar con `Svg` (`viewBox="0 0 300 200"`, tamaño `ancho` × `alto`), el fondo de la escena y los objetos colocados, todo con `pointerEvents="none"`; conservar el recuadro con `testID`, el rótulo, la medición con `onLayout`, el toque con `locationX/locationY` relativos y los círculos de las diferencias encontradas tal como están hoy (depende de T005 y T012)
+- [ ] T012 [US1] Actualizar `src/actividades/diferencias/escenas/index.ts` (creado en T006) para exportar `escenas: Escena[] = [salon]` (se ampliará en la Fase 5) (depende de T011)
+- [ ] T013 [US1] Reescribir `src/actividades/diferencias/Dibujo.tsx`: recibe una propiedad `fondo` además de los objetos y dibuja con `Svg` (`viewBox="0 0 300 200"`, tamaño `ancho` × `alto`), el fondo de la escena y los objetos colocados, todo con `pointerEvents="none"`; conservar el recuadro con `testID`, el rótulo, la medición con `onLayout`, el toque con `locationX/locationY` relativos y los círculos de las diferencias encontradas tal como están hoy (depende de T005 y T012)
 
 **Punto de control**: se ve el Salón en los dos dibujos; la prueba de T010 pasa.
 
@@ -99,7 +99,7 @@
 
 - [ ] T020 [P] [US3] Crear `src/actividades/diferencias/escenas/cocina.tsx`: fondo (pared con azulejos suaves, encimera), comunes (nevera, fogón, ventana), la olla (cambio `color`), el cuadro o reloj (cambio `falta`) y la manzana o el pan (cambio `sobra`); exportar la `Escena` `cocina` con `nombre: 'Cocina'` (depende de T004 y T005)
 - [ ] T021 [P] [US3] Crear `src/actividades/diferencias/escenas/jardin.tsx`: fondo (cielo, césped, camino), comunes (casa, valla, árbol), la flor grande o la sombrilla (cambio `color`), el sol (cambio `falta`) y el pájaro o la mariposa (cambio `sobra`); exportar la `Escena` `jardin` con `nombre: 'Jardín'` (depende de T004 y T005)
-- [ ] T022 [US3] Actualizar `src/actividades/diferencias/escenas/index.ts` a `[salon, cocina, jardin]` (depende de T020 y T021)
+- [ ] T022 [US3] Actualizar `src/actividades/diferencias/escenas/index.ts` (de `[salon]`) a `[salon, cocina, jardin]` (depende de T020 y T021)
 
 **Punto de control**: las pruebas de la historia 3 pasan y las de la historia 2 siguen pasando con las 3 escenas.
 
