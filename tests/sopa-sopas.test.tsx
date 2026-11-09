@@ -48,4 +48,25 @@ describe('Sopa de letras: lista de sopas', () => {
       }
     },
   );
+
+  // Dirección de cada palabra: horizontal si está dentro de una fila; vertical si está dentro de una columna.
+  const direcciones = (sopa: (typeof sopas)[number]) => {
+    const enFilas = (palabra: string) => filas(sopa.cuadricula).some((fila) => fila.includes(palabra));
+    const horizontales = sopa.palabras.filter(enFilas).length;
+    return { horizontales, verticales: sopa.palabras.length - horizontales };
+  };
+
+  it('al menos 2 sopas tienen más palabras en vertical que en horizontal', () => {
+    const conMasVerticales = sopas.filter((s) => {
+      const d = direcciones(s);
+      return d.verticales > d.horizontales;
+    });
+    expect(conMasVerticales.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it.each(sopas.map((s) => [s.id, s] as const))('«%s»: las palabras de 6 letras van en horizontal', (_id, sopa) => {
+    for (const palabra of sopa.palabras.filter((p) => p.length === 6)) {
+      expect(filas(sopa.cuadricula).some((fila) => fila.includes(palabra))).toBe(true);
+    }
+  });
 });

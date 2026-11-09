@@ -74,14 +74,14 @@
 
 ### Pruebas de la historia 2
 
-- [ ] T014 [US2] Añadir a `tests/sopa-sopas.test.tsx` una prueba que calcula, para cada sopa, cuántas de sus palabras están en horizontal (dentro de una fila) y cuántas en vertical (dentro de una columna) y comprueba que al menos 2 sopas tienen más verticales que horizontales; y otra que comprueba que las palabras de 6 letras están en horizontal. Las pruebas actuales (una sola aparición, nunca al revés, 5 filas de 6) ya recorren todas las sopas. Debe fallar al principio (depende de T001)
+- [X] T014 [US2] Añadir a `tests/sopa-sopas.test.tsx` una prueba que calcula, para cada sopa, cuántas de sus palabras están en horizontal (dentro de una fila) y cuántas en vertical (dentro de una columna) y comprueba que al menos 2 sopas tienen más verticales que horizontales; y otra que comprueba que las palabras de 6 letras están en horizontal. Las pruebas actuales (una sola aparición, nunca al revés, 5 filas de 6) ya recorren todas las sopas. Debe fallar al principio (depende de T001)
 
 ### Implementación de la historia 2
 
-- [ ] T015 [US2] Reescribir en `src/actividades/sopa-de-letras/sopas.ts` la cuadrícula de `nube` (5 filas × 6, letras mayúsculas sin tildes): LLUVIA en horizontal y CIELO y RAYO en vertical, con las mismas palabras y la misma referencia. Cada palabra debe aparecer una sola vez, solo de izquierda a derecha o de arriba abajo, y las letras de relleno no deben formar otras palabras (depende de T014)
-- [ ] T016 [US2] Reescribir en `src/actividades/sopa-de-letras/sopas.ts` la cuadrícula de `mar`: BARCO en horizontal y OLAS y ARENA en vertical, con las mismas reglas que T015 (depende de T015)
-- [ ] T017 [US2] Reescribir en `src/actividades/sopa-de-letras/sopas.ts` la cuadrícula de `cocina`: SARTEN en horizontal y PLATO y HORNO en vertical, con las mismas reglas que T015. `huerto` y `costura` no cambian (depende de T016)
-- [ ] T018 [US2] Ejecutar `npm test` y `npm run typecheck`: T014 debe pasar y las pruebas de la sopa (`tests/sopa-*.test.tsx`) no deben romperse; si alguna dependía de las celdas de las sopas antiguas, actualizar solo esas coordenadas (depende de T017)
+- [X] T015 [US2] Reescribir en `src/actividades/sopa-de-letras/sopas.ts` la cuadrícula de `nube` (5 filas × 6, letras mayúsculas sin tildes): LLUVIA en horizontal y CIELO y RAYO en vertical, con las mismas palabras y la misma referencia. Cada palabra debe aparecer una sola vez, solo de izquierda a derecha o de arriba abajo, y las letras de relleno no deben formar otras palabras (depende de T014)
+- [X] T016 [US2] Reescribir en `src/actividades/sopa-de-letras/sopas.ts` la cuadrícula de `mar`: BARCO en horizontal y OLAS y ARENA en vertical, con las mismas reglas que T015 (depende de T015)
+- [X] T017 [US2] Reescribir en `src/actividades/sopa-de-letras/sopas.ts` la cuadrícula de `cocina`: SARTEN en horizontal y PLATO y HORNO en vertical, con las mismas reglas que T015. `huerto` y `costura` no cambian (depende de T016)
+- [X] T018 [US2] Ejecutar `npm test` y `npm run typecheck`: T014 debe pasar y las pruebas de la sopa (`tests/sopa-*.test.tsx`) no deben romperse; si alguna dependía de las celdas de las sopas antiguas, actualizar solo esas coordenadas (depende de T017)
 
 **Punto de control**: tres sopas pequeñas tienen 2 verticales y 1 horizontal. Falta la revisión humana (T045).
 

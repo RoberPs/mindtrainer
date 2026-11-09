@@ -13,19 +13,19 @@ export const sopas: Sopa[] = [
     id: 'nube',
     referencia: 'NUBE',
     palabras: ['LLUVIA', 'CIELO', 'RAYO'],
-    cuadricula: ['LLUVIA', 'BDFGHR', 'CIELOA', 'JKMNPY', 'QSTWXO'],
+    cuadricula: ['BDFGCR', 'LLUVIA', 'HJKMEY', 'NPQSLO', 'TWXZOB'],
   },
   {
     id: 'mar',
     referencia: 'MAR',
     palabras: ['OLAS', 'ARENA', 'BARCO'],
-    cuadricula: ['BARCOA', 'DFGHJR', 'KMPQTE', 'OLASWN', 'XZVDGA'],
+    cuadricula: ['BARCOD', 'FRGHLJ', 'KEMPAQ', 'TNVWSX', 'ZAFGBC'],
   },
   {
     id: 'cocina',
     referencia: 'COCINA',
     palabras: ['SARTEN', 'PLATO', 'HORNO'],
-    cuadricula: ['FPGJKM', 'DLBVWX', 'SARTEN', 'QTZDWB', 'HORNOV'],
+    cuadricula: ['BPHDFG', 'VLOWXZ', 'SARTEN', 'GTNJKM', 'QOOLBD'],
   },
   {
     id: 'huerto',
