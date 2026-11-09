@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ElegirOpcion } from '../../componentes/ElegirOpcion';
 import { Icono } from '../../componentes/Icono';
 import { textosSopa as t } from '../../textos';
 import { tema } from '../../tema';
@@ -8,25 +9,33 @@ import { Cuadricula } from './Cuadricula';
 import { Felicitacion } from './Felicitacion';
 import { crearPartida, haTerminado, tocarCasilla, type Casilla, type Partida } from './juego';
 import { ListaPalabras } from './ListaPalabras';
+import type { Tamano } from './sopas';
 
-// Contenido de la actividad: una sopa por partida. Nada se guarda.
+const opciones = [
+  { valor: 'pequena' as Tamano, texto: t.pequena, icono: { nombre: 'size-s' }, idIcono: 'icono-pequena' },
+  { valor: 'mediana' as Tamano, texto: t.mediana, icono: { nombre: 'size-m' }, idIcono: 'icono-mediana' },
+];
+
+// Contenido de la actividad: elegir el tamaño y una sopa por partida. Nada se guarda.
 export function SopaDeLetras({ avisarPartida }: PropsContenido) {
-  const [partida, setPartida] = useState<Partida>(() => crearPartida());
+  const [partida, setPartida] = useState<Partida | null>(null);
+  // Sopa de la partida anterior: la siguiente es siempre otra distinta.
+  const [sopaAnterior, setSopaAnterior] = useState<string | undefined>(undefined);
 
-  // La partida empieza al abrir la actividad.
-  useEffect(() => {
+  const elegir = (tamano: Tamano) => {
+    const nueva = crearPartida(tamano, sopaAnterior);
+    setPartida(nueva);
+    setSopaAnterior(nueva.sopa.id);
     avisarPartida(true);
-  }, []);
+  };
 
-  // Aplica el toque y avisa de que la partida acaba al encontrar la tercera palabra.
+  if (!partida) return <ElegirOpcion invitacion={t.elegirTamano} opciones={opciones} alElegir={elegir} />;
+
+  // Aplica el toque y avisa de que la partida acaba al encontrar la última palabra.
   const alTocar = (casilla: Casilla) => {
     const nueva = tocarCasilla(partida, casilla);
     setPartida(nueva);
     if (haTerminado(nueva) && !haTerminado(partida)) avisarPartida(false);
-  };
-  const alJugarOtraVez = () => {
-    setPartida(crearPartida(partida.sopa.id));
-    avisarPartida(true);
   };
   const terminada = haTerminado(partida);
   const mensaje = terminada ? null : mensajeActual(partida);
@@ -34,13 +43,17 @@ export function SopaDeLetras({ avisarPartida }: PropsContenido) {
   return (
     <ScrollView contentContainerStyle={estilos.pantalla}>
       <View style={estilos.cabecera}>
-        <Text style={estilos.etiqueta}>{t.etiqueta}</Text>
+        <Text style={estilos.etiqueta}>{t.etiqueta(partida.sopa.palabras.length)}</Text>
         <Text style={estilos.referencia}>{partida.sopa.referencia}</Text>
       </View>
 
       <Cuadricula partida={partida} alTocar={alTocar} />
 
-      {terminada && <Felicitacion intentos={partida.intentos} alJugarOtraVez={alJugarOtraVez} />}
+      {terminada && <Felicitacion
+          palabras={partida.sopa.palabras.length}
+          intentos={partida.intentos}
+          alJugarOtraVez={() => setPartida(null)}
+        />}
 
       {mensaje && (
         <View style={estilos.mensaje}>

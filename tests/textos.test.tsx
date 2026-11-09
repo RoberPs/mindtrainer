@@ -134,12 +134,17 @@ describe('Textos de "Sopa de letras" (RF-017, RF-018)', () => {
   it('los textos fijos son los acordados, con tildes y signos de apertura', () => {
     expect(textosSopa.nombre).toBe('Sopa de letras');
     expect(textosSopa.descripcion).toBe('Encuentra las palabras escondidas');
-    expect(textosSopa.etiqueta).toBe('Busca 3 palabras relacionadas con:');
+    expect(textosSopa.etiqueta(3)).toBe('Busca 3 palabras relacionadas con:');
+    expect(textosSopa.etiqueta(5)).toBe('Busca 5 palabras relacionadas con:');
+    expect(textosSopa.elegirTamano).toBe('Elige el tamaño de la sopa');
+    expect(textosSopa.pequena).toBe('Pequeña: 3 palabras');
+    expect(textosSopa.mediana).toBe('Mediana: 5 palabras');
     expect(textosSopa.invitar).toBe('Ahora toca la última letra de la palabra');
     expect(textosSopa.acierto).toBe('¡Muy bien! Has encontrado una palabra');
     expect(textosSopa.fallo).toBe('Esa no es una de las palabras. Inténtalo otra vez');
     expect(textosSopa.noRecta).toBe('Marca una línea recta, en horizontal o en vertical');
-    expect(textosSopa.felicitacion).toBe('¡Enhorabuena! Has encontrado las 3 palabras');
+    expect(textosSopa.felicitacion(3)).toBe('¡Enhorabuena! Has encontrado las 3 palabras');
+    expect(textosSopa.felicitacion(5)).toBe('¡Enhorabuena! Has encontrado las 5 palabras');
     expect(textosSopa.faltan(3)).toBe('Te faltan 3 palabras');
     expect(textosSopa.faltan(1)).toBe('Te falta 1 palabra');
     expect(textosSopa.faltan(0)).toBe('No te falta ninguna palabra');
@@ -154,9 +159,10 @@ describe('Textos de "Sopa de letras" (RF-017, RF-018)', () => {
 
   it('el botón de la felicitación lleva icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
-    const sopa = crearPartidaSopa(undefined, () => 0).sopa;
+    const sopa = crearPartidaSopa('pequena', undefined, () => 0).sopa;
     await render(<App />);
     await fireEvent.press(screen.getByText('Sopa de letras'));
+    await fireEvent.press(screen.getByText(textosSopa.pequena));
     for (const palabra of sopa.palabras) {
       const { inicio, fin } = casillasDe(sopa, palabra);
       await fireEvent.press(screen.getByTestId(`celda-${inicio.fila}-${inicio.columna}`));
