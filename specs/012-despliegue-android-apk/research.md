@@ -30,6 +30,7 @@
 
 - **Decisión**: objetivo **≤ 50 MB**. Se limitan las arquitecturas a `arm64-v8a` y `armeabi-v7a` con el plugin `expo-build-properties` (`android.buildArchs`); se descartan `x86` y `x86_64`, que solo usan emuladores.
 - **Motivo**: un móvil antiguo suele ser `armeabi-v7a`; hay que incluirla. Quitar las de PC reduce el tamaño a la mitad aproximadamente.
+- **Medido (2026-11-09)**: primer APK (1.0.0, `versionCode` 1) = **35,8 MB** (37 525 808 bytes), por debajo del objetivo de 50 MB.
 - **Nota**: el tamaño real se mide al generar el primer APK; si pasa de 50 MB se anota y la persona responsable decide (no se inventa trabajo extra).
 - **Alternativa descartada**: AAB por arquitectura; solo vale para Google Play, que está fuera de alcance.
 

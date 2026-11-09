@@ -39,8 +39,8 @@
 
 **Prueba independiente**: en un móvil que nunca ha tenido la app ni Expo Go, descargar el archivo, instalarlo y abrir MindTrainer.
 
-- [ ] T007 [US1] 🧑 Generar el primer APK siguiendo `docs/generar-apk.md` (la persona responsable inicia sesión en Expo y lanza la compilación; `versionCode` 1)
-- [ ] T008 [US1] 🧑 Anotar el tamaño real del APK en `specs/012-despliegue-android-apk/research.md` (D5). Si pasa de 50 MB, avisar y decidir qué hacer; no se añade trabajo extra por cuenta propia (SC-007)
+- [x] T007 [US1] 🧑 Generar el primer APK siguiendo `docs/generar-apk.md` (la persona responsable inicia sesión en Expo y lanza la compilación; `versionCode` 1)
+- [x] T008 [US1] 🧑 Anotar el tamaño real del APK en `specs/012-despliegue-android-apk/research.md` (D5). Si pasa de 50 MB, avisar y decidir qué hacer; no se añade trabajo extra por cuenta propia (SC-007)
 - [ ] T009 [US1] 🧑 Instalar el APK en el móvil Android 11 sin Expo Go: aparece "MindTrainer" con su icono propio en la lista de aplicaciones (FR-001, FR-002)
 - [ ] T010 [US1] 🧑 Abrir la app: se ve la bienvenida y se puede jugar a los cinco juegos con las mismas reglas, textos y aspecto que en Expo Go; no pide cuenta ni inicio de sesión (FR-003, FR-005)
 - [ ] T011 [US1] 🧑 Comprobar casos límite: con el móvil girado se mantiene vertical y los botones de Android (inicio, atrás) no tapan ningún botón de la app
@@ -83,7 +83,7 @@
 **Prueba independiente**: seguir los pasos desde un proyecto recién descargado y obtener un APK que se instala y funciona.
 
 - [x] T017 [US4] Comprobar que el repositorio no contiene claves ni archivos de firma: `git ls-files` sin `*.jks`, `*.keystore`, `*.p12`, `*.key` ni `credentials.json`, y revisión de que `app.json`, `eas.json` y `docs/` no llevan contraseñas ni tokens (FR-009, SC-006)
-- [ ] T018 [US4] 🧑 Hacer y guardar fuera del proyecto la copia de seguridad de la clave de firma con `npx eas-cli credentials`
+- [x] T018 [US4] 🧑 Hacer y guardar fuera del proyecto la copia de seguridad de la clave de firma con `npx eas-cli credentials`
 - [ ] T019 [US4] 🧑 Subir `android.versionCode` a `2` en `app.json`, generar otro APK e instalarlo encima del anterior sin desinstalar: se completa y la app sigue funcionando; dejar `versionCode` = 2 en `app.json` y commitearlo para no repetir el número (SC-004, FR-008, FR-010)
 - [ ] T020 [US4] 🧑 Comprobar que la persona responsable puede generar un APK nuevo desde un proyecto recién descargado (`git clone`, `npm install` y los pasos de `docs/generar-apk.md`) (SC-005)
 
