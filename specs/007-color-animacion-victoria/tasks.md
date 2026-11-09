@@ -70,7 +70,7 @@
 
 - [X] T018 [P] Actualizar `CLAUDE.md`: en la sección "Estructura" añadir `animacion.ts` junto a `tema.ts` y `IconoVictoria.tsx` a `componentes/`, y en "Cómo añadir una actividad" mencionar el `color` opcional en el contrato
 - [X] T019 Ejecutar `npm test` y `npm run typecheck` completos: todo debe pasar, también las pruebas de las funcionalidades 001 a 006 (depende de T017, T018)
-- [ ] T020 Hacer la comprobación manual de los 12 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos los colores de la lista (pasos 1 a 3), activar y desactivar "reducir movimiento" en el móvil (pasos 8 y 9), esperar un par de minutos en la pantalla final (paso 11) y el modo avión (paso 12). Antes de cerrar la spec, preguntar al usuario si hay observaciones nuevas y anotarlas en [specs/ideas-pendientes.md](../ideas-pendientes.md) (no se construyen), y preguntarle si se fusiona la rama en `main`. **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
+- [X] T020 Hacer la comprobación manual de los 12 pasos de [quickstart.md](quickstart.md) en un móvil con una persona mayor, incluidos los colores de la lista (pasos 1 a 3), activar y desactivar "reducir movimiento" en el móvil (pasos 8 y 9), esperar un par de minutos en la pantalla final (paso 11) y el modo avión (paso 12). Antes de cerrar la spec, preguntar al usuario si hay observaciones nuevas y anotarlas en [specs/ideas-pendientes.md](../ideas-pendientes.md) (no se construyen), y preguntarle si se fusiona la rama en `main`. **Requiere a una persona y un móvil: no la puede hacer el agente; déjala pendiente y avísalo.**
 
 ---
 
