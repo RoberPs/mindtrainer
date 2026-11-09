@@ -190,7 +190,7 @@ describe('Textos de "Adivinanzas" (RF-015, RF-016)', () => {
 
   it('cada botón de acción lleva icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
-    const partida = crearPartidaAdivinanzas(() => 0);
+    const partida = crearPartidaAdivinanzas([], () => 0);
     await render(<App />);
     await fireEvent.press(screen.getByText('Adivinanzas'));
     const turno = partida.turnos[0];

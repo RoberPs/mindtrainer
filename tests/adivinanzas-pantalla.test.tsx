@@ -9,7 +9,7 @@ import { correctaActual, incorrectaActual, turnoActual } from './ayudas-adivinan
 let modelo: Partida;
 beforeEach(() => {
   jest.spyOn(Math, 'random').mockReturnValue(0);
-  modelo = crearPartida(() => 0);
+  modelo = crearPartida([], () => 0);
 });
 afterEach(() => {
   jest.restoreAllMocks();
@@ -141,6 +141,7 @@ describe('Adivinanzas: final de partida', () => {
   it('Jugar otra vez empieza una partida nueva, con 0 aciertos y sin mensajes anteriores', async () => {
     const avisar = jest.fn();
     await render(<Adivinanzas avisarPartida={avisar} />);
+    const idsAnteriores = modelo.turnos.map((t) => t.adivinanza.id);
     for (let i = 0; i < 5; i++) await jugarTurno(i, true);
     await pulsar('Jugar otra vez');
     expect(avisar).toHaveBeenLastCalledWith(true);
@@ -148,9 +149,23 @@ describe('Adivinanzas: final de partida', () => {
     expect(screen.queryByText('¡Muy bien! Esa es la respuesta correcta')).toBeNull();
     expect(screen.queryByText('Siguiente')).toBeNull();
     // La nueva partida cuenta desde cero: se falla una y se acierta el resto.
-    modelo = crearPartida(() => 0);
+    modelo = crearPartida(idsAnteriores, () => 0);
     for (let i = 0; i < 5; i++) await jugarTurno(i, i !== 0);
     expect(screen.getByText('Has acertado 4 de 5')).toBeTruthy();
+  });
+
+  it('Jugar otra vez trae 5 adivinanzas distintas de las de la partida anterior', async () => {
+    await render(<Adivinanzas avisarPartida={() => {}} />);
+    const textosAnteriores = modelo.turnos.map((t) => t.adivinanza.texto);
+    for (let i = 0; i < 5; i++) await jugarTurno(i, true);
+    await pulsar('Jugar otra vez');
+    modelo = crearPartida(modelo.turnos.map((t) => t.adivinanza.id), () => 0);
+    for (let i = 0; i < 5; i++) {
+      const texto = turnoActual(modelo).adivinanza.texto;
+      expect(textosAnteriores).not.toContain(texto);
+      expect(screen.getByText(texto)).toBeTruthy();
+      await jugarTurno(i, true);
+    }
   });
 
   it('dentro del marco, Volver al inicio en el resultado sale sin preguntar', async () => {

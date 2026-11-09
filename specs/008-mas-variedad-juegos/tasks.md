@@ -25,7 +25,7 @@
 
 ## Fase 1: Preparación
 
-- [ ] T001 Comprobar que `npm test` y `npm run typecheck` pasan en la rama `008-mas-variedad-juegos` antes de tocar nada, para saber que cualquier fallo posterior es de esta funcionalidad
+- [X] T001 Comprobar que `npm test` y `npm run typecheck` pasan en la rama `008-mas-variedad-juegos` antes de tocar nada, para saber que cualquier fallo posterior es de esta funcionalidad
 
 ---
 
@@ -33,8 +33,8 @@
 
 **Objetivo**: Tener el componente de elegir que usarán "Sopa de letras" y "Diferencias".
 
-- [ ] T002 Escribir `tests/elegir-opcion.test.tsx`: dado un `ElegirOpcion` con una invitación y 3 opciones (`valor`, `texto`, `icono`, `idIcono`), se ve la invitación, se ve un botón por cada opción con su texto y su icono, y al tocar un botón se llama a `alElegir` con el `valor` de esa opción. Debe fallar al principio (depende de T001)
-- [ ] T003 Crear `src/componentes/ElegirOpcion.tsx` según [data-model.md](data-model.md): una pantalla con la invitación en `tema.letra.titulo` y negrita, y un `BotonGrande` por opción (con `texto`, `icono: { nombre }` e `idIcono`) que llama a `alElegir(valor)`. Mismo estilo y espacios que `src/actividades/parejas/ElegirTamano.tsx`, que no se toca (depende de T002)
+- [X] T002 Escribir `tests/elegir-opcion.test.tsx`: dado un `ElegirOpcion` con una invitación y 3 opciones (`valor`, `texto`, `icono`, `idIcono`), se ve la invitación, se ve un botón por cada opción con su texto y su icono, y al tocar un botón se llama a `alElegir` con el `valor` de esa opción. Debe fallar al principio (depende de T001)
+- [X] T003 Crear `src/componentes/ElegirOpcion.tsx` según [data-model.md](data-model.md): una pantalla con la invitación en `tema.letra.titulo` y negrita, y un `BotonGrande` por opción (con `texto`, `icono: { nombre }` e `idIcono`) que llama a `alElegir(valor)`. Mismo estilo y espacios que `src/actividades/parejas/ElegirTamano.tsx`, que no se toca (depende de T002)
 
 **Punto de control**: `tests/elegir-opcion.test.tsx` pasa.
 
@@ -48,19 +48,19 @@
 
 ### Pruebas de la historia 1
 
-- [ ] T004 [US1] Actualizar `tests/adivinanzas-banco.test.tsx`: el mínimo pasa de 10 a 50 (`toBeGreaterThanOrEqual(50)`) y se renombra la prueba ("hay 50 adivinanzas o más…"). El resto de pruebas (tres respuestas distintas, una palabra, el texto sin la respuesta) se quedan igual porque ya recorren todo el banco. Debe fallar al principio (depende de T001)
-- [ ] T005 [P] [US1] Añadir a `tests/adivinanzas-juego.test.tsx` pruebas de `crearPartida(idsAnteriores, azar)`: sin `idsAnteriores` sigue dando 5 adivinanzas distintas; con los ids de las 5 de una partida, la partida nueva no contiene ninguna de ellas, para varios valores de `azar` (por ejemplo, 0, 0,5 y 0,99); 20 partidas encadenadas (cada una excluyendo la anterior) nunca comparten una adivinanza con la inmediatamente anterior. Deben fallar al principio (depende de T001)
-- [ ] T006 [P] [US1] Añadir a `tests/adivinanzas-pantalla.test.tsx` una prueba de la pantalla: se juega una partida completa, se anotan los textos de las 5 adivinanzas, se pulsa "Jugar otra vez" y ninguno de los 5 textos de la partida nueva coincide con los anotados. Debe fallar al principio (depende de T001)
+- [X] T004 [US1] Actualizar `tests/adivinanzas-banco.test.tsx`: el mínimo pasa de 10 a 50 (`toBeGreaterThanOrEqual(50)`) y se renombra la prueba ("hay 50 adivinanzas o más…"). El resto de pruebas (tres respuestas distintas, una palabra, el texto sin la respuesta) se quedan igual porque ya recorren todo el banco. Debe fallar al principio (depende de T001)
+- [X] T005 [P] [US1] Añadir a `tests/adivinanzas-juego.test.tsx` pruebas de `crearPartida(idsAnteriores, azar)`: sin `idsAnteriores` sigue dando 5 adivinanzas distintas; con los ids de las 5 de una partida, la partida nueva no contiene ninguna de ellas, para varios valores de `azar` (por ejemplo, 0, 0,5 y 0,99); 20 partidas encadenadas (cada una excluyendo la anterior) nunca comparten una adivinanza con la inmediatamente anterior. Deben fallar al principio (depende de T001)
+- [X] T006 [P] [US1] Añadir a `tests/adivinanzas-pantalla.test.tsx` una prueba de la pantalla: se juega una partida completa, se anotan los textos de las 5 adivinanzas, se pulsa "Jugar otra vez" y ninguno de los 5 textos de la partida nueva coincide con los anotados. Debe fallar al principio (depende de T001)
 
 ### Implementación de la historia 1
 
-- [ ] T007 [US1] Cambiar `src/actividades/adivinanzas/juego.ts`: `crearPartida(idsAnteriores: string[] = [], azar = Math.random)` mezcla y elige 5 solo entre las adivinanzas cuyo `id` no esté en `idsAnteriores`. El resto de reglas no cambia (depende de T005)
-- [ ] T008 [US1] Cambiar `src/actividades/adivinanzas/Adivinanzas.tsx`: al pulsar "Jugar otra vez" se llama a `crearPartida(partida.turnos.map((t) => t.adivinanza.id))` (depende de T006, T007)
-- [ ] T009 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de animales, siguiendo [contracts/contenido.md](contracts/contenido.md): `id` único, `texto`, `correcta` de una sola palabra, dos `incorrectas` de una sola palabra que no valgan también como respuesta y sin la respuesta en el texto, en español de España con tildes (depende de T004)
-- [ ] T010 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de frutas, verduras y comida, con las mismas reglas que T009 (depende de T009)
-- [ ] T011 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de objetos de la casa y de la ropa, con las mismas reglas que T009 (depende de T010)
-- [ ] T012 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de la naturaleza, el cuerpo y el tiempo, con las mismas reglas que T009; así el banco llega a 50 (depende de T011)
-- [ ] T013 [US1] Ejecutar `npm test` y `npm run typecheck`: T004, T005 y T006 deben pasar sin romper el resto (depende de T008, T012)
+- [X] T007 [US1] Cambiar `src/actividades/adivinanzas/juego.ts`: `crearPartida(idsAnteriores: string[] = [], azar = Math.random)` mezcla y elige 5 solo entre las adivinanzas cuyo `id` no esté en `idsAnteriores`. El resto de reglas no cambia (depende de T005)
+- [X] T008 [US1] Cambiar `src/actividades/adivinanzas/Adivinanzas.tsx`: al pulsar "Jugar otra vez" se llama a `crearPartida(partida.turnos.map((t) => t.adivinanza.id))` (depende de T006, T007)
+- [X] T009 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de animales, siguiendo [contracts/contenido.md](contracts/contenido.md): `id` único, `texto`, `correcta` de una sola palabra, dos `incorrectas` de una sola palabra que no valgan también como respuesta y sin la respuesta en el texto, en español de España con tildes (depende de T004)
+- [X] T010 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de frutas, verduras y comida, con las mismas reglas que T009 (depende de T009)
+- [X] T011 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de objetos de la casa y de la ropa, con las mismas reglas que T009 (depende de T010)
+- [X] T012 [US1] Añadir a `src/actividades/adivinanzas/banco.ts` 10 adivinanzas tradicionales nuevas, de la naturaleza, el cuerpo y el tiempo, con las mismas reglas que T009; así el banco llega a 50 (depende de T011)
+- [X] T013 [US1] Ejecutar `npm test` y `npm run typecheck`: T004, T005 y T006 deben pasar sin romper el resto (depende de T008, T012)
 
 **Punto de control**: "Adivinanzas" tiene 50 o más adivinanzas y no repite las de la partida anterior. Falta solo la revisión humana del contenido (T045).
 

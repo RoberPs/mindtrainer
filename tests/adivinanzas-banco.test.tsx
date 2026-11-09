@@ -1,8 +1,8 @@
 import { adivinanzas } from '../src/actividades/adivinanzas/banco';
 
 describe('Banco de adivinanzas', () => {
-  it('hay 10 adivinanzas o más, con identificadores distintos', () => {
-    expect(adivinanzas.length).toBeGreaterThanOrEqual(10);
+  it('hay 50 adivinanzas o más, con identificadores distintos', () => {
+    expect(adivinanzas.length).toBeGreaterThanOrEqual(50);
     expect(new Set(adivinanzas.map((a) => a.id)).size).toBe(adivinanzas.length);
   });
 

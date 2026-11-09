@@ -1,8 +1,32 @@
 import { adivinanzas } from '../src/actividades/adivinanzas/banco';
-import { crearPartida, esUltima, responder, siguiente } from '../src/actividades/adivinanzas/juego';
+import { crearPartida, esUltima, responder, siguiente, type Partida } from '../src/actividades/adivinanzas/juego';
 import { azarCon, correctaActual, incorrectaActual, partidaConAzar, turnoActual } from './ayudas-adivinanzas';
 
 describe('Adivinanzas: crearPartida', () => {
+  const idsDe = (p: Partida) => p.turnos.map((t) => t.adivinanza.id);
+
+  it('sin partida anterior da 5 adivinanzas distintas', () => {
+    expect(new Set(idsDe(crearPartida([], azarCon(4)))).size).toBe(5);
+  });
+
+  it.each([0, 0.5, 0.99])('con las de la partida anterior, la nueva no repite ninguna (azar %s)', (valor) => {
+    const anterior = idsDe(partidaConAzar(valor));
+    const nueva = idsDe(crearPartida(anterior, () => valor));
+    expect(nueva).toHaveLength(5);
+    expect(new Set(nueva).size).toBe(5);
+    for (const id of nueva) expect(anterior).not.toContain(id);
+  });
+
+  it('20 partidas encadenadas nunca comparten una adivinanza con la inmediatamente anterior', () => {
+    const azar = azarCon(7);
+    let anterior = idsDe(crearPartida([], azar));
+    for (let i = 0; i < 20; i++) {
+      const nueva = idsDe(crearPartida(anterior, azar));
+      for (const id of nueva) expect(anterior).not.toContain(id);
+      anterior = nueva;
+    }
+  });
+
   it('crea 5 turnos distintos del banco, cada uno con sus 3 respuestas', () => {
     const partida = partidaConAzar(0);
     expect(partida.turnos).toHaveLength(5);
@@ -24,21 +48,21 @@ describe('Adivinanzas: crearPartida', () => {
   it('el orden de las respuestas se sortea: la correcta aparece en las tres posiciones', () => {
     const posiciones = new Set<number>();
     for (let semilla = 1; semilla <= 30; semilla++) {
-      const p = crearPartida(azarCon(semilla));
+      const p = crearPartida([], azarCon(semilla));
       for (const t of p.turnos) posiciones.add(t.opciones.indexOf(t.adivinanza.correcta));
     }
     expect(posiciones).toEqual(new Set([0, 1, 2]));
   });
 
   it('con azares distintos cambia la partida', () => {
-    const a = crearPartida(azarCon(1)).turnos.map((t) => t.opciones.join());
-    const b = crearPartida(azarCon(2)).turnos.map((t) => t.opciones.join());
+    const a = crearPartida([], azarCon(1)).turnos.map((t) => t.opciones.join());
+    const b = crearPartida([], azarCon(2)).turnos.map((t) => t.opciones.join());
     expect(a).not.toEqual(b);
   });
 
   it('no modifica el banco', () => {
     const antes = JSON.stringify(adivinanzas);
-    crearPartida(azarCon(3));
+    crearPartida([], azarCon(3));
     expect(JSON.stringify(adivinanzas)).toBe(antes);
   });
 
