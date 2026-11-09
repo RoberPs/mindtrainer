@@ -89,7 +89,7 @@ Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla
 
 ## Cosas a tener en cuenta
 
-- Los dibujos de "Diferencias" son propios (vectoriales, con `react-native-svg`, licencia MIT): no se descarga ninguna imagen. Esa librería, como los iconos de `@expo/vector-icons` (Apache 2.0), pide conservar su aviso al redistribuir el código; la persona responsable debe aceptarlo de forma expresa.
+- Los dibujos de "Diferencias" son propios (vectoriales, con `react-native-svg`, licencia MIT): no se descarga ninguna imagen. Esa librería, como los iconos de `@expo/vector-icons` (Apache 2.0), pide conservar su aviso al redistribuir el código; la persona responsable lo aceptó de forma expresa el 2026-11-09.
 - Las actividades reales por ahora son "Parejas", "Forma la palabra", "Sopa de letras", "Adivinanzas" y "Diferencias". No se inventan actividades de relleno.
 - Las pruebas usan `getByTestId(..., { includeHiddenElements: true })` para los iconos, porque
   son decorativos y están ocultos a la accesibilidad a propósito.

@@ -124,7 +124,7 @@
 - [X] T026 [P] Añadir en `specs/ideas-pendientes.md` el estado tras la spec 011: Diferencias pasa a 3 escenas dibujadas con 3 diferencias fijas (sustituye a las ideas 2 y 3 de la spec 008 sobre 3, 5 o 7); no se usó ninguna galería; salvedad de licencia MIT de `react-native-svg` pendiente de aceptación expresa
 - [X] T027 Comprobar la restricción de licencia (SC-007): `git status` y `git diff --stat main` no muestran archivos de imagen nuevos en `assets/`, y la única dependencia nueva en `package.json` es `react-native-svg`
 - [X] T028 Tarea para una persona con móvil (no la puede hacer el agente): seguir [quickstart.md](quickstart.md) puntos 1 a 7 y anotar si los dibujos se ven nítidos, si las diferencias son evidentes y si la persona responsable acepta la licencia MIT de `react-native-svg`. Dejar pendiente y avisar
-- [ ] T029 Antes de cerrar la spec, preguntar al usuario si hay observaciones nuevas de los juegos para `specs/ideas-pendientes.md`, y preguntar si se fusiona la rama en `main` (no fusionar sin su respuesta)
+- [X] T029 Antes de cerrar la spec, preguntar al usuario si hay observaciones nuevas de los juegos para `specs/ideas-pendientes.md`, y preguntar si se fusiona la rama en `main` (no fusionar sin su respuesta)
 
 ---
 

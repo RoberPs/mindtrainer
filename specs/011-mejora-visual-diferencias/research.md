@@ -21,7 +21,7 @@
 - **Decisión**: `react-native-svg` (MIT), la versión que fija Expo para el SDK 58 (15.16.0, ver `node_modules/expo/bundledNativeModules.json`), instalada con `npx expo install react-native-svg`. Es una dependencia oficial de Expo, funciona en Expo Go y no requiere cuenta ni internet.
 - **Razón**: permite formas con curvas y contorno oscuro, color por parámetro y escalado nítido. Es el único añadido (principio I).
 - **Comprobación pendiente**: que `jest-expo` renderice los componentes de SVG en las pruebas (suele funcionar). Si no, se evita con un simulacro mínimo en las pruebas; no se cambia el enfoque.
-- **Salvedad de licencia, para decidir expresamente**: `react-native-svg` es MIT, que pide conservar su aviso al redistribuir el código. Es el mismo tipo de condición que ya tienen los iconos de `@expo/vector-icons` (Apache 2.0) desde la spec 001. Los dibujos de las escenas son propios y no heredan nada. Si la persona responsable considera que esa condición choca con "no heredar una licencia", la alternativa es dibujar con vistas de React Native (sin dependencia) a costa de formas más toscas.
+- **Salvedad de licencia (ACEPTADA por la persona responsable el 2026-11-09)**: `react-native-svg` es MIT, que pide conservar su aviso al redistribuir el código. Es el mismo tipo de condición que ya tienen los iconos de `@expo/vector-icons` (Apache 2.0) desde la spec 001. Los dibujos de las escenas son propios y no heredan nada. Si la persona responsable considera que esa condición choca con "no heredar una licencia", la alternativa es dibujar con vistas de React Native (sin dependencia) a costa de formas más toscas.
 
 ## 3. Estilo de los dibujos
 
