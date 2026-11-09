@@ -79,7 +79,7 @@ const estilos = StyleSheet.create({
   pantalla: { gap: tema.espacio, padding: tema.espacio },
   cabecera: { alignItems: 'center', gap: 4 },
   etiqueta: { fontSize: tema.letra.normal, color: tema.colores.texto, textAlign: 'center' },
-  referencia: { fontSize: tema.letra.titulo, fontWeight: '700', color: tema.colores.primario },
+  referencia: { fontSize: tema.letra.titulo, fontWeight: '700', color: tema.colores.texto },
   mensaje: { alignItems: 'center', gap: 8 },
   textoMensaje: { fontSize: tema.letra.titulo, fontWeight: '700', color: tema.colores.texto, textAlign: 'center' },
 });

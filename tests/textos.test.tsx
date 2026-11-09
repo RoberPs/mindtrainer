@@ -1,11 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import App from '../App';
 import { crearPartida } from '../src/actividades/parejas/juego';
 import { crearPartida as crearPartidaSopa } from '../src/actividades/sopa-de-letras/juego';
 import { textos, textosAdivinanzas, textosDiferencias, textosFormaPalabra, textosParejas, textosSopa } from '../src/textos';
 import { crearPartida as crearPartidaAdivinanzas } from '../src/actividades/adivinanzas/juego';
 import { tema } from '../src/tema';
-import { crearActividades } from './ayudas';
+import { crearActividades, abrirApp } from './ayudas';
 import { casillasDe } from './ayudas-sopa';
 import { centroDe, diferenciasDe, puntoVacio, tocarAbajo } from './ayudas-diferencias';
 
@@ -33,7 +32,7 @@ describe('Textos en español de España (FR-009)', () => {
 
 describe('Los botones llevan icono y texto (FR-014)', () => {
   it('"Volver al inicio" y los botones del aviso tienen icono y texto', async () => {
-    await render(<App actividades={crearActividades(1)} />);
+    await abrirApp(crearActividades(1));
     await fireEvent.press(screen.getByText('Actividad 1'));
     await fireEvent.press(screen.getByText('Empezar partida'));
     await fireEvent.press(screen.getByText('Volver al inicio'));
@@ -76,7 +75,7 @@ describe('Textos de "Parejas" (FR-009, FR-014)', () => {
 
   it('cada botón de la actividad lleva icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Parejas'));
     for (const [id, t] of [
       ['icono-pequena', textosParejas.pequena],
@@ -112,7 +111,7 @@ describe('Textos de "Forma la palabra" (RF-014)', () => {
 
   it('cada botón de acción lleva icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Forma la palabra'));
     for (const [id, t] of [
       ['icono-comprobar', textosFormaPalabra.comprobar],
@@ -160,7 +159,7 @@ describe('Textos de "Sopa de letras" (RF-017, RF-018)', () => {
   it('el botón de la felicitación lleva icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
     const sopa = crearPartidaSopa('pequena', undefined, () => 0).sopa;
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Sopa de letras'));
     await fireEvent.press(screen.getByText(textosSopa.pequena));
     for (const palabra of sopa.palabras) {
@@ -196,7 +195,7 @@ describe('Textos de "Adivinanzas" (RF-015, RF-016)', () => {
   it('cada botón de acción lleva icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
     const partida = crearPartidaAdivinanzas([], () => 0);
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Adivinanzas'));
     const turno = partida.turnos[0];
     await fireEvent.press(screen.getByText(turno.adivinanza.correcta));
@@ -251,7 +250,7 @@ describe('Textos de "Diferencias" (RF-014, RF-015)', () => {
 
   it('el botón y los mensajes importantes llevan icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0); // siempre la primera escena
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Diferencias'));
     await fireEvent.press(screen.getByText(textosDiferencias.tres));
     expect(screen.getByTestId('icono-faltan', { includeHiddenElements: true })).toBeTruthy();

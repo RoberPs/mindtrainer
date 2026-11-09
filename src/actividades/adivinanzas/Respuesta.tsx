@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
+import { useColorJuego } from '../../componentes/ColorJuego';
 import { Icono } from '../../componentes/Icono';
 import { tema } from '../../tema';
 
@@ -15,7 +16,12 @@ type Props = {
 // Botón de una respuesta. Tras responder, la correcta y la elegida se distinguen por icono y forma,
 // no solo por color.
 export function Respuesta({ texto, estado, idPantalla, idIcono, alTocar }: Props) {
-  const visual = visuales[estado];
+  const color = useColorJuego();
+  const base = visuales[estado];
+  const visual =
+    estado === 'pendiente'
+      ? { ...base, estilo: [base.estilo, { backgroundColor: color.fondo }], colorTexto: color.texto }
+      : base;
   return (
     <Pressable
       accessibilityRole="button"

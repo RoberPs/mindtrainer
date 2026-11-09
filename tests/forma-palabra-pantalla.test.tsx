@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import App from '../App';
 import { crearPartida, palabraActual, siguiente, type Partida } from '../src/actividades/forma-palabra/juego';
 import { FormaPalabra } from '../src/actividades/forma-palabra/FormaPalabra';
 import { MarcoActividad } from '../src/pantallas/MarcoActividad';
+import { abrirApp } from './ayudas';
 
 // Con Math.random fijado a 0 conocemos la partida que crea la app (misma mezcla).
 let modelo: Partida;
@@ -15,7 +15,7 @@ afterEach(() => {
 });
 
 async function abrir() {
-  await render(<App />);
+  await abrirApp();
   await fireEvent.press(screen.getByText('Forma la palabra'));
 }
 
@@ -38,7 +38,7 @@ function avanzarModelo() {
 
 describe('Forma la palabra: pantalla de una palabra', () => {
   it('aparece en la lista de inicio con icono, nombre y descripción', async () => {
-    await render(<App />);
+    await abrirApp();
     expect(screen.getByText('Forma la palabra')).toBeTruthy();
     expect(screen.getByText('Ordena las letras para formar la palabra')).toBeTruthy();
     expect(screen.getByTestId('icono-forma-palabra', { includeHiddenElements: true })).toBeTruthy();

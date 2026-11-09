@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import App from '../App';
 import { Diferencias } from '../src/actividades/diferencias/Diferencias';
 import type { Total } from '../src/actividades/diferencias/escena';
 import { MarcoActividad } from '../src/pantallas/MarcoActividad';
 import { textosDiferencias as t } from '../src/textos';
 import { centroDe, diferenciasDe, escenaDePrueba, puntoVacio, segundaEscena, tocarAbajo, tocarArriba } from './ayudas-diferencias';
+import { abrirApp } from './ayudas';
 
 // Con Math.random fijado a 0, la primera partida usa la escena de prueba y la siguiente la segunda.
 beforeEach(() => {
@@ -21,7 +21,7 @@ const elegir = (total: Total) => fireEvent.press(screen.getByText(textoDe[total]
 
 // Abre la actividad y elige cuántas diferencias buscar (3 si no se dice otra cosa).
 async function abrir(total: Total = 3) {
-  await render(<App />);
+  await abrirApp();
   await fireEvent.press(screen.getByText('Diferencias'));
   await elegir(total);
 }
@@ -33,7 +33,7 @@ const hayCirculo = (lado: 'arriba' | 'abajo', id: string) =>
 
 describe('Diferencias: elegir cuántas diferencias buscar (RF-016)', () => {
   it('al abrirla se ve la invitación y los botones de 3, 5 y 7 con su icono, y todavía no hay dibujos', async () => {
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Diferencias'));
     expect(screen.getByText(t.elegirNumero)).toBeTruthy();
     for (const [texto, idIcono] of [
@@ -85,7 +85,7 @@ describe('Diferencias: elegir cuántas diferencias buscar (RF-016)', () => {
 
 describe('Diferencias: pantalla de los dibujos', () => {
   it('aparece en la lista de inicio con icono, nombre y descripción', async () => {
-    await render(<App />);
+    await abrirApp();
     expect(screen.getByText('Diferencias')).toBeTruthy();
     expect(screen.getByText(t.descripcion)).toBeTruthy();
     expect(icono('icono-diferencias')).toBeTruthy();

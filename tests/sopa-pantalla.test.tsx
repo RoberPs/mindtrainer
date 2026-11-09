@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import App from '../App';
 import { crearPartida, type Casilla } from '../src/actividades/sopa-de-letras/juego';
 import { SopaDeLetras } from '../src/actividades/sopa-de-letras/SopaDeLetras';
 import { sopas } from '../src/actividades/sopa-de-letras/sopas';
 import { MarcoActividad } from '../src/pantallas/MarcoActividad';
 import { casillasDe } from './ayudas-sopa';
+import { abrirApp } from './ayudas';
 
 // Con Math.random fijado a 0 conocemos la sopa que muestra la app en cada tamaño.
 const sopa = crearPartida('pequena', undefined, () => 0).sopa;
@@ -21,7 +21,7 @@ const elegir = (tamano: 'pequena' | 'mediana') => fireEvent.press(screen.getByTe
 
 // Abre la actividad y elige el tamaño (pequeña si no se dice otra cosa).
 async function abrir(tamano: 'pequena' | 'mediana' = 'pequena') {
-  await render(<App />);
+  await abrirApp();
   await fireEvent.press(screen.getByText('Sopa de letras'));
   await elegir(tamano);
 }
@@ -34,7 +34,7 @@ async function marcar(palabra: string, deSopa = sopa) {
 
 describe('Sopa de letras: elegir el tamaño (RF-007, RF-010, RF-011)', () => {
   it('al abrirla se ve la invitación y los botones de pequeña y mediana con su icono, y aún no hay cuadrícula', async () => {
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Sopa de letras'));
     expect(screen.getByText('Elige el tamaño de la sopa')).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Pequeña: 3 palabras' })).toBeTruthy();
@@ -93,7 +93,7 @@ describe('Sopa de letras: elegir el tamaño (RF-007, RF-010, RF-011)', () => {
 
 describe('Sopa de letras: marcar palabras en la pantalla', () => {
   it('aparece en la lista de inicio con icono, nombre y descripción', async () => {
-    await render(<App />);
+    await abrirApp();
     expect(screen.getByText('Sopa de letras')).toBeTruthy();
     expect(screen.getByText('Encuentra las palabras escondidas')).toBeTruthy();
     expect(screen.getByTestId('icono-sopa-de-letras', { includeHiddenElements: true })).toBeTruthy();

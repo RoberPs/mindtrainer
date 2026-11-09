@@ -21,7 +21,7 @@ Contraste calculado con la fórmula de WCAG (la misma de la prueba `inicio-color
 
 ## 2. Color de cada juego (RF-012)
 
-Parejas azul, Forma la palabra verde, Sopa de letras naranja, Adivinanzas magenta y Diferencias gris azulado: cuatro de la paleta y el quinto, el gris del logo. Además del color, cada juego se distingue por icono y nombre. El verde de acierto (`#13653F`) coincide con el de Forma la palabra, pero siempre va con icono o texto. El rojo de las marcas de Diferencias (`#A0001C`) se mantiene.
+Parejas azul, Forma la palabra verde, Sopa de letras naranja, Adivinanzas magenta y Diferencias gris azulado: cuatro de la paleta y el quinto, el gris del logo. Además del color, cada juego se distingue por icono y nombre. El verde de acierto (`#0F5A38`, algo más oscuro que el verde de Forma la palabra para llegar a 7 a 1 sobre el crema) es parecido al de Forma la palabra, pero siempre va con icono o texto. El rojo de las marcas de Diferencias (`#A0001C`) se mantiene.
 
 ## 3. Cómo llega el color a todo el juego (RF-013, RF-014)
 

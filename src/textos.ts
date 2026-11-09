@@ -108,3 +108,12 @@ export const textosDiferencias = {
   toques: (n: number) => `Has necesitado ${n} toques`,
   jugarOtraVez: 'Jugar otra vez',
 };
+
+// Textos de la pantalla de bienvenida y de la lista de juegos.
+export const textosBienvenida = {
+  nombreApp: 'MindTrainer',
+  titulo: 'Empieza a entrenar tu mente',
+  pregunta: '¿Listo para ejercitar tu memoria hoy?',
+  empezar: 'Empezar',
+  eligeJuego: 'Elige uno de los juegos',
+};
