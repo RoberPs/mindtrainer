@@ -6,13 +6,14 @@ import { tema } from '../../tema';
 import type { PropsContenido } from '../tipos';
 import { Dibujo } from './Dibujo';
 import { Felicitacion } from './Felicitacion';
-import { dibujoAbajo, dibujoArriba, proporcionDibujo } from './escena';
+import { dibujosDe, proporcionDibujo } from './escena';
 import { crearPartida, faltan, tocar, type Partida } from './juego';
 
 // Alto que ocupan el marco, la instrucción, el aviso de las que faltan, los rótulos, el hueco
 // del mensaje de fallo y los espacios. El resto se reparte entre los dos dibujos.
 const altoReservado = 410;
-const anchoMinimo = 160;
+// Con 7 diferencias las zonas son más pequeñas: con este ancho miden al menos 44 puntos.
+const anchoMinimo = 240;
 
 // Contenido de la actividad: los dos dibujos y la felicitación. Nada se guarda.
 export function Diferencias({ avisarPartida }: PropsContenido) {
@@ -35,7 +36,7 @@ export function Diferencias({ avisarPartida }: PropsContenido) {
       <Felicitacion
         toques={partida.toques}
         alJugarOtraVez={() => {
-          setPartida(crearPartida());
+          setPartida(crearPartida(3, partida.escena.id));
           avisarPartida(true);
         }}
       />
@@ -46,6 +47,7 @@ export function Diferencias({ avisarPartida }: PropsContenido) {
   const ancho = Math.max(anchoMinimo, Math.min(width - 2 * tema.espacio, ((height - altoReservado) / 2) * proporcionDibujo));
   const alto = ancho / proporcionDibujo;
   const falta = faltan(partida);
+  const { arriba, abajo, diferencias } = dibujosDe(partida.escena, partida.total);
 
   return (
     <ScrollView contentContainerStyle={estilos.pantalla}>
@@ -54,11 +56,12 @@ export function Diferencias({ avisarPartida }: PropsContenido) {
         <Icono icono={{ nombre: 'magnify' }} tamano={40} testID="icono-faltan" />
         <Text style={estilos.textoFaltan}>{t.faltan(falta)}</Text>
       </View>
-      <Dibujo lado="arriba" rotulo={t.rotuloArriba} elementos={dibujoArriba} encontradas={partida.encontradas} ancho={ancho} alto={alto} />
+      <Dibujo lado="arriba" rotulo={t.rotuloArriba} elementos={arriba} diferencias={diferencias} encontradas={partida.encontradas} ancho={ancho} alto={alto} />
       <Dibujo
         lado="abajo"
         rotulo={t.rotuloAbajo}
-        elementos={dibujoAbajo}
+        elementos={abajo}
+        diferencias={diferencias}
         encontradas={partida.encontradas}
         ancho={ancho}
         alto={alto}

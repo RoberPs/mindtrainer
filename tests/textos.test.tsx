@@ -7,8 +7,7 @@ import { crearPartida as crearPartidaAdivinanzas } from '../src/actividades/adiv
 import { tema } from '../src/tema';
 import { crearActividades } from './ayudas';
 import { casillasDe } from './ayudas-sopa';
-import { diferencias } from '../src/actividades/diferencias/escena';
-import { centroDe, puntoVacio, tocarAbajo } from './ayudas-diferencias';
+import { centroDe, diferenciasDe, puntoVacio, tocarAbajo } from './ayudas-diferencias';
 
 // Contraste entre dos colores hexadecimales (#RRGGBB), según la fórmula habitual de accesibilidad.
 function luminancia(hex: string): number {
@@ -236,13 +235,14 @@ describe('Textos de "Diferencias" (RF-014, RF-015)', () => {
   });
 
   it('el botón y los mensajes importantes llevan icono y texto', async () => {
+    jest.spyOn(Math, 'random').mockReturnValue(0); // siempre la primera escena
     await render(<App />);
     await fireEvent.press(screen.getByText('Diferencias'));
     expect(screen.getByTestId('icono-faltan', { includeHiddenElements: true })).toBeTruthy();
     await tocarAbajo(puntoVacio().x, puntoVacio().y);
     expect(screen.getByTestId('icono-fallo', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosDiferencias.fallo)).toBeTruthy();
-    for (const d of diferencias) await tocarAbajo(centroDe(d.id).x, centroDe(d.id).y);
+    for (const d of diferenciasDe()) await tocarAbajo(centroDe(d.id).x, centroDe(d.id).y);
     expect(screen.getByTestId('icono-felicitacion', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosDiferencias.felicitacion)).toBeTruthy();
     expect(screen.getByTestId('icono-jugar-otra-vez', { includeHiddenElements: true })).toBeTruthy();

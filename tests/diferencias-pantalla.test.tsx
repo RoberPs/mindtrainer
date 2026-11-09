@@ -1,12 +1,19 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import App from '../App';
 import { Diferencias } from '../src/actividades/diferencias/Diferencias';
-import { diferencias } from '../src/actividades/diferencias/escena';
 import { MarcoActividad } from '../src/pantallas/MarcoActividad';
 import { textosDiferencias as t } from '../src/textos';
-import { centroDe, puntoVacio, tocarAbajo, tocarArriba } from './ayudas-diferencias';
+import { centroDe, diferenciasDe, escenaDePrueba, puntoVacio, segundaEscena, tocarAbajo, tocarArriba } from './ayudas-diferencias';
 
-const ids = diferencias.map((d) => d.id);
+// Con Math.random fijado a 0, la primera partida usa la escena de prueba y la siguiente la segunda.
+beforeEach(() => {
+  jest.spyOn(Math, 'random').mockReturnValue(0);
+});
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
+const ids = diferenciasDe(escenaDePrueba).map((d) => d.id);
 
 async function abrir() {
   await render(<App />);
@@ -122,15 +129,18 @@ describe('Diferencias: felicitación y jugar otra vez', () => {
     expect(screen.getByText('Has necesitado 5 toques')).toBeTruthy();
   });
 
-  it('Jugar otra vez empieza de cero: sin círculos, 3 por encontrar y recuento a cero', async () => {
+  it('Jugar otra vez empieza de cero con otra escena: sin círculos, 3 por encontrar y recuento a cero', async () => {
+    const idsNuevos = diferenciasDe(segundaEscena).map((d) => d.id);
     await abrir();
     await fallar();
     for (const id of ids) await acertar(id);
     await fireEvent.press(screen.getByText(t.jugarOtraVez));
     expect(screen.getByText(t.faltan(3))).toBeTruthy();
     expect(screen.queryByText(t.fallo)).toBeNull();
-    ids.forEach((id) => expect(hayCirculo('abajo', id)).toBe(false));
-    for (const id of ids) await acertar(id);
+    [...ids, ...idsNuevos].forEach((id) => expect(hayCirculo('abajo', id)).toBe(false));
+    // Las zonas son las de la escena nueva, distinta de la anterior.
+    expect(segundaEscena.id).not.toBe(escenaDePrueba.id);
+    for (const id of idsNuevos) await tocarAbajo(centroDe(id, segundaEscena).x, centroDe(id, segundaEscena).y);
     expect(screen.getByText('Has necesitado 3 toques')).toBeTruthy();
   });
 });

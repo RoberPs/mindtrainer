@@ -2,12 +2,14 @@ import { useRef } from 'react';
 import { Pressable, StyleSheet, Text, View, type GestureResponderEvent, type LayoutChangeEvent } from 'react-native';
 import { Icono } from '../../componentes/Icono';
 import { tema } from '../../tema';
-import { diferencias, type Elemento } from './escena';
+import type { Diferencia, Elemento } from './escena';
 
 type Props = {
   lado: 'arriba' | 'abajo';
   rotulo: string;
   elementos: Elemento[];
+  // Las diferencias de la partida: de ellas se dibuja un círculo por cada una encontrada.
+  diferencias: Diferencia[];
   encontradas: string[];
   ancho: number;
   alto: number;
@@ -16,7 +18,7 @@ type Props = {
 };
 
 // Un dibujo hecho con iconos y, encima, un círculo grueso por cada diferencia encontrada.
-export function Dibujo({ lado, rotulo, elementos, encontradas, ancho, alto, alTocar }: Props) {
+export function Dibujo({ lado, rotulo, elementos, diferencias, encontradas, ancho, alto, alTocar }: Props) {
   // Tamaño real medido; mientras no se mida se usa el calculado.
   const medido = useRef<{ ancho: number; alto: number } | null>(null);
 
