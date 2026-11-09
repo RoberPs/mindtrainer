@@ -104,7 +104,7 @@
 
 - [X] T014 Ejecutar `npm test` y `npm run typecheck`: todo en verde, incluidas las pruebas que ya existían de "Parejas" y de las demás actividades
 - [X] T015 [P] Actualizar `CLAUDE.md` (línea de `parejas/` en la estructura: 12 dibujos con color propio y dorso común) y añadir en `specs/ideas-pendientes.md` el estado tras la spec 010, indicando que no se usó Openclipart ni Kenney y por qué, y la salvedad de licencia de los iconos (research.md, punto 1: la licencia pide conservar su aviso al redistribuir el código); dejar anotado que la persona responsable debe aceptarla de forma expresa al cerrar la spec (FR-008, SC-006)
-- [ ] T016 Comprobación manual con un móvil siguiendo [quickstart.md](quickstart.md). **La hace una persona**: dejar pendiente y avisarlo
+- [X] T016 Comprobación manual con un móvil siguiendo [quickstart.md](quickstart.md). **La hace una persona**: dejar pendiente y avisarlo
 - [ ] T017 Antes de cerrar la spec, preguntar al usuario si acepta la salvedad de licencia de los iconos (FR-008, SC-006), si hay observaciones nuevas para `specs/ideas-pendientes.md` y si se fusiona la rama en `main`. No fusionar sin su respuesta
 
 ---
