@@ -30,20 +30,17 @@
 - **Lienzo**: proporción 3 : 2 (300 × 200), la que ya usan los dibujos (`proporcionDibujo`), así el tamaño en pantalla y las zonas no cambian de lógica.
 - **Los fondos** (pared, suelo, cielo, césped) son iguales en los dos dibujos y no tienen detalles que puedan confundirse con una diferencia.
 
-## 4. Las escenas y sus 3 diferencias
+## 4. Los ambientes y la composición al azar
 
-- **Decisión**: 3 escenas fijas (Salón, Cocina, Jardín); cada una con una diferencia de cada clase:
-  - **Color**: el mismo objeto en dos colores bien distintos (por ejemplo, sofá rojo y sofá azul).
-  - **Falta**: un objeto grande presente solo en el dibujo de arriba.
-  - **Añadido**: un objeto grande presente solo en el dibujo de abajo.
-- **Reglas de diseño** de cada diferencia: ocupa al menos el 20 % del ancho y el 30 % del alto del dibujo (así su zona mide al menos 44 puntos en el móvil más pequeño), no se solapa con otras zonas y no está pegada al borde.
-- **Razón**: 3 escenas dan variedad (historia 3, mínimo 2) con un trabajo de dibujo asumible. Las 4 anteriores se retiran porque estaban hechas con iconos sueltos.
-- **Alternativa descartada**: más de 3 escenas; más variedad no cambia lo que pide la spec y cada escena hay que dibujarla y revisarla a mano.
+- **Decisión**: 6 ambientes (Salón, Cocina, Jardín, Dormitorio, Playa, Granja). Cada uno tiene 6 huecos fijos (3 columnas por 2 filas, todos del mismo tamaño, revisados para que ni sus zonas ni sus dibujos se pisen) y un catálogo de 4 a 7 objetos para cada fila. Al empezar cada partida se elige al azar: el color de la pared o del cielo (de 2 a 4 posibles), los objetos de cada hueco, cuál es el cambio de color, cuál falta y cuál sobra, y los colores.
+- **Razón**: la petición posterior pide unas 20 o 30 composiciones y más aleatoriedad. Dibujar y revisar 30 escenas fijas es mucho trabajo; componerlas con piezas revisadas da miles de combinaciones y todas cumplen las reglas por construcción (las pruebas lo comprueban con 40 azares por ambiente).
+- **Reglas de diseño**: cada diferencia ocupa una zona de al menos 0,2 de ancho y 0,3 de alto (al menos 44 puntos en el móvil más pequeño), no se solapa con otras y está dentro del dibujo. Los objetos que no tienen sentido de otro color (animales, sol, árbol, nubes) no pueden ser el cambio de color. Las parejas de colores se distinguen por tono y también por claridad.
+- **Alternativas descartadas**: 30 escenas dibujadas a mano (mucho trabajo y menos variedad real); colocar los objetos en posiciones libres al azar (riesgo de solapamientos y de diferencias poco claras).
 
 ## 5. Cómo se elige la escena
 
-- **Decisión**: se mantiene la regla actual: al volver a jugar sale una escena distinta de la anterior (`crearPartida` con `idEscenaAnterior`). Con 3 escenas, 3 partidas seguidas ya muestran más de una.
-- **Razón**: ya está hecha y probada.
+- **Decisión**: `crearPartida(anterior, azar)` elige un ambiente distinto del de la partida anterior y compone dentro de él la escena. Dos partidas seguidas nunca tienen el mismo lugar y, además, casi nunca los mismos objetos.
+- **Razón**: con solo 3 escenas fijas se repetían cada 2 o 3 partidas.
 
 ## 6. Quitar la elección de 3, 5 o 7
 

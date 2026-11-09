@@ -1,5 +1,5 @@
-// Las escenas de "Diferencias": dibujos propios (ver objetos.tsx). Son datos fijos, revisados a
-// mano (no se generan al azar). Cada escena tiene un fondo, unos objetos comunes y exactamente 3
+// Las escenas de "Diferencias": dibujos propios (ver objetos.tsx), compuestos al empezar cada
+// partida (ver composicion.ts). Cada escena tiene un fondo, unos objetos comunes y exactamente 3
 // cambios entre los dos dibujos: un objeto de otro color, uno que falta y uno añadido. Todas las
 // coordenadas son relativas (de 0 a 1 sobre el ancho y el alto del dibujo), así valen para
 // cualquier tamaño de pantalla.
@@ -28,8 +28,11 @@ export type TipoCambio = 'color' | 'falta' | 'sobra';
 // arriba) o sobra (solo abajo). Su `id` es el de sus objetos.
 export type Cambio = { id: string; tipo: TipoCambio; arriba?: Colocado; abajo?: Colocado; zona: Zona };
 
+// Una escena es una composición concreta: el ambiente (Salón, Cocina...) con sus objetos. Su `id`
+// identifica esa composición entera; `ambiente` es solo el lugar.
 export type Escena = {
   id: string;
+  ambiente: string;
   nombre: string;
   fondo: () => ReactElement;
   comunes: Colocado[];

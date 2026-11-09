@@ -1,5 +1,6 @@
 import { dibujosDe, type Escena, type Zona } from './escena';
-import { escenas } from './escenas';
+import { componerEscena } from './composicion';
+import { ambientes } from './escenas';
 
 // Reglas del juego como funciones puras: no dependen del tiempo ni modifican lo que reciben.
 // Cada partida tiene siempre 3 diferencias.
@@ -13,11 +14,13 @@ export type Partida = {
   terminada: boolean;
 };
 
-// Sortea una escena distinta de la anterior; el azar se puede cambiar para que las pruebas sean repetibles.
-export function crearPartida(idEscenaAnterior?: string, azar: () => number = Math.random): Partida {
-  const candidatas = escenas.filter((e) => e.id !== idEscenaAnterior);
-  const escena = candidatas[Math.floor(azar() * candidatas.length)];
-  return { escena, encontradas: [], toques: 0, fallo: false, terminada: false };
+// Compone la escena de una partida al azar: el ambiente es siempre distinto del de la partida
+// anterior (así no se repite el lugar) y dentro de él se eligen al azar la pared, los objetos y
+// las 3 diferencias. El azar se puede cambiar para que las pruebas sean repetibles.
+export function crearPartida(anterior?: Escena, azar: () => number = Math.random): Partida {
+  const candidatos = ambientes.filter((a) => a.id !== anterior?.ambiente);
+  const ambiente = candidatos[Math.min(candidatos.length - 1, Math.floor(azar() * candidatos.length))];
+  return { escena: componerEscena(ambiente, azar), encontradas: [], toques: 0, fallo: false, terminada: false };
 }
 
 const dentro = (zona: Zona, x: number, y: number) =>

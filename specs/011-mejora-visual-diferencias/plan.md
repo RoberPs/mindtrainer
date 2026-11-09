@@ -28,7 +28,7 @@ Enfoque (detalle en [research.md](research.md)): **no se usa ninguna galería ex
 
 **Restricciones**: sin internet, sin descargas, sin límites de tiempo; letra de 22 puntos o más; botones de 64 o más; zonas táctiles de al menos 44 puntos en el móvil más pequeño
 
-**Escala/alcance**: 3 escenas fijas con 3 diferencias cada una; solo afecta a `src/actividades/diferencias/`, su texto y sus pruebas
+**Escala/alcance**: 6 ambientes que componen al azar la escena de cada partida, siempre con 3 diferencias; solo afecta a `src/actividades/diferencias/`, su texto y sus pruebas
 
 ## Comprobación de la constitución
 
@@ -69,11 +69,10 @@ No hay carpeta `contracts/`: el contrato de actividad no cambia y el formato de 
 src/actividades/diferencias/
 ├── objetos.tsx      # NUEVO: estilo común de los dibujos (contorno, paleta) y ayudas
 ├── escena.ts        # CAMBIA: tipos (Colocado, Cambio, Escena), zonaEn y dibujosDe; sin Total
-├── escenas/         # NUEVO: una escena por archivo (fondo, objetos y definición)
-│   ├── salon.tsx
-│   ├── cocina.tsx
-│   ├── jardin.tsx
-│   └── index.ts     # la lista `escenas` (3 escenas fijas, 3 cambios cada una: color, falta, sobra)
+├── composicion.ts   # NUEVO: tipos de ambiente y componerEscena (huecos, azar, colores)
+├── escenas/         # NUEVO: un ambiente por archivo (fondo y catálogo de objetos)
+│   ├── salon.tsx, cocina.tsx, jardin.tsx, dormitorio.tsx, playa.tsx, granja.tsx
+│   └── index.ts     # la lista `ambientes` (6 como mínimo)
 ├── Dibujo.tsx       # CAMBIA: dibuja con Svg en lugar de iconos sueltos; mismos círculos de acierto
 ├── Diferencias.tsx  # CAMBIA: sin pantalla de elegir; la partida empieza al abrir
 ├── Felicitacion.tsx # CAMBIA mínimo: ya no recibe el total

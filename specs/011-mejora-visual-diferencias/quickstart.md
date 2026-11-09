@@ -17,7 +17,7 @@ Hace falta una persona con un móvil para los puntos 1 a 6 (el agente no puede d
 2. **Dibujos nítidos y vivos (historia 1)**: cada objeto se reconoce a primera vista, con contorno oscuro y colores vivos, y todos tienen el mismo estilo.
 3. **Exactamente 3 diferencias (SC-002, SC-003)**: en cada escena hay un objeto de otro color, uno que falta arriba y uno añadido abajo. La pantalla dice "Te faltan 3 diferencias". Tocar cada una la marca con un círculo en los dos dibujos y baja la cuenta. Al marcar la tercera aparece la felicitación con "las 3 diferencias". No se encuentra ninguna otra.
 4. **Fallo (casos límite)**: tocar un sitio sin diferencia muestra el aviso amable de siempre y suma un toque. Tocar una diferencia ya marcada no cambia nada.
-5. **Escenas distintas (SC-004)**: jugar 3 partidas seguidas con "Jugar otra vez": aparece más de una escena (nunca la misma dos veces seguidas).
+5. **Composiciones distintas (SC-004)**: jugar 10 partidas seguidas con "Jugar otra vez": las 10 son distintas (otros objetos y otras diferencias), el lugar (Salón, Cocina, Jardín, Dormitorio, Playa o Granja) cambia siempre de una partida a la siguiente y a veces cambia también el color de fondo.
 6. **Botones (SC-005)**: en la felicitación, "Jugar otra vez" y "Volver al inicio" muestran un icono grande junto a su texto.
 7. **Otras actividades (FR-010)**: abrir Parejas, Forma la palabra, Sopa de letras y Adivinanzas; funcionan igual que antes (la elección de número de Sopa de letras sigue ahí).
 

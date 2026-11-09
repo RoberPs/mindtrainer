@@ -25,9 +25,9 @@ export function Diferencias({ avisarPartida }: PropsContenido) {
     // Solo al abrir la actividad.
   }, []);
 
-  // La siguiente partida es siempre de otra escena distinta de la que se acaba de jugar.
+  // La siguiente partida es siempre de otro ambiente y con otra composición.
   const jugarOtraVez = () => {
-    setPartida(crearPartida(partida.escena.id));
+    setPartida(crearPartida(partida.escena));
     avisarPartida(true);
   };
 

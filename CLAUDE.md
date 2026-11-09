@@ -45,7 +45,7 @@ src/
 │   ├── forma-palabra/       # Actividad "Forma la palabra": palabras.ts, juego.ts (reglas puras) y sus pantallas
 │   ├── sopa-de-letras/      # Actividad "Sopa de letras": sopas.ts (5 pequeñas y 3 medianas, fijas), juego.ts (reglas puras) y sus pantallas
 │   ├── adivinanzas/         # Actividad "Adivinanzas": banco.ts (50 adivinanzas), juego.ts (reglas puras) y sus pantallas
-│   └── diferencias/         # Actividad "Diferencias": escena.ts (tipos y reglas de las escenas), objetos.tsx (estilo común de los dibujos), escenas/ (3 escenas fijas, Salón, Cocina y Jardín, dibujadas con react-native-svg; cada una con 3 diferencias: color, falta y añadido), juego.ts (reglas puras, siempre 3 diferencias) y sus pantallas
+│   └── diferencias/         # Actividad "Diferencias": escena.ts (tipos de las escenas), objetos.tsx (estilo común de los dibujos), composicion.ts (compone al azar la escena de cada partida) y escenas/ (6 ambientes: Salón, Cocina, Jardín, Dormitorio, Playa y Granja, con sus objetos dibujados con react-native-svg; cada escena tiene 3 diferencias: color, falta y añadido), juego.ts (reglas puras, siempre 3 diferencias) y sus pantallas
 ├── pantallas/               # Bienvenida.tsx (logo y botón Empezar), Inicio.tsx (tarjetas grandes de juegos), MarcoActividad.tsx (da su color al juego)
 ├── componentes/             # BotonGrande.tsx, ColorJuego.tsx (contexto del color del juego), Icono.tsx, ElegirOpcion.tsx (pantalla de elegir de Sopa de letras), IconoVictoria.tsx (icono de las pantallas finales, con fundido)
 ├── animacion.ts             # Interruptor de la animación de victoria (apagada en pruebas) y su duración

@@ -69,3 +69,26 @@ export const planta = (color: string) => (
     <Rect x={22} y={60} width={56} height={9} rx={3} fill={color} {...trazo} />
   </G>
 );
+
+// Cuadro con un paisaje. El color es el del marco.
+export const cuadro = (color: string) => (
+  <G>
+    <Rect x={10} y={16} width={80} height={68} rx={4} fill={color} {...trazo} />
+    <Rect x={19} y={25} width={62} height={50} fill={colores.cielo} {...trazo} />
+    <Polygon points="19,75 40,45 56,64 66,52 81,75" fill={colores.verde} {...trazo} />
+    <Circle cx={66} cy={36} r={7} fill={colores.amarillo} {...trazo} strokeWidth={2.5} />
+  </G>
+);
+
+// Estante con tarros. El color es el de la tabla.
+export const estante = (color: string) => (
+  <G>
+    <Rect x={14} y={28} width={16} height={32} rx={4} fill={colores.crema} {...trazo} />
+    <Rect x={14} y={24} width={16} height={7} rx={2} fill={colores.rojo} {...trazo} strokeWidth={2.5} />
+    <Rect x={38} y={20} width={20} height={40} rx={4} fill={colores.crema} {...trazo} />
+    <Rect x={38} y={16} width={20} height={7} rx={2} fill={colores.verde} {...trazo} strokeWidth={2.5} />
+    <Rect x={66} y={32} width={16} height={28} rx={4} fill={colores.crema} {...trazo} />
+    <Rect x={66} y={28} width={16} height={7} rx={2} fill={colores.amarillo} {...trazo} strokeWidth={2.5} />
+    <Rect x={6} y={58} width={88} height={9} rx={3} fill={color} {...trazo} />
+  </G>
+);

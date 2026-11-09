@@ -1,7 +1,7 @@
 import { dibujosDe } from '../src/actividades/diferencias/escena';
-import { escenas } from '../src/actividades/diferencias/escenas';
+import { ambientes } from '../src/actividades/diferencias/escenas';
 import { crearPartida, faltan, tocar, totalDiferencias, type Partida } from '../src/actividades/diferencias/juego';
-import { centroDe, diferenciasDe, escenaDePrueba, puntoVacio } from './ayudas-diferencias';
+import { azarFijo, centroDe, diferenciasDe, escenaDePrueba, puntoVacio } from './ayudas-diferencias';
 
 const nueva = (): Partida => ({ ...crearPartida(undefined, () => 0), escena: escenaDePrueba });
 const ids = diferenciasDe(escenaDePrueba).map((d) => d.id);
@@ -75,30 +75,36 @@ describe('Diferencias: reglas del juego (siempre 3 diferencias)', () => {
 });
 
 describe('Diferencias: la escena de cada partida', () => {
-  it('hay 3 escenas fijas', () => {
-    expect(escenas).toHaveLength(3);
+  it('hay al menos 6 ambientes', () => {
+    expect(ambientes.length).toBeGreaterThanOrEqual(6);
   });
 
-  it('crearPartida elige una escena de la lista', () => {
-    expect(escenas).toContain(crearPartida(undefined, () => 0).escena);
+  it('crearPartida compone una escena de uno de los ambientes', () => {
+    const p = crearPartida(undefined, azarFijo(1));
+    expect(ambientes.map((a) => a.id)).toContain(p.escena.ambiente);
   });
 
-  it('nunca repite la escena anterior, con cualquier valor del azar', () => {
+  it('nunca repite el ambiente de la partida anterior, con cualquier valor del azar', () => {
     for (const azar of [0, 0.25, 0.5, 0.75, 0.99]) {
-      for (const anterior of escenas) {
-        expect(crearPartida(anterior.id, () => azar).escena.id).not.toBe(anterior.id);
+      for (const a of ambientes) {
+        const anterior = crearPartida(undefined, azarFijo(ambientes.indexOf(a))).escena;
+        const previa = { ...anterior, ambiente: a.id };
+        expect(crearPartida(previa, () => azar).escena.ambiente).not.toBe(a.id);
       }
     }
   });
 
-  it('partidas seguidas muestran más de una escena distinta', () => {
-    let anterior: string | undefined;
-    const vistas = new Set<string>();
-    for (let i = 0; i < 3; i++) {
-      const p = crearPartida(anterior, () => 0);
-      vistas.add(p.escena.id);
-      anterior = p.escena.id;
+  it('con 12 partidas seguidas salen varios ambientes y casi todas las composiciones son distintas', () => {
+    let anterior: Partida | undefined;
+    const ids = new Set<string>();
+    const lugares = new Set<string>();
+    for (let i = 0; i < 12; i++) {
+      const p = crearPartida(anterior?.escena, azarFijo(100 + i));
+      ids.add(p.escena.id);
+      lugares.add(p.escena.ambiente);
+      anterior = p;
     }
-    expect(vistas.size).toBeGreaterThan(1);
+    expect(ids.size).toBe(12);
+    expect(lugares.size).toBeGreaterThanOrEqual(4);
   });
 });

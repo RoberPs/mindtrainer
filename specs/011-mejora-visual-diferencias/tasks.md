@@ -145,5 +145,19 @@
 
 ## Resumen
 
-- 29 tareas. Preparación 2 (T001-T002), base 7 (T003-T009), US1 4 (T010-T013), US2 4 (T014-T017), US3 5 (T018-T022), US4 1 (T023), cierre 6 (T024-T029).
+- 36 tareas (T030 a T036 son la fase 8, de la petición de más variedad). Preparación 2 (T001-T002), base 7 (T003-T009), US1 4 (T010-T013), US2 4 (T014-T017), US3 5 (T018-T022), US4 1 (T023), cierre 6 (T024-T029).
 - Oportunidades de paralelismo: T003 y T004; T014 a T016; T020 y T021; T025 y T026.
+
+---
+
+## Fase 8: Más variedad (petición posterior: 20 o 30 composiciones, al menos el doble de ambientes)
+
+**Objetivo**: 6 ambientes y composición al azar de objetos, colores y diferencias en cada partida (historia 3 ampliada, FR-006 y SC-004 de la spec).
+
+- [X] T030 Crear `src/actividades/diferencias/composicion.ts` con los tipos `Ambiente` y `Elegible`, los 6 huecos fijos (3 columnas por 2 filas), las parejas de color y `componerEscena(ambiente, azar)`; añadir `ambiente` a `Escena` en `escena.ts` y mover `cuadro` y `estante` a `objetos.tsx`
+- [X] T031 [P] Reescribir `escenas/salon.tsx`, `escenas/cocina.tsx` y `escenas/jardin.tsx` como ambientes con catálogo de objetos (fila de arriba y de abajo) y varios colores de fondo, y exportar los objetos que otros ambientes reutilizan
+- [X] T032 [P] Crear los ambientes nuevos `escenas/dormitorio.tsx`, `escenas/playa.tsx` y `escenas/granja.tsx` con sus objetos propios y `escenas/index.ts` con la lista `ambientes` (6)
+- [X] T033 Adaptar `juego.ts` (`crearPartida(anterior, azar)` elige un ambiente distinto del anterior y compone la escena) y `Diferencias.tsx` (`crearPartida(partida.escena)`)
+- [X] T034 Rehacer `tests/diferencias-escena.test.tsx` (reglas de 40 composiciones por ambiente, al menos 30 distintas por ambiente y más de 200 en total), `tests/diferencias-juego.test.tsx` (ambiente nunca repetido y 12 partidas seguidas distintas) y ajustar `tests/ayudas-diferencias.ts` y `tests/diferencias-pantalla.test.tsx`
+- [X] T035 Revisar el aspecto de las composiciones con una vista previa fuera del proyecto y actualizar `CLAUDE.md`
+- [ ] T036 Tarea para una persona con móvil: jugar 10 partidas seguidas y comprobar que cada una es distinta, que el lugar cambia siempre y que las diferencias son evidentes (SC-004, quickstart punto 5)

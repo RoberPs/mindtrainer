@@ -41,17 +41,17 @@ En cada partida hay exactamente 3 diferencias entre los dos dibujos, de tres cla
 
 ---
 
-### Historia 3 - Partidas distintas, escenas distintas (Prioridad: P2)
+### Historia 3 - Partidas distintas, composiciones distintas (Prioridad: P2)
 
-Al jugar varias partidas seguidas, no siempre sale la misma escena. Hay al menos 2 escenas diferentes.
+Al jugar varias partidas seguidas, cada una muestra una composición distinta: otro lugar, otros objetos y otras diferencias. Hay al menos 6 lugares (ambientes) y al menos 30 composiciones posibles, elegidas al azar, de modo que no se repiten las mismas cada 2 o 3 partidas.
 
 **Por qué esta prioridad**: aporta variedad, pero el juego es usable con una sola escena.
 
-**Prueba independiente**: jugar varias partidas seguidas y comprobar que sale más de una escena distinta.
+**Prueba independiente**: jugar 10 partidas seguidas y comprobar que cada una es distinta de las demás y que el lugar nunca se repite en dos partidas seguidas.
 
 **Escenarios de aceptación**:
 
-1. **Dado** varias partidas seguidas, **cuando** se comparan las escenas que salen, **entonces** aparece más de una escena distinta.
+1. **Dado** varias partidas seguidas, **cuando** se comparan las escenas que salen, **entonces** cada una tiene objetos y diferencias distintos de las demás y el lugar cambia siempre de una partida a la siguiente.
 
 ---
 
@@ -85,7 +85,7 @@ Los botones "Jugar otra vez" y "Volver al inicio" de "Diferencias" llevan un ico
 - **FR-003**: Cada partida DEBE tener exactamente 3 diferencias: un objeto de otro color, un objeto que falta y un objeto añadido. No DEBE haber ninguna diferencia más entre los dos dibujos.
 - **FR-004**: Cada diferencia DEBE ser grande y evidente, y DEBE poder marcarse tocando justo donde se ve.
 - **FR-005**: Los detalles propios del dibujo DEBEN ser idénticos en los dos dibujos, para que no se confundan con diferencias.
-- **FR-006**: DEBE haber al menos 2 escenas distintas y la escena DEBE poder variar entre partidas seguidas.
+- **FR-006**: DEBE haber al menos 6 ambientes (lugares) distintos y al menos 30 composiciones posibles. La composición se elige al azar al empezar cada partida: el ambiente NO DEBE repetirse en dos partidas seguidas y cambian también los objetos, los colores de fondo y cuáles son las 3 diferencias.
 - **FR-007**: Los botones "Jugar otra vez" y "Volver al inicio" de "Diferencias" DEBEN mostrar un icono grande junto al texto, con texto legible.
 - **FR-008**: Las reglas, el aviso al acertar o fallar, la puntuación y el color propio del juego NO DEBEN cambiar. Los textos mantienen el contraste de 7 a 1 y el tamaño mínimo del proyecto.
 - **FR-009**: Todo el material gráfico nuevo DEBE estar incluido en la app (sin descargas ni internet) y tener una licencia que permita usarlo sin pagar, sin dar crédito, sin crear una cuenta y sin heredar una licencia.
@@ -93,7 +93,8 @@ Los botones "Jugar otra vez" y "Volver al inicio" de "Diferencias" llevan un ico
 
 ### Entidades clave
 
-- **Escena**: dibujo con su nombre y sus objetos propios, que puede mostrarse en dos versiones (con y sin las 3 diferencias).
+- **Ambiente**: un lugar (Salón, Cocina, Jardín, Dormitorio, Playa, Granja) con su fondo y un catálogo de objetos propios.
+- **Escena**: composición concreta de una partida: un ambiente con unos objetos colocados al azar, que se muestra en dos versiones (con y sin las 3 diferencias).
 - **Diferencia**: cambio entre los dos dibujos de una escena, de una de tres clases (color, falta, añadido), con la zona donde se marca.
 - **Material gráfico**: imágenes de la app con licencia sin condiciones.
 
@@ -104,7 +105,7 @@ Los botones "Jugar otra vez" y "Volver al inicio" de "Diferencias" llevan un ico
 - **SC-001**: En una partida, el 100 % de las veces se ven los dos dibujos completos, con el mismo tamaño y alineados, sin acercar.
 - **SC-002**: En cada escena hay exactamente 3 diferencias, y una persona que juega la escena entera encuentra las 3 y no halla ninguna más.
 - **SC-003**: Una persona mayor localiza cada una de las 3 diferencias a simple vista, sin ayuda, en cada escena.
-- **SC-004**: En varias partidas seguidas aparece más de una escena distinta.
+- **SC-004**: En 10 partidas seguidas, las 10 composiciones son distintas entre sí y el ambiente nunca se repite en dos partidas seguidas; en total hay al menos 30 composiciones posibles.
 - **SC-005**: Los dos botones ("Jugar otra vez", "Volver al inicio") muestran icono y texto a la vez el 100 % de las veces que aparecen en "Diferencias".
 - **SC-006**: Las reglas, el aviso al acertar o fallar y la puntuación se comportan igual que antes; las pruebas existentes de "Diferencias" que sigan valiendo siguen pasando.
 - **SC-007**: No se necesita pagar, dar crédito, crear una cuenta ni aceptar una licencia heredada para usar ningún material gráfico de la app.
@@ -115,7 +116,7 @@ Los botones "Jugar otra vez" y "Volver al inicio" de "Diferencias" llevan un ico
 - **Mismo estilo**: es más importante que todos los objetos de una escena compartan estilo que el origen de cada imagen; mezclar estilos no se admite.
 - **Solo 3 diferencias**: la petición fija exactamente 3 diferencias por escena y por partida. Por tanto, desaparece la elección actual de 3, 5 o 7 diferencias (spec 008) y la partida empieza directamente. Es el único cambio de reglas, pedido de forma expresa; el resto del juego no cambia.
 - **Cambio de color**: el mismo objeto aparece en los dos dibujos con un color claramente distinto (no un tono parecido).
-- Las 4 escenas actuales (Salón, Cocina, Jardín, Mercado) pueden rehacerse o sustituirse; basta con que queden al menos 2.
+- **Más variedad (petición posterior)**: se pidió más variedad (unas 20 o 30 composiciones, más aleatorias) y al menos el doble de ambientes que los 3 iniciales. Se resuelve con 6 ambientes y composición al azar de objetos, colores y diferencias en cada partida, en lugar de dibujar una escena fija para cada composición. Las escenas fijas anteriores se sustituyen por este sistema.
 - El color propio de "Diferencias" se mantiene para botones y elementos, como hasta ahora.
 - Que los dibujos se vean "nítidos y vivos" y las diferencias "evidentes" lo comprueba una persona con un móvil; el agente no puede darlo por hecho.
 

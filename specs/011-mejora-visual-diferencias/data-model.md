@@ -27,11 +27,21 @@ Una función que dibuja una figura vectorial en un lienzo de 300 × 200 unidades
   - `sobra`: solo `abajo`.
 - `zona`: rectángulo relativo (`x`, `y`, `ancho`, `alto`) donde se marca.
 
-## Escena
+## Ambiente (lugar con catálogo de objetos)
 
-- `id`, `nombre` en español.
+- `id`, `nombre` en español (Salón, Cocina, Jardín, Dormitorio, Playa, Granja: al menos 6).
+- `paredes`: 2 a 4 colores posibles del fondo (pared o cielo).
+- `fondo(pared)`: dibujo de fondo.
+- `arriba`, `abajo`: catálogos de objetos para cada fila (cada uno con `id`, dibujo, `paleta` de colores posibles y `cambiaColor`, que es falso si de otro color no tiene sentido, como un animal o un árbol).
+- Tiene 6 huecos fijos (3 columnas por 2 filas, mismo tamaño). Al empezar cada partida se compone una escena: se eligen al azar la pared, un objeto distinto para cada hueco, qué hueco es el cambio de color (uno que lo admita), cuál falta y cuál sobra, y los colores.
+
+## Escena (composición de una partida)
+
+- `id`: identifica la composición entera (ambiente, pared, objeto de cada hueco y cambios).
+- `ambiente`: el id del lugar; la partida siguiente siempre tiene otro.
+- `nombre` en español.
 - `fondo`: dibujo de fondo, igual en los dos dibujos.
-- `comunes`: objetos que salen igual en los dos dibujos.
+- `comunes`: **3** objetos que salen igual en los dos dibujos.
 - `cambios`: **exactamente 3**, uno de cada tipo.
 
 ### Reglas que comprueban las pruebas

@@ -166,6 +166,7 @@ describe('Diferencias: felicitación y jugar otra vez', () => {
     [...ids, ...idsNuevos].forEach((id) => expect(hayCirculo('abajo', id)).toBe(false));
     // Las zonas son las de la escena nueva, distinta de la anterior.
     expect(segundaEscena.id).not.toBe(escenaDePrueba.id);
+    expect(segundaEscena.ambiente).not.toBe(escenaDePrueba.ambiente);
     for (const id of idsNuevos) await tocarAbajo(centroDe(id, segundaEscena).x, centroDe(id, segundaEscena).y);
     expect(screen.getByText('Has necesitado 3 toques')).toBeTruthy();
   });

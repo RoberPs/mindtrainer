@@ -1,14 +1,13 @@
 import { fireEvent, screen } from '@testing-library/react-native';
 import { dibujosDe, type Escena } from '../src/actividades/diferencias/escena';
-import { escenas } from '../src/actividades/diferencias/escenas';
 import { crearPartida, tocar } from '../src/actividades/diferencias/juego';
 
 // Ayudas para las pruebas de "Diferencias": las coordenadas salen de la escena, no se escriben a mano.
 
-// Con Math.random fijado a 0, la primera partida usa la primera escena y la segunda (que evita la
-// anterior) la segunda.
-export const escenaDePrueba: Escena = escenas[0];
-export const segundaEscena: Escena = escenas[1];
+// Con Math.random fijado a 0, la primera partida compone esta escena y la segunda (que cambia de
+// ambiente) esta otra. Las dos se componen con el mismo azar fijo.
+export const escenaDePrueba: Escena = crearPartida(undefined, () => 0).escena;
+export const segundaEscena: Escena = crearPartida(escenaDePrueba, () => 0).escena;
 
 // Las 3 diferencias de una escena.
 export const diferenciasDe = (escena: Escena = escenaDePrueba) => dibujosDe(escena).diferencias;
@@ -37,6 +36,17 @@ export function puntoVacio(escena: Escena = escenaDePrueba): { x: number; y: num
   if (!vacio) throw new Error('No hay ningún punto vacío');
   return vacio;
 }
+
+// Un azar repetible (mulberry32) para componer escenas distintas en las pruebas.
+export const azarFijo = (semilla: number) => {
+  let a = semilla;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+};
 
 const ANCHO = 300;
 const ALTO = 200;
