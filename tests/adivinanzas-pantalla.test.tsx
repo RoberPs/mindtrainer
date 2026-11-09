@@ -1,9 +1,9 @@
 import { fireEvent, render, screen, within } from '@testing-library/react-native';
-import App from '../App';
 import { Adivinanzas } from '../src/actividades/adivinanzas/Adivinanzas';
 import { MarcoActividad } from '../src/pantallas/MarcoActividad';
 import { crearPartida, responder, siguiente, type Partida } from '../src/actividades/adivinanzas/juego';
 import { correctaActual, incorrectaActual, turnoActual } from './ayudas-adivinanzas';
+import { abrirApp } from './ayudas';
 
 // Con Math.random fijado a 0 conocemos la partida que crea la app (mismo sorteo).
 let modelo: Partida;
@@ -16,7 +16,7 @@ afterEach(() => {
 });
 
 async function abrir() {
-  await render(<App />);
+  await abrirApp();
   await fireEvent.press(screen.getByText('Adivinanzas'));
 }
 const pulsar = (texto: string) => fireEvent.press(screen.getByText(texto));
@@ -28,7 +28,7 @@ function avanzarModelo() {
 
 describe('Adivinanzas: pantalla de una adivinanza', () => {
   it('aparece en la lista de inicio con icono, nombre y descripción', async () => {
-    await render(<App />);
+    await abrirApp();
     expect(screen.getByText('Adivinanzas')).toBeTruthy();
     expect(screen.getByText('Descubre la respuesta de cada adivinanza')).toBeTruthy();
     expect(screen.getByTestId('icono-adivinanzas', { includeHiddenElements: true })).toBeTruthy();

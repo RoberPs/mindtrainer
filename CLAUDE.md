@@ -16,6 +16,7 @@ Lee [la constitución](.specify/memory/constitution.md) antes de cambiar nada. R
   dato sale del móvil y ninguna clave o secreto va en el código.
 - **Personas mayores**: letra de al menos 22 puntos, botones de al menos 64 puntos de alto,
   contraste de al menos 7 a 1, sin límites de tiempo. Los valores viven en `src/tema.ts`.
+- **Color por juego**: cada juego tiene su color (fondo y texto, en `tema.colores.actividades`) y lo usa en todos sus botones y elementos mediante `useColorJuego()`. Texto sobre el crema: siempre `tema.colores.texto`. Todo par texto/fondo, 7 a 1 (lo comprueba `tests/tema-contraste.test.tsx`).
 - **Iconos e imágenes**: muchos, intuitivos, grandes, incluidos en la app y siempre junto al
   texto, nunca en lugar de él.
 - **Textos**: todos en español de España, en `src/textos.ts`. Con tildes y signos de apertura.
@@ -37,7 +38,7 @@ npm run typecheck  # comprobar tipos
 ## Estructura
 
 ```text
-App.tsx                      # Decide si se ve el inicio o una actividad
+App.tsx                      # Decide si se ve la bienvenida, la lista de juegos o una actividad
 src/
 ├── actividades/             # tipos.ts (contrato), registro.ts (lista real), ejemplos.ts (solo pruebas a mano)
 │   ├── parejas/             # Actividad "Parejas": juego.ts (reglas puras), dibujos.ts y sus pantallas
@@ -45,10 +46,10 @@ src/
 │   ├── sopa-de-letras/      # Actividad "Sopa de letras": sopas.ts (5 pequeñas y 3 medianas, fijas), juego.ts (reglas puras) y sus pantallas
 │   ├── adivinanzas/         # Actividad "Adivinanzas": banco.ts (50 adivinanzas), juego.ts (reglas puras) y sus pantallas
 │   └── diferencias/         # Actividad "Diferencias": escena.ts (4 escenas fijas con 7 cambios cada una; se juega con 3, 5 o 7), juego.ts (reglas puras) y sus pantallas
-├── pantallas/               # Inicio.tsx, MarcoActividad.tsx
-├── componentes/             # BotonGrande.tsx, Icono.tsx, ElegirOpcion.tsx (pantalla de elegir de Sopa y Diferencias), IconoVictoria.tsx (icono de las pantallas finales, con fundido)
+├── pantallas/               # Bienvenida.tsx (logo y botón Empezar), Inicio.tsx (tarjetas grandes de juegos), MarcoActividad.tsx (da su color al juego)
+├── componentes/             # BotonGrande.tsx, ColorJuego.tsx (contexto del color del juego), Icono.tsx, ElegirOpcion.tsx (pantalla de elegir de Sopa y Diferencias), IconoVictoria.tsx (icono de las pantallas finales, con fundido)
 ├── animacion.ts             # Interruptor de la animación de victoria (apagada en pruebas) y su duración
-├── tema.ts                  # Tamaños y colores accesibles (incluye un color por actividad)
+├── tema.ts                  # Tamaños y colores accesibles (paleta del logo: crema, azul, verde, naranja, magenta y gris azulado; un color por actividad)
 └── textos.ts                # Textos fijos
 tests/                       # *.test.tsx; ayudas.tsx crea actividades de prueba
 specs/<nnn-nombre>/          # spec, plan, tareas y quickstart de cada funcionalidad
@@ -58,9 +59,10 @@ specs/<nnn-nombre>/          # spec, plan, tareas y quickstart de cada funcional
 
 Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla:
 
-1. Cumple el contrato de [specs/001-pantalla-inicio/contracts/actividad.md](specs/001-pantalla-inicio/contracts/actividad.md):
-   identificador, icono, nombre, descripción, contenido y, opcional, el color de su tarjeta
-   (`tema.colores.actividades`; distinto del de las demás y con contraste de 7 a 1 con blanco).
+1. Cumple el contrato de [specs/001-pantalla-inicio/contracts/actividad.md](specs/001-pantalla-inicio/contracts/actividad.md)
+   y [specs/009-bienvenida-seleccion-juegos/contracts/actividad-color.md](specs/009-bienvenida-seleccion-juegos/contracts/actividad-color.md):
+   identificador, icono, nombre, descripción, contenido y, opcional, su color y el color de su texto
+   (`tema.colores.actividades`; distinto del de las demás y con contraste de 7 a 1).
 2. El contenido avisa con `avisarPartida(true)` al empezar una partida y `avisarPartida(false)`
    al terminarla.
 3. No pinta el botón "Volver al inicio": lo pone siempre `MarcoActividad`.

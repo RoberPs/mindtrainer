@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import App from '../App';
 import { buscarDibujo } from '../src/actividades/parejas/dibujos';
 import { crearPartida, type Tamano } from '../src/actividades/parejas/juego';
+import { abrirApp } from './ayudas';
 
 const botones: Record<Tamano, string> = {
   pequena: 'Pequeña: 6 cartas',
@@ -30,7 +30,7 @@ function parejas(ids: string[]): [number, number][] {
 const distintaDe = (ids: string[], pos: number) => ids.findIndex((id) => id !== ids[pos]);
 
 async function abrirPartida(tamano: Tamano) {
-  await render(<App />);
+  await abrirApp();
   await fireEvent.press(screen.getByText('Parejas'));
   await fireEvent.press(screen.getByText(botones[tamano]));
 }
@@ -53,7 +53,7 @@ afterEach(() => {
 
 describe('Parejas: inicio y elección de tamaño', () => {
   it('aparece en la lista de inicio con icono, nombre y descripción', async () => {
-    await render(<App />);
+    await abrirApp();
     expect(screen.getByTestId('lista-actividades')).toBeTruthy();
     expect(screen.getByText('Parejas')).toBeTruthy();
     expect(screen.getByText('Encuentra las cartas iguales')).toBeTruthy();
@@ -61,7 +61,7 @@ describe('Parejas: inicio y elección de tamaño', () => {
   });
 
   it('al abrirla se ven los tres tamaños con su número de cartas y sus iconos', async () => {
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Parejas'));
     expect(screen.getByText('Elige el tamaño de la partida')).toBeTruthy();
     for (const texto of Object.values(botones)) expect(screen.getByText(texto)).toBeTruthy();
@@ -78,7 +78,7 @@ describe('Parejas: inicio y elección de tamaño', () => {
   });
 
   it('elegir el tamaño empieza la partida: salir pide confirmación; antes de elegir, no', async () => {
-    await render(<App />);
+    await abrirApp();
     await fireEvent.press(screen.getByText('Parejas'));
     await fireEvent.press(screen.getByText('Volver al inicio'));
     expect(screen.queryByText(/Seguro que quieres salir/)).toBeNull();

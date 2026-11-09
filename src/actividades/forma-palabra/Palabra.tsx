@@ -1,5 +1,6 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { BotonGrande } from '../../componentes/BotonGrande';
+import { useColorJuego } from '../../componentes/ColorJuego';
 import { Icono } from '../../componentes/Icono';
 import { textosFormaPalabra as t } from '../../textos';
 import { tema } from '../../tema';
@@ -25,6 +26,7 @@ export function Palabra({
   alVerRespuesta,
   alSiguiente,
 }: Props) {
+  const color = useColorJuego();
   const palabra = palabraActual(partida);
   const jugando = partida.estado === 'jugando';
   const casillas = [...palabra].map((_, i) => partida.colocadas[i]?.letra ?? '');
@@ -57,9 +59,9 @@ export function Palabra({
                 accessibilityLabel={l.letra}
                 testID={`letra-${l.id}`}
                 onPress={() => alColocar(l.id)}
-                style={({ pressed }) => [estilos.letra, pressed && estilos.pulsado]}
+                style={({ pressed }) => [estilos.letra, { backgroundColor: color.fondo }, pressed && estilos.pulsado]}
               >
-                <Text style={estilos.textoLetra}>{l.letra}</Text>
+                <Text style={[estilos.textoLetra, { color: color.texto }]}>{l.letra}</Text>
               </Pressable>
             ))}
           </View>
@@ -112,8 +114,7 @@ const estilos = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 12,
-    backgroundColor: tema.colores.primario,
   },
   pulsado: { opacity: 0.8 },
-  textoLetra: { fontSize: tema.letra.titulo, fontWeight: '700', color: tema.colores.textoSobrePrimario },
+  textoLetra: { fontSize: tema.letra.titulo, fontWeight: '700' },
 });

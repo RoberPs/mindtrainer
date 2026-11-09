@@ -24,7 +24,7 @@ export function ListaPalabras({ partida }: Props) {
             <Icono
               icono={{ nombre: hallada ? 'checkbox-marked-circle' : 'help-circle-outline' }}
               tamano={40}
-              color={hallada ? tema.colores.acierto : tema.colores.primario}
+              color={hallada ? tema.colores.acierto : tema.colores.texto}
             />
             {hallada ? (
               <Text style={[estilos.texto, estilos.tachada]}>{palabra}</Text>

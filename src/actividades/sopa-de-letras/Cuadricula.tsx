@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useColorJuego } from '../../componentes/ColorJuego';
 import { textosSopa as t } from '../../textos';
 import { tema } from '../../tema';
 import type { Casilla, Partida } from './juego';
@@ -13,6 +14,7 @@ const clave = (c: Casilla) => `${c.fila}-${c.columna}`;
 // Cuadrícula de cada sopa (5 × 6 la pequeña, 6 × 6 la mediana). Marca y palabras encontradas se distinguen por el
 // borde y por el fondo, no solo por el color.
 export function Cuadricula({ partida, alTocar }: Props) {
+  const color = useColorJuego();
   const encontradas = new Set(partida.encontradas.flatMap((e) => e.casillas.map(clave)));
   return (
     <View style={estilos.cuadricula}>
@@ -30,9 +32,13 @@ export function Cuadricula({ partida, alTocar }: Props) {
                 accessibilityLabel={t.celda(letra, fila + 1, columna + 1)}
                 accessibilityState={{ selected: hallada || marcada }}
                 onPress={() => alTocar(casilla)}
-                style={[estilos.celda, marcada && estilos.marcada, hallada && estilos.hallada]}
+                style={[
+                  estilos.celda,
+                  marcada && [estilos.marcada, { backgroundColor: color.fondo, borderColor: color.fondo }],
+                  hallada && estilos.hallada,
+                ]}
               >
-                <Text style={[estilos.letra, hallada && estilos.letraHallada]}>{letra}</Text>
+                <Text style={[estilos.letra, marcada && { color: color.texto }, hallada && estilos.letraHallada]}>{letra}</Text>
               </Pressable>
             );
           })}

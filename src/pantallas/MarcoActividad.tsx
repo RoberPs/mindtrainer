@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { BotonGrande } from '../componentes/BotonGrande';
+import { ProveedorColorJuego } from '../componentes/ColorJuego';
 import { textos } from '../textos';
 import { tema } from '../tema';
 import type { Actividad } from '../actividades/tipos';
@@ -26,6 +27,10 @@ export function MarcoActividad({ actividad, alVolver }: Props) {
   };
 
   return (
+    <ProveedorColorJuego
+      fondo={actividad.color ?? tema.colores.primario}
+      texto={actividad.colorTexto ?? tema.colores.textoSobrePrimario}
+    >
     <View style={estilos.marco}>
       <View style={estilos.barra}>
         <BotonGrande
@@ -58,6 +63,7 @@ export function MarcoActividad({ actividad, alVolver }: Props) {
         </View>
       )}
     </View>
+    </ProveedorColorJuego>
   );
 }
 

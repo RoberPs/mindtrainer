@@ -68,12 +68,12 @@ const cambia = (id: string, iconoArriba: string, iconoAbajo: string, columna: nu
 });
 
 // Colores oscuros: todos superan 7 a 1 de contraste con el fondo de los dibujos.
-const azul = '#0B3D91';
+const azul = '#1A469C';
 const marron = '#5D2E0C';
 const ocre = '#6B4400';
 const naranja = '#7A3E00';
-const verde = '#1B5E20';
-const morado = '#5B2A86';
+const verde = '#0F5A38';
+const magenta = '#8E2149';
 const gris = '#4A4A4A';
 const negro = '#111111';
 
@@ -112,7 +112,7 @@ const cocina: Escena = {
     cambia('cubierto', 'knife', 'silverware-spoon', 1, 0, negro),
     falta('queso', 'cheese', 3, 2, ocre),
     sobra('huevo', 'egg', 0, 2, naranja),
-    cambia('maquina', 'blender', 'toaster-oven', 2, 1, morado),
+    cambia('maquina', 'blender', 'toaster-oven', 2, 1, magenta),
   ],
 };
 
@@ -126,7 +126,7 @@ const jardin: Escena = {
     elemento('pino', 'pine-tree', 1, 2, verde),
   ],
   cambios: [
-    cambia('insecto', 'butterfly', 'bee', 1, 1, morado),
+    cambia('insecto', 'butterfly', 'bee', 1, 1, magenta),
     falta('sol', 'weather-sunny', 3, 0, naranja),
     sobra('nube', 'cloud', 0, 2, gris),
     cambia('animal', 'bird', 'rabbit', 2, 0, marron),
@@ -143,11 +143,11 @@ const mercado: Escena = {
     elemento('cesta', 'basket', 1, 0, ocre),
     elemento('caja', 'cash-register', 3, 0, gris),
     elemento('tienda', 'store', 1, 1, azul),
-    elemento('etiqueta', 'tag', 0, 2, morado),
+    elemento('etiqueta', 'tag', 0, 2, magenta),
     elemento('carro', 'cart', 2, 2, negro),
   ],
   cambios: [
-    cambia('fruta', 'fruit-grapes', 'fruit-cherries', 0, 0, morado),
+    cambia('fruta', 'fruit-grapes', 'fruit-cherries', 0, 0, magenta),
     falta('pina', 'fruit-pineapple', 2, 1, naranja),
     sobra('pescado', 'fish', 3, 2, azul),
     cambia('granja', 'cow', 'pig', 1, 2, marron),

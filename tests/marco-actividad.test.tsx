@@ -1,9 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import App from '../App';
-import { crearActividades } from './ayudas';
+import { crearActividades, abrirApp } from './ayudas';
 
 async function abrirPrimeraActividad() {
-  await render(<App actividades={crearActividades(2)} />);
+  await abrirApp(crearActividades(2));
   await fireEvent.press(screen.getByText('Actividad 1'));
 }
 

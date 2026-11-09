@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Pressable, StyleSheet, Text, View, type GestureResponderEvent, type LayoutChangeEvent } from 'react-native';
+import { useColorJuego } from '../../componentes/ColorJuego';
 import { Icono } from '../../componentes/Icono';
 import { tema } from '../../tema';
 import type { Diferencia, Elemento } from './escena';
@@ -19,6 +20,7 @@ type Props = {
 
 // Un dibujo hecho con iconos y, encima, un círculo grueso por cada diferencia encontrada.
 export function Dibujo({ lado, rotulo, elementos, diferencias, encontradas, ancho, alto, alTocar }: Props) {
+  const color = useColorJuego();
   // Tamaño real medido; mientras no se mida se usa el calculado.
   const medido = useRef<{ ancho: number; alto: number } | null>(null);
 
@@ -74,7 +76,7 @@ export function Dibujo({ lado, rotulo, elementos, diferencias, encontradas, anch
           accessibilityLabel={rotulo}
           onLayout={alMedir}
           onPress={pulsar}
-          style={[estilos.recuadro, { width: ancho, height: alto }]}
+          style={[estilos.recuadro, { width: ancho, height: alto, borderColor: color.fondo }]}
         >
           {contenido}
         </Pressable>
@@ -83,7 +85,7 @@ export function Dibujo({ lado, rotulo, elementos, diferencias, encontradas, anch
           testID={`dibujo-${lado}`}
           accessibilityLabel={rotulo}
           onLayout={alMedir}
-          style={[estilos.recuadro, { width: ancho, height: alto }]}
+          style={[estilos.recuadro, { width: ancho, height: alto, borderColor: color.fondo }]}
         >
           {contenido}
         </View>
@@ -98,7 +100,6 @@ const estilos = StyleSheet.create({
   recuadro: {
     backgroundColor: tema.colores.tarjeta,
     borderWidth: 2,
-    borderColor: tema.colores.borde,
     borderRadius: 12,
     overflow: 'hidden',
   },

@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useColorJuego } from '../../componentes/ColorJuego';
 import { Icono } from '../../componentes/Icono';
 import { textosParejas } from '../../textos';
 import { tema } from '../../tema';
@@ -13,6 +14,7 @@ type Props = {
 
 // Una carta: tapada (interrogante + "Carta") o con su dibujo grande y su nombre escrito.
 export function Carta({ carta, posicion, alTocar }: Props) {
+  const color = useColorJuego();
   if (carta.estado === 'tapada') {
     return (
       <Pressable
@@ -20,15 +22,15 @@ export function Carta({ carta, posicion, alTocar }: Props) {
         accessibilityRole="button"
         accessibilityLabel={textosParejas.carta}
         onPress={alTocar}
-        style={[estilos.carta, estilos.tapada]}
+        style={[estilos.carta, { backgroundColor: color.fondo, borderColor: color.fondo }]}
       >
         <Icono
           icono={{ nombre: 'help-circle-outline' }}
           tamano={64}
-          color={tema.colores.textoSobrePrimario}
+          color={color.texto}
           testID={`icono-carta-${posicion}`}
         />
-        <Text style={[estilos.nombre, { color: tema.colores.textoSobrePrimario }]}>{textosParejas.carta}</Text>
+        <Text style={[estilos.nombre, { color: color.texto }]}>{textosParejas.carta}</Text>
       </Pressable>
     );
   }
@@ -75,7 +77,6 @@ const estilos = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 4,
   },
-  tapada: { backgroundColor: tema.colores.primario, borderColor: tema.colores.primario },
   visible: { backgroundColor: tema.colores.tarjeta, borderColor: tema.colores.borde },
   acertada: { borderColor: tema.colores.acierto },
   fila: { flexDirection: 'row', alignItems: 'center', gap: 4 },

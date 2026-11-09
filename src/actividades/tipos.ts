@@ -17,7 +17,9 @@ export type Actividad = {
   icono: IconoActividad;
   nombre: string;
   descripcion: string;
-  // Color de fondo de su tarjeta en el inicio. Si falta, la tarjeta es azul.
+  // Color del juego: fondo de su tarjeta y de sus botones y elementos. Si falta, es el azul principal.
   color?: string;
+  // Color del texto y de los iconos sobre el color del juego. Si falta, es blanco.
+  colorTexto?: string;
   Contenido: ComponentType<PropsContenido>;
 };

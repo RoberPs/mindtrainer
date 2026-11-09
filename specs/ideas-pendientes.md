@@ -26,6 +26,8 @@ de las adivinanzas (50), las ideas 1, 2 y 3 de Diferencias (4 escenas fijas, 54 
 diferencias) y la animación (900 ms). **No se construyeron** las palabras al revés o en diagonal ni
 la colocación aleatoria. Pendiente de una persona: revisar el contenido nuevo y probarlo en un móvil.
 
+**Estado tras implementar la spec 009 (2026-11-09)**: hechas la bienvenida, el encabezado "Elige uno de los juegos", las tarjetas grandes y la paleta del logo con un color por juego en todos sus botones. Comprobado a mano en un móvil por la persona responsable.
+
 ## Sopa de letras (spec 004)
 
 Observadas el 2026-11-06 al hacer la comprobación manual de la spec 004. Esa comprobación salió

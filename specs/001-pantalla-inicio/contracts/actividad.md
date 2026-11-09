@@ -47,3 +47,5 @@ cumplir este contrato. Es la única interfaz entre la pantalla de inicio y las a
 - Texto: "¿Seguro que quieres salir? Perderás la partida".
 - Dos botones grandes, cada uno con icono y texto: "Sí, salir" y "No, seguir jugando".
 - Sin límite de tiempo para responder.
+
+> Spec 009: el color pasa a ser el color de todo el juego y se añade el color de texto. Ver [actividad-color.md](../../009-bienvenida-seleccion-juegos/contracts/actividad-color.md).
