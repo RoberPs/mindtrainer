@@ -31,4 +31,4 @@
 
 ## Notas
 
-- Los colores concretos y el tipo de movimiento se dejan a la planificación, dentro de los límites de la spec.
+- Los colores concretos se dejan a la planificación, dentro de los límites de la spec. El tipo de animación (fundido) quedó decidido en la aclaración del 2026-11-09.
