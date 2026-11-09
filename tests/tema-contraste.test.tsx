@@ -16,10 +16,17 @@ function contraste(a: string, b: string): number {
 
 const c = tema.colores;
 const juegos = Object.entries(c.actividades);
+// Excepción expresa de la persona responsable (spec 009, aclaraciones): naranja vivo con texto blanco.
+const conExcepcion = ['naranja'];
 
 describe('Contraste de la paleta (RF-009 a RF-012)', () => {
-  it.each(juegos)('el color de %s tiene al menos 7 a 1 entre su texto y su fondo', (_nombre, juego) => {
+  it.each(juegos.filter(([nombre]) => !conExcepcion.includes(nombre)))('el color de %s tiene al menos 7 a 1 entre su texto y su fondo', (_nombre, juego) => {
     expect(contraste(juego.fondo, juego.texto)).toBeGreaterThanOrEqual(tema.contrasteMinimo);
+  });
+
+  it('la excepción del naranja es la única y está documentada: texto blanco sobre el naranja del logo', () => {
+    expect(conExcepcion).toEqual(['naranja']);
+    expect(c.actividades.naranja).toEqual({ fondo: '#F2800D', texto: '#FFFFFF' });
   });
 
   it('hay 5 colores de juego y sus fondos son distintos', () => {

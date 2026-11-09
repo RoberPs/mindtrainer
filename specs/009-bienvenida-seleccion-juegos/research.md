@@ -19,6 +19,8 @@ Contraste calculado con la fórmula de WCAG (la misma de la prueba `inicio-color
 
 **Alternativas descartadas**: oscurecer también el naranja (pierde la identidad); texto casi negro en todas las tarjetas (no llega a 7 a 1 con azul, verde ni magenta).
 
+> **Excepción (2026-11-09)**: la persona responsable ha decidido mantener el naranja del logo con texto **blanco** en Sopa de letras (2,7 a 1) en lugar de texto casi negro (7,08). Es la única combinación por debajo de 7 a 1 y la prueba de contraste la recoge como excepción expresa.
+
 ## 2. Color de cada juego (RF-012)
 
 Parejas azul, Forma la palabra verde, Sopa de letras naranja, Adivinanzas magenta y Diferencias gris azulado: cuatro de la paleta y el quinto, el gris del logo. Además del color, cada juego se distingue por icono y nombre. El verde de acierto (`#0F5A38`, algo más oscuro que el verde de Forma la palabra para llegar a 7 a 1 sobre el crema) es parecido al de Forma la palabra, pero siempre va con icono o texto. El rojo de las marcas de Diferencias (`#A0001C`) se mantiene.

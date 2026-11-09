@@ -11,11 +11,13 @@ export const tema = {
     acierto: '#0F5A38', // verde oscuro de lo acertado (siempre con icono o texto)
     velo: 'rgba(0, 0, 0, 0.6)',
     marca: '#A0001C', // rojo oscuro de los círculos de las diferencias encontradas
-    // Un color por actividad: fondo y color del texto. Todos superan 7 a 1.
+    // Un color por actividad: fondo y color del texto. Todos superan 7 a 1 salvo la excepción del naranja.
     actividades: {
       azul: { fondo: '#1F53B4', texto: '#FFFFFF' },
       verde: { fondo: '#13653F', texto: '#FFFFFF' },
-      naranja: { fondo: '#F2800D', texto: '#111111' },
+      // EXCEPCIÓN decidida por la persona responsable (2026-11-09): naranja vivo del logo con texto blanco,
+      // que da solo 2,7 a 1 (la constitución pide 7 a 1). Ver spec 009, aclaraciones.
+      naranja: { fondo: '#F2800D', texto: '#FFFFFF' },
       magenta: { fondo: '#A32752', texto: '#FFFFFF' },
       grisAzulado: { fondo: '#4C5974', texto: '#FFFFFF' },
     },

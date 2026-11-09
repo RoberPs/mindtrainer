@@ -13,6 +13,7 @@
 ### Sesión 2026-11-09
 
 - Q: ¿Qué mensaje lleva la bienvenida: "Empieza a entrenar tu mente" (ideas pendientes) o "Buenos días" (boceto)? → A (decisión por defecto, revisable): título "Empieza a entrenar tu mente" y debajo la pregunta del boceto "¿Listo para ejercitar tu memoria hoy?". "Buenos días" se descarta porque sería incorrecto por la tarde o por la noche y la app no usa la hora.
+- Q: El naranja del logo (#F2800D) con texto blanco da solo 2,7 a 1, por debajo del 7 a 1 de la constitución. ¿Se oscurece o se usa texto negro? → A (decisión expresa de la persona responsable, 2026-11-09, tras probar la app): se mantiene el naranja vivo del logo con texto blanco en "Sopa de letras". Es una **excepción** a RF-010 y al principio VII, y es la única; el resto de combinaciones cumple 7 a 1. Queda pendiente decidir si se corrige más adelante.
 - Q: ¿Cuál es el nombre de la app que sustituye al hueco "[Nombre de la app]" del boceto? → A: el actual, "MindTrainer".
 
 ## Escenarios de usuario y pruebas *(obligatorio)*
