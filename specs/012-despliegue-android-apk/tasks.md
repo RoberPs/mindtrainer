@@ -14,9 +14,9 @@
 
 ## Fase 1: Preparación
 
-- [ ] T001 Instalar el plugin de Expo para limitar arquitecturas con `npx expo install expo-build-properties` (modifica `package.json` y `package-lock.json`)
-- [ ] T002 [P] Crear `eas.json` con `cli.appVersionSource: "local"` y el perfil `build.preview` (`distribution: "internal"`, `android.buildType: "apk"`), tal como indica `contracts/configuracion-android.md`
-- [ ] T003 [P] Ampliar `.gitignore` con `credentials.json` y `*.keystore` (ya excluye `*.jks`, `*.key`, `*.p12`)
+- [x] T001 Instalar el plugin de Expo para limitar arquitecturas con `npx expo install expo-build-properties` (modifica `package.json` y `package-lock.json`)
+- [x] T002 [P] Crear `eas.json` con `cli.appVersionSource: "local"` y el perfil `build.preview` (`distribution: "internal"`, `android.buildType: "apk"`), tal como indica `contracts/configuracion-android.md`
+- [x] T003 [P] Ampliar `.gitignore` con `credentials.json` y `*.keystore` (ya excluye `*.jks`, `*.key`, `*.p12`)
 
 ---
 
@@ -24,9 +24,10 @@
 
 **Objetivo**: configuración de Android completa y guía de generación disponible antes de compilar.
 
-- [ ] T004 Editar `app.json`: añadir `android.package` = `automatizacionro.mindtrainer`, `android.versionCode` = `1`, `android.blockedPermissions` (INTERNET, READ/WRITE_EXTERNAL_STORAGE, ACCESS_FINE/COARSE_LOCATION, CAMERA, RECORD_AUDIO, READ_CONTACTS) y el plugin `["expo-build-properties", { "android": { "buildArchs": ["arm64-v8a", "armeabi-v7a"] } }]` sin quitar `expo-font` ni `expo-asset`; no tocar `name`, `orientation` ni iconos (FR-002, FR-004, FR-010, FR-011)
-- [ ] T005 Comprobar que la configuración es válida con `npx expo config --type public` y que `npm test` y `npm run typecheck` siguen pasando (SC-006)
-- [ ] T006 [P] Escribir `docs/generar-apk.md` en español para la persona responsable: requisitos (Node, cuenta gratuita de Expo), `npx eas-cli login`, `npx eas-cli build -p android --profile preview`, aceptar que EAS genere la clave la primera vez, descargar el APK, subir `versionCode` en +1 antes de cada APK nuevo, copia de seguridad de la clave con `npx eas-cli credentials` guardada fuera del proyecto y aviso de qué pasa si se pierde (FR-007, FR-008, FR-009, FR-010)
+- [x] T004 Editar `app.json`: añadir `android.package` = `automatizacionro.mindtrainer`, `android.versionCode` = `1`, `android.blockedPermissions` (INTERNET, READ/WRITE_EXTERNAL_STORAGE, ACCESS_FINE/COARSE_LOCATION, CAMERA, RECORD_AUDIO, READ_CONTACTS) y el plugin `["expo-build-properties", { "android": { "buildArchs": ["arm64-v8a", "armeabi-v7a"] } }]` sin quitar `expo-font` ni `expo-asset`; no tocar `name`, `orientation` ni iconos (FR-002, FR-004, FR-010, FR-011)
+- [x] T005 Comprobar que la configuración es válida con `npx expo config --type public` y que `npm test` y `npm run typecheck` siguen pasando (SC-006)
+- [x] T005b Comprobar los permisos antes de compilar: `npx expo prebuild --platform android --no-install` y revisar `android/app/src/main/AndroidManifest.xml` (la carpeta `/android` está en `.gitignore`; borrarla después). Es una comprobación parcial: no incluye los manifiestos de las librerías, así que T013 sigue siendo la prueba definitiva
+- [x] T006 [P] Escribir `docs/generar-apk.md` en español para la persona responsable: requisitos (Node, cuenta gratuita de Expo), `npx eas-cli login`, `npx eas-cli build -p android --profile preview`, aceptar que EAS genere la clave la primera vez, enlazar el proyecto con `npx eas-cli init` (avisar de que escribe `extra.eas.projectId` y quizá `owner` en `app.json`; no son secretos y se commitean tras T007), descargar el APK, subir `versionCode` en +1 antes de cada APK nuevo, copia de seguridad de la clave con `npx eas-cli credentials` guardada fuera del proyecto y aviso de qué pasa si se pierde (FR-007, FR-008, FR-009, FR-010)
 
 **Punto de control**: `app.json`, `eas.json` y `docs/generar-apk.md` cumplen el contrato; pruebas y tipos en verde.
 
@@ -67,8 +68,8 @@
 
 **Prueba independiente**: una persona no técnica instala la app siguiendo solo la guía.
 
-- [ ] T014 [P] [US3] Escribir `docs/instalar-android.md` en español de España, con frases cortas y letra clara: versión mínima (Android 7.0), cómo descargar el archivo, el aviso de Android 11 sobre instalar apps desconocidas (se concede a la aplicación desde la que se abre el APK, qué pulsar), el posible aviso del antivirus o de origen desconocido, la instalación y la primera apertura; sin necesidad de cuenta (FR-006)
-- [ ] T015 [P] [US3] Enlazar las dos guías (`docs/instalar-android.md` y `docs/generar-apk.md`) desde `README.md`
+- [x] T014 [P] [US3] Escribir `docs/instalar-android.md` en español de España, con frases cortas y letra clara: versión mínima (Android 7.0), cómo descargar el archivo, el aviso de Android 11 sobre instalar apps desconocidas (se concede a la aplicación desde la que se abre el APK, qué pulsar), el posible aviso del antivirus o de origen desconocido, la instalación y la primera apertura; sin necesidad de cuenta (FR-006)
+- [x] T015 [P] [US3] Enlazar las dos guías (`docs/instalar-android.md` y `docs/generar-apk.md`) desde `README.md`
 - [ ] T016 [US3] 🧑 Probar la guía con al menos 2 personas no técnicas y 2 móviles Android distintos: instalan y abren la app en menos de 5 minutos sin ayuda; corregir la guía con lo que salga (SC-001)
 
 **Punto de control**: la guía se sigue sin ayuda.
@@ -81,9 +82,9 @@
 
 **Prueba independiente**: seguir los pasos desde un proyecto recién descargado y obtener un APK que se instala y funciona.
 
-- [ ] T017 [US4] Comprobar que el repositorio no contiene claves ni archivos de firma: `git ls-files` sin `*.jks`, `*.keystore`, `*.p12`, `*.key` ni `credentials.json`, y revisión de que `app.json`, `eas.json` y `docs/` no llevan contraseñas ni tokens (FR-009, SC-006)
+- [x] T017 [US4] Comprobar que el repositorio no contiene claves ni archivos de firma: `git ls-files` sin `*.jks`, `*.keystore`, `*.p12`, `*.key` ni `credentials.json`, y revisión de que `app.json`, `eas.json` y `docs/` no llevan contraseñas ni tokens (FR-009, SC-006)
 - [ ] T018 [US4] 🧑 Hacer y guardar fuera del proyecto la copia de seguridad de la clave de firma con `npx eas-cli credentials`
-- [ ] T019 [US4] 🧑 Subir `android.versionCode` a `2` en `app.json`, generar otro APK e instalarlo encima del anterior sin desinstalar: se completa y la app sigue funcionando (SC-004, FR-008, FR-010)
+- [ ] T019 [US4] 🧑 Subir `android.versionCode` a `2` en `app.json`, generar otro APK e instalarlo encima del anterior sin desinstalar: se completa y la app sigue funcionando; dejar `versionCode` = 2 en `app.json` y commitearlo para no repetir el número (SC-004, FR-008, FR-010)
 - [ ] T020 [US4] 🧑 Comprobar que la persona responsable puede generar un APK nuevo desde un proyecto recién descargado (`git clone`, `npm install` y los pasos de `docs/generar-apk.md`) (SC-005)
 
 **Punto de control**: se puede repetir el proceso con la misma firma.
@@ -92,8 +93,8 @@
 
 ## Fase 7: Cierre
 
-- [ ] T021 [P] Actualizar `CLAUDE.md`: añadir en Comandos/Estructura una línea con `eas.json`, `docs/` y el aviso de subir `versionCode` en cada APK, y en "Cosas a tener en cuenta" que la clave de firma está fuera del repositorio
-- [ ] T022 Ejecutar `npm test` y `npm run typecheck` por última vez y repasar `quickstart.md` marcando qué pasos quedan pendientes de una persona
+- [x] T021 [P] Actualizar `CLAUDE.md`: añadir en Comandos/Estructura una línea con `eas.json`, `docs/` y el aviso de subir `versionCode` en cada APK, y en "Cosas a tener en cuenta" que la clave de firma está fuera del repositorio
+- [x] T022 Ejecutar `npm test` y `npm run typecheck` por última vez y repasar `quickstart.md` marcando qué pasos quedan pendientes de una persona
 - [ ] T023 Preguntar al usuario si hay observaciones nuevas para `specs/ideas-pendientes.md` antes de cerrar la spec
 - [ ] T024 Preguntar al usuario si se fusiona la rama `012-despliegue-android-apk` en `main`; no fusionar sin su respuesta
 

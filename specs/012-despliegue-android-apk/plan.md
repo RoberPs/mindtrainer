@@ -43,7 +43,7 @@ proyecto)
 
 **Restricciones**: sin internet, sin permisos, vertical, APK ≤ 50 MB, sin secretos en el repositorio
 
-**Escala/Alcance**: un archivo instalable, dos guías cortas, 2 ficheros de configuración editados/creados
+**Escala/Alcance**: un archivo instalable, dos guías cortas, 4 ficheros de configuración editados/creados (`app.json`, `eas.json`, `package.json`, `.gitignore`)
 
 ## Comprobación de la constitución
 

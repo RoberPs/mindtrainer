@@ -42,3 +42,7 @@ yarn-error.*
 
 # tests
 coverage/
+
+# Firma y credenciales (nunca en el repositorio)
+credentials.json
+*.keystore

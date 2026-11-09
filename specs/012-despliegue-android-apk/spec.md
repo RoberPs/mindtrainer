@@ -4,7 +4,7 @@
 
 **Creada**: 2026-11-09
 
-**Estado**: Borrador
+**Estado**: En implementación (pendiente de pruebas con móvil)
 
 **Entrada**: Preparar el despliegue de MindTrainer como app descargable para Android. Hoy la app solo se prueba con Expo Go en el móvil de desarrollo. Se quiere un archivo instalable (APK) que una persona pueda descargar e instalar en su móvil Android sin Expo Go, sin ordenador y sin cuentas. Fuera de alcance: iOS, publicación en Google Play u otras tiendas, actualizaciones automáticas, nuevas funciones o cambios en los juegos.
 
@@ -123,7 +123,7 @@ La persona responsable puede generar de nuevo el archivo instalable (por ejemplo
 - **Cuentas del desarrollador**: la restricción "sin cuentas" se refiere a quien usa la app. Generar el archivo puede requerir herramientas o servicios gratuitos que use la persona responsable; el plan elige el camino más simple y avisa si pide una cuenta.
 - **Versión mínima de Android**: la que admita la versión de Expo del proyecto; el plan la fija y la guía la indica.
 - **Nombre de la app e icono**: son los actuales (`MindTrainer` y los iconos ya incluidos en el proyecto); no se rediseñan.
-- **Identificador del paquete**: un identificador estable y propio (por ejemplo, de tipo `com.<responsable>.mindtrainer`), que el plan propone y la persona responsable confirma, porque no se puede cambiar después sin crear otra app.
+- **Identificador del paquete**: un identificador estable y propio `automatizacionro.mindtrainer`, confirmado por la persona responsable el 2026-11-09, porque no se puede cambiar después sin crear otra app.
 - **La app no guarda datos**: por eso instalar encima o desinstalar no hace perder nada.
 - Que la guía se entienda y que la instalación sea cómoda lo comprueba una persona con un móvil Android; el agente no puede darlo por hecho.
 

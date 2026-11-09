@@ -11,7 +11,7 @@ Este es el contrato entre el proyecto y la herramienta de compilación. Lo que d
 | `orientation` | `portrait` (sin cambios) |
 | `android.package` | `automatizacionro.mindtrainer` |
 | `android.versionCode` | `1` (sube 1 con cada APK) |
-| `android.blockedPermissions` | `android.permission.INTERNET`, `android.permission.READ_EXTERNAL_STORAGE`, `android.permission.WRITE_EXTERNAL_STORAGE`, `android.permission.ACCESS_FINE_LOCATION`, `android.permission.ACCESS_COARSE_LOCATION`, `android.permission.CAMERA`, `android.permission.RECORD_AUDIO`, `android.permission.READ_CONTACTS` |
+| `android.blockedPermissions` | `android.permission.INTERNET`, `android.permission.READ_EXTERNAL_STORAGE`, `android.permission.WRITE_EXTERNAL_STORAGE`, `android.permission.ACCESS_FINE_LOCATION`, `android.permission.ACCESS_COARSE_LOCATION`, `android.permission.CAMERA`, `android.permission.RECORD_AUDIO`, `android.permission.READ_CONTACTS`, `android.permission.SYSTEM_ALERT_WINDOW`, `android.permission.VIBRATE` |
 | `plugins` | los actuales + `["expo-build-properties", { "android": { "buildArchs": ["arm64-v8a", "armeabi-v7a"] } }]` |
 
 ## `eas.json`
