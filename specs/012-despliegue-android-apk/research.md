@@ -18,6 +18,7 @@
 - **Decisión**: la versión mínima es **Android 7.0**; no se rebaja (no es posible con esta versión de React Native sin cambiar de Expo, y eso queda fuera de alcance).
 - **Riesgo**: un móvil con Android 6.0 o anterior no instalará la app (Android dirá que no es compatible). Hay que **comprobar la versión de Android del móvil de destino** (Ajustes > Acerca del teléfono) antes de generar nada. Si fuera inferior a 7.0, esta funcionalidad no sirve para ese móvil y habría que decidirlo aparte.
 - La guía de instalación indica la versión mínima.
+- **Comprobado (2026-11-09)**: el móvil de destino tiene **Android 11** (API 30), superior al mínimo; el riesgo no aplica. En Android 8 o superior, el permiso de "instalar apps desconocidas" se da a la aplicación desde la que se abre el APK (navegador o gestor de archivos), no al sistema entero; la guía lo explica así.
 
 ## D4. Permisos
 
