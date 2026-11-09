@@ -123,7 +123,7 @@
 - [X] T025 [P] Actualizar `CLAUDE.md`: la línea de `diferencias/` de la estructura (3 escenas fijas con 3 diferencias cada una, dibujos propios con `react-native-svg`, `escena.ts`, `objetos.tsx`, `escenas/`), la lista de componentes (`ElegirOpcion.tsx` ya solo lo usa Sopa de letras) y, en "Cosas a tener en cuenta", una línea sobre la excepción de licencia de `react-native-svg`
 - [X] T026 [P] Añadir en `specs/ideas-pendientes.md` el estado tras la spec 011: Diferencias pasa a 3 escenas dibujadas con 3 diferencias fijas (sustituye a las ideas 2 y 3 de la spec 008 sobre 3, 5 o 7); no se usó ninguna galería; salvedad de licencia MIT de `react-native-svg` pendiente de aceptación expresa
 - [X] T027 Comprobar la restricción de licencia (SC-007): `git status` y `git diff --stat main` no muestran archivos de imagen nuevos en `assets/`, y la única dependencia nueva en `package.json` es `react-native-svg`
-- [ ] T028 Tarea para una persona con móvil (no la puede hacer el agente): seguir [quickstart.md](quickstart.md) puntos 1 a 7 y anotar si los dibujos se ven nítidos, si las diferencias son evidentes y si la persona responsable acepta la licencia MIT de `react-native-svg`. Dejar pendiente y avisar
+- [X] T028 Tarea para una persona con móvil (no la puede hacer el agente): seguir [quickstart.md](quickstart.md) puntos 1 a 7 y anotar si los dibujos se ven nítidos, si las diferencias son evidentes y si la persona responsable acepta la licencia MIT de `react-native-svg`. Dejar pendiente y avisar
 - [ ] T029 Antes de cerrar la spec, preguntar al usuario si hay observaciones nuevas de los juegos para `specs/ideas-pendientes.md`, y preguntar si se fusiona la rama en `main` (no fusionar sin su respuesta)
 
 ---
@@ -160,4 +160,4 @@
 - [X] T033 Adaptar `juego.ts` (`crearPartida(anterior, azar)` elige un ambiente distinto del anterior y compone la escena) y `Diferencias.tsx` (`crearPartida(partida.escena)`)
 - [X] T034 Rehacer `tests/diferencias-escena.test.tsx` (reglas de 40 composiciones por ambiente, al menos 30 distintas por ambiente y más de 200 en total), `tests/diferencias-juego.test.tsx` (ambiente nunca repetido y 12 partidas seguidas distintas) y ajustar `tests/ayudas-diferencias.ts` y `tests/diferencias-pantalla.test.tsx`
 - [X] T035 Revisar el aspecto de las composiciones con una vista previa fuera del proyecto y actualizar `CLAUDE.md`
-- [ ] T036 Tarea para una persona con móvil: jugar 10 partidas seguidas y comprobar que cada una es distinta, que el lugar cambia siempre y que las diferencias son evidentes (SC-004, quickstart punto 5)
+- [X] T036 Tarea para una persona con móvil: jugar 10 partidas seguidas y comprobar que cada una es distinta, que el lugar cambia siempre y que las diferencias son evidentes (SC-004, quickstart punto 5)
