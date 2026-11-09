@@ -70,6 +70,12 @@ describe('Color de cada juego en toda su pantalla (RF-012 a RF-014)', () => {
       expect(screen.getByRole('button', { name: 'Volver al inicio' })).toHaveStyle({ backgroundColor: actividad.color });
       // Todos los demás botones de la primera pantalla del juego (elegir, letras, respuestas...) usan el color del juego.
       const otros = screen.getAllByRole('button').filter((b) => b.props.accessibilityLabel !== 'Volver al inicio');
+      if (actividad.id === 'diferencias') {
+        // Diferencias empieza directamente con los dos dibujos, sin botones: el color del juego va en su borde.
+        expect(otros).toHaveLength(0);
+        expect(screen.getByTestId('dibujo-abajo')).toHaveStyle({ borderColor: actividad.color });
+        return;
+      }
       expect(otros.length).toBeGreaterThan(0);
       otros.forEach((b) => expect(b).toHaveStyle({ backgroundColor: actividad.color }));
     },

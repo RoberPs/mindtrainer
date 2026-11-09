@@ -81,8 +81,8 @@ describe('Animación de victoria (RF-019, RF-020 de la spec 008; RF-009 a RF-011
 
   it('con la animación activa, el mensaje y "Jugar otra vez" están a la vista y responden al primer toque', async () => {
     const alJugarOtraVez = jest.fn();
-    await render(<Felicitacion total={3} toques={3} alJugarOtraVez={alJugarOtraVez} />);
-    expect(screen.getByText(t.felicitacion(3))).toBeTruthy();
+    await render(<Felicitacion toques={3} alJugarOtraVez={alJugarOtraVez} />);
+    expect(screen.getByText(t.felicitacion)).toBeTruthy();
     expect(screen.getByText(t.toques(3))).toBeTruthy();
     // Sin avanzar el reloj: el fundido no ha terminado y el botón ya responde.
     await fireEvent.press(screen.getByRole('button', { name: t.jugarOtraVez }));

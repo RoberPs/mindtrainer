@@ -220,17 +220,11 @@ describe('Textos de "Diferencias" (RF-014, RF-015)', () => {
     expect(textosDiferencias.descripcion).toBe('Encuentra las diferencias entre dos dibujos');
     expect(textosDiferencias.instruccion).toBe('Toca en el dibujo de abajo lo que sea distinto');
     expect(textosDiferencias.fallo).toBe('Ahí no hay ninguna diferencia. ¡Sigue buscando!');
-    expect(textosDiferencias.elegirNumero).toBe('Elige cuántas diferencias quieres buscar');
-    expect(textosDiferencias.tres).toBe('3 diferencias');
-    expect(textosDiferencias.cinco).toBe('5 diferencias');
-    expect(textosDiferencias.siete).toBe('7 diferencias');
     expect(textosDiferencias.jugarOtraVez).toBe('Jugar otra vez');
   });
 
-  it('la felicitación dice cuántas diferencias había', () => {
-    expect(textosDiferencias.felicitacion(3)).toBe('¡Enhorabuena! Has encontrado las 3 diferencias');
-    expect(textosDiferencias.felicitacion(5)).toBe('¡Enhorabuena! Has encontrado las 5 diferencias');
-    expect(textosDiferencias.felicitacion(7)).toBe('¡Enhorabuena! Has encontrado las 7 diferencias');
+  it('la felicitación dice que había 3 diferencias', () => {
+    expect(textosDiferencias.felicitacion).toBe('¡Enhorabuena! Has encontrado las 3 diferencias');
   });
 
   it('el aviso de las que faltan usa singular para 1 y plural para 2 y 3', () => {
@@ -253,14 +247,13 @@ describe('Textos de "Diferencias" (RF-014, RF-015)', () => {
     jest.spyOn(Math, 'random').mockReturnValue(0); // siempre la primera escena
     await abrirApp();
     await fireEvent.press(screen.getByText('Diferencias'));
-    await fireEvent.press(screen.getByText(textosDiferencias.tres));
     expect(screen.getByTestId('icono-faltan', { includeHiddenElements: true })).toBeTruthy();
     await tocarAbajo(puntoVacio().x, puntoVacio().y);
     expect(screen.getByTestId('icono-fallo', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosDiferencias.fallo)).toBeTruthy();
     for (const d of diferenciasDe()) await tocarAbajo(centroDe(d.id).x, centroDe(d.id).y);
     expect(screen.getByTestId('icono-felicitacion', { includeHiddenElements: true })).toBeTruthy();
-    expect(screen.getByText(textosDiferencias.felicitacion(3))).toBeTruthy();
+    expect(screen.getByText(textosDiferencias.felicitacion)).toBeTruthy();
     expect(screen.getByTestId('icono-jugar-otra-vez', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosDiferencias.jugarOtraVez)).toBeTruthy();
   });

@@ -45,9 +45,9 @@ src/
 │   ├── forma-palabra/       # Actividad "Forma la palabra": palabras.ts, juego.ts (reglas puras) y sus pantallas
 │   ├── sopa-de-letras/      # Actividad "Sopa de letras": sopas.ts (5 pequeñas y 3 medianas, fijas), juego.ts (reglas puras) y sus pantallas
 │   ├── adivinanzas/         # Actividad "Adivinanzas": banco.ts (50 adivinanzas), juego.ts (reglas puras) y sus pantallas
-│   └── diferencias/         # Actividad "Diferencias": escena.ts (4 escenas fijas con 7 cambios cada una; se juega con 3, 5 o 7), juego.ts (reglas puras) y sus pantallas
+│   └── diferencias/         # Actividad "Diferencias": escena.ts (tipos y reglas de las escenas), objetos.tsx (estilo común de los dibujos), escenas/ (3 escenas fijas, Salón, Cocina y Jardín, dibujadas con react-native-svg; cada una con 3 diferencias: color, falta y añadido), juego.ts (reglas puras, siempre 3 diferencias) y sus pantallas
 ├── pantallas/               # Bienvenida.tsx (logo y botón Empezar), Inicio.tsx (tarjetas grandes de juegos), MarcoActividad.tsx (da su color al juego)
-├── componentes/             # BotonGrande.tsx, ColorJuego.tsx (contexto del color del juego), Icono.tsx, ElegirOpcion.tsx (pantalla de elegir de Sopa y Diferencias), IconoVictoria.tsx (icono de las pantallas finales, con fundido)
+├── componentes/             # BotonGrande.tsx, ColorJuego.tsx (contexto del color del juego), Icono.tsx, ElegirOpcion.tsx (pantalla de elegir de Sopa de letras), IconoVictoria.tsx (icono de las pantallas finales, con fundido)
 ├── animacion.ts             # Interruptor de la animación de victoria (apagada en pruebas) y su duración
 ├── tema.ts                  # Tamaños y colores accesibles (paleta del logo: crema, azul, verde, naranja, magenta y gris azulado; un color por actividad)
 └── textos.ts                # Textos fijos
@@ -89,6 +89,7 @@ Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla
 
 ## Cosas a tener en cuenta
 
+- Los dibujos de "Diferencias" son propios (vectoriales, con `react-native-svg`, licencia MIT): no se descarga ninguna imagen. Esa librería, como los iconos de `@expo/vector-icons` (Apache 2.0), pide conservar su aviso al redistribuir el código; la persona responsable debe aceptarlo de forma expresa.
 - Las actividades reales por ahora son "Parejas", "Forma la palabra", "Sopa de letras", "Adivinanzas" y "Diferencias". No se inventan actividades de relleno.
 - Las pruebas usan `getByTestId(..., { includeHiddenElements: true })` para los iconos, porque
   son decorativos y están ocultos a la accesibilidad a propósito.
