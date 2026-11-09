@@ -8,6 +8,13 @@
 
 **Entrada**: Última funcionalidad del proyecto. Reúne las mejoras de contenido y variedad observadas al probar los juegos (ver `specs/ideas-pendientes.md`). Historias por prioridad: P1) Adivinanzas con un banco de al menos 50; P1) Sopa de letras con las direcciones mejor repartidas; P2) Diferencias con varias escenas fijas y un catálogo de unos 50 iconos; P3) Diferencias con 3, 5 o 7 diferencias a elegir; P3) Sopa de letras en tamaño pequeño o mediano a elegir; P4) Animación de victoria con un fundido más largo. Fuera de alcance: palabras al revés o en diagonal, tres tamaños de sopa y colocación aleatoria de iconos.
 
+## Aclaraciones
+
+### Sesión 2026-11-09
+
+- Q: Al pulsar "Jugar otra vez" en "Adivinanzas", ¿deben evitarse las adivinanzas de la partida anterior? → A: Sí. Las 5 de la partida nueva son distintas de las 5 de la anterior.
+- Q: Al pulsar "Jugar otra vez" en "Diferencias", ¿debe evitarse la escena de la partida anterior? → A: Sí. La escena nueva es siempre distinta de la anterior.
+
 ## Escenarios de usuario y pruebas *(obligatorio)*
 
 ### Historia 1 - Adivinanzas distintas en cada partida (Prioridad: P1)
@@ -21,7 +28,7 @@ Una persona mayor juega a "Adivinanzas" varios días seguidos. Hoy el banco tien
 **Escenarios de aceptación**:
 
 1. **Dado** que juego una partida de "Adivinanzas", **cuando** veo las 5 adivinanzas, **entonces** son 5 distintas entre sí, como hasta ahora.
-2. **Dado** que juego varias partidas seguidas, **cuando** comparo las adivinanzas de cada una, **entonces** veo adivinanzas diferentes de una partida a otra con mucha más frecuencia que antes.
+2. **Dado** que termino una partida y pulso "Jugar otra vez", **cuando** veo las 5 adivinanzas nuevas, **entonces** ninguna es una de las 5 de la partida anterior.
 3. **Dado** que veo cualquier adivinanza, **cuando** leo las 3 opciones, **entonces** solo una es correcta, ninguna de las otras dos podría valer también como respuesta y el texto no contiene la respuesta.
 4. **Dado** que respondo, acierto o fallo, **cuando** termino las 5 adivinanzas, **entonces** el resultado, la puntuación y los botones funcionan igual que antes.
 
@@ -55,7 +62,7 @@ Hoy la escena de "Diferencias" es una sola y fija, así que se memoriza a la seg
 **Escenarios de aceptación**:
 
 1. **Dado** que empiezo una partida de "Diferencias", **cuando** aparecen los dos dibujos, **entonces** muestran una escena de entre varias preparadas de antemano.
-2. **Dado** que juego varias partidas seguidas, **cuando** comparo las escenas, **entonces** se ven escenas distintas, con iconos diferentes y con distinta cantidad de iconos.
+2. **Dado** que termino una partida y pulso "Jugar otra vez", **cuando** aparece la escena nueva, **entonces** es distinta de la anterior, con iconos diferentes y con distinta cantidad de iconos.
 3. **Dado** que miro cualquier escena, **cuando** examino los dos dibujos, **entonces** todos los iconos se reconocen a simple vista, tienen colores de alto contraste y caben sin tocarse.
 4. **Dado** que toco una diferencia en cualquier escena, **cuando** acierto, **entonces** se marca con su círculo y cuenta, igual que hasta ahora.
 5. **Dado** que toco un icono que no es una diferencia o un hueco, **cuando** lo hago, **entonces** no se marca ni se cuenta nada.
@@ -119,7 +126,7 @@ El fundido del icono de celebración dura hoy 400 milisegundos y casi no se nota
 ### Casos límite
 
 - Ninguna mejora cambia el funcionamiento básico de los juegos: acertar, fallar, la puntuación y el final de la partida siguen igual que antes.
-- Una adivinanza nunca aparece dos veces en la misma partida.
+- Una adivinanza nunca aparece dos veces en la misma partida ni en dos partidas seguidas.
 - Si el banco de adivinanzas, las sopas o las escenas tuvieran un error de contenido (una respuesta ambigua, una palabra que aparece dos veces, una zona de diferencia que se sale del dibujo), las pruebas automáticas lo detectan antes de entregar la app.
 - Con 7 diferencias, los círculos de las zonas no se pisan entre sí ni se salen del dibujo, y se pueden tocar con comodidad.
 - En un móvil pequeño (unos 360 puntos de ancho), la sopa mediana sigue pudiéndose jugar sin errores al tocar.
@@ -135,7 +142,7 @@ El fundido del icono de celebración dura hoy 400 milisegundos y casi no se nota
 
 - **RF-001**: El banco de "Adivinanzas" MUST tener al menos 50 adivinanzas. Este requisito sustituye al RF-010 de la spec 005, que exigía al menos 10.
 - **RF-002**: Cada adivinanza MUST ser tradicional y conocida, tener como respuesta una sola palabra, mostrar 3 opciones distintas con una sola correcta, y sus dos opciones incorrectas MUST NO valer también como respuesta (RF-011 de la spec 005). El texto de la adivinanza MUST NO contener la respuesta.
-- **RF-003**: Cada partida MUST seguir enseñando 5 adivinanzas distintas elegidas del banco completo.
+- **RF-003**: Cada partida MUST seguir enseñando 5 adivinanzas distintas entre sí, elegidas del banco completo, y MUST NO incluir ninguna de las 5 de la partida inmediatamente anterior.
 - **RF-004**: Una persona MUST haber revisado una por una las adivinanzas nuevas antes de darlas por buenas.
 
 **Sopa de letras**
@@ -150,7 +157,7 @@ El fundido del icono de celebración dura hoy 400 milisegundos y casi no se nota
 
 **Diferencias**
 
-- **RF-012**: "Diferencias" MUST tener varias escenas fijas, preparadas y revisadas a mano (no generadas al azar), de modo que cada partida use una escena elegida entre ellas.
+- **RF-012**: "Diferencias" MUST tener varias escenas fijas, preparadas y revisadas a mano (no generadas al azar), de modo que cada partida use una escena elegida entre ellas, siempre distinta de la de la partida inmediatamente anterior.
 - **RF-013**: Las escenas MUST usar entre todas un catálogo de unos 50 iconos distintos. Cada icono MUST existir en la app, reconocerse a simple vista, tener colores de alto contraste y haber sido revisado una a una por una persona.
 - **RF-014**: Las escenas MUST variar en los iconos que usan, en dónde están colocados y en cuántos hay. Cada escena MUST tener suficientes elementos para albergar hasta 7 diferencias sin que se pisen.
 - **RF-015**: Las zonas donde se marca cada diferencia MUST medir al menos unos 44 puntos, no solaparse entre sí y no salirse del dibujo. Las zonas MUST ser datos fijos revisados a mano, no calculados al azar.
@@ -185,10 +192,10 @@ Palabras al revés o en diagonal, tres tamaños de sopa de letras, colocación a
 
 ### Resultados medibles
 
-- **CE-001**: El banco de "Adivinanzas" contiene al menos 50 adivinanzas, y en 5 partidas seguidas aparecen más de 15 adivinanzas distintas.
+- **CE-001**: El banco de "Adivinanzas" contiene al menos 50 adivinanzas, y dos partidas seguidas nunca comparten ninguna adivinanza (en 2 partidas seguidas se ven siempre 10 adivinanzas distintas).
 - **CE-002**: Al menos 2 de las 5 sopas pequeñas tienen más palabras verticales que horizontales, y en todas las sopas cada palabra se encuentra una sola vez.
 - **CE-003**: Al elegir tamaño en "Sopa de letras", la sopa mediana tiene 5 palabras y se completa tocando las casillas con comodidad en un móvil de unos 360 puntos de ancho, sin errores al tocar.
-- **CE-004**: En 5 partidas seguidas de "Diferencias" se ven al menos 3 escenas distintas entre sí.
+- **CE-004**: Dos partidas seguidas de "Diferencias" nunca usan la misma escena, y en 5 partidas seguidas se ven al menos 3 escenas distintas entre sí.
 - **CE-005**: Al elegir 3, 5 o 7 diferencias, la partida tiene exactamente ese número, el aviso de cuántas faltan es correcto en cada momento y la felicitación final menciona el número elegido.
 - **CE-006**: En todas las escenas, ninguna zona de diferencia se solapa con otra ni se sale del dibujo, y todas se pueden tocar con comodidad.
 - **CE-007**: En las 5 actividades, el icono de celebración aparece poco a poco en entre 0,8 y 1 segundo, se queda quieto y no se repite; con el ajuste de reducir movimiento activado, no se anima.
