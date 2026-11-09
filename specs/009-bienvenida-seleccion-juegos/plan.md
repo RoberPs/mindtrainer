@@ -41,7 +41,7 @@ specs/009-bienvenida-seleccion-juegos/
 └── tasks.md                       # lo crea /speckit-tasks
 
 App.tsx                            # estado: bienvenida → lista → actividad
-assets/logo.png                    # recorte de assets/diseno/logo-presentacion.png (fondo crema); icon.png, splash-icon.png y android-icon-foreground.png se regeneran con él
+assets/logo.png                    # recorte cuadrado de assets/diseno/logo-presentacion.png (fondo crema); icon.png, splash-icon.png y android-icon-foreground.png se regeneran con él
 src/
 ├── pantallas/Bienvenida.tsx       # NUEVA
 ├── pantallas/Inicio.tsx           # tarjetas grandes + encabezado
