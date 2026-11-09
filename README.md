@@ -44,6 +44,12 @@ Para comprobar la app con una persona, sigue la
 reales, hay dos de ejemplo en `src/actividades/ejemplos.ts`; se activan cambiando una línea en
 `App.tsx` (hay una nota allí) y se quitan al terminar.
 
+## Instalarla en un móvil Android
+
+- Para quien instala: [guía de instalación](docs/instalar-android.md) (Android 7.0 o superior,
+  sin cuentas ni internet).
+- Para la persona responsable: [cómo generar el archivo instalable](docs/generar-apk.md).
+
 ## Cómo se trabaja
 
 El proyecto usa [Spec Kit](https://github.com/github/spec-kit): cada funcionalidad pasa por

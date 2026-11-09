@@ -95,5 +95,7 @@ Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla
   son decorativos y están ocultos a la accesibilidad a propósito.
 - La pantalla final de cada actividad usa `IconoVictoria` (fundido de 900 ms, una sola vez, respeta
   "reducir movimiento"). Es la única animación de la app; no se animan los aciertos ni el inicio.
+- Despliegue Android: `eas.json` (perfil `preview`, APK) y `docs/` (`generar-apk.md` para quien genera el archivo, `instalar-android.md` para quien instala). Paquete `automatizacionro.mindtrainer`, Android 7.0 o superior, sin permisos (todos bloqueados en `app.json`). **Sube `android.versionCode` en 1 con cada APK nuevo.** La clave de firma la guarda EAS y su copia vive fuera del repositorio: nunca se commitea.
+- `npx expo prebuild` cambia los scripts `android` e `ios` de `package.json`; revierte ese cambio y borra `android/` (está en `.gitignore`).
 - En PowerShell 5.1, `Set-Content -Encoding utf8` añade BOM y rompe los JSON; usa Node para
   reescribirlos.
