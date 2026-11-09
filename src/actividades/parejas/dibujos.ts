@@ -1,6 +1,6 @@
 import { textosParejas } from '../../textos';
 
-// Los ocho objetos cotidianos que pueden salir en una carta (iconos incluidos en la app).
+// Los doce objetos cotidianos que pueden salir en una carta (iconos incluidos en la app).
 export type Dibujo = {
   id: string;
   nombre: string;
@@ -16,6 +16,10 @@ export const dibujos: Dibujo[] = [
   { id: 'silla', nombre: textosParejas.dibujos.silla, icono: 'seat' },
   { id: 'lampara', nombre: textosParejas.dibujos.lampara, icono: 'lamp' },
   { id: 'tijeras', nombre: textosParejas.dibujos.tijeras, icono: 'content-cut' },
+  { id: 'paraguas', nombre: textosParejas.dibujos.paraguas, icono: 'umbrella' },
+  { id: 'telefono', nombre: textosParejas.dibujos.telefono, icono: 'phone-classic' },
+  { id: 'libro', nombre: textosParejas.dibujos.libro, icono: 'book-open-variant' },
+  { id: 'sombrero', nombre: textosParejas.dibujos.sombrero, icono: 'hat-fedora' },
 ];
 
 export function buscarDibujo(id: string): Dibujo {

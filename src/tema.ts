@@ -11,6 +11,21 @@ export const tema = {
     acierto: '#0F5A38', // verde oscuro de lo acertado (siempre con icono o texto)
     velo: 'rgba(0, 0, 0, 0.6)',
     marca: '#A0001C', // rojo oscuro de los círculos de las diferencias encontradas
+    // Un color oscuro por dibujo de "Parejas" (spec 010), todos con 7 a 1 sobre `tarjeta`.
+    dibujos: {
+      llave: '#7F3300',
+      taza: '#5C3317',
+      reloj: '#1A47A0',
+      gafas: '#4B2E83',
+      cama: '#0A5555',
+      silla: '#554B00',
+      lampara: '#8B1A1A',
+      tijeras: '#2C2C54',
+      paraguas: '#90135A',
+      telefono: '#0F5A38',
+      libro: '#6A2A7A',
+      sombrero: '#47474F',
+    } as Record<string, string>,
     // Un color por actividad: fondo y color del texto. Todos superan 7 a 1 salvo la excepción del naranja.
     actividades: {
       azul: { fondo: '#1F53B4', texto: '#FFFFFF' },

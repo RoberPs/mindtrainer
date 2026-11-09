@@ -41,7 +41,7 @@ npm run typecheck  # comprobar tipos
 App.tsx                      # Decide si se ve la bienvenida, la lista de juegos o una actividad
 src/
 ├── actividades/             # tipos.ts (contrato), registro.ts (lista real), ejemplos.ts (solo pruebas a mano)
-│   ├── parejas/             # Actividad "Parejas": juego.ts (reglas puras), dibujos.ts y sus pantallas
+│   ├── parejas/             # Actividad "Parejas": juego.ts (reglas puras), dibujos.ts (12 dibujos, cada uno con su color en tema.colores.dibujos) y sus pantallas (dorso común con cerebro)
 │   ├── forma-palabra/       # Actividad "Forma la palabra": palabras.ts, juego.ts (reglas puras) y sus pantallas
 │   ├── sopa-de-letras/      # Actividad "Sopa de letras": sopas.ts (5 pequeñas y 3 medianas, fijas), juego.ts (reglas puras) y sus pantallas
 │   ├── adivinanzas/         # Actividad "Adivinanzas": banco.ts (50 adivinanzas), juego.ts (reglas puras) y sus pantallas

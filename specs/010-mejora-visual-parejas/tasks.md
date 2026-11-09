@@ -21,7 +21,7 @@
 
 ## Fase 1: Preparación
 
-- [ ] T001 Comprobar que `npm test` y `npm run typecheck` pasan en la rama `010-mejora-visual-parejas` antes de tocar nada
+- [X] T001 Comprobar que `npm test` y `npm run typecheck` pasan en la rama `010-mejora-visual-parejas` antes de tocar nada
 
 ---
 
@@ -29,9 +29,9 @@
 
 **Propósito**: textos y colores que usan los dibujos nuevos.
 
-- [ ] T002 [P] Añadir en `src/textos.ts`, dentro de `textosParejas.dibujos`, los nombres `paraguas: 'Paraguas'`, `telefono: 'Teléfono'`, `libro: 'Libro'` y `sombrero: 'Sombrero'`
-- [ ] T003 [P] Añadir en `src/tema.ts` el objeto `tema.colores.dibujos` con un color oscuro distinto para cada uno de los 12 ids de dibujo, cada uno con contraste de al menos 7 a 1 sobre `tema.colores.tarjeta` (`#F7EEE0`); elegir tonos bien separados entre sí (por ejemplo azul, verde, granate, marrón, morado, verde azulado, ocre oscuro…) para que no se parezcan, y comprobar los valores con la fórmula de `tests/tema-contraste.test.tsx` antes de fijarlos
-- [ ] T004 Añadir en `tests/tema-contraste.test.tsx` una prueba que recorra `tema.colores.dibujos` y compruebe que hay 12 colores distintos y que cada uno tiene al menos 7 a 1 sobre `tema.colores.tarjeta` (depende de T003)
+- [X] T002 [P] Añadir en `src/textos.ts`, dentro de `textosParejas.dibujos`, los nombres `paraguas: 'Paraguas'`, `telefono: 'Teléfono'`, `libro: 'Libro'` y `sombrero: 'Sombrero'`
+- [X] T003 [P] Añadir en `src/tema.ts` el objeto `tema.colores.dibujos` con un color oscuro distinto para cada uno de los 12 ids de dibujo, cada uno con contraste de al menos 7 a 1 sobre `tema.colores.tarjeta` (`#F7EEE0`); elegir tonos bien separados entre sí (por ejemplo azul, verde, granate, marrón, morado, verde azulado, ocre oscuro…) para que no se parezcan, y comprobar los valores con la fórmula de `tests/tema-contraste.test.tsx` antes de fijarlos
+- [X] T004 Añadir en `tests/tema-contraste.test.tsx` una prueba que recorra `tema.colores.dibujos` y compruebe que hay 12 colores distintos y que cada uno tiene al menos 7 a 1 sobre `tema.colores.tarjeta` (depende de T003)
 
 **Punto de control**: textos y colores listos y con su prueba pasando.
 
@@ -45,14 +45,14 @@
 
 ### Pruebas de la historia 1
 
-- [ ] T005 [P] [US1] En `tests/parejas-juego.test.tsx` añadir una prueba de que `dibujos` tiene 12 elementos, con `id` e `icono` sin repetir, y que cada uno tiene nombre en `textosParejas.dibujos` y color en `tema.colores.dibujos`
-- [ ] T006 [P] [US1] En `tests/parejas-pantalla.test.tsx` añadir una prueba de que, en las partidas de 6, 8 y 12 cartas, al descubrir una pareja se ven su nombre escrito y su icono (`icono-carta-N`) en las dos cartas
+- [X] T005 [P] [US1] En `tests/parejas-juego.test.tsx` añadir una prueba de que `dibujos` tiene 12 elementos, con `id` e `icono` sin repetir, y que cada uno tiene nombre en `textosParejas.dibujos` y color en `tema.colores.dibujos`
+- [X] T006 [P] [US1] En `tests/parejas-pantalla.test.tsx` añadir una prueba de que, en las partidas de 6, 8 y 12 cartas, al descubrir una pareja se ven su nombre escrito y su icono (`icono-carta-N`) en las dos cartas
 
 ### Implementación de la historia 1
 
-- [ ] T007 [US1] En `src/actividades/parejas/dibujos.ts` ampliar la lista a los 12 dibujos indicados en las notas (depende de T002)
-- [ ] T008 [US1] En `src/actividades/parejas/Carta.tsx` pintar la cara con el dibujo en su color (`tema.colores.dibujos[dibujo.id]`), el nombre debajo con `tema.colores.texto`, borde del color del juego (`useColorJuego()`), con el mismo ancho de 4 puntos de hoy, para la carta girada y borde verde con el visto para la acertada; añadir una propiedad `tamanoIcono` y usarla para el dibujo (depende de T003 y T007)
-- [ ] T009 [US1] En `src/actividades/parejas/Tablero.tsx` pasar a cada `Carta` `tamanoIcono` 88 en partidas de 6 y 8 cartas y 64 en la de 12 (depende de T008)
+- [X] T007 [US1] En `src/actividades/parejas/dibujos.ts` ampliar la lista a los 12 dibujos indicados en las notas (depende de T002)
+- [X] T008 [US1] En `src/actividades/parejas/Carta.tsx` pintar la cara con el dibujo en su color (`tema.colores.dibujos[dibujo.id]`), el nombre debajo con `tema.colores.texto`, borde del color del juego (`useColorJuego()`), con el mismo ancho de 4 puntos de hoy, para la carta girada y borde verde con el visto para la acertada; añadir una propiedad `tamanoIcono` y usarla para el dibujo (depende de T003 y T007)
+- [X] T009 [US1] En `src/actividades/parejas/Tablero.tsx` pasar a cada `Carta` `tamanoIcono` 88 en partidas de 6 y 8 cartas y 64 en la de 12 (depende de T008)
 
 **Punto de control**: las pruebas de US1 pasan y los dibujos se ven bien en los tres tamaños.
 
@@ -66,11 +66,11 @@
 
 ### Pruebas de la historia 2
 
-- [ ] T010 [P] [US2] En `tests/parejas-pantalla.test.tsx` añadir solo lo que falta (la prueba de la línea 75 ya comprueba que salen tantos "Carta" como cartas): que en cada tamaño todas las cartas tapadas tienen el icono `icono-carta-N`, y que al girar una carta deja de mostrar "Carta" y muestra su nombre
+- [X] T010 [P] [US2] En `tests/parejas-pantalla.test.tsx` añadir solo lo que falta (la prueba de la línea 75 ya comprueba que salen tantos "Carta" como cartas): que en cada tamaño todas las cartas tapadas tienen el icono `icono-carta-N`, y que al girar una carta deja de mostrar "Carta" y muestra su nombre
 
 ### Implementación de la historia 2
 
-- [ ] T011 [US2] En `src/actividades/parejas/Carta.tsx` cambiar el dorso: fondo del color del juego, borde claro grueso (color del texto del juego), icono `brain` grande en lugar de `help-circle-outline`, y el texto "Carta" (mantener `testID` `icono-carta-N` y `accessibilityLabel`) (depende de T008)
+- [X] T011 [US2] En `src/actividades/parejas/Carta.tsx` cambiar el dorso: fondo del color del juego, borde claro grueso (color del texto del juego), icono `brain` grande en lugar de `help-circle-outline`, y el texto "Carta" (mantener `testID` `icono-carta-N` y `accessibilityLabel`) (depende de T008)
 
 **Punto de control**: las pruebas de US1 y US2 pasan.
 
@@ -82,7 +82,7 @@
 
 **Prueba independiente**: llegar a cada pantalla donde aparecen y comprobar icono y texto.
 
-- [ ] T012 [P] [US3] En `tests/parejas-pantalla.test.tsx` añadir una prueba de que "Volver al inicio" (`icono-volver`) y "Seguir" (`icono-seguir`, tras girar dos cartas distintas) muestran su icono y su texto a la vez; y comprobar que la prueba existente de "Jugar otra vez" (`icono-jugar-otra-vez`) sigue cubriendo ese botón. Si algo falla, corregirlo en `src/actividades/parejas/` sin tocar `BotonGrande` ni `MarcoActividad`
+- [X] T012 [P] [US3] En `tests/parejas-pantalla.test.tsx` añadir una prueba de que "Volver al inicio" (`icono-volver`) y "Seguir" (`icono-seguir`, tras girar dos cartas distintas) muestran su icono y su texto a la vez; y comprobar que la prueba existente de "Jugar otra vez" (`icono-jugar-otra-vez`) sigue cubriendo ese botón. Si algo falla, corregirlo en `src/actividades/parejas/` sin tocar `BotonGrande` ni `MarcoActividad`
 
 **Punto de control**: la prueba de US3 pasa sin cambiar código (si hace falta cambiarlo, anotarlo en la spec).
 
@@ -94,7 +94,7 @@
 
 **Prueba independiente**: 3 partidas seguidas del mismo tamaño muestran más de un conjunto de dibujos.
 
-- [ ] T013 [P] [US4] En `tests/parejas-juego.test.tsx` añadir una prueba que cree 3 partidas del mismo tamaño con tres funciones de azar distintas y compruebe que el conjunto de dibujos no es el mismo en las tres, y que ninguna partida repite un dibujo en más de dos cartas (las reglas no cambian)
+- [X] T013 [P] [US4] En `tests/parejas-juego.test.tsx` añadir una prueba que cree 3 partidas del mismo tamaño con tres funciones de azar distintas y compruebe que el conjunto de dibujos no es el mismo en las tres, y que ninguna partida repite un dibujo en más de dos cartas (las reglas no cambian)
 
 **Punto de control**: la prueba pasa sin tocar `juego.ts`.
 
@@ -102,8 +102,8 @@
 
 ## Fase 7: Cierre
 
-- [ ] T014 Ejecutar `npm test` y `npm run typecheck`: todo en verde, incluidas las pruebas que ya existían de "Parejas" y de las demás actividades
-- [ ] T015 [P] Actualizar `CLAUDE.md` (línea de `parejas/` en la estructura: 12 dibujos con color propio y dorso común) y añadir en `specs/ideas-pendientes.md` el estado tras la spec 010, indicando que no se usó Openclipart ni Kenney y por qué, y la salvedad de licencia de los iconos (research.md, punto 1: la licencia pide conservar su aviso al redistribuir el código); dejar anotado que la persona responsable debe aceptarla de forma expresa al cerrar la spec (FR-008, SC-006)
+- [X] T014 Ejecutar `npm test` y `npm run typecheck`: todo en verde, incluidas las pruebas que ya existían de "Parejas" y de las demás actividades
+- [X] T015 [P] Actualizar `CLAUDE.md` (línea de `parejas/` en la estructura: 12 dibujos con color propio y dorso común) y añadir en `specs/ideas-pendientes.md` el estado tras la spec 010, indicando que no se usó Openclipart ni Kenney y por qué, y la salvedad de licencia de los iconos (research.md, punto 1: la licencia pide conservar su aviso al redistribuir el código); dejar anotado que la persona responsable debe aceptarla de forma expresa al cerrar la spec (FR-008, SC-006)
 - [ ] T016 Comprobación manual con un móvil siguiendo [quickstart.md](quickstart.md). **La hace una persona**: dejar pendiente y avisarlo
 - [ ] T017 Antes de cerrar la spec, preguntar al usuario si acepta la salvedad de licencia de los iconos (FR-008, SC-006), si hay observaciones nuevas para `specs/ideas-pendientes.md` y si se fusiona la rama en `main`. No fusionar sin su respuesta
 

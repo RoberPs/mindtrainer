@@ -1,4 +1,20 @@
+import { dibujos } from '../src/actividades/parejas/dibujos';
 import { crearPartida, seguir, tocarCarta, type Partida, type Tamano } from '../src/actividades/parejas/juego';
+import { textosParejas } from '../src/textos';
+import { tema } from '../src/tema';
+
+describe('Parejas: dibujos', () => {
+  it('hay 12 dibujos, sin repetir, cada uno con su nombre y su color', () => {
+    expect(dibujos).toHaveLength(12);
+    expect(new Set(dibujos.map((d) => d.id)).size).toBe(12);
+    expect(new Set(dibujos.map((d) => d.icono)).size).toBe(12);
+    const nombres = textosParejas.dibujos as Record<string, string>;
+    for (const d of dibujos) {
+      expect(nombres[d.id]).toBe(d.nombre);
+      expect(tema.colores.dibujos[d.id]).toBeTruthy();
+    }
+  });
+});
 
 // Mazo conocido de 6 cartas: posiciones 0 y 1 son pareja (llave), 2 y 3 (taza), 4 y 5 (reloj).
 function mazoConocido(): Partida {
@@ -89,6 +105,15 @@ describe('Parejas: crear partida', () => {
     const a = crearPartida('grande', () => 0);
     const b = crearPartida('grande', () => 0.99);
     expect(a.cartas.map((c) => c.dibujo)).not.toEqual(b.cartas.map((c) => c.dibujo));
+  });
+
+  it('tres partidas del mismo tamaño con azares distintos no usan siempre los mismos dibujos', () => {
+    for (const [tamano] of casos) {
+      const conjuntos = [0, 0.5, 0.99].map((azar) =>
+        [...new Set(crearPartida(tamano, () => azar).cartas.map((c) => c.dibujo))].sort().join(','),
+      );
+      expect(new Set(conjuntos).size).toBeGreaterThan(1);
+    }
   });
 
   it('se puede jugar y terminar una partida de cada tamaño', () => {
