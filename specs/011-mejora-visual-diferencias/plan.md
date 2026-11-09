@@ -67,9 +67,13 @@ No hay carpeta `contracts/`: el contrato de actividad no cambia y el formato de 
 
 ```text
 src/actividades/diferencias/
-├── objetos.tsx      # NUEVO: biblioteca de dibujos vectoriales (sofá, ventana, lámpara, gato, taza...)
-├── escena.ts        # CAMBIA: 3 escenas fijas, 3 cambios cada una (color, falta, sobra); sin Total
-├── escenas-fondos.tsx  # NUEVO: fondo de cada escena (pared, suelo, cielo...)
+├── objetos.tsx      # NUEVO: estilo común de los dibujos (contorno, paleta) y ayudas
+├── escena.ts        # CAMBIA: tipos (Colocado, Cambio, Escena), zonaEn y dibujosDe; sin Total
+├── escenas/         # NUEVO: una escena por archivo (fondo, objetos y definición)
+│   ├── salon.tsx
+│   ├── cocina.tsx
+│   ├── jardin.tsx
+│   └── index.ts     # la lista `escenas` (3 escenas fijas, 3 cambios cada una: color, falta, sobra)
 ├── Dibujo.tsx       # CAMBIA: dibuja con Svg en lugar de iconos sueltos; mismos círculos de acierto
 ├── Diferencias.tsx  # CAMBIA: sin pantalla de elegir; la partida empieza al abrir
 ├── Felicitacion.tsx # CAMBIA mínimo: ya no recibe el total
