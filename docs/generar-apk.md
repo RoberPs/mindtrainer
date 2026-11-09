@@ -41,6 +41,37 @@ en un móvil Android (versión 7.0 o superior) sin Expo Go.
 4. Al terminar, EAS muestra un **enlace de descarga** del `.apk`. Descárgalo o comparte el
    enlace con quien vaya a instalarlo (cómo repartirlo lo decides tú).
 
+## Llevar el archivo al móvil
+
+Lo más sencillo es abrir el enlace de descarga directamente en el móvil:
+
+- **Opción 1**: escanea con la cámara del móvil el código QR que muestra EAS (o la página del
+  build en expo.dev).
+- **Opción 2**: envíate el enlace por WhatsApp o correo y ábrelo desde el móvil.
+- **Opción 3**: descarga el `.apk` en el ordenador y pásalo al móvil por cable USB o por una
+  carpeta compartida (Drive, por ejemplo).
+
+## Instalarlo en el móvil Android
+
+Hay una guía más detallada en [instalar-android.md](instalar-android.md). En resumen:
+
+1. **Descarga** el archivo. Si avisa de que "puede dañar tu dispositivo", pulsa **Descargar de
+   todos modos**.
+2. **Ábrelo** (desde el aviso de descarga o en Archivos > Descargas).
+3. Android dirá que no puede instalar apps desconocidas desde esa fuente: pulsa **Ajustes** y
+   activa **Permitir desde esta fuente** (la fuente es Chrome o Archivos). Vuelve atrás.
+4. Pulsa **Instalar**. Si Play Protect avisa de que es desconocida, pulsa **Instalar de todos
+   modos**.
+5. Pulsa **Abrir**: se ve la bienvenida de MindTrainer.
+
+## Comprobar que todo está bien
+
+- Aparece "MindTrainer" con su icono entre las aplicaciones.
+- Ajustes > Aplicaciones > MindTrainer > Permisos: ninguno.
+- Con el **modo avión** activado, se puede jugar a los cinco juegos de principio a fin.
+- Con el móvil girado se mantiene en vertical y los botones de Android no tapan ningún botón.
+- Ocupa **50 MB como máximo** (Ajustes > Aplicaciones > MindTrainer).
+
 ## Guardar la copia de la clave de firma (importante)
 
 Si pierdes la clave, no podrás instalar versiones nuevas encima de la actual (habría que
