@@ -49,6 +49,12 @@
           }
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9f3e0785-3ee1-488f-9f13-d6d0e7c99066"
+      }
+    },
+    "owner": "rober360"
   }
 }
