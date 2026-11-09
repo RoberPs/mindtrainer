@@ -1,14 +1,19 @@
-import { useRef } from 'react';
+import { useRef, type ReactElement } from 'react';
 import { Pressable, StyleSheet, Text, View, type GestureResponderEvent, type LayoutChangeEvent } from 'react-native';
+import Svg, { G } from 'react-native-svg';
 import { useColorJuego } from '../../componentes/ColorJuego';
-import { Icono } from '../../componentes/Icono';
 import { tema } from '../../tema';
-import type { Diferencia, Elemento } from './escena';
+import type { Colocado, Diferencia } from './escena';
+
+// Tamaño del lienzo de los dibujos; los objetos se dibujan en cajas de 100 × 100 y se escalan.
+const LIENZO_ANCHO = 300;
+const LIENZO_ALTO = 200;
 
 type Props = {
   lado: 'arriba' | 'abajo';
   rotulo: string;
-  elementos: Elemento[];
+  fondo: () => ReactElement;
+  elementos: Colocado[];
   // Las diferencias de la partida: de ellas se dibuja un círculo por cada una encontrada.
   diferencias: Diferencia[];
   encontradas: string[];
@@ -18,8 +23,8 @@ type Props = {
   alTocar?: (x: number, y: number) => void;
 };
 
-// Un dibujo hecho con iconos y, encima, un círculo grueso por cada diferencia encontrada.
-export function Dibujo({ lado, rotulo, elementos, diferencias, encontradas, ancho, alto, alTocar }: Props) {
+// Un dibujo vectorial de la escena y, encima, un círculo grueso por cada diferencia encontrada.
+export function Dibujo({ lado, rotulo, fondo, elementos, diferencias, encontradas, ancho, alto, alTocar }: Props) {
   const color = useColorJuego();
   // Tamaño real medido; mientras no se mida se usa el calculado.
   const medido = useRef<{ ancho: number; alto: number } | null>(null);
@@ -36,21 +41,24 @@ export function Dibujo({ lado, rotulo, elementos, diferencias, encontradas, anch
   };
 
   // Los hijos no reciben toques: así el toque lo recibe siempre el recuadro y sus coordenadas
-  // son relativas al dibujo y no a un icono.
+  // son relativas al dibujo y no a un objeto.
   const contenido = (
     <>
-      {elementos.map((e) => {
-        const tamano = e.tamano * alto;
-        return (
-          <View
-            key={e.id}
-            pointerEvents="none"
-            style={{ position: 'absolute', left: e.x * ancho - tamano / 2, top: e.y * alto - tamano / 2 }}
-          >
-            <Icono icono={{ nombre: e.icono }} tamano={tamano} color={e.color} />
-          </View>
-        );
-      })}
+      <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+        <Svg width="100%" height="100%" viewBox={`0 0 ${LIENZO_ANCHO} ${LIENZO_ALTO}`}>
+          {fondo()}
+          {elementos.map((e) => {
+            const tamano = e.alto * LIENZO_ALTO;
+            const x = e.x * LIENZO_ANCHO - tamano / 2;
+            const y = e.y * LIENZO_ALTO - tamano / 2;
+            return (
+              <G key={e.id} transform={`translate(${x} ${y}) scale(${tamano / 100})`}>
+                {e.objeto(e.color)}
+              </G>
+            );
+          })}
+        </Svg>
+      </View>
       {diferencias
         .filter((d) => encontradas.includes(d.id))
         .map((d) => (

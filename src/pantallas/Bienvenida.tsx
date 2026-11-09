@@ -34,7 +34,14 @@ export function Bienvenida({ alEmpezar }: Props) {
 }
 
 const estilos = StyleSheet.create({
-  pantalla: { flexGrow: 1, justifyContent: 'space-between', padding: tema.espacio, gap: tema.espacio },
+  // Margen inferior extra: el botón Empezar no debe quedar junto a los botones táctiles del móvil.
+  pantalla: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    padding: tema.espacio,
+    paddingBottom: tema.espacio + 48,
+    gap: tema.espacio,
+  },
   cabecera: { flexDirection: 'row', alignItems: 'center', gap: tema.espacio },
   nombre: { fontSize: tema.letra.titulo, fontWeight: '700', color: tema.colores.texto },
   centro: { alignItems: 'center', gap: tema.espacio },

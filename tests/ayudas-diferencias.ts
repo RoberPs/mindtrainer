@@ -1,16 +1,16 @@
 import { fireEvent, screen } from '@testing-library/react-native';
-import { dibujosDe, escenas, type Escena } from '../src/actividades/diferencias/escena';
+import { dibujosDe, type Escena } from '../src/actividades/diferencias/escena';
 import { crearPartida, tocar } from '../src/actividades/diferencias/juego';
 
 // Ayudas para las pruebas de "Diferencias": las coordenadas salen de la escena, no se escriben a mano.
 
-// Con Math.random fijado a 0, la primera partida usa la primera escena y la segunda (que evita la
-// anterior) la segunda.
-export const escenaDePrueba: Escena = escenas[0];
-export const segundaEscena: Escena = escenas[1];
+// Con Math.random fijado a 0, la primera partida compone esta escena y la segunda (que cambia de
+// ambiente) esta otra. Las dos se componen con el mismo azar fijo.
+export const escenaDePrueba: Escena = crearPartida(undefined, () => 0).escena;
+export const segundaEscena: Escena = crearPartida(escenaDePrueba, () => 0).escena;
 
-// Las diferencias de una escena con el número de diferencias dado (3 por defecto).
-export const diferenciasDe = (escena: Escena = escenaDePrueba, total = 3) => dibujosDe(escena, total).diferencias;
+// Las 3 diferencias de una escena.
+export const diferenciasDe = (escena: Escena = escenaDePrueba) => dibujosDe(escena).diferencias;
 
 // Centro de la zona de una diferencia (coordenadas relativas).
 export function centroDe(id: string, escena: Escena = escenaDePrueba): { x: number; y: number } {
@@ -21,7 +21,7 @@ export function centroDe(id: string, escena: Escena = escenaDePrueba): { x: numb
 }
 
 // Un punto que no cae en ninguna zona activa (se comprueba con las propias reglas).
-export function puntoVacio(escena: Escena = escenaDePrueba, total = 3): { x: number; y: number } {
+export function puntoVacio(escena: Escena = escenaDePrueba): { x: number; y: number } {
   const candidatos = [
     { x: 0.01, y: 0.01 },
     { x: 0.99, y: 0.01 },
@@ -30,12 +30,23 @@ export function puntoVacio(escena: Escena = escenaDePrueba, total = 3): { x: num
     { x: 0.25, y: 0.34 },
   ];
   const vacio = candidatos.find((p) => {
-    const partida = { ...crearPartida(3, undefined, () => 0), escena, total: total as 3 | 5 | 7 };
+    const partida = { ...crearPartida(undefined, () => 0), escena };
     return tocar(partida, p.x, p.y).encontradas.length === 0;
   });
   if (!vacio) throw new Error('No hay ningún punto vacío');
   return vacio;
 }
+
+// Un azar repetible (mulberry32) para componer escenas distintas en las pruebas.
+export const azarFijo = (semilla: number) => {
+  let a = semilla;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+};
 
 const ANCHO = 300;
 const ALTO = 200;
