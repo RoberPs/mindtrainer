@@ -12,21 +12,32 @@ type Props = {
 export function Inicio({ actividades, alAbrir }: Props) {
   return (
     <ScrollView testID="lista-actividades" contentContainerStyle={estilos.lista}>
-      {actividades.map((actividad) => (
-        <Pressable
-          key={actividad.id}
-          accessibilityRole="button"
-          accessibilityLabel={`${actividad.nombre}. ${actividad.descripcion}`}
-          onPress={() => alAbrir(actividad)}
-          style={({ pressed }) => [estilos.tarjeta, pressed && estilos.pulsada]}
-        >
-          <Icono icono={actividad.icono} testID={`icono-${actividad.id}`} />
-          <View style={estilos.textos}>
-            <Text style={estilos.nombre}>{actividad.nombre}</Text>
-            <Text style={estilos.descripcion}>{actividad.descripcion}</Text>
-          </View>
-        </Pressable>
-      ))}
+      {actividades.map((actividad) => {
+        const color = actividad.color ?? tema.colores.primario;
+        return (
+          <Pressable
+            key={actividad.id}
+            accessibilityRole="button"
+            accessibilityLabel={`${actividad.nombre}. ${actividad.descripcion}`}
+            onPress={() => alAbrir(actividad)}
+            style={({ pressed }) => [
+              estilos.tarjeta,
+              { backgroundColor: color, borderColor: color },
+              pressed && estilos.pulsada,
+            ]}
+          >
+            <Icono
+              icono={actividad.icono}
+              color={tema.colores.textoSobrePrimario}
+              testID={`icono-${actividad.id}`}
+            />
+            <View style={estilos.textos}>
+              <Text style={estilos.nombre}>{actividad.nombre}</Text>
+              <Text style={estilos.descripcion}>{actividad.descripcion}</Text>
+            </View>
+          </Pressable>
+        );
+      })}
     </ScrollView>
   );
 }
@@ -41,11 +52,9 @@ const estilos = StyleSheet.create({
     padding: tema.espacio,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: tema.colores.borde,
-    backgroundColor: tema.colores.tarjeta,
   },
   pulsada: { opacity: 0.8 },
   textos: { flex: 1 },
-  nombre: { fontSize: tema.letra.titulo, fontWeight: '700', color: tema.colores.texto },
-  descripcion: { fontSize: tema.letra.normal, color: tema.colores.texto },
+  nombre: { fontSize: tema.letra.titulo, fontWeight: '700', color: tema.colores.textoSobrePrimario },
+  descripcion: { fontSize: tema.letra.normal, color: tema.colores.textoSobrePrimario },
 });

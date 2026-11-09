@@ -10,6 +10,14 @@ export const tema = {
     acierto: '#1B5E20', // verde oscuro para las parejas encontradas
     velo: 'rgba(0, 0, 0, 0.6)',
     marca: '#A0001C', // rojo oscuro de los círculos de las diferencias encontradas
+    // Un color por actividad en la lista de inicio. Todos superan 7 a 1 con texto blanco.
+    actividades: {
+      azul: '#0B3D91',
+      verde: '#1B5E20',
+      morado: '#5B2A86',
+      marron: '#7A3E00',
+      verdeAzulado: '#006064',
+    },
   },
   letra: {
     normal: 22, // mínimo 22 puntos

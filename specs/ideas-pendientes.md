@@ -81,3 +81,17 @@ bien; estas son mejoras, no fallos.
      colores de alto contraste; revisado uno a uno por una persona.
    - Las ideas 1, 2 y 3 se apoyan entre sí: con más iconos y más diferencias, la colocación
      variable tiene sentido. Conviene decidirlas juntas.
+
+## Color por actividad y animación de victoria (spec 007)
+
+Observada el 2026-11-09 al hacer la comprobación manual de la spec 007. Esa comprobación salió
+bien; esta es una mejora, no un fallo.
+
+1. **Animación de victoria más visible.** El fundido de 400 ms del icono de celebración
+   (`src/componentes/IconoVictoria.tsx`) es demasiado sencillo y casi no se nota. A tener en cuenta:
+   - La aclaración de la spec 007 descartó el rebote y el crecimiento por ser más mareantes. Si
+     se quiere algo más llamativo, hay que decidirlo en la spec: por ejemplo un fundido más
+     largo o un crecimiento leve, siempre una sola vez.
+   - Debe seguir respetando "reducir movimiento", sin bloquear botones y sin librerías nuevas.
+   - Cambiaría: RF-008 y RF-009 de la spec 007, `IconoVictoria.tsx`, `src/animacion.ts` y
+     `tests/icono-victoria.test.tsx`.

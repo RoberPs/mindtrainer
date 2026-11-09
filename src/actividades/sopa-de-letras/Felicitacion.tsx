@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { BotonGrande } from '../../componentes/BotonGrande';
-import { Icono } from '../../componentes/Icono';
+import { IconoVictoria } from '../../componentes/IconoVictoria';
 import { textosSopa as t } from '../../textos';
 import { tema } from '../../tema';
 
@@ -13,7 +13,7 @@ type Props = {
 export function Felicitacion({ intentos, alJugarOtraVez }: Props) {
   return (
     <View style={estilos.pantalla}>
-      <Icono icono={{ nombre: 'party-popper' }} tamano={96} testID="icono-felicitacion" />
+      <IconoVictoria testID="icono-felicitacion" />
       <Text style={estilos.mensaje}>{t.felicitacion}</Text>
       <Text style={estilos.mensaje}>{t.intentosNecesitados(intentos)}</Text>
       <BotonGrande texto={t.jugarOtraVez} icono={{ nombre: 'refresh' }} idIcono="icono-jugar-otra-vez" alTocar={alJugarOtraVez} />

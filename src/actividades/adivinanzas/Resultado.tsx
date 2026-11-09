@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { BotonGrande } from '../../componentes/BotonGrande';
-import { Icono } from '../../componentes/Icono';
+import { IconoVictoria } from '../../componentes/IconoVictoria';
 import { textosAdivinanzas as t } from '../../textos';
 import { tema } from '../../tema';
 
@@ -13,7 +13,7 @@ type Props = {
 export function Resultado({ aciertos, alJugarOtraVez }: Props) {
   return (
     <View style={estilos.pantalla}>
-      <Icono icono={{ nombre: 'party-popper' }} tamano={96} testID="icono-resultado" />
+      <IconoVictoria testID="icono-resultado" />
       <Text style={estilos.mensaje}>{t.aciertos(aciertos)}</Text>
       <Text style={estilos.mensaje}>{t.mensajeFinal(aciertos)}</Text>
       <BotonGrande texto={t.jugarOtraVez} icono={{ nombre: 'refresh' }} idIcono="icono-jugar-otra-vez" alTocar={alJugarOtraVez} />

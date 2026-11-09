@@ -46,8 +46,9 @@ src/
 │   ├── adivinanzas/         # Actividad "Adivinanzas": banco.ts (10 adivinanzas), juego.ts (reglas puras) y sus pantallas
 │   └── diferencias/         # Actividad "Diferencias": escena.ts (2 dibujos con iconos y 3 zonas), juego.ts (reglas puras) y sus pantallas
 ├── pantallas/               # Inicio.tsx, MarcoActividad.tsx
-├── componentes/             # BotonGrande.tsx, Icono.tsx
-├── tema.ts                  # Tamaños y colores accesibles
+├── componentes/             # BotonGrande.tsx, Icono.tsx, IconoVictoria.tsx (icono de las pantallas finales, con fundido)
+├── animacion.ts             # Interruptor de la animación de victoria (apagada en pruebas) y su duración
+├── tema.ts                  # Tamaños y colores accesibles (incluye un color por actividad)
 └── textos.ts                # Textos fijos
 tests/                       # *.test.tsx; ayudas.tsx crea actividades de prueba
 specs/<nnn-nombre>/          # spec, plan, tareas y quickstart de cada funcionalidad
@@ -58,7 +59,8 @@ specs/<nnn-nombre>/          # spec, plan, tareas y quickstart de cada funcional
 Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla:
 
 1. Cumple el contrato de [specs/001-pantalla-inicio/contracts/actividad.md](specs/001-pantalla-inicio/contracts/actividad.md):
-   identificador, icono, nombre, descripción y contenido.
+   identificador, icono, nombre, descripción, contenido y, opcional, el color de su tarjeta
+   (`tema.colores.actividades`; distinto del de las demás y con contraste de 7 a 1 con blanco).
 2. El contenido avisa con `avisarPartida(true)` al empezar una partida y `avisarPartida(false)`
    al terminarla.
 3. No pinta el botón "Volver al inicio": lo pone siempre `MarcoActividad`.
@@ -88,5 +90,7 @@ Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla
 - Las actividades reales por ahora son "Parejas", "Forma la palabra", "Sopa de letras", "Adivinanzas" y "Diferencias". No se inventan actividades de relleno.
 - Las pruebas usan `getByTestId(..., { includeHiddenElements: true })` para los iconos, porque
   son decorativos y están ocultos a la accesibilidad a propósito.
+- La pantalla final de cada actividad usa `IconoVictoria` (fundido de 400 ms, una sola vez, respeta
+  "reducir movimiento"). Es la única animación de la app; no se animan los aciertos ni el inicio.
 - En PowerShell 5.1, `Set-Content -Encoding utf8` añade BOM y rompe los JSON; usa Node para
   reescribirlos.
