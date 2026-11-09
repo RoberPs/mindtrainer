@@ -10,6 +10,9 @@ const marcar = (partida: Partida, palabra: string) => {
   return tocar(partida, inicio, fin);
 };
 
+const pequenas = sopas.filter((s) => s.tamano === 'pequena');
+const medianas = sopas.filter((s) => s.tamano === 'mediana');
+
 describe('Sopa de letras: crearPartida', () => {
   it('usa una sopa de la lista y empieza sin nada encontrado', () => {
     const partida = crearPartida();
@@ -20,23 +23,48 @@ describe('Sopa de letras: crearPartida', () => {
     expect(partida.aviso).toBe('ninguno');
   });
 
-  it('sin sopa anterior sirve cualquiera de la lista', () => {
-    expect(crearPartida(undefined, () => 0).sopa.id).toBe(sopas[0].id);
-    expect(crearPartida(undefined, () => 0.999).sopa.id).toBe(sopas[sopas.length - 1].id);
+  it('sin sopa anterior sirve cualquiera de las del tamaño elegido', () => {
+    expect(crearPartida('pequena', undefined, () => 0).sopa.id).toBe(pequenas[0].id);
+    expect(crearPartida('pequena', undefined, () => 0.999).sopa.id).toBe(pequenas[pequenas.length - 1].id);
+    expect(crearPartida('mediana', undefined, () => 0).sopa.id).toBe(medianas[0].id);
+    expect(crearPartida('mediana', undefined, () => 0.999).sopa.id).toBe(medianas[medianas.length - 1].id);
+  });
+
+  it('por defecto la sopa es pequeña', () => {
+    expect(crearPartida().sopa.tamano).toBe('pequena');
+  });
+
+  it.each(['pequena', 'mediana'] as const)('la sopa %s tiene 3 o 5 palabras y la partida termina al encontrarlas todas', (tamano) => {
+    const partida = crearPartida(tamano, undefined, () => 0);
+    const cuantas = tamano === 'pequena' ? 3 : 5;
+    expect(partida.sopa.tamano).toBe(tamano);
+    expect(partida.sopa.palabras).toHaveLength(cuantas);
+    expect(faltan(partida)).toBe(cuantas);
+    let p = partida;
+    partida.sopa.palabras.forEach((palabra, i) => {
+      expect(haTerminado(p)).toBe(false);
+      const { inicio, fin } = casillasDe(partida.sopa, palabra);
+      p = tocar(p, inicio, fin);
+      expect(faltan(p)).toBe(cuantas - i - 1);
+    });
+    expect(haTerminado(p)).toBe(true);
+    expect(p.intentos).toBe(cuantas);
   });
 
   it('nunca devuelve la sopa anterior, sea cual sea el azar', () => {
     const azares = [() => 0, () => 0.25, () => 0.5, () => 0.75, () => 0.999];
     for (const anterior of sopas) {
       for (const azar of azares) {
-        expect(crearPartida(anterior.id, azar).sopa.id).not.toBe(anterior.id);
+        const nueva = crearPartida(anterior.tamano, anterior.id, azar).sopa;
+        expect(nueva.id).not.toBe(anterior.id);
+        expect(nueva.tamano).toBe(anterior.tamano);
       }
     }
   });
 
   it('con azares distintos puede salir otra sopa', () => {
-    const a = crearPartida(undefined, () => 0).sopa.id;
-    const b = crearPartida(undefined, () => 0.999).sopa.id;
+    const a = crearPartida('pequena', undefined, () => 0).sopa.id;
+    const b = crearPartida('pequena', undefined, () => 0.999).sopa.id;
     expect(a).not.toBe(b);
   });
 });

@@ -8,6 +8,24 @@ especificación. Se recogen aquí para tratarlas todas juntas en la última spec
 (las que sigan valiendo) y revisar con la persona responsable cuáles entran. Mientras tanto, añadir
 aquí cualquier detalle nuevo con la fecha, el juego y quién lo observó.
 
+## Decisiones para la spec 008 (2026-11-09)
+
+Alcance acordado con la persona responsable para la última spec, "Más variedad en los juegos":
+
+- **Entran** (por prioridad): P1 adivinanzas (50 o más) y equilibrio de direcciones en la sopa;
+  P2 Diferencias con varias escenas fijas revisadas a mano y catálogo de unos 50 iconos;
+  P3 Diferencias con 3, 5 o 7 diferencias y sopa en tamaño pequeño o mediano (6 o 7 columnas
+  como máximo, 5 palabras); P4 fundido de victoria más largo (unos 800 a 1000 ms, una sola vez,
+  sin crecimiento).
+- **No entran**: palabras al revés o en diagonal, tres tamaños de sopa y colocación aleatoria
+  de iconos.
+
+**Estado tras implementar la spec 008 (2026-11-09)**: hechas la idea 1 y la idea 3 de la sopa
+(con sopa mediana de 6 × 6, porque con 7 columnas las casillas medirían unos 42 puntos), la idea 1
+de las adivinanzas (50), las ideas 1, 2 y 3 de Diferencias (4 escenas fijas, 54 iconos y 3, 5 o 7
+diferencias) y la animación (900 ms). **No se construyeron** las palabras al revés o en diagonal ni
+la colocación aleatoria. Pendiente de una persona: revisar el contenido nuevo y probarlo en un móvil.
+
 ## Sopa de letras (spec 004)
 
 Observadas el 2026-11-06 al hacer la comprobación manual de la spec 004. Esa comprobación salió
@@ -95,3 +113,23 @@ bien; esta es una mejora, no un fallo.
    - Debe seguir respetando "reducir movimiento", sin bloquear botones y sin librerías nuevas.
    - Cambiaría: RF-008 y RF-009 de la spec 007, `IconoVictoria.tsx`, `src/animacion.ts` y
      `tests/icono-victoria.test.tsx`.
+
+## Pantalla de bienvenida y selección de juegos más intuitiva (spec 008)
+
+Observada el 2026-11-09 al cerrar la spec 008.
+
+1. **Pantalla de bienvenida básica.** Una pantalla inicial con el logo de la app (el usuario lo
+   facilitará más adelante), el mensaje "Empieza a entrenar tu mente" y un botón grande que lleve
+   a la pantalla de juegos. A tener en cuenta:
+   - Hasta que llegue el logo, hace falta un hueco o un icono provisional. El logo debe ir
+     incluido en la app (sin internet) y junto al texto, nunca en lugar de él.
+   - Cambiaría: `App.tsx` (nueva pantalla previa a `Inicio`), `src/textos.ts`, `src/tema.ts` si
+     hace falta y pruebas nuevas de navegación.
+2. **Pantalla de juegos con el mensaje "Elige uno de los juegos".** Encabezado claro que indique
+   qué hacer en la pantalla actual (`src/pantallas/Inicio.tsx`).
+3. **Selección de juego más intuitiva que una lista de botones.** Que cada juego se reconozca de
+   un vistazo, no solo por un botón con su nombre. A tener en cuenta:
+   - Opciones a decidir en la spec: tarjetas grandes con icono grande y color propio, cuadrícula
+     de dos columnas, o una ilustración por juego. Siempre con texto junto al icono.
+   - Debe seguir cumpliendo letra de 22 puntos o más, botones de 64 puntos o más de alto y
+     contraste de 7 a 1, con 5 juegos y los que se añadan después.

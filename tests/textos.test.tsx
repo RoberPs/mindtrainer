@@ -7,8 +7,7 @@ import { crearPartida as crearPartidaAdivinanzas } from '../src/actividades/adiv
 import { tema } from '../src/tema';
 import { crearActividades } from './ayudas';
 import { casillasDe } from './ayudas-sopa';
-import { diferencias } from '../src/actividades/diferencias/escena';
-import { centroDe, puntoVacio, tocarAbajo } from './ayudas-diferencias';
+import { centroDe, diferenciasDe, puntoVacio, tocarAbajo } from './ayudas-diferencias';
 
 // Contraste entre dos colores hexadecimales (#RRGGBB), según la fórmula habitual de accesibilidad.
 function luminancia(hex: string): number {
@@ -135,12 +134,17 @@ describe('Textos de "Sopa de letras" (RF-017, RF-018)', () => {
   it('los textos fijos son los acordados, con tildes y signos de apertura', () => {
     expect(textosSopa.nombre).toBe('Sopa de letras');
     expect(textosSopa.descripcion).toBe('Encuentra las palabras escondidas');
-    expect(textosSopa.etiqueta).toBe('Busca 3 palabras relacionadas con:');
+    expect(textosSopa.etiqueta(3)).toBe('Busca 3 palabras relacionadas con:');
+    expect(textosSopa.etiqueta(5)).toBe('Busca 5 palabras relacionadas con:');
+    expect(textosSopa.elegirTamano).toBe('Elige el tamaño de la sopa');
+    expect(textosSopa.pequena).toBe('Pequeña: 3 palabras');
+    expect(textosSopa.mediana).toBe('Mediana: 5 palabras');
     expect(textosSopa.invitar).toBe('Ahora toca la última letra de la palabra');
     expect(textosSopa.acierto).toBe('¡Muy bien! Has encontrado una palabra');
     expect(textosSopa.fallo).toBe('Esa no es una de las palabras. Inténtalo otra vez');
     expect(textosSopa.noRecta).toBe('Marca una línea recta, en horizontal o en vertical');
-    expect(textosSopa.felicitacion).toBe('¡Enhorabuena! Has encontrado las 3 palabras');
+    expect(textosSopa.felicitacion(3)).toBe('¡Enhorabuena! Has encontrado las 3 palabras');
+    expect(textosSopa.felicitacion(5)).toBe('¡Enhorabuena! Has encontrado las 5 palabras');
     expect(textosSopa.faltan(3)).toBe('Te faltan 3 palabras');
     expect(textosSopa.faltan(1)).toBe('Te falta 1 palabra');
     expect(textosSopa.faltan(0)).toBe('No te falta ninguna palabra');
@@ -155,9 +159,10 @@ describe('Textos de "Sopa de letras" (RF-017, RF-018)', () => {
 
   it('el botón de la felicitación lleva icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
-    const sopa = crearPartidaSopa(undefined, () => 0).sopa;
+    const sopa = crearPartidaSopa('pequena', undefined, () => 0).sopa;
     await render(<App />);
     await fireEvent.press(screen.getByText('Sopa de letras'));
+    await fireEvent.press(screen.getByText(textosSopa.pequena));
     for (const palabra of sopa.palabras) {
       const { inicio, fin } = casillasDe(sopa, palabra);
       await fireEvent.press(screen.getByTestId(`celda-${inicio.fila}-${inicio.columna}`));
@@ -190,7 +195,7 @@ describe('Textos de "Adivinanzas" (RF-015, RF-016)', () => {
 
   it('cada botón de acción lleva icono y texto', async () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
-    const partida = crearPartidaAdivinanzas(() => 0);
+    const partida = crearPartidaAdivinanzas([], () => 0);
     await render(<App />);
     await fireEvent.press(screen.getByText('Adivinanzas'));
     const turno = partida.turnos[0];
@@ -212,11 +217,20 @@ describe('Textos de "Adivinanzas" (RF-015, RF-016)', () => {
 describe('Textos de "Diferencias" (RF-014, RF-015)', () => {
   it('los textos fijos son los acordados, con tildes y signos de apertura', () => {
     expect(textosDiferencias.nombre).toBe('Diferencias');
-    expect(textosDiferencias.descripcion).toBe('Encuentra las 3 diferencias entre dos dibujos');
+    expect(textosDiferencias.descripcion).toBe('Encuentra las diferencias entre dos dibujos');
     expect(textosDiferencias.instruccion).toBe('Toca en el dibujo de abajo lo que sea distinto');
     expect(textosDiferencias.fallo).toBe('Ahí no hay ninguna diferencia. ¡Sigue buscando!');
-    expect(textosDiferencias.felicitacion).toBe('¡Enhorabuena! Has encontrado las 3 diferencias');
+    expect(textosDiferencias.elegirNumero).toBe('Elige cuántas diferencias quieres buscar');
+    expect(textosDiferencias.tres).toBe('3 diferencias');
+    expect(textosDiferencias.cinco).toBe('5 diferencias');
+    expect(textosDiferencias.siete).toBe('7 diferencias');
     expect(textosDiferencias.jugarOtraVez).toBe('Jugar otra vez');
+  });
+
+  it('la felicitación dice cuántas diferencias había', () => {
+    expect(textosDiferencias.felicitacion(3)).toBe('¡Enhorabuena! Has encontrado las 3 diferencias');
+    expect(textosDiferencias.felicitacion(5)).toBe('¡Enhorabuena! Has encontrado las 5 diferencias');
+    expect(textosDiferencias.felicitacion(7)).toBe('¡Enhorabuena! Has encontrado las 7 diferencias');
   });
 
   it('el aviso de las que faltan usa singular para 1 y plural para 2 y 3', () => {
@@ -236,15 +250,17 @@ describe('Textos de "Diferencias" (RF-014, RF-015)', () => {
   });
 
   it('el botón y los mensajes importantes llevan icono y texto', async () => {
+    jest.spyOn(Math, 'random').mockReturnValue(0); // siempre la primera escena
     await render(<App />);
     await fireEvent.press(screen.getByText('Diferencias'));
+    await fireEvent.press(screen.getByText(textosDiferencias.tres));
     expect(screen.getByTestId('icono-faltan', { includeHiddenElements: true })).toBeTruthy();
     await tocarAbajo(puntoVacio().x, puntoVacio().y);
     expect(screen.getByTestId('icono-fallo', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosDiferencias.fallo)).toBeTruthy();
-    for (const d of diferencias) await tocarAbajo(centroDe(d.id).x, centroDe(d.id).y);
+    for (const d of diferenciasDe()) await tocarAbajo(centroDe(d.id).x, centroDe(d.id).y);
     expect(screen.getByTestId('icono-felicitacion', { includeHiddenElements: true })).toBeTruthy();
-    expect(screen.getByText(textosDiferencias.felicitacion)).toBeTruthy();
+    expect(screen.getByText(textosDiferencias.felicitacion(3))).toBeTruthy();
     expect(screen.getByTestId('icono-jugar-otra-vez', { includeHiddenElements: true })).toBeTruthy();
     expect(screen.getByText(textosDiferencias.jugarOtraVez)).toBeTruthy();
   });

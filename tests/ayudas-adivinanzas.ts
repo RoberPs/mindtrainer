@@ -6,7 +6,7 @@ export const correctaActual = (partida: Partida) => turnoActual(partida).adivina
 export const incorrectaActual = (partida: Partida) => turnoActual(partida).adivinanza.incorrectas[0];
 
 // Partida creada con un azar constante (siempre la misma).
-export const partidaConAzar = (valor: number): Partida => crearPartida(() => valor);
+export const partidaConAzar = (valor: number): Partida => crearPartida([], () => valor);
 
 // Azar repetible con resultados variados (generador congruencial sencillo).
 export function azarCon(semilla: number) {

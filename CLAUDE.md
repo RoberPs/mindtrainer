@@ -42,11 +42,11 @@ src/
 ├── actividades/             # tipos.ts (contrato), registro.ts (lista real), ejemplos.ts (solo pruebas a mano)
 │   ├── parejas/             # Actividad "Parejas": juego.ts (reglas puras), dibujos.ts y sus pantallas
 │   ├── forma-palabra/       # Actividad "Forma la palabra": palabras.ts, juego.ts (reglas puras) y sus pantallas
-│   ├── sopa-de-letras/      # Actividad "Sopa de letras": sopas.ts (5 sopas fijas), juego.ts (reglas puras) y sus pantallas
-│   ├── adivinanzas/         # Actividad "Adivinanzas": banco.ts (10 adivinanzas), juego.ts (reglas puras) y sus pantallas
-│   └── diferencias/         # Actividad "Diferencias": escena.ts (2 dibujos con iconos y 3 zonas), juego.ts (reglas puras) y sus pantallas
+│   ├── sopa-de-letras/      # Actividad "Sopa de letras": sopas.ts (5 pequeñas y 3 medianas, fijas), juego.ts (reglas puras) y sus pantallas
+│   ├── adivinanzas/         # Actividad "Adivinanzas": banco.ts (50 adivinanzas), juego.ts (reglas puras) y sus pantallas
+│   └── diferencias/         # Actividad "Diferencias": escena.ts (4 escenas fijas con 7 cambios cada una; se juega con 3, 5 o 7), juego.ts (reglas puras) y sus pantallas
 ├── pantallas/               # Inicio.tsx, MarcoActividad.tsx
-├── componentes/             # BotonGrande.tsx, Icono.tsx, IconoVictoria.tsx (icono de las pantallas finales, con fundido)
+├── componentes/             # BotonGrande.tsx, Icono.tsx, ElegirOpcion.tsx (pantalla de elegir de Sopa y Diferencias), IconoVictoria.tsx (icono de las pantallas finales, con fundido)
 ├── animacion.ts             # Interruptor de la animación de victoria (apagada en pruebas) y su duración
 ├── tema.ts                  # Tamaños y colores accesibles (incluye un color por actividad)
 └── textos.ts                # Textos fijos
@@ -90,7 +90,7 @@ Cada actividad (juego o tipo de pregunta) tiene su propia spec. Al implementarla
 - Las actividades reales por ahora son "Parejas", "Forma la palabra", "Sopa de letras", "Adivinanzas" y "Diferencias". No se inventan actividades de relleno.
 - Las pruebas usan `getByTestId(..., { includeHiddenElements: true })` para los iconos, porque
   son decorativos y están ocultos a la accesibilidad a propósito.
-- La pantalla final de cada actividad usa `IconoVictoria` (fundido de 400 ms, una sola vez, respeta
+- La pantalla final de cada actividad usa `IconoVictoria` (fundido de 900 ms, una sola vez, respeta
   "reducir movimiento"). Es la única animación de la app; no se animan los aciertos ni el inicio.
 - En PowerShell 5.1, `Set-Content -Encoding utf8` añade BOM y rompe los JSON; usa Node para
   reescribirlos.

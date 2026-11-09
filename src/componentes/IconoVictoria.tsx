@@ -27,7 +27,7 @@ export function IconoVictoria({ testID, tamano = 96 }: Props) {
         fundido = Animated.timing(opacidad, {
           toValue: 1,
           duration: animacion.duracion,
-          // Un solo icono durante 400 ms: no hace falta el motor nativo, y así se puede probar.
+          // Un solo icono durante menos de un segundo: no hace falta el motor nativo, y así se puede probar.
           useNativeDriver: false,
         });
         fundido.start();

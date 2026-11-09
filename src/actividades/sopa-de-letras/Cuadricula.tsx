@@ -10,7 +10,7 @@ type Props = {
 
 const clave = (c: Casilla) => `${c.fila}-${c.columna}`;
 
-// Cuadrícula de 5 filas por 6 columnas. Marca y palabras encontradas se distinguen por el
+// Cuadrícula de cada sopa (5 × 6 la pequeña, 6 × 6 la mediana). Marca y palabras encontradas se distinguen por el
 // borde y por el fondo, no solo por el color.
 export function Cuadricula({ partida, alTocar }: Props) {
   const encontradas = new Set(partida.encontradas.flatMap((e) => e.casillas.map(clave)));

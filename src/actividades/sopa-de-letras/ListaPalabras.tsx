@@ -8,7 +8,7 @@ type Props = {
   partida: Partida;
 };
 
-// Las 3 palabras de la sopa: las encontradas, escritas y tachadas; las demás, ocultas.
+// Las palabras de la sopa (3 o 5): las encontradas, escritas y tachadas; las demás, ocultas.
 export function ListaPalabras({ partida }: Props) {
   const encontradas = partida.encontradas.map((e) => e.palabra);
   return (

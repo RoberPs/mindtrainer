@@ -25,7 +25,7 @@ export function Adivinanzas({ avisarPartida }: PropsContenido) {
       <Resultado
         aciertos={partida.aciertos}
         alJugarOtraVez={() => {
-          setPartida(crearPartida());
+          setPartida(crearPartida(partida.turnos.map((t) => t.adivinanza.id)));
           avisarPartida(true);
         }}
       />

@@ -1,37 +1,55 @@
-import { diferencias } from '../src/actividades/diferencias/escena';
+import { escenas, type Total } from '../src/actividades/diferencias/escena';
 import { crearPartida, faltan, tocar, type Partida } from '../src/actividades/diferencias/juego';
-import { centroDe, puntoVacio } from './ayudas-diferencias';
+import { centroDe, diferenciasDe, escenaDePrueba, puntoVacio } from './ayudas-diferencias';
 
-const ids = diferencias.map((d) => d.id);
+// Partida de la escena de prueba con el número de diferencias dado.
+const nueva = (total: Total = 3): Partida => ({ ...crearPartida(total, undefined, () => 0), escena: escenaDePrueba });
+const ids = diferenciasDe(escenaDePrueba, 7).map((d) => d.id);
 
 // Toca el centro de una diferencia de la escena.
 const acertar = (partida: Partida, id: string) => {
-  const { x, y } = centroDe(id);
+  const { x, y } = centroDe(id, partida.escena);
   return tocar(partida, x, y);
 };
 const fallar = (partida: Partida) => {
-  const { x, y } = puntoVacio();
+  const { x, y } = puntoVacio(partida.escena, partida.total);
   return tocar(partida, x, y);
 };
 
 describe('Diferencias: crear la partida', () => {
   it('empieza sin diferencias encontradas, con 0 toques, sin mensaje de fallo y sin terminar', () => {
-    expect(crearPartida()).toEqual({ encontradas: [], toques: 0, fallo: false, terminada: false });
+    const p = crearPartida(5, undefined, () => 0);
+    expect(p).toEqual({ escena: escenas[0], total: 5, encontradas: [], toques: 0, fallo: false, terminada: false });
+  });
+
+  it('por defecto hay 3 diferencias', () => {
+    expect(crearPartida().total).toBe(3);
   });
 
   it('dos partidas no comparten la lista de encontradas', () => {
-    const a = crearPartida();
-    const b = crearPartida();
+    const a = nueva();
+    const b = nueva();
     acertar(a, ids[0]);
     expect(a.encontradas).toEqual([]);
     expect(b.encontradas).toEqual([]);
     expect(a.encontradas).not.toBe(b.encontradas);
   });
+
+  it.each([0, 0.3, 0.6, 0.99])('la escena nueva es siempre distinta de la anterior (azar %s)', (valor) => {
+    for (const anterior of escenas) {
+      expect(crearPartida(3, anterior.id, () => valor).escena.id).not.toBe(anterior.id);
+    }
+  });
+
+  it('con azares distintos salen escenas distintas', () => {
+    const vistas = new Set([0, 0.3, 0.6, 0.99].map((a) => crearPartida(3, undefined, () => a).escena.id));
+    expect(vistas.size).toBeGreaterThanOrEqual(3);
+  });
 });
 
 describe('Diferencias: tocar (RF-003, RF-004, RF-005)', () => {
   it('tocar una diferencia la marca, suma un toque y no pone mensaje de fallo', () => {
-    const p = acertar(crearPartida(), ids[0]);
+    const p = acertar(nueva(), ids[0]);
     expect(p.encontradas).toEqual([ids[0]]);
     expect(p.toques).toBe(1);
     expect(p.fallo).toBe(false);
@@ -39,29 +57,36 @@ describe('Diferencias: tocar (RF-003, RF-004, RF-005)', () => {
   });
 
   it('tocar fuera de las zonas suma un toque y pone el mensaje de fallo, sin cambiar nada más', () => {
-    const p = fallar(crearPartida());
+    const p = fallar(nueva());
     expect(p.encontradas).toEqual([]);
     expect(p.toques).toBe(1);
     expect(p.fallo).toBe(true);
     expect(p.terminada).toBe(false);
   });
 
+  it('la zona de un cambio que no está activo cuenta como fallo y no marca nada', () => {
+    const p = acertar(nueva(3), ids[3]);
+    expect(p.encontradas).toEqual([]);
+    expect(p.fallo).toBe(true);
+    expect(p.toques).toBe(1);
+  });
+
   it('un fallo no penaliza: después se puede acertar con normalidad y se quita el mensaje', () => {
-    const p = acertar(fallar(crearPartida()), ids[1]);
+    const p = acertar(fallar(nueva()), ids[1]);
     expect(p.encontradas).toEqual([ids[1]]);
     expect(p.toques).toBe(2);
     expect(p.fallo).toBe(false);
   });
 
   it('tocar una diferencia ya encontrada no hace nada (misma partida, sin toque ni mensaje)', () => {
-    const marcada = acertar(crearPartida(), ids[0]);
+    const marcada = acertar(nueva(), ids[0]);
     expect(acertar(marcada, ids[0])).toBe(marcada);
     const conFallo = fallar(marcada);
     expect(acertar(conFallo, ids[0])).toBe(conFallo);
   });
 
   it('los cuatro bordes de una zona cuentan como acierto', () => {
-    diferencias.forEach(({ id, zona }) => {
+    diferenciasDe(escenaDePrueba, 7).forEach(({ id, zona }) => {
       const { x, y, ancho, alto } = zona;
       [
         [x, y],
@@ -69,18 +94,18 @@ describe('Diferencias: tocar (RF-003, RF-004, RF-005)', () => {
         [x, y + alto],
         [x + ancho, y + alto],
       ].forEach(([px, py]) => {
-        expect(tocar(crearPartida(), px, py).encontradas).toEqual([id]);
+        expect(tocar(nueva(7), px, py).encontradas).toEqual([id]);
       });
     });
   });
 
   it('un punto justo fuera de la zona es un fallo', () => {
-    const { x, y } = diferencias[0].zona;
-    expect(tocar(crearPartida(), x - 0.001, y).fallo).toBe(true);
+    const { x, y } = diferenciasDe()[0].zona;
+    expect(tocar(nueva(), x - 0.001, y).fallo).toBe(true);
   });
 
   it('no modifica la partida que recibe', () => {
-    const p = crearPartida();
+    const p = nueva();
     const copia = JSON.parse(JSON.stringify(p));
     acertar(p, ids[0]);
     fallar(p);
@@ -88,49 +113,51 @@ describe('Diferencias: tocar (RF-003, RF-004, RF-005)', () => {
   });
 });
 
-describe('Diferencias: final de partida y toques (RF-007, RF-008)', () => {
-  it('al encontrar las 3 la partida termina', () => {
-    const p = ids.reduce(acertar, crearPartida());
-    expect(p.encontradas).toHaveLength(3);
+describe.each([3, 5, 7] as Total[])('Diferencias: final de partida con %i diferencias (RF-007, RF-008)', (total) => {
+  const activas = ids.slice(0, total);
+
+  it('al encontrar todas la partida termina, y no antes', () => {
+    const casiTodas = activas.slice(0, -1).reduce(acertar, nueva(total));
+    expect(casiTodas.terminada).toBe(false);
+    const p = acertar(casiTodas, activas[total - 1]);
+    expect(p.encontradas).toHaveLength(total);
     expect(p.terminada).toBe(true);
   });
 
-  it('con 3 aciertos seguidos los toques son 3', () => {
-    expect(ids.reduce(acertar, crearPartida()).toques).toBe(3);
+  it('con todos los aciertos seguidos los toques son los mismos que diferencias', () => {
+    expect(activas.reduce(acertar, nueva(total)).toques).toBe(total);
   });
 
-  it('con 2 fallos y 3 aciertos los toques son 5', () => {
-    const p = ids.reduce(acertar, fallar(fallar(crearPartida())));
-    expect(p.toques).toBe(5);
+  it('con 2 fallos y todos los aciertos los toques suman 2 más', () => {
+    const p = activas.reduce(acertar, fallar(fallar(nueva(total))));
+    expect(p.toques).toBe(total + 2);
   });
 
+  it('con la partida terminada ningún toque más cambia nada', () => {
+    const terminada = activas.reduce(acertar, nueva(total));
+    expect(fallar(terminada)).toBe(terminada);
+    expect(acertar(terminada, ids[0])).toBe(terminada);
+  });
+
+  it('las que faltan bajan hasta 0 al encontrar las diferencias', () => {
+    let p = nueva(total);
+    expect(faltan(p)).toBe(total);
+    activas.forEach((id, i) => {
+      p = acertar(p, id);
+      expect(faltan(p)).toBe(total - i - 1);
+    });
+  });
+});
+
+describe('Diferencias: toques repetidos y cuántas faltan (RF-010)', () => {
   it('los toques repetidos sobre diferencias encontradas no suman', () => {
-    let p = acertar(crearPartida(), ids[0]);
+    let p = acertar(nueva(), ids[0]);
     p = acertar(acertar(acertar(p, ids[0]), ids[0]), ids[0]);
     expect(p.toques).toBe(1);
   });
 
-  it('con la partida terminada ningún toque más cambia nada', () => {
-    const terminada = ids.reduce(acertar, crearPartida());
-    expect(fallar(terminada)).toBe(terminada);
-    expect(acertar(terminada, ids[0])).toBe(terminada);
-  });
-});
-
-describe('Diferencias: cuántas faltan (RF-010)', () => {
-  it('baja de 3 a 0 al encontrar las diferencias', () => {
-    let p = crearPartida();
-    expect(faltan(p)).toBe(3);
-    p = acertar(p, ids[0]);
-    expect(faltan(p)).toBe(2);
-    p = acertar(p, ids[1]);
-    expect(faltan(p)).toBe(1);
-    p = acertar(p, ids[2]);
-    expect(faltan(p)).toBe(0);
-  });
-
   it('un fallo y un toque repetido no cambian las que faltan', () => {
-    const p = acertar(crearPartida(), ids[0]);
+    const p = acertar(nueva(), ids[0]);
     expect(faltan(fallar(p))).toBe(2);
     expect(faltan(acertar(p, ids[0]))).toBe(2);
   });

@@ -23,8 +23,10 @@ function mezclar<T>(lista: T[], azar: () => number): T[] {
   return copia;
 }
 
-export function crearPartida(azar: () => number = Math.random): Partida {
-  const turnos = mezclar(adivinanzas, azar)
+// Elige 5 adivinanzas del banco, sin ninguna de las de la partida anterior (sus identificadores).
+export function crearPartida(idsAnteriores: string[] = [], azar: () => number = Math.random): Partida {
+  const candidatas = adivinanzas.filter((a) => !idsAnteriores.includes(a.id));
+  const turnos = mezclar(candidatas, azar)
     .slice(0, adivinanzasPorPartida)
     .map((adivinanza) => ({
       adivinanza,

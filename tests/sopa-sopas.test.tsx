@@ -16,20 +16,22 @@ function contar(texto: string, palabra: string) {
 const alReves = (texto: string) => [...texto].reverse().join('');
 
 describe('Sopa de letras: lista de sopas', () => {
-  it('hay 5 sopas o más, con identificadores distintos', () => {
-    expect(sopas.length).toBeGreaterThanOrEqual(5);
+  it('hay 5 sopas pequeñas y 3 medianas o más, con identificadores distintos', () => {
+    expect(sopas.filter((s) => s.tamano === 'pequena').length).toBeGreaterThanOrEqual(5);
+    expect(sopas.filter((s) => s.tamano === 'mediana').length).toBeGreaterThanOrEqual(3);
     expect(new Set(sopas.map((s) => s.id)).size).toBe(sopas.length);
   });
 
-  it.each(sopas.map((s) => [s.id, s] as const))('«%s» tiene una cuadrícula de 5 filas de 6 letras', (_id, sopa) => {
-    expect(sopa.cuadricula).toHaveLength(5);
+  it.each(sopas.map((s) => [s.id, s] as const))('«%s» tiene la cuadrícula de su tamaño: 5 filas de 6 letras (pequeña) o 6 de 6 (mediana)', (_id, sopa) => {
+    expect(sopa.cuadricula).toHaveLength(sopa.tamano === 'pequena' ? 5 : 6);
     for (const fila of sopa.cuadricula) expect(fila).toMatch(/^[A-ZÑ]{6}$/);
   });
 
-  it.each(sopas.map((s) => [s.id, s] as const))('«%s» usa mayúsculas sin tildes y 3 palabras distintas', (_id, sopa) => {
+  it.each(sopas.map((s) => [s.id, s] as const))('«%s» usa mayúsculas sin tildes y 3 (pequeña) o 5 (mediana) palabras distintas', (_id, sopa) => {
+    const cuantas = sopa.tamano === 'pequena' ? 3 : 5;
     expect(sopa.referencia).toMatch(/^[A-ZÑ]+$/);
-    expect(sopa.palabras).toHaveLength(3);
-    expect(new Set(sopa.palabras).size).toBe(3);
+    expect(sopa.palabras).toHaveLength(cuantas);
+    expect(new Set(sopa.palabras).size).toBe(cuantas);
     for (const palabra of sopa.palabras) {
       expect(palabra).toMatch(/^[A-ZÑ]{4,6}$/);
       expect(palabra).not.toBe(sopa.referencia);
@@ -48,4 +50,25 @@ describe('Sopa de letras: lista de sopas', () => {
       }
     },
   );
+
+  // Dirección de cada palabra: horizontal si está dentro de una fila; vertical si está dentro de una columna.
+  const direcciones = (sopa: (typeof sopas)[number]) => {
+    const enFilas = (palabra: string) => filas(sopa.cuadricula).some((fila) => fila.includes(palabra));
+    const horizontales = sopa.palabras.filter(enFilas).length;
+    return { horizontales, verticales: sopa.palabras.length - horizontales };
+  };
+
+  it('al menos 2 sopas pequeñas tienen más palabras en vertical que en horizontal', () => {
+    const conMasVerticales = sopas.filter((s) => s.tamano === 'pequena').filter((s) => {
+      const d = direcciones(s);
+      return d.verticales > d.horizontales;
+    });
+    expect(conMasVerticales.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it.each(sopas.filter((s) => s.tamano === 'pequena').map((s) => [s.id, s] as const))('«%s» (pequeña): las palabras de 6 letras van en horizontal', (_id, sopa) => {
+    for (const palabra of sopa.palabras.filter((p) => p.length === 6)) {
+      expect(filas(sopa.cuadricula).some((fila) => fila.includes(palabra))).toBe(true);
+    }
+  });
 });

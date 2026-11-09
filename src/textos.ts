@@ -54,7 +54,10 @@ export const textosFormaPalabra = {
 export const textosSopa = {
   nombre: 'Sopa de letras',
   descripcion: 'Encuentra las palabras escondidas',
-  etiqueta: 'Busca 3 palabras relacionadas con:',
+  elegirTamano: 'Elige el tamaño de la sopa',
+  pequena: 'Pequeña: 3 palabras',
+  mediana: 'Mediana: 5 palabras',
+  etiqueta: (n: number) => `Busca ${n} palabras relacionadas con:`,
   invitar: 'Ahora toca la última letra de la palabra',
   acierto: '¡Muy bien! Has encontrado una palabra',
   fallo: 'Esa no es una de las palabras. Inténtalo otra vez',
@@ -65,7 +68,7 @@ export const textosSopa = {
     if (n === 0) return 'No te falta ninguna palabra';
     return n === 1 ? 'Te falta 1 palabra' : `Te faltan ${n} palabras`;
   },
-  felicitacion: '¡Enhorabuena! Has encontrado las 3 palabras',
+  felicitacion: (n: number) => `¡Enhorabuena! Has encontrado las ${n} palabras`,
   intentosNecesitados: (n: number) => (n === 1 ? 'Has necesitado 1 intento' : `Has necesitado ${n} intentos`),
   jugarOtraVez: 'Jugar otra vez',
   celda: (letra: string, fila: number, columna: number) => `Letra ${letra}, fila ${fila}, columna ${columna}`,
@@ -91,13 +94,17 @@ export const textosAdivinanzas = {
 
 export const textosDiferencias = {
   nombre: 'Diferencias',
-  descripcion: 'Encuentra las 3 diferencias entre dos dibujos',
+  descripcion: 'Encuentra las diferencias entre dos dibujos',
+  elegirNumero: 'Elige cuántas diferencias quieres buscar',
+  tres: '3 diferencias',
+  cinco: '5 diferencias',
+  siete: '7 diferencias',
   instruccion: 'Toca en el dibujo de abajo lo que sea distinto',
   rotuloArriba: 'Dibujo de arriba',
   rotuloAbajo: 'Dibujo de abajo',
   faltan: (n: number) => (n === 1 ? 'Te falta 1 diferencia' : `Te faltan ${n} diferencias`),
   fallo: 'Ahí no hay ninguna diferencia. ¡Sigue buscando!',
-  felicitacion: '¡Enhorabuena! Has encontrado las 3 diferencias',
+  felicitacion: (n: number) => `¡Enhorabuena! Has encontrado las ${n} diferencias`,
   toques: (n: number) => `Has necesitado ${n} toques`,
   jugarOtraVez: 'Jugar otra vez',
 };

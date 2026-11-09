@@ -6,8 +6,9 @@ import { sopas } from '../src/actividades/sopa-de-letras/sopas';
 import { MarcoActividad } from '../src/pantallas/MarcoActividad';
 import { casillasDe } from './ayudas-sopa';
 
-// Con Math.random fijado a 0 conocemos la sopa que muestra la app.
-const sopa = crearPartida(undefined, () => 0).sopa;
+// Con Math.random fijado a 0 conocemos la sopa que muestra la app en cada tamaño.
+const sopa = crearPartida('pequena', undefined, () => 0).sopa;
+const sopaMediana = crearPartida('mediana', undefined, () => 0).sopa;
 beforeEach(() => {
   jest.spyOn(Math, 'random').mockReturnValue(0);
 });
@@ -15,16 +16,80 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-async function abrir() {
+const botonDe = { pequena: 'Pequeña: 3 palabras', mediana: 'Mediana: 5 palabras' } as const;
+const elegir = (tamano: 'pequena' | 'mediana') => fireEvent.press(screen.getByText(botonDe[tamano]));
+
+// Abre la actividad y elige el tamaño (pequeña si no se dice otra cosa).
+async function abrir(tamano: 'pequena' | 'mediana' = 'pequena') {
   await render(<App />);
   await fireEvent.press(screen.getByText('Sopa de letras'));
+  await elegir(tamano);
 }
 const tocar = (c: Casilla) => fireEvent.press(screen.getByTestId(`celda-${c.fila}-${c.columna}`));
-async function marcar(palabra: string) {
-  const { inicio, fin } = casillasDe(sopa, palabra);
+async function marcar(palabra: string, deSopa = sopa) {
+  const { inicio, fin } = casillasDe(deSopa, palabra);
   await tocar(inicio);
   await tocar(fin);
 }
+
+describe('Sopa de letras: elegir el tamaño (RF-007, RF-010, RF-011)', () => {
+  it('al abrirla se ve la invitación y los botones de pequeña y mediana con su icono, y aún no hay cuadrícula', async () => {
+    await render(<App />);
+    await fireEvent.press(screen.getByText('Sopa de letras'));
+    expect(screen.getByText('Elige el tamaño de la sopa')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Pequeña: 3 palabras' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Mediana: 5 palabras' })).toBeTruthy();
+    expect(screen.getByTestId('icono-pequena', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.getByTestId('icono-mediana', { includeHiddenElements: true })).toBeTruthy();
+    expect(screen.queryByTestId('celda-0-0')).toBeNull();
+  });
+
+  it('la sopa pequeña tiene 5 filas de 6 casillas, 3 palabras y su etiqueta', async () => {
+    await abrir('pequena');
+    expect(screen.getByText('Busca 3 palabras relacionadas con:')).toBeTruthy();
+    expect(screen.getAllByText('???')).toHaveLength(3);
+    expect(screen.getByText('Te faltan 3 palabras')).toBeTruthy();
+    expect(screen.queryByTestId('celda-5-0')).toBeNull();
+  });
+
+  it('la sopa mediana tiene 6 filas de 6 casillas, 5 palabras y su etiqueta', async () => {
+    await abrir('mediana');
+    expect(screen.getByText(sopaMediana.referencia)).toBeTruthy();
+    expect(screen.getByText('Busca 5 palabras relacionadas con:')).toBeTruthy();
+    for (let fila = 0; fila < 6; fila++) {
+      for (let columna = 0; columna < 6; columna++) {
+        expect(screen.getByTestId(`celda-${fila}-${columna}`)).toHaveTextContent(sopaMediana.cuadricula[fila][columna]);
+      }
+    }
+    expect(screen.getAllByText('???')).toHaveLength(5);
+    expect(screen.getByText('Te faltan 5 palabras')).toBeTruthy();
+  });
+
+  it('una partida mediana completa: el aviso baja de 5 a 0 y la felicitación dice 5 palabras', async () => {
+    await abrir('mediana');
+    let faltan = 5;
+    for (const palabra of sopaMediana.palabras) {
+      await marcar(palabra, sopaMediana);
+      faltan--;
+      if (faltan > 0) {
+        expect(screen.getByText(faltan === 1 ? 'Te falta 1 palabra' : `Te faltan ${faltan} palabras`)).toBeTruthy();
+      }
+    }
+    expect(screen.getByText('¡Enhorabuena! Has encontrado las 5 palabras')).toBeTruthy();
+    expect(screen.getByText('Has necesitado 5 intentos')).toBeTruthy();
+    expect(screen.getByText('Jugar otra vez')).toBeTruthy();
+  });
+
+  it('Jugar otra vez vuelve a pedir el tamaño y se puede cambiar de tamaño', async () => {
+    await abrir('mediana');
+    for (const palabra of sopaMediana.palabras) await marcar(palabra, sopaMediana);
+    await fireEvent.press(screen.getByText('Jugar otra vez'));
+    expect(screen.getByText('Elige el tamaño de la sopa')).toBeTruthy();
+    await elegir('pequena');
+    expect(screen.getByText('Busca 3 palabras relacionadas con:')).toBeTruthy();
+    expect(screen.getAllByText('???')).toHaveLength(3);
+  });
+});
 
 describe('Sopa de letras: marcar palabras en la pantalla', () => {
   it('aparece en la lista de inicio con icono, nombre y descripción', async () => {
@@ -145,9 +210,11 @@ describe('Sopa de letras: final de la partida en la pantalla', () => {
     expect(screen.getByText('¡Enhorabuena! Has encontrado las 3 palabras')).toBeTruthy();
   });
 
-  it('avisa de partida en curso al abrir y de que acaba al encontrar la tercera palabra', async () => {
+  it('avisa de partida en curso al elegir el tamaño y de que acaba al encontrar la tercera palabra', async () => {
     const avisar = jest.fn();
     await render(<SopaDeLetras avisarPartida={avisar} />);
+    expect(avisar).not.toHaveBeenCalled(); // todavía se está eligiendo el tamaño
+    await elegir('pequena');
     expect(avisar).toHaveBeenCalledWith(true);
     await marcar(sopa.palabras[0]);
     await marcar(sopa.palabras[1]);
@@ -159,8 +226,10 @@ describe('Sopa de letras: final de la partida en la pantalla', () => {
   it('Jugar otra vez empieza con otra sopa, sin palabras y con los intentos a cero', async () => {
     const avisar = jest.fn();
     await render(<SopaDeLetras avisarPartida={avisar} />);
+    await elegir('pequena');
     await terminar();
     await fireEvent.press(screen.getByText('Jugar otra vez'));
+    await elegir('pequena');
     expect(avisar).toHaveBeenLastCalledWith(true);
     expect(screen.getByText(sopas[1].referencia)).toBeTruthy(); // con azar 0 y sin la anterior
     expect(screen.queryByText(sopa.referencia)).toBeNull();
@@ -185,6 +254,7 @@ describe('Sopa de letras: final de la partida en la pantalla', () => {
     };
     const alVolver = jest.fn();
     await render(<MarcoActividad actividad={actividad} alVolver={alVolver} />);
+    await elegir('pequena');
     await terminar();
     await fireEvent.press(screen.getByText('Volver al inicio'));
     expect(alVolver).toHaveBeenCalled();

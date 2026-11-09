@@ -1,4 +1,4 @@
-import { sopas, type Sopa } from './sopas';
+import { sopas, type Sopa, type Tamano } from './sopas';
 
 // Reglas del juego como funciones puras: no dependen del tiempo ni modifican lo que reciben.
 export type Casilla = { fila: number; columna: number };
@@ -13,9 +13,10 @@ export type Partida = {
   aviso: Aviso;
 };
 
-// Sortea una sopa distinta de la anterior; el azar se puede cambiar para que las pruebas sean repetibles.
-export function crearPartida(idAnterior?: string, azar: () => number = Math.random): Partida {
-  const candidatas = sopas.filter((s) => s.id !== idAnterior);
+// Sortea una sopa del tamaño elegido, distinta de la anterior; el azar se puede cambiar para que las
+// pruebas sean repetibles.
+export function crearPartida(tamano: Tamano = 'pequena', idAnterior?: string, azar: () => number = Math.random): Partida {
+  const candidatas = sopas.filter((s) => s.tamano === tamano && s.id !== idAnterior);
   const sopa = candidatas[Math.floor(azar() * candidatas.length)];
   return { sopa, encontradas: [], marca: null, intentos: 0, aviso: 'ninguno' };
 }
@@ -33,13 +34,11 @@ function linea(desde: Casilla, hasta: Casilla): Casilla[] {
   }));
 }
 
-export const palabrasPorSopa = 3;
-
-// La partida termina al encontrar las 3 palabras.
-export const haTerminado = (partida: Partida) => partida.encontradas.length === palabrasPorSopa;
+// La partida termina al encontrar todas las palabras de la sopa (3 en la pequeña, 5 en la mediana).
+export const haTerminado = (partida: Partida) => partida.encontradas.length === partida.sopa.palabras.length;
 
 // Palabras que aún no se han encontrado.
-export const faltan = (partida: Partida) => palabrasPorSopa - partida.encontradas.length;
+export const faltan = (partida: Partida) => partida.sopa.palabras.length - partida.encontradas.length;
 
 // Un toque en la cuadrícula: el primero marca una letra y el segundo cierra la línea.
 export function tocarCasilla(partida: Partida, casilla: Casilla): Partida {

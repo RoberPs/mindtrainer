@@ -5,6 +5,7 @@ import type { Sopa } from '../src/actividades/sopa-de-letras/sopas';
 // LLUVIA (fila 0) y ARENA (columna 5) se cruzan en la casilla 0,5; OLAS está en la fila 3.
 export const sopaDePrueba: Sopa = {
   id: 'prueba',
+  tamano: 'pequena',
   referencia: 'PRUEBA',
   palabras: ['LLUVIA', 'ARENA', 'OLAS'],
   cuadricula: ['LLUVIA', 'BBBBBR', 'CCCCCE', 'OLASZN', 'DDDDDA'],
