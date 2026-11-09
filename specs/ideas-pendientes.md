@@ -8,6 +8,18 @@ especificación. Se recogen aquí para tratarlas todas juntas en la última spec
 (las que sigan valiendo) y revisar con la persona responsable cuáles entran. Mientras tanto, añadir
 aquí cualquier detalle nuevo con la fecha, el juego y quién lo observó.
 
+## Decisiones para la spec 008 (2026-11-09)
+
+Alcance acordado con la persona responsable para la última spec, "Más variedad en los juegos":
+
+- **Entran** (por prioridad): P1 adivinanzas (50 o más) y equilibrio de direcciones en la sopa;
+  P2 Diferencias con varias escenas fijas revisadas a mano y catálogo de unos 50 iconos;
+  P3 Diferencias con 3, 5 o 7 diferencias y sopa en tamaño pequeño o mediano (6 o 7 columnas
+  como máximo, 5 palabras); P4 fundido de victoria más largo (unos 800 a 1000 ms, una sola vez,
+  sin crecimiento).
+- **No entran**: palabras al revés o en diagonal, tres tamaños de sopa y colocación aleatoria
+  de iconos.
+
 ## Sopa de letras (spec 004)
 
 Observadas el 2026-11-06 al hacer la comprobación manual de la spec 004. Esa comprobación salió
