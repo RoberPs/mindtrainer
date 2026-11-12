@@ -37,7 +37,11 @@ export function Dibujo({ lado, rotulo, fondo, elementos, diferencias, encontrada
   const pulsar = (e: GestureResponderEvent) => {
     const anchoReal = medido.current?.ancho || ancho;
     const altoReal = medido.current?.alto || alto;
-    alTocar?.(e.nativeEvent.locationX / anchoReal, e.nativeEvent.locationY / altoReal);
+    // En la demo web, onPress recibe el clic del navegador: trae offsetX/offsetY en lugar de locationX/locationY.
+    const clic = e.nativeEvent as unknown as { offsetX?: number; offsetY?: number };
+    const x = e.nativeEvent.locationX ?? clic.offsetX ?? 0;
+    const y = e.nativeEvent.locationY ?? clic.offsetY ?? 0;
+    alTocar?.(x / anchoReal, y / altoReal);
   };
 
   // Los hijos no reciben toques: así el toque lo recibe siempre el recuadro y sus coordenadas

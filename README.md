@@ -17,6 +17,12 @@
   <img alt="Licencia MIT" src="https://img.shields.io/badge/licencia-MIT-green">
 </p>
 
+<p align="center">
+  <a href="https://roberps.github.io/mindtrainer/"><strong>▶ Probar la demo en el navegador</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/RoberPs/mindtrainer/releases/latest">Descargar el APK para Android</a>
+</p>
+
 ## Los juegos
 
 | Juego | En qué consiste |
@@ -51,7 +57,7 @@ automáticas.
 
 - **Expo SDK 58**, **React Native 0.88**, **React 19** y **TypeScript** en modo `strict`.
 - **ESLint** con la configuración oficial de Expo y **GitHub Actions**, que comprueba tipos,
-  estilo y pruebas en cada cambio.
+  estilo y pruebas en cada cambio y publica la demo web en GitHub Pages.
 - Dibujos vectoriales propios con `react-native-svg`; ninguna imagen se descarga.
 - **645 pruebas** con Jest y React Native Testing Library: reglas, aciertos, fallos,
   puntuación y final de partida de cada juego. La lógica de cada juego está en funciones
@@ -76,7 +82,14 @@ app son trabajo propio. La configuración del agente está en [`CLAUDE.md`](CLAU
 
 ## Probarla
 
-### En Android, sin instalar nada más
+### En el navegador, sin instalar nada
+
+**[roberps.github.io/mindtrainer](https://roberps.github.io/mindtrainer/)**: la misma app
+compilada para web con Expo, en el móvil o en el ordenador. Es una demo para probarla desde un
+enlace: el producto es la app de Android, que funciona sin internet. La demo tampoco guarda ni
+envía ningún dato.
+
+### En Android
 
 Descarga el APK de la sección *Releases* y sigue la
 [guía de instalación](docs/instalar-android.md) (Android 7.0 o superior).

@@ -20,23 +20,30 @@ export default function App({ actividades = registro }: Props) {
   const [bienvenidaVista, setBienvenidaVista] = useState(false);
 
   return (
-    <View style={estilos.pantalla}>
-      {!bienvenidaVista ? (
-        <Bienvenida alEmpezar={() => setBienvenidaVista(true)} />
-      ) : abierta ? (
-        <MarcoActividad actividad={abierta} alVolver={() => setAbierta(null)} />
-      ) : (
-        <Inicio actividades={actividades} alAbrir={setAbierta} />
-      )}
-      <StatusBar style="dark" />
+    <View style={estilos.fondo}>
+      <View style={estilos.pantalla}>
+        {!bienvenidaVista ? (
+          <Bienvenida alEmpezar={() => setBienvenidaVista(true)} />
+        ) : abierta ? (
+          <MarcoActividad actividad={abierta} alVolver={() => setAbierta(null)} />
+        ) : (
+          <Inicio actividades={actividades} alAbrir={setAbierta} />
+        )}
+        <StatusBar style="dark" />
+      </View>
     </View>
   );
 }
 
 const estilos = StyleSheet.create({
-  pantalla: {
+  fondo: {
     flex: 1,
     backgroundColor: tema.colores.fondo,
+  },
+  pantalla: {
+    flex: 1,
     paddingTop: Platform.OS === 'ios' ? 56 : 32,
+    // En la demo web, en un ordenador, la app ocupa una columna centrada con ancho de móvil.
+    ...(Platform.OS === 'web' && { width: '100%', maxWidth: tema.anchoMaximoWeb, alignSelf: 'center' }),
   },
 });

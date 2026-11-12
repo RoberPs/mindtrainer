@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import { Icono } from '../../componentes/Icono';
 import { textosDiferencias as t } from '../../textos';
 import { tema } from '../../tema';
@@ -18,7 +18,10 @@ const anchoMinimo = 220;
 // Contenido de la actividad: los dos dibujos y la felicitación. La partida empieza al abrirla. Nada se guarda.
 export function Diferencias({ avisarPartida }: PropsContenido) {
   const [partida, setPartida] = useState<Partida>(() => crearPartida());
-  const { width, height } = useWindowDimensions();
+  const ventana = useWindowDimensions();
+  // En la demo web la app ocupa una columna con ancho de móvil, no toda la ventana.
+  const width = Platform.OS === 'web' ? Math.min(ventana.width, tema.anchoMaximoWeb) : ventana.width;
+  const { height } = ventana;
 
   useEffect(() => {
     avisarPartida(true);

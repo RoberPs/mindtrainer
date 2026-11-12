@@ -52,4 +52,5 @@ export const tema = {
   },
   contrasteMinimo: 7, // al menos 7 a 1 entre texto y fondo
   espacio: 16,
+  anchoMaximoWeb: 480, // solo en la demo web: la app se ve con ancho de móvil en un ordenador
 };

@@ -33,7 +33,12 @@
       ]
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "name": "MindTrainer (demo web)",
+      "lang": "es"
+    },
+    "experiments": {
+      "baseUrl": "/mindtrainer"
     },
     "plugins": [
       "expo-font",
