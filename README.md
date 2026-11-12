@@ -17,16 +17,6 @@
   <img alt="Licencia MIT" src="https://img.shields.io/badge/licencia-MIT-green">
 </p>
 
-## Capturas
-
-| Bienvenida | Inicio | Parejas | Forma la palabra |
-|:---:|:---:|:---:|:---:|
-| <img src="docs/capturas/bienvenida.png" width="180" alt="Pantalla de bienvenida"> | <img src="docs/capturas/inicio.png" width="180" alt="Lista de juegos"> | <img src="docs/capturas/parejas.png" width="180" alt="Juego de parejas"> | <img src="docs/capturas/forma-palabra.png" width="180" alt="Juego de formar la palabra"> |
-
-| Sopa de letras | Adivinanzas | Diferencias | Victoria |
-|:---:|:---:|:---:|:---:|
-| <img src="docs/capturas/sopa-de-letras.png" width="180" alt="Sopa de letras"> | <img src="docs/capturas/adivinanzas.png" width="180" alt="Adivinanzas"> | <img src="docs/capturas/diferencias.png" width="180" alt="Juego de las diferencias"> | <img src="docs/capturas/victoria.png" width="180" alt="Pantalla final de una partida"> |
-
 ## Los juegos
 
 | Juego | En qué consiste |
