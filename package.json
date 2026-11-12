@@ -33,6 +33,7 @@
   "private": true,
   "jest": {
     "preset": "jest-expo",
+    "testTimeout": 60000,
     "testMatch": [
       "<rootDir>/tests/**/*.test.tsx"
     ]

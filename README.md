@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/RoberPs/mindtrainer/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/RoberPs/mindtrainer/actions/workflows/ci.yml/badge.svg"></a>
   <img alt="Expo SDK 58" src="https://img.shields.io/badge/Expo-SDK%2058-000020?logo=expo">
   <img alt="React Native 0.88" src="https://img.shields.io/badge/React%20Native-0.88-61DAFB?logo=react">
   <img alt="TypeScript strict" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript">
