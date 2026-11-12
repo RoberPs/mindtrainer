@@ -9,7 +9,7 @@
   - Ambas fuentes darían imágenes (SVG o PNG): las SVG necesitarían una librería nueva, y los PNG habría que guardarlos en `assets/`, con peso y mantenimiento.
 - **Razón**: la familia de iconos actual tiene un solo estilo (cumple FR-002 por construcción), ya está en la app, no añade nada (principio I) y las 12 figuras existen en el paquete instalado (comprobado). La mejora visual se consigue con color, tamaño, dorso y bordes, no con otra fuente.
 - **Alternativas descartadas**: Openclipart (estilos mezclados, revisión de licencias a mano, dependencia nueva); Kenney (sin objetos cotidianos confirmados); emojis (su aspecto cambia según el móvil).
-- **Salvedad de licencia, para que la persona responsable decida**: los iconos de `@expo/vector-icons` tienen licencia libre (tipo Apache 2.0), sin crédito en pantalla ni cuenta ni pago, pero esa licencia pide conservar su aviso al redistribuir el código. El proyecto ya depende de ello desde la spec 001. Si se considera que choca con "no heredar una licencia", habría que cambiar de fuente en las 5 actividades, lo que queda fuera de esta spec.
+- **Salvedad de licencia (ACEPTADA por la persona responsable el 2026-11-12)**: los iconos de `@expo/vector-icons` tienen licencia libre (tipo Apache 2.0), sin crédito en pantalla ni cuenta ni pago, pero esa licencia pide conservar su aviso al redistribuir el código. El proyecto ya depende de ello desde la spec 001. Si se considera que choca con "no heredar una licencia", habría que cambiar de fuente en las 5 actividades, lo que queda fuera de esta spec.
 - **Si tras probarlo en el móvil los dibujos siguen pareciendo genéricos**: se abre otra spec para sustituirlos por imágenes de una sola fuente CC0, revisando una a una.
 
 ## 2. Los 12 dibujos

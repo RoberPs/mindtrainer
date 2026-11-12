@@ -104,6 +104,7 @@ npm start          # arranca la app; escanea el código QR con Expo Go
 npm test           # pruebas automáticas
 npm run typecheck  # comprobación de tipos
 npm run lint       # revisión del código con ESLint
+npm run web        # la versión web en el navegador del ordenador
 ```
 
 Para generar el APK: [docs/generar-apk.md](docs/generar-apk.md).
@@ -121,9 +122,11 @@ src/
 tests/               Pruebas de cada juego y de las reglas de accesibilidad
 specs/               Especificación, plan y tareas de cada funcionalidad
 docs/                Guías para generar e instalar el APK
+.github/workflows/   CI (tipos, ESLint y pruebas) y publicación de la demo web
 ```
 
 ## Licencia
 
-[MIT](LICENSE). Usa `react-native-svg` (MIT) y los iconos de `@expo/vector-icons`
-(Apache 2.0), que conservan sus propias licencias.
+[MIT](LICENSE). Usa `react-native-svg` (MIT), `@expo/vector-icons` (MIT) y sus iconos
+[Material Design Icons](https://pictogrammers.com/library/mdi/) (Apache 2.0), que conservan
+sus propias licencias.
