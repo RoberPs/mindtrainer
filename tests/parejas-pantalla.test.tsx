@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, screen } from '@testing-library/react-native';
 import { buscarDibujo } from '../src/actividades/parejas/dibujos';
 import { crearPartida, type Tamano } from '../src/actividades/parejas/juego';
 import { abrirApp } from './ayudas';

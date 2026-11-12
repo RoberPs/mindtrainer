@@ -21,7 +21,7 @@ export function FormaPalabra({ avisarPartida }: PropsContenido) {
   // La partida empieza al abrir la actividad.
   useEffect(() => {
     avisarPartida(true);
-  }, []);
+  }, [avisarPartida]);
 
   // Aplica una regla y avisa de que la partida acaba cuando se cierra la quinta palabra.
   const aplicar = (regla: (p: Partida) => Partida) => {

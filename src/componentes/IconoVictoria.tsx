@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { AccessibilityInfo, Animated } from 'react-native';
 import { Icono } from './Icono';
 import { animacion } from '../animacion';
@@ -11,7 +11,7 @@ type Props = {
 // Icono de celebración de las pantallas finales. Aparece con un fundido suave, una sola vez.
 // Solo envuelve el icono: el texto y los botones no se animan ni esperan a nadie.
 export function IconoVictoria({ testID, tamano = 96 }: Props) {
-  const opacidad = useRef(new Animated.Value(animacion.activa ? 0 : 1)).current;
+  const [opacidad] = useState(() => new Animated.Value(animacion.activa ? 0 : 1));
 
   useEffect(() => {
     if (!animacion.activa) return;

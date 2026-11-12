@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, screen } from '@testing-library/react-native';
 import { actividades } from '../src/actividades/registro';
 import { tema } from '../src/tema';
 import { crearActividades, abrirApp } from './ayudas';

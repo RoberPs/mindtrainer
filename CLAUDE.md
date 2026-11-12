@@ -33,6 +33,7 @@ npm install        # dependencias
 npm start          # arrancar la app (Expo)
 npm test           # pruebas (Jest + React Native Testing Library)
 npm run typecheck  # comprobar tipos
+npm run lint       # ESLint (configuración de Expo); la CI no admite avisos
 ```
 
 ## Estructura

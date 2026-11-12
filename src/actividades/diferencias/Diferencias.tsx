@@ -23,7 +23,7 @@ export function Diferencias({ avisarPartida }: PropsContenido) {
   useEffect(() => {
     avisarPartida(true);
     // Solo al abrir la actividad.
-  }, []);
+  }, [avisarPartida]);
 
   // La siguiente partida es siempre de otro ambiente y con otra composición.
   const jugarOtraVez = () => {

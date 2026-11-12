@@ -11,7 +11,7 @@ export function Adivinanzas({ avisarPartida }: PropsContenido) {
   // La partida empieza al abrir la actividad.
   useEffect(() => {
     avisarPartida(true);
-  }, []);
+  }, [avisarPartida]);
 
   // Al responder la quinta adivinanza la partida deja de estar en curso.
   const alResponder = (opcion: string) => {

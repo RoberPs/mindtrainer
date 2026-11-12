@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, screen } from '@testing-library/react-native';
 import { crearPartida } from '../src/actividades/parejas/juego';
 import { crearPartida as crearPartidaSopa } from '../src/actividades/sopa-de-letras/juego';
 import { textos, textosAdivinanzas, textosDiferencias, textosFormaPalabra, textosParejas, textosSopa } from '../src/textos';

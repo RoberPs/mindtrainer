@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, screen } from '@testing-library/react-native';
 import { crearActividades, abrirApp } from './ayudas';
 
 async function abrirPrimeraActividad() {

@@ -60,6 +60,8 @@ automáticas.
 ## Tecnología
 
 - **Expo SDK 58**, **React Native 0.88**, **React 19** y **TypeScript** en modo `strict`.
+- **ESLint** con la configuración oficial de Expo y **GitHub Actions**, que comprueba tipos,
+  estilo y pruebas en cada cambio.
 - Dibujos vectoriales propios con `react-native-svg`; ninguna imagen se descarga.
 - **645 pruebas** con Jest y React Native Testing Library: reglas, aciertos, fallos,
   puntuación y final de partida de cada juego. La lógica de cada juego está en funciones
@@ -98,6 +100,7 @@ npm install        # dependencias
 npm start          # arranca la app; escanea el código QR con Expo Go
 npm test           # pruebas automáticas
 npm run typecheck  # comprobación de tipos
+npm run lint       # revisión del código con ESLint
 ```
 
 Para generar el APK: [docs/generar-apk.md](docs/generar-apk.md).
